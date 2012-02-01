@@ -5,8 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'django_magpie.views.home', name='home'),
+    url(r'^$', 'testapp.views.index', name='index'),
     # url(r'^django_magpie/', include('django_magpie.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
