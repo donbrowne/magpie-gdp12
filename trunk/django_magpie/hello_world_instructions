@@ -1,0 +1,7 @@
+From your OS shell, cd to this directory, and enter the following -
+
+python manage.py runserver
+
+This will start a webserver and will inform you of the address. It is usually -
+
+http://127.0.0.1:8000
