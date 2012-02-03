@@ -1,15 +1,17 @@
-INITIALIZING SERVER -
+INITIALIZING TEST SERVER -
 
-From your OS shell, cd to this directory, and enter the following -
+From your OS shell, cd to the django_mapgie directory, and enter the following -
 
 python manage.py runserver
 
 This will start a webserver and will inform you of the address. It is usually -
 
-http://127.0.0.1:8000
+http://127.0.0.1:8000/
 
 UNIT TESTING -
 
 When the server has been started as per the previous instructions, run -
 
 python helloWorldUnitTest.py
+
+The test will ensure that the server works, and that it has the expected message, it assumes the server is running at the default address.
