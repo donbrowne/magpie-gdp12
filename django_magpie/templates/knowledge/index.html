@@ -1,9 +1,17 @@
+<h2>Questions:</h2>
 {% if question_list %}
-    Questions:
-    {% for question in question_list %}
-        <li>{{ question.text }}</li>
-    {% endfor %}
+<form action="/" method="post">
+{% csrf_token %}
+<ol>
+{% for question in question_list %}
+    <li>{{ question.text }}
+    <input type="radio" name='answer_{{question.id}}' value="y">Yes
+    <input type="radio" name='answer_{{question.id}}' value="n">No
+    </li>
+{% endfor %}
+</ol>
+<input type="submit" value="Submit" />
+</form>
 {% else %}
     <p>There are no question!</p>
 {% endif %}
-
