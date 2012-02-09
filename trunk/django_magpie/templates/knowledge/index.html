@@ -1,5 +1,5 @@
-<h2>Questions:</h2>
 {% if question_list %}
+<h2>Questions:</h2>
 <form action="/" method="post">
 {% csrf_token %}
 <ol>
@@ -14,4 +14,12 @@
 </form>
 {% else %}
     <p>There are no question!</p>
+{% endif %}
+{% if recommend_list %}
+<h2>Recommmendations:</h2>
+<ol>
+{% for rec in recommend_list %}
+    <li>{{ rec.text }}</li>
+{% endfor %}
+</ol>
 {% endif %}

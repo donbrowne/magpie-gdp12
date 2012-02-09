@@ -1,25 +1,28 @@
 from django.db import models
 
-# Create your models here.
+class Question(models.Model):
+    text = models.CharField(max_length=255)
+    def __unicode__(self):
+        return self.text
+
+class Recommend(models.Model):
+    text = models.CharField(max_length=255)
+    def __unicode__(self):
+        return self.text
+
 class Fact(models.Model):
     name = models.CharField(max_length=30)
+    requires = models.ManyToManyField('Fact',blank=True)
+    recommends = models.ManyToManyField(Recommend,blank=True)
     def __unicode__(self):
         return self.name
 
-class Question(models.Model):
-    text = models.CharField(max_length=255)
-    yes_fact = models.ForeignKey(Fact, related_name='yes_fact')
-    no_fact = models.ForeignKey(Fact, related_name='no_fact')
-    def __unicode__(self):
-        return self.text
+#BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
 
-class Recommendation(models.Model):
-    text = models.CharField(max_length=255)
+class FactAnswer(models.Model):
+    parent = models.ForeignKey(Fact)
+    question = models.ForeignKey(Question)
+    answer = models.BooleanField()
     def __unicode__(self):
-        return self.text
+        return self.question.text + ' ' + str(self.answer)
 
-class Rule(models.Model):
-    facts = models.ManyToManyField(Fact)
-    recommendations = models.ManyToManyField(Recommendation)
-    def __unicode__(self):
-        return str(self.id)
