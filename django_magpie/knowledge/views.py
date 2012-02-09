@@ -3,8 +3,8 @@ from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response
 from knowledge.models import start_sess,next_sess,get_ids,get_answers
 
-# TODO move logic into models
 def index(request):
+    context = RequestContext(request)
     if request.method == 'POST':
         # extract session state
         answers =  get_answers(request.POST.items())
@@ -28,7 +28,7 @@ def index(request):
                 'knowledge/index.html', 
                 { 'question_list': questions,
                   'recommend_list': recommends},
-                context_instance=RequestContext(request))
+                context)
 
     else:
         rule_ids,questions = start_sess()
@@ -37,4 +37,4 @@ def index(request):
         return render_to_response(
             'knowledge/index.html', 
             {'question_list': questions },
-             context_instance=RequestContext(request))
+             context)
