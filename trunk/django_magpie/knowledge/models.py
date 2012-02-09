@@ -25,4 +25,3 @@ class RuleAnswer(models.Model):
     answer = models.BooleanField()
     def __unicode__(self):
         return self.question.text + ' ' + str(self.answer)
-
