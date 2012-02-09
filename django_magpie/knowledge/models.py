@@ -10,17 +10,17 @@ class Recommend(models.Model):
     def __unicode__(self):
         return self.text
 
-class Fact(models.Model):
+class Rule(models.Model):
     name = models.CharField(max_length=30)
-    requires = models.ManyToManyField('Fact',blank=True)
+    requires = models.ManyToManyField('Rule',blank=True)
     recommends = models.ManyToManyField(Recommend,blank=True)
     def __unicode__(self):
         return self.name
 
 #BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
 
-class FactAnswer(models.Model):
-    parent = models.ForeignKey(Fact)
+class RuleAnswer(models.Model):
+    parent = models.ForeignKey(Rule)
     question = models.ForeignKey(Question)
     answer = models.BooleanField()
     def __unicode__(self):

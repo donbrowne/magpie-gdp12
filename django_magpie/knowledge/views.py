@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response
-from knowledge.models import Question,Recommend,Fact
+from knowledge.models import Question,Recommend,Rule
 
 
 # TODO move logic into models
@@ -15,37 +15,37 @@ def index(request):
                 qid = int(name[len('answer_'):])
                 istrue = value == 'y'
                 answers.append((qid, istrue))
-        # prune facts based on answers
-        fact_ids = map(int, request.session['fact_ids'])
-        fact_list = Fact.objects.filter(id__in=fact_ids)
-        match_facts = []
-        for fact in fact_list:
+        # prune rules based on answers
+        rule_ids = map(int, request.session['rule_ids'])
+        rule_list = Rule.objects.filter(id__in=rule_ids)
+        match_rules = []
+        for rule in rule_list:
             match_all = True
-            for fanswer in fact.factanswer_set.all():
-                expect = (fanswer.question.id, fanswer.answer)
+            for ranswer in rule.ruleanswer_set.all():
+                expect = (ranswer.question.id, ranswer.answer)
                 if expect not in answers:
                     match_all = False
                     break
             if match_all:
-                match_facts.append(fact)
+                match_rules.append(rule)
         # update recommend list, get next questions
         rec_ids = map(int, request.session['rec_ids'])
         rec_list = list(Recommend.objects.filter(id__in=rec_ids))
         question_list = []
-        fact_ids = []
-        for fact in match_facts:
-            for rec in fact.recommends.all():
+        rule_ids = []
+        for rule in match_rules:
+            for rec in rule.recommends.all():
                 if rec not in rec_list:
                     rec_list.append(rec)
                     rec_ids.append(rec.id)
-            for child_fact in fact.fact_set.all():
-                fact_ids.append(child_fact.id)
-                for fanswer in child_fact.factanswer_set.all():
-                    if fanswer.question not in question_list:
-                        question_list.append(fanswer.question)
-        if len(fact_ids) == 0:
+            for child_rule in rule.rule_set.all():
+                rule_ids.append(child_rule.id)
+                for ranswer in child_rule.ruleanswer_set.all():
+                    if ranswer.question not in question_list:
+                        question_list.append(ranswer.question)
+        if len(rule_ids) == 0:
             # all done
-            del request.session['fact_ids']
+            del request.session['rule_ids']
             del request.session['rec_ids']
             return render_to_response(
                 'knowledge/index.html', 
@@ -53,7 +53,7 @@ def index(request):
                 context_instance=RequestContext(request))
         else:
             # keep going
-            request.session['fact_ids'] = map(str,fact_ids)
+            request.session['rule_ids'] = map(str,rule_ids)
             request.session['rec_ids'] = map(str,rec_ids)
             return render_to_response(
                 'knowledge/index.html', 
@@ -62,15 +62,15 @@ def index(request):
                 context_instance=RequestContext(request))
 
     else:
-        fact_list = Fact.objects.filter(requires__isnull=True)
-        fact_ids = []
+        rule_list = Rule.objects.filter(requires__isnull=True)
+        rule_ids = []
         question_list = []
-        for fact in fact_list:
-            fact_ids.append(fact.id)
-            for fanswer in fact.factanswer_set.all():
-                if fanswer.question not in question_list:
-                    question_list.append(fanswer.question)
-        request.session['fact_ids'] = map(str,fact_ids)
+        for rule in rule_list:
+            rule_ids.append(rule.id)
+            for ranswer in rule.ruleanswer_set.all():
+                if ranswer.question not in question_list:
+                    question_list.append(ranswer.question)
+        request.session['rule_ids'] = map(str,rule_ids)
         request.session['rec_ids'] = []
         return render_to_response(
             'knowledge/index.html', 
