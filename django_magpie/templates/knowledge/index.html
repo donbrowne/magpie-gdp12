@@ -1,3 +1,13 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Magpie Site' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Welcome to M.A.G.P.I.E'  %}</h1>
+{% endblock %}
+
+{% block content %}
 {% if question_list %}
 <h2>Questions:</h2>
 <form action="/" method="post">
@@ -23,3 +33,4 @@
 {% endfor %}
 </ol>
 {% endif %}
+{% endblock %}
