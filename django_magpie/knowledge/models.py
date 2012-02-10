@@ -40,6 +40,11 @@ def get_answers(items):
             answers.append((qid, istrue))
     return answers
 
+class Reason(object):
+    def __init__(self, text, qa_list):
+        self.text = text
+        self.qa_list = qa_list
+
 class FactState(object):
     def __init__(self, test_ids, pass_ids=[], answers=[]):
         self.test_ids = test_ids
@@ -65,6 +70,28 @@ class FactState(object):
                 if recommend not in recommends:
                     recommends.append(recommend)
         return recommends
+
+    def get_reasons(self):
+        reasons = []
+        ans_dict = dict(self.answers)
+        id_set = set()
+        for fact in Fact.objects.filter(id__in=self.pass_ids):
+            # first get unique list of recommends
+            recommends = []
+            for recommend in fact.recommends.all():
+                if recommend.id not in id_set:
+                    id_set.add(recommend.id)
+                    recommends.append(recommend)
+            # now build questions+answer list
+            qa_list = []
+            for fquestion in fact.factquestion_set.all():
+                question = fquestion.question
+                #'%s ? %s' % (question.text, 'Yes'
+                qa_list.append((question.text, ans_dict[question.id]))
+            # generate reason for each recommend
+            for recommend in recommends:
+                reasons.append(Reason(recommend.text, qa_list))
+        return reasons
 
     # given some answers calculate next set of facts to test
     def next_state(self, answers):
