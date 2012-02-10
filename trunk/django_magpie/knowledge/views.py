@@ -1,40 +1,54 @@
 from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response
-from knowledge.models import start_sess,next_sess,get_ids,get_answers
+from knowledge.models import FactState, start_state, get_answers
+
+def del_state(session):
+    del session['test_ids']
+    del session['pass_ids']
+    del session['answers']
+
+def get_state(session):
+    test_ids = session['test_ids']
+    pass_ids = session['pass_ids']
+    answers = session['answers']
+    return FactState(test_ids, pass_ids, answers)
+
+def put_state(session, state):
+    session['test_ids'] = state.test_ids
+    session['pass_ids'] = state.pass_ids
+    session['answers'] = state.answers
 
 def index(request):
     context = RequestContext(request)
     if request.method == 'POST':
-        # extract session state
         answers =  get_answers(request.POST.items())
-        rule_ids = request.session['rule_ids']
-        rec_ids = request.session['rec_ids']
-        # establish next state
-        rules,questions,recommends = next_sess(rule_ids, answers, rec_ids)
-        if len(rule_ids) == 0:
+        state = get_state(request.session)
+        state = state.next_state(answers)
+        questions = state.get_questions()
+        recommends = state.get_recommends()
+        if len(questions) == 0:
             # all done
-            del request.session['rule_ids']
-            del request.session['rec_ids']
+            del_state(request.session)
             return render_to_response(
-                'knowledge/index.html', 
-                {'recommend_list': recommends },
-                context_instance=RequestContext(request))
+                'knowledge/index.html', {
+                    'recommend_list': recommends
+                },
+                context)
         else:
             # keep going
-            request.session['rule_ids'] = get_ids(rules)
-            request.session['rec_ids'] = get_ids(recommends)
+            put_state(request.session, state)
             return render_to_response(
-                'knowledge/index.html', 
-                { 'question_list': questions,
-                  'recommend_list': recommends},
+                'knowledge/index.html', {
+                  'question_list': questions,
+                  'recommend_list': recommends
+                },
                 context)
 
     else:
-        rule_ids,questions = start_sess()
-        request.session['rule_ids'] = get_ids(rule_ids)
-        request.session['rec_ids'] = []
+        state = start_state()
+        put_state(request.session, state)
         return render_to_response(
             'knowledge/index.html', 
-            {'question_list': questions },
+            {'question_list': state.get_questions() },
              context)
