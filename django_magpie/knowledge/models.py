@@ -30,6 +30,7 @@ class RuleAnswer(models.Model):
 def get_ids(alist):
     return map(lambda elem:elem.id, alist)
 
+# TODO should this be in views
 def get_answers(items):
     answers = []
     for name,value in items:
@@ -39,42 +40,64 @@ def get_answers(items):
             answers.append((qid, istrue))
     return answers
 
-# update recommends + calculate next set of questions
-def next_sess(rule_ids, answers, rec_ids):
-    # build list of rules that match all answers
-    rules = []
-    questions = []
-    recommends = list(Recommend.objects.filter(id__in=rec_ids))
-    for rule in Rule.objects.filter(id__in=rule_ids):
-        # check if expected answers match those given
-        match_all = True
-        for ranswer in rule.ruleanswer_set.all():
-            expect = (ranswer.question.id, ranswer.answer)
-            if expect not in answers:
-                match_all = False
-                break
-        if match_all:
+class FactState(object):
+    def __init__(self, test_ids, pass_ids=[], answers=[]):
+        self.test_ids = test_ids
+        self.pass_ids = pass_ids
+        self.answers = answers
+
+    # return list of questions for rule set not yet answered
+    def get_questions(self):
+        questions = []
+        ans_dict = dict(self.answers)
+        for rule in Rule.objects.filter(id__in=self.test_ids):
+            for ranswer in rule.ruleanswer_set.all():
+                question = ranswer.question
+                if question.id not in ans_dict and question not in questions:
+                    questions.append(question)
+        return questions
+
+    # return list of recommendation for rule set answered
+    def get_recommends(self):
+        recommends = []
+        for rule in Rule.objects.filter(id__in=self.pass_ids):
             for recommend in rule.recommends.all():
                 if recommend not in recommends:
                     recommends.append(recommend)
-            for child_rule in rule.rule_set.all():
-                if child_rule not in rules:
-                    rules.append(child_rule)
-                for ranswer in child_rule.ruleanswer_set.all():
-                    if ranswer.question not in questions:
-                        questions.append(ranswer.question)
-    return rules, questions, recommends
+        return recommends
 
-# start a q+a session
-def start_sess():
-    rules = []
-    questions = []
-    recommends = []
+    # given some answers calculate next set of rules to test
+    def next_state(self, answers):
+        test_ids = []
+        pass_ids = self.pass_ids
+        # answers = prev + new
+        ans_dict = dict(self.answers)
+        for item in answers:
+            ans_dict[item[0]] = item[1]
+        # build list of rules that match all answers
+        for rule in Rule.objects.filter(id__in=self.test_ids):
+            # check if expected answers match those given
+            match_all = True
+            for ranswer in rule.ruleanswer_set.all():
+                qid = ranswer.question.id
+                if qid not in ans_dict or ans_dict[qid] != ranswer.answer:
+                    match_all = False
+                    break
+            if match_all:
+                pass_ids.append(rule.id)
+                for child_rule in rule.rule_set.all():
+                    if child_rule.id not in test_ids:
+                        test_ids.append(child_rule.id)
+        return FactState(test_ids, pass_ids, ans_dict.items())
+
+
+# Factory start a q+a session
+def start_state():
+    test_ids = []
     for rule in Rule.objects.filter(requires__isnull=True):
-        if rule not in rules:
-            rules.append(rule)
-        for ranswer in rule.ruleanswer_set.all():
-            if ranswer.question not in questions:
-                questions.append(ranswer.question)
-    return rules, questions
+        if rule.id not in test_ids:
+            test_ids.append(rule.id)
+    return FactState(test_ids)
+
+
 
