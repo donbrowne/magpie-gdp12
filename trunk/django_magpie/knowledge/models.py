@@ -10,17 +10,17 @@ class Recommend(models.Model):
     def __unicode__(self):
         return self.text
 
-class Rule(models.Model):
+class Fact(models.Model):
     name = models.CharField(max_length=30)
-    requires = models.ManyToManyField('Rule',blank=True)
+    requires = models.ManyToManyField('Fact',blank=True)
     recommends = models.ManyToManyField(Recommend,blank=True)
     def __unicode__(self):
         return self.name
 
 #BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
 
-class RuleAnswer(models.Model):
-    parent = models.ForeignKey(Rule)
+class FactQuestion(models.Model):
+    fact = models.ForeignKey(Fact)
     question = models.ForeignKey(Question)
     answer = models.BooleanField()
     def __unicode__(self):
@@ -46,27 +46,27 @@ class FactState(object):
         self.pass_ids = pass_ids
         self.answers = answers
 
-    # return list of questions for rule set not yet answered
+    # return list of questions for fact set not yet answered
     def get_questions(self):
         questions = []
         ans_dict = dict(self.answers)
-        for rule in Rule.objects.filter(id__in=self.test_ids):
-            for ranswer in rule.ruleanswer_set.all():
-                question = ranswer.question
+        for fact in Fact.objects.filter(id__in=self.test_ids):
+            for fquestion in fact.factquestion_set.all():
+                question = fquestion.question
                 if question.id not in ans_dict and question not in questions:
                     questions.append(question)
         return questions
 
-    # return list of recommendation for rule set answered
+    # return list of recommendation for fact set answered
     def get_recommends(self):
         recommends = []
-        for rule in Rule.objects.filter(id__in=self.pass_ids):
-            for recommend in rule.recommends.all():
+        for fact in Fact.objects.filter(id__in=self.pass_ids):
+            for recommend in fact.recommends.all():
                 if recommend not in recommends:
                     recommends.append(recommend)
         return recommends
 
-    # given some answers calculate next set of rules to test
+    # given some answers calculate next set of facts to test
     def next_state(self, answers):
         test_ids = []
         pass_ids = self.pass_ids
@@ -74,29 +74,29 @@ class FactState(object):
         ans_dict = dict(self.answers)
         for item in answers:
             ans_dict[item[0]] = item[1]
-        # build list of rules that match all answers
-        for rule in Rule.objects.filter(id__in=self.test_ids):
+        # build list of facts that match all answers
+        for fact in Fact.objects.filter(id__in=self.test_ids):
             # check if expected answers match those given
             match_all = True
-            for ranswer in rule.ruleanswer_set.all():
-                qid = ranswer.question.id
-                if qid not in ans_dict or ans_dict[qid] != ranswer.answer:
+            for fquestion in fact.factquestion_set.all():
+                qid = fquestion.question.id
+                if qid not in ans_dict or ans_dict[qid] != fquestion.answer:
                     match_all = False
                     break
             if match_all:
-                pass_ids.append(rule.id)
-                for child_rule in rule.rule_set.all():
-                    if child_rule.id not in test_ids:
-                        test_ids.append(child_rule.id)
+                pass_ids.append(fact.id)
+                for child_fact in fact.fact_set.all():
+                    if child_fact.id not in test_ids:
+                        test_ids.append(child_fact.id)
         return FactState(test_ids, pass_ids, ans_dict.items())
 
 
 # Factory start a q+a session
 def start_state():
     test_ids = []
-    for rule in Rule.objects.filter(requires__isnull=True):
-        if rule.id not in test_ids:
-            test_ids.append(rule.id)
+    for fact in Fact.objects.filter(requires__isnull=True):
+        if fact.id not in test_ids:
+            test_ids.append(fact.id)
     return FactState(test_ids)
 
 
