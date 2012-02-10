@@ -1,13 +1,13 @@
 from knowledge.models import *
 from django.contrib import admin
 
-class RuleAnswerInline(admin.TabularInline):
-    model = RuleAnswer
+class FactQuestionInline(admin.TabularInline):
+    model = FactQuestion
 
-class RuleAdmin(admin.ModelAdmin):
+class FactAdmin(admin.ModelAdmin):
     filter_horizontal = ('requires','recommends',)
-    inlines = [RuleAnswerInline]
+    inlines = [FactQuestionInline]
 
-admin.site.register(Rule, RuleAdmin)
+admin.site.register(Fact, FactAdmin)
 admin.site.register(Question)
 admin.site.register(Recommend)
