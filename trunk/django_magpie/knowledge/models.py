@@ -149,12 +149,12 @@ class FactState(object):
             match_all = True
             for fquestion in fact.factquestion_set.all():
                 qid = fquestion.question.id
+                if qid not in ans_dict:
+                    match_all = False
+                    break
                 if ans_dict[qid] != fquestion.answer:
                     match_all = False
                     falseFactIDs.append(fact.id)
-                    break
-                elif qid not in ans_dict:
-                    match_all = False
                     break
             if match_all:
                 pass_ids.append(fact.id)
