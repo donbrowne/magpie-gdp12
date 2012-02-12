@@ -4,7 +4,7 @@
 {% block title %}{{ title }} | {% trans 'Magpie Site' %}{% endblock %}
 
 {% block branding %}
-<h1 id="site-name">{% trans 'Welcome to M.A.G.P.I.E'  %}</h1>
+<h1 id="site-name">{% trans 'Welcome to MAGPIE'  %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
 {% csrf_token %}
 <ol>
 {% for question in question_list %}
-    <li>{{ question.text|add:"?" }}
+    <li>{{ question.text}}
     <input type="radio" name='answer_{{question.id}}' value="y">Yes
     <input type="radio" name='answer_{{question.id}}' value="n">No
     </li>
@@ -33,6 +33,7 @@
 {% endfor %}
 </ol>
 {% endif %}
+
 {% if reason_list %}
 <h2>Reasons:</h2>
 <ol class="treeview">
@@ -40,10 +41,43 @@
     <li>{{ reason.text }}</li>
     <ol>
     {% for qa in reason.qa_list %}
-        <li>{{ qa.0|add:"?" }} {{ qa.1|yesno:"Yes,No" }} </li>
+        <li>{{ qa.0|add:" You answered - " }} {{ qa.1|yesno:"Yes,No" }} </li>
     {% endfor %}
     </ol>
 {% endfor %}
 </ol>
 {% endif %}
+
+{% if nonRecommendedList %}
+<h2>Do not:</h2>
+<ol>
+{% for nr in nonRecommendedList %}
+    <li>{{ nr.text }}</li>
+{% endfor %}
+</ol>
+{% endif %}
+
+{% if reasonsNonList %}
+<h2>Reasons:</h2>
+<ol class="treeview">
+{% for reason in reasonsNonList %}
+    <li>{{ reason.text }}</li>
+    <ol>
+    {% for qa in reason.qa_list %}
+        <li>{{ qa.0|add:" You answered - " }} {{ qa.1|yesno:"Yes,No" }} </li>
+    {% endfor %}
+    </ol>
+{% endfor %}
+</ol>
+{% endif %}
+
+{% if otherRecsList %}
+<h2>Other Recommendations:</h2>
+<ol>
+{% for otr in otherRecsList %}
+    <li>{{ otr.text }}</li>
+{% endfor %}
+</ol>
+{% endif %}
+
 {% endblock %}
