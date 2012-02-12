@@ -38,6 +38,7 @@ def index(request):
         reasons = state.get_reasons()
         reasonsNon = state.getNonReasons()
         otherRecs = state.getOtherRecs()
+        unansweredReasons = state.getUnansweredReasons()
         if len(questions) == 0:
             # all done
             del_state(request.session)
@@ -47,7 +48,8 @@ def index(request):
                     'reason_list' : reasons,
                     'nonRecommendedList' : nonRecommended,
                     'reasonsNonList': reasonsNon,
-                    'otherRecsList' : otherRecs
+                    'otherRecsList' : otherRecs,
+                    'unansweredList' : unansweredReasons
                 },
                 context)
         else:
@@ -60,7 +62,8 @@ def index(request):
                   'reason_list': reasons,
                   'nonRecommendedList': nonRecommended,
                   'reasonsNonList': reasonsNon,
-                  'otherRecsList' : otherRecs
+                  'otherRecsList' : otherRecs,
+                  'unansweredList' : unansweredReasons
                 },
                 context)
     else:
