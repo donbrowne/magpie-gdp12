@@ -44,12 +44,18 @@ class Reason(object):
     def __init__(self, text, qa_list):
         self.text = text
         self.qa_list = qa_list
-
+        
+class UnansweredReason(object): 
+    def __init__(self, recs, question):
+        self.question = question
+        self.recs = recs
+        
 class FactState(object):
-    def __init__(self, test_ids, pass_ids=[], answers=[], falseFactIDs=[]):
+    def __init__(self, test_ids, pass_ids=[], answers=[], falseFactIDs=[], notAnswered=[]):
         self.test_ids = test_ids
         self.pass_ids = pass_ids
         self.falseFactIDs = falseFactIDs
+        self.notAnswered = notAnswered
         self.answers = answers
 
     # return list of questions for fact set not yet answered
@@ -84,7 +90,10 @@ class FactState(object):
     #Get a list of recommendations that are not applicable yet
     def getOtherRecs(self):
         other_recommended = []
-        for fact in Fact.objects.exclude(id__in=self.pass_ids).exclude(id__in=self.falseFactIDs):
+        notAnsweredIDs = []
+        for pair in self.notAnswered:
+            notAnsweredIDs.append(pair[0])
+        for fact in Fact.objects.exclude(id__in=self.pass_ids).exclude(id__in=self.falseFactIDs).exclude(id__in=notAnsweredIDs):
             for other in fact.recommends.all():
                 if other not in other_recommended:
                     other_recommended.append(other)
@@ -133,12 +142,27 @@ class FactState(object):
             for recommend in recommends:
                 reasons.append(Reason(recommend.text, qa_list))
         return reasons
+        
+    def getUnansweredReasons(self):
+        id_set = set()
+        reasons = []
+        for pair in self.notAnswered:
+            fact = Fact.objects.get(id=pair[0])
+            recommends = []
+            for recommend in fact.recommends.all():
+                if recommend.id not in id_set:
+                    id_set.add(recommend.id)
+                    recommends.append(recommend.text)
+            question = Question.objects.get(id=pair[1])
+            reasons.append(UnansweredReason(recommends,question))
+        return reasons
 
     # given some answers calculate next set of facts to test
     def next_state(self, answers):
         test_ids = []
         pass_ids = self.pass_ids
         falseFactIDs = self.falseFactIDs
+        notAnswered = self.notAnswered
         # answers = prev + new
         ans_dict = dict(self.answers)
         for item in answers:
@@ -151,17 +175,23 @@ class FactState(object):
                 qid = fquestion.question.id
                 if qid not in ans_dict:
                     match_all = False
+                    if (qid,fact.id) not in notAnswered:
+                        notAnswered.append((fact.id,qid))
                     break
-                if ans_dict[qid] != fquestion.answer:
+                elif ans_dict[qid] != fquestion.answer:
                     match_all = False
+                    if (qid,fact.id) in notAnswered:
+                        notAnswered.remove((fact.id,qid))
                     falseFactIDs.append(fact.id)
                     break
+                elif (qid,fact.id) in notAnswered:
+                        notAnswered.remove((fact.id,qid))
             if match_all:
                 pass_ids.append(fact.id)
                 for child_fact in fact.fact_set.all():
                     if child_fact.id not in test_ids:
                         test_ids.append(child_fact.id)
-        return FactState(test_ids, pass_ids, ans_dict.items(), falseFactIDs)
+        return FactState(test_ids, pass_ids, ans_dict.items(), falseFactIDs, notAnswered)
 
 
 # Factory start a q+a session

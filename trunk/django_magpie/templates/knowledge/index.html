@@ -71,6 +71,20 @@
 </ol>
 {% endif %}
 
+{% if unansweredList %}
+<h2>Questions you did not answer (and their recommendations):</h2>
+<ol class="treeview">
+{% for reason in unansweredList %}
+    <li>{{ reason.question }}</li>
+    <ol>
+    {% for rec in reason.recs %}
+        <li>{{ rec }} </li>
+    {% endfor %}
+    </ol>
+{% endfor %}
+</ol>
+{% endif %}
+
 {% if otherRecsList %}
 <h2>Other Recommendations:</h2>
 <ol>
