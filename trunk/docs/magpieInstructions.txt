@@ -87,7 +87,18 @@ delivers -
 The user can click the "Home" button near the top of the screen to go back to
 the start.
 
+UNIT TESTS:
+
+To run all tests do
+
+  ./manage.py test
+
+To run specific tests for the knowledge module do
+
+  ./manage.py test knowledge 
+
 KNOWN ISSUES:
 
 Refreshing the page after answering questions will throw an error. Navigate to
 the main page to start from the beginning.
+
