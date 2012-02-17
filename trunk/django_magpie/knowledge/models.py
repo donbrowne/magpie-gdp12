@@ -7,6 +7,9 @@ class Question(models.Model):
 
 class Recommend(models.Model):
     text = models.CharField(max_length=255)
+    pmlLink = models.CharField(max_length=255,blank=True)
+    videoLink = models.CharField(max_length=255,blank=True)
+    pdfLink = models.CharField(max_length=255,blank=True) 
     def __unicode__(self):
         return self.text
 
