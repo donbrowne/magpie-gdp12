@@ -86,18 +86,6 @@ class FactState(object):
                 if nr not in non_recommended:
                     non_recommended.append(nr)
         return non_recommended
-        
-    #Get a list of recommendations that are not applicable yet
-    def getOtherRecs(self):
-        other_recommended = []
-        notAnsweredIDs = []
-        for pair in self.notAnswered:
-            notAnsweredIDs.append(pair[0])
-        for fact in Fact.objects.exclude(id__in=self.pass_ids).exclude(id__in=self.falseFactIDs).exclude(id__in=notAnsweredIDs):
-            for other in fact.recommends.all():
-                if other not in other_recommended:
-                    other_recommended.append(other)
-        return other_recommended
 
     def get_reasons(self):
         reasons = []
