@@ -3,4 +3,5 @@ from django.conf.urls.defaults import patterns, include, url
 urlpatterns = patterns('knowledge.views',
     url(r'^$', 'index'),
     url(r'^ask$', 'ask'),
+    url(r'^done$', 'done'),
 )

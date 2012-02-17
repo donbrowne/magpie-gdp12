@@ -46,9 +46,8 @@ def ask(request):
         unansweredReasons = state.getUnansweredReasons()
         if len(questions) == 0:
             # all done
-            del_state(request.session)
             return render_to_response(
-                'knowledge/ask.html', {
+                'knowledge/done.html', {
                     'recommend_list': recommends,
                     'reason_list' : reasons,
                     'nonRecommendedList' : nonRecommended,
@@ -57,25 +56,41 @@ def ask(request):
                     'unansweredList' : unansweredReasons
                 },
                 context)
-        else:
-            # keep going
-            put_state(request.session, state)
-            return render_to_response(
-                'knowledge/ask.html', {
-                  'question_list': questions,
-                  'recommend_list': recommends,
-                  'reason_list': reasons,
-                  'nonRecommendedList': nonRecommended,
-                  'reasonsNonList': reasonsNon,
-                  'otherRecsList' : otherRecs,
-                  'unansweredList' : unansweredReasons
-                },
-                context)
-    else:
-        state = start_state()
+        # keep going
         put_state(request.session, state)
         return render_to_response(
             'knowledge/ask.html', {
-                'question_list': state.get_questions()
+            'question_list': questions,
+            'recommend_list': recommends,
+            'reason_list': reasons,
+            'nonRecommendedList': nonRecommended,
+            'reasonsNonList': reasonsNon,
+            'otherRecsList' : otherRecs,
+            'unansweredList' : unansweredReasons
             },
             context)
+    state = start_state()
+    put_state(request.session, state)
+    questions = state.get_questions()
+    if len(questions) == 0:
+        # all done
+        return render_to_response(
+                'knowledge/done.html', {
+                    'recommend_list': recommends,
+                    'reason_list' : reasons,
+                    'nonRecommendedList' : nonRecommended,
+                    'reasonsNonList': reasonsNon,
+                    'otherRecsList' : otherRecs,
+                    'unansweredList' : unansweredReasons
+                },
+                context)
+    return render_to_response(
+        'knowledge/ask.html', {
+        'question_list': state.get_questions()
+        },
+        context)
+
+# save state here if logged in (else keep in cookie)
+def done(request):
+    return redirect('/')
+    
