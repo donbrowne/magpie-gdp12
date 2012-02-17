@@ -42,7 +42,6 @@ def ask(request):
         nonRecommended = state.getNonRecommended()
         reasons = state.get_reasons()
         reasonsNon = state.getNonReasons()
-        otherRecs = state.getOtherRecs()
         unansweredReasons = state.getUnansweredReasons()
         if len(questions) == 0:
             # all done
@@ -52,7 +51,6 @@ def ask(request):
                     'reason_list' : reasons,
                     'nonRecommendedList' : nonRecommended,
                     'reasonsNonList': reasonsNon,
-                    'otherRecsList' : otherRecs,
                     'unansweredList' : unansweredReasons
                 },
                 context)
@@ -65,7 +63,6 @@ def ask(request):
             'reason_list': reasons,
             'nonRecommendedList': nonRecommended,
             'reasonsNonList': reasonsNon,
-            'otherRecsList' : otherRecs,
             'unansweredList' : unansweredReasons
             },
             context)
@@ -80,7 +77,6 @@ def ask(request):
                     'reason_list' : reasons,
                     'nonRecommendedList' : nonRecommended,
                     'reasonsNonList': reasonsNon,
-                    'otherRecsList' : otherRecs,
                     'unansweredList' : unansweredReasons
                 },
                 context)

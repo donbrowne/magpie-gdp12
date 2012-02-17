@@ -19,7 +19,7 @@ program works (from the user's perspective) -
 * A Recommendation consists of text that is presented to the user.
 * A Fact consists of a name, a list of questions (and the expected answers) 
   required for the Fact to be true, a list of recommendations provided when the 
-  Fact is true, and an otional list of requirements.
+  Fact is true, and an optional list of requirements.
 * The program iterates through the list of facts, and asks the user the
   questions associated with those facts. If the user gives the expected answers
   to all the questions associated with that fact, then that fact is true.
