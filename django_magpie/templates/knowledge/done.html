@@ -8,28 +8,21 @@
 {% endblock %}
 
 {% block content %}
-<h2>Questions:</h2>
-<form action="/knowledge/ask" method="post">
+<h2>All Done!</h2>
+
+<form action="/knowledge/done" method="post">
 {% csrf_token %}
-<ol>
-{% for question in question_list %}
-    <li>{{ question.text}}
-    <input type="radio" name='answer_{{question.id}}' value="y">Yes
-    <input type="radio" name='answer_{{question.id}}' value="n">No
-    </li>
-{% endfor %}
-</ol>
-<input type="submit" value="Next" />
+<input type="submit" value="Done" />
 </form>
-{% if recommend_list %}
+
 <h2>Recommmendations:</h2>
+{% if recommend_list %}
 <ol>
 {% for rec in recommend_list %}
     <li>{{ rec.text }}</li>
 {% endfor %}
 </ol>
 {% endif %}
-
 {% if reason_list %}
 <h2>Reasons:</h2>
 <ol class="treeview">
@@ -52,7 +45,6 @@
 {% endfor %}
 </ol>
 {% endif %}
-
 {% if reasonsNonList %}
 <h2>Reasons:</h2>
 <ol class="treeview">
