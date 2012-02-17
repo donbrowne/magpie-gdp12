@@ -1,16 +1,14 @@
 from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,redirect
 from knowledge.models import FactState, start_state, get_answers
 
 # note sesson is a gui state so
 # should not pass to business logic layer
 def del_state(session):
-    del session['test_ids']
-    del session['pass_ids']
-    del session['answers']
-    del session['falseFactIDs']
-
+    for key in ['test_ids','pass_ids','answers','falseFactIDs']:
+        if key in session:
+            del session[key]
 
 def get_state(session):
     test_ids = session['test_ids']
@@ -29,6 +27,13 @@ def put_state(session, state):
 def index(request):
     context = RequestContext(request)
     if request.method == 'POST':
+        del_state(request.session)
+        return redirect('knowledge/ask')
+    return render_to_response('knowledge/index.html', context)
+
+def ask(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
         answers =  get_answers(request.POST.items())
         state = get_state(request.session)
         state = state.next_state(answers)
@@ -43,7 +48,7 @@ def index(request):
             # all done
             del_state(request.session)
             return render_to_response(
-                'knowledge/index.html', {
+                'knowledge/ask.html', {
                     'recommend_list': recommends,
                     'reason_list' : reasons,
                     'nonRecommendedList' : nonRecommended,
@@ -56,7 +61,7 @@ def index(request):
             # keep going
             put_state(request.session, state)
             return render_to_response(
-                'knowledge/index.html', {
+                'knowledge/ask.html', {
                   'question_list': questions,
                   'recommend_list': recommends,
                   'reason_list': reasons,
@@ -70,7 +75,7 @@ def index(request):
         state = start_state()
         put_state(request.session, state)
         return render_to_response(
-            'knowledge/index.html', {
+            'knowledge/ask.html', {
                 'question_list': state.get_questions()
             },
             context)
