@@ -3,13 +3,10 @@
 
 {% block title %}{{ title }} | {% trans 'Magpie Site' %}{% endblock %}
 
-{% block branding %}
-<h1 id="site-name">{% trans 'Welcome to MAGPIE'  %}</h1>
-{% endblock %}
-
 {% block content %}
 <form action="/" method="post">
-<p> Welcome to the Model Advice Guidance Process Integration Explorer
+<p> Welcome to the M.A.G.P.IE. </p>
+Model Advice Guidance Process Integration Explorer
 or M.A.G.P.I.E for short.</p>
 <p>Take some time to answer some questions by pressing the start button below</p>
 {% csrf_token %}
