@@ -21,7 +21,13 @@
 <h2>Recommmendations:</h2>
 <ol>
 {% for rec in recommend_list %}
-    <li>{{ rec.text }}</li>
+    <li>{{ rec.text }} 
+    <ol>
+    {% if rec.pmlLink %} <li>{{ " PML description - "|add:rec.pmlLink }}</li>{% endif %}
+    {% if rec.pdfLink %} <li>{{ " PDF Link - "|add:rec.pdfLink }}</li>{% endif %}
+    {% if rec.videoLink %} <li>{{ " Video Link - "|add:rec.videoLink }}</li>{% endif %}
+    </ol>
+    </li>
 {% endfor %}
 </ol>
 {% endif %}
@@ -43,8 +49,8 @@
 {% if nonRecommendedList %}
 <h2>Do not:</h2>
 <ol>
-{% for nr in nonRecommendedList %}
-    <li>{{ nr.text }}</li>
+{% for rec in nonRecommendedList %}
+    <li>{{ rec.text }}</li>
 {% endfor %}
 </ol>
 {% endif %}
@@ -76,5 +82,4 @@
 {% endfor %}
 </ol>
 {% endif %}
-
 {% endblock %}
