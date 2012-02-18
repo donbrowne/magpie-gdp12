@@ -1,5 +1,5 @@
 # Django settings for django_magpie project.
-
+import django.conf.global_settings as DEFAULT_SETTINGS
 import os
 
 CURRENT_DIR = os.path.dirname(__file__)
@@ -106,6 +106,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
+
+
+# need this to reference request context in templates
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    "django.core.context_processors.request",
+)
+
 
 ROOT_URLCONF = 'django_magpie.urls'
 

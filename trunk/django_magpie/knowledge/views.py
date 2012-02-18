@@ -23,7 +23,6 @@ def put_state(session, state):
     session['answers'] = state.answers
     session['falseFactIDs'] = state.falseFactIDs
 
-# TODO move this to questions url
 def index(request):
     context = RequestContext(request)
     if request.method == 'POST':
@@ -43,8 +42,8 @@ def ask(request):
         reasons = state.get_reasons()
         reasonsNon = state.getNonReasons()
         unansweredReasons = state.getUnansweredReasons()
+        # check if all done
         if len(questions) == 0:
-            # all done
             return render_to_response(
                 'knowledge/done.html', {
                     'recommend_list': recommends,
@@ -66,19 +65,14 @@ def ask(request):
             'unansweredList' : unansweredReasons
             },
             context)
+    # get request - first time we ask
     state = start_state()
     put_state(request.session, state)
     questions = state.get_questions()
     if len(questions) == 0:
         # all done
         return render_to_response(
-                'knowledge/done.html', {
-                    'recommend_list': recommends,
-                    'reason_list' : reasons,
-                    'nonRecommendedList' : nonRecommended,
-                    'reasonsNonList': reasonsNon,
-                    'unansweredList' : unansweredReasons
-                },
+                'knowledge/done.html',
                 context)
     return render_to_response(
         'knowledge/ask.html', {
