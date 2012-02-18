@@ -28,6 +28,23 @@ class FactQuestion(models.Model):
     answer = models.BooleanField()
     def __unicode__(self):
         return self.question.text + ' ' + str(self.answer)
+        
+class FactQuestion(models.Model):
+    fact = models.ForeignKey(Fact)
+    question = models.ForeignKey(Question)
+    answer = models.BooleanField()
+    def __unicode__(self):
+        return self.question.text + ' ' + str(self.answer)
+        
+from django import forms
+
+class ResourceFile(models.Model):
+#Upload to the media root directory 
+#(upload_to is the subdir of the media root directory
+#TODO: Replace . with user name
+    file  = models.FileField(upload_to=".")
+    def __unicode__(self):
+        return self.file.url
 
 # TODO make a helper class
 def get_ids(alist):

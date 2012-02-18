@@ -11,3 +11,4 @@ class FactAdmin(admin.ModelAdmin):
 admin.site.register(Fact, FactAdmin)
 admin.site.register(Question)
 admin.site.register(Recommend)
+admin.site.register(ResourceFile)
