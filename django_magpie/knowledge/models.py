@@ -1,4 +1,5 @@
 from django.db import models
+import django.contrib.auth.models
 
 class Question(models.Model):
     text = models.CharField(max_length=255)
@@ -35,14 +36,13 @@ class FactQuestion(models.Model):
     answer = models.BooleanField()
     def __unicode__(self):
         return self.question.text + ' ' + str(self.answer)
-        
-from django import forms
 
 class ResourceFile(models.Model):
 #Upload to the media root directory 
 #(upload_to is the subdir of the media root directory
 #TODO: Replace . with user name
     file  = models.FileField(upload_to=".")
+    group = models.ForeignKey(django.contrib.auth.models.Group)
     def __unicode__(self):
         return self.file.url
 
