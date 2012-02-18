@@ -5,14 +5,31 @@ class Question(models.Model):
     text = models.CharField(max_length=255)
     def __unicode__(self):
         return self.text
+        
+class ResourceFile(models.Model):
+    description = models.CharField(max_length=255)
+#Upload to the media root directory 
+#(upload_to is the subdir of the media root directory
+#TODO: Replace . with user name
+    file  = models.FileField(upload_to=".")
+    group = models.ManyToManyField(django.contrib.auth.models.Group,blank=True,null=True)
+    def __unicode__(self):
+        return self.description    
 
 class Recommend(models.Model):
     text = models.CharField(max_length=255)
-    pmlLink = models.CharField(max_length=255,blank=True)
-    videoLink = models.CharField(max_length=255,blank=True)
-    pdfLink = models.CharField(max_length=255,blank=True) 
+    pmlLink = models.ForeignKey(ResourceFile, related_name='+',blank=True,null=True)
+    videoLink = models.ForeignKey(ResourceFile, related_name='+',blank=True,null=True)
+    pdfLink = models.ForeignKey(ResourceFile, related_name='+',blank=True,null=True)
     def __unicode__(self):
         return self.text
+        
+class ExternalLink(models.Model):
+    rec = models.ForeignKey(Recommend)
+    description = models.CharField(max_length=255)
+    link = models.CharField(max_length=255)
+    def __unicode__(self):
+        return self.description
 
 class Fact(models.Model):
     name = models.CharField(max_length=30)
@@ -36,15 +53,6 @@ class FactQuestion(models.Model):
     answer = models.BooleanField()
     def __unicode__(self):
         return self.question.text + ' ' + str(self.answer)
-
-class ResourceFile(models.Model):
-#Upload to the media root directory 
-#(upload_to is the subdir of the media root directory
-#TODO: Replace . with user name
-    file  = models.FileField(upload_to=".")
-    group = models.ForeignKey(django.contrib.auth.models.Group)
-    def __unicode__(self):
-        return self.file.url
 
 # TODO make a helper class
 def get_ids(alist):

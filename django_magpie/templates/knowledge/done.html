@@ -18,9 +18,9 @@
 {% for rec in recommend_list %}
     <li>{{ rec.text }} 
     <ol>
-    {% if rec.pmlLink %} <li>{{ " PML description - "|add:rec.pmlLink }}</li>{% endif %}
-    {% if rec.pdfLink %} <li>{{ " PDF Link - "|add:rec.pdfLink }}</li>{% endif %}
-    {% if rec.videoLink %} <li>{{ " Video Link - "|add:rec.videoLink }}</li>{% endif %}
+    {% if rec.pmlLink %} <li>{{ " PML description - "|add:rec.pmlLink.file.url }}</li>{% endif %}
+    {% if rec.pdfLink %} <li>{{ " PDF Link - "|add:rec.pdfLink.file.url }}</li>{% endif %}
+    {% if rec.videoLink %} <li>{{ " Video Link - "|add:rec.videoLink.file.url }}</li>{% endif %}
     </ol>
     </li>
 {% endfor %}
