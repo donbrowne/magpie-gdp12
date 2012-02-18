@@ -32,7 +32,8 @@
             <strong>{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</strong>.
             <a href="{% url 'logout' %}?next={{request.path}}">Log out</a>
         {% else %}
-            <a href="{% url 'login'  %}?next={{request.path}}">Log in</a>
+            <a href="{% url 'login'  %}?next={{request.path}}">Log in</a> |
+            <a href="{% url 'register'  %}?next={{request.path}}">Register</a>
         {% endif %}
         </div>
         
