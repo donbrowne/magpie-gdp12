@@ -76,21 +76,30 @@ class RecsSummary(object):
         self.text = text
         self.links = details
         
+def compareGroups(userGroup, fileGroup):
+    print userGroup
+    print fileGroup
+    if not fileGroup: 
+        print "HELLO"
+        return True
+    else:
+        return bool(list(set(userGroup) & set(fileGroup)))
+        
 #Pack together the recommendation data in a nice way.        
-def generateRecSummary(rec):
-    recsList = []
-    if rec.videoLink != None:
-        recsList.append(("Video Link", rec.videoLink.file.url))
-    if rec.pdfLink != None:
-        recsList.append(("PDF Link", rec.pdfLink.file.url))
-    if rec.pmlLink != None:
-        recsList.append(("PML Link", rec.pmlLink.file.url))
-        
-    for link in ExternalLink.objects.filter(id=rec.id):
-        recsList.append((link.description,link.link))
-        
-    return RecsSummary(rec.text,recsList)
-        
+def recSummaryClosure(userGroup):
+    def getRecSummary(rec):
+        recsList = []
+        if rec.videoLink != None and compareGroups(userGroup,rec.pdfLink.group.all()):
+            recsList.append(("Video Link", rec.videoLink.file.url))
+        if rec.pdfLink != None and compareGroups(userGroup,rec.videoLink.group.all()):
+            recsList.append(("PDF Link", rec.pdfLink.file.url))
+        if rec.pmlLink != None and compareGroups(userGroup,rec.pmlLink.group.all()):
+            recsList.append(("PML Link", rec.pmlLink.file.url))
+        for link in ExternalLink.objects.filter(id=rec.id):
+            recsList.append((link.description,link.link))
+        return RecsSummary(rec.text,recsList)
+    return getRecSummary
+
 class FactState(object):
     def __init__(self, test_ids, pass_ids=[], answers=[], falseFactIDs=[], notAnswered=[]):
         self.test_ids = test_ids

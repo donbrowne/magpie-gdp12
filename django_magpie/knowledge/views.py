@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response,redirect
-from knowledge.models import FactState, start_state, get_answers, generateRecSummary
+from knowledge.models import FactState, start_state, get_answers, recSummaryClosure
 
 # note sesson is a gui state so
 # should not pass to business logic layer
@@ -38,8 +38,8 @@ def ask(request):
         state = get_state(request.session)
         state = state.next_state(answers)
         questions = state.get_questions()
-        recommends = map(generateRecSummary,state.get_recommends())
-        print recommends[0].links
+        summaryClosure = recSummaryClosure(request.user.groups.all())
+        recommends = map(summaryClosure,state.get_recommends())
         nonRecommended = state.getNonRecommended()
         reasons = state.get_reasons()
         reasonsNon = state.getNonReasons()
