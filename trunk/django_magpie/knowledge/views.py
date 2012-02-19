@@ -2,6 +2,9 @@ from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response,redirect
 from knowledge.models import FactState, start_state, get_answers, recSummaryClosure
+from django.conf import settings
+import subprocess 
+import pydot
 
 # note sesson is a gui state so
 # should not pass to business logic layer
@@ -16,6 +19,14 @@ def get_state(session):
     answers = session['answers']
     falseFactIDs = session['falseFactIDs']
     return FactState(test_ids, pass_ids, answers, falseFactIDs)
+
+def generatePmlGraph(request):
+    pmlPath = request.GET.items()[0][1]
+    traverse = subprocess.Popen([settings.TRAVERSE_PATH,pmlPath],stdout=subprocess.PIPE)
+    dotDesc = traverse.communicate()[0]
+    graph = pydot.graph_from_dot_data(dotDesc)
+    png = graph.create_png()
+    return HttpResponse(png, mimetype="image/png")
 
 def put_state(session, state):
     session['test_ids'] = state.test_ids

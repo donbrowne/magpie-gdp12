@@ -27,6 +27,9 @@
         <li><a href={{link.1}}>{{link.0}}</a> </li>
     {% endfor %}
     </ol>
+    {% if rec.pmlPath != None %}
+        <img src={{rec.pmlPath|safe}} />
+    {% endif %}
     </li>
 {% endfor %}
 </ol>

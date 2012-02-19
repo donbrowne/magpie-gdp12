@@ -16,12 +16,15 @@
 {% if recommend_list %}
 <ol>
 {% for rec in recommend_list %}
-    <li>{{ rec.text }} 
+    <li>{{ rec.text }}
     <ol>
     {% for link in rec.links %}
         <li><a href={{link.1}}>{{link.0}}</a> </li>
     {% endfor %}
     </ol>
+    {% if rec.pmlPath != None %}
+        <img src={{rec.pmlPath|safe}} />
+    {% endif %}
     </li>
 {% endfor %}
 </ol>
