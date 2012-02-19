@@ -22,9 +22,6 @@ class UserAnswer(models.Model):
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        print type(instance)
-        print str(instance)
-        print 'creating user here'
         UserProfile.objects.create(user=instance)
 
 # tell us if a new user created
