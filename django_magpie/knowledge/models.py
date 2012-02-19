@@ -20,7 +20,7 @@ class Recommend(models.Model):
     text = models.CharField(max_length=255)
     pmlLink = models.ForeignKey(ResourceFile, related_name='+',blank=True,null=True)
     videoLink = models.ForeignKey(ResourceFile, related_name='+',blank=True,null=True)
-    pdfLink = models.ForeignKey(ResourceFile, related_name='+',blank=True,null=True)
+    otherLinks = models.ManyToManyField(ResourceFile,blank=True,null=True,related_name='+')
     def __unicode__(self):
         return self.text
         
@@ -77,10 +77,7 @@ class RecsSummary(object):
         self.links = details
         
 def compareGroups(userGroup, fileGroup):
-    print userGroup
-    print fileGroup
     if not fileGroup: 
-        print "HELLO"
         return True
     else:
         return bool(list(set(userGroup) & set(fileGroup)))
@@ -89,12 +86,13 @@ def compareGroups(userGroup, fileGroup):
 def recSummaryClosure(userGroup):
     def getRecSummary(rec):
         recsList = []
-        if rec.videoLink != None and compareGroups(userGroup,rec.pdfLink.group.all()):
+        if rec.videoLink != None and compareGroups(userGroup,rec.videoLink.group.all()):
             recsList.append(("Video Link", rec.videoLink.file.url))
-        if rec.pdfLink != None and compareGroups(userGroup,rec.videoLink.group.all()):
-            recsList.append(("PDF Link", rec.pdfLink.file.url))
         if rec.pmlLink != None and compareGroups(userGroup,rec.pmlLink.group.all()):
             recsList.append(("PML Link", rec.pmlLink.file.url))
+        for others in rec.otherLinks.all():
+            if compareGroups(userGroup,others.group.all()):
+                recsList.append((others.description,others.file.url))
         for link in ExternalLink.objects.filter(id=rec.id):
             recsList.append((link.description,link.link))
         return RecsSummary(rec.text,recsList)
