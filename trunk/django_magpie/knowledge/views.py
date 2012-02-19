@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response,redirect
-from knowledge.models import FactState, start_state, get_answers
+from knowledge.models import FactState, start_state, get_answers, generateRecSummary
 
 # note sesson is a gui state so
 # should not pass to business logic layer
@@ -23,6 +23,7 @@ def put_state(session, state):
     session['answers'] = state.answers
     session['falseFactIDs'] = state.falseFactIDs
 
+# TODO move this to questions url
 def index(request):
     context = RequestContext(request)
     if request.method == 'POST':
@@ -37,13 +38,14 @@ def ask(request):
         state = get_state(request.session)
         state = state.next_state(answers)
         questions = state.get_questions()
-        recommends = state.get_recommends()
+        recommends = map(generateRecSummary,state.get_recommends())
+        print recommends[0].links
         nonRecommended = state.getNonRecommended()
         reasons = state.get_reasons()
         reasonsNon = state.getNonReasons()
         unansweredReasons = state.getUnansweredReasons()
-        # check if all done
         if len(questions) == 0:
+            # all done
             return render_to_response(
                 'knowledge/done.html', {
                     'recommend_list': recommends,
@@ -65,14 +67,19 @@ def ask(request):
             'unansweredList' : unansweredReasons
             },
             context)
-    # get request - first time we ask
     state = start_state()
     put_state(request.session, state)
     questions = state.get_questions()
     if len(questions) == 0:
         # all done
         return render_to_response(
-                'knowledge/done.html',
+                'knowledge/done.html', {
+                    'recommend_list': recommends,
+                    'reason_list' : reasons,
+                    'nonRecommendedList' : nonRecommended,
+                    'reasonsNonList': reasonsNon,
+                    'unansweredList' : unansweredReasons
+                },
                 context)
     return render_to_response(
         'knowledge/ask.html', {
