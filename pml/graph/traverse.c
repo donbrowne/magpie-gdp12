@@ -344,7 +344,7 @@ int main(argc, argv)
 	    }
 	    if (graph_type != XML) {
 		printf("digraph %s {\n", name);
-		printf("process [shape=plaintext, label=\"%s\"];\n", filename);
+		printf("process [shape=plaintext];\n");
 	    }
 	    name_nodes(program->source);
 	    traverse(program->source, 0);
