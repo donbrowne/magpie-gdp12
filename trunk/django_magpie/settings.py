@@ -165,9 +165,12 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'knowledge',
+    'accounts',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 
 # A sample logging configuration. The only tangible logging
