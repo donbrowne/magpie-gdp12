@@ -30,7 +30,7 @@
     {% if rec.pmlPath != None %}
     {% with pmlReq="\"pmlGraph?path="|add:rec.pmlPath|add:"\"" %}
         <img src={{pmlReq|safe}} />
-    {% withend %}
+    {% endwith %}
     {% endif %}
     </li>
 {% endfor %}
