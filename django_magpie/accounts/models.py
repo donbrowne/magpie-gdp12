@@ -12,6 +12,10 @@ class UserType(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     facts = models.ManyToManyField(Fact,blank=True)
+
+    def save_answers(self, answers):
+        print 'in here'
+
     def __unicode__(self):
         return self.user.username
 
