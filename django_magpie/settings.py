@@ -66,6 +66,9 @@ USE_L10N = True
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = MAGPIE_DIR + '/../resources/'
 
+#Path to the traverse tool
+TRAVERSE_PATH = MAGPIE_DIR + '/../pml/graph/traverse'
+
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.

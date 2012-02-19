@@ -72,9 +72,10 @@ class UnansweredReason(object):
         self.recs = recs
         
 class RecsSummary(object): 
-    def __init__(self, text, details):
+    def __init__(self, text, details, pmlPath):
         self.text = text
         self.links = details
+        self.pmlPath = pmlPath
         
 def compareGroups(userGroup, fileGroup):
     if not fileGroup: 
@@ -86,16 +87,19 @@ def compareGroups(userGroup, fileGroup):
 def recSummaryClosure(userGroup):
     def getRecSummary(rec):
         recsList = []
+        pmlPath = None
         if rec.videoLink != None and compareGroups(userGroup,rec.videoLink.group.all()):
             recsList.append(("Video Link", rec.videoLink.file.url))
         if rec.pmlLink != None and compareGroups(userGroup,rec.pmlLink.group.all()):
             recsList.append(("PML Link", rec.pmlLink.file.url))
+            pmlPath = '"pmlGraph?path=' + rec.pmlLink.file.path + '"'
+            print pmlPath
         for others in rec.otherLinks.all():
             if compareGroups(userGroup,others.group.all()):
                 recsList.append((others.description,others.file.url))
         for link in ExternalLink.objects.filter(id=rec.id):
             recsList.append((link.description,link.link))
-        return RecsSummary(rec.text,recsList)
+        return RecsSummary(rec.text,recsList,pmlPath)
     return getRecSummary
 
 class FactState(object):
