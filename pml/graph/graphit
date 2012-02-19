@@ -32,7 +32,7 @@ while [ $# -gt 0 ] ; do
     DOT_FILE=${BASENAME}.dot
     ANA_FILE=${BASENAME}.analysis
     PS_FILE=${BASENAME}.ps
-    traverse ${ANON} ${DOM_FLAG} ${FLOW_FLAG} ${MATCH_FLAG} $FILE > $DOT_FILE
+    ./traverse ${ANON} ${DOM_FLAG} ${FLOW_FLAG} ${MATCH_FLAG} $FILE > $DOT_FILE
     if [ -n "$MARK" ] ; then
 	echo $MARK >/dev/stderr
 	sed "s/\(label=\"[^\"]*${MARK}[^a-zA-Z0-9][^\"]*\"\)/fontcolor=\"red\",\1/" $DOT_FILE > ${DOT_FILE}.tmp
