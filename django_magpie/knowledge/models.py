@@ -39,13 +39,6 @@ class Fact(models.Model):
         return self.name
 
 #BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
-
-class FactQuestion(models.Model):
-    fact = models.ForeignKey(Fact)
-    question = models.ForeignKey(Question)
-    answer = models.BooleanField()
-    def __unicode__(self):
-        return self.question.text + ' ' + str(self.answer)
         
 class FactQuestion(models.Model):
     fact = models.ForeignKey(Fact)
@@ -77,6 +70,26 @@ class UnansweredReason(object):
     def __init__(self, recs, question):
         self.question = question
         self.recs = recs
+        
+class RecsSummary(object): 
+    def __init__(self, text, details):
+        self.text = text
+        self.links = details
+        
+#Pack together the recommendation data in a nice way.        
+def generateRecSummary(rec):
+    recsList = []
+    if rec.videoLink != None:
+        recsList.append(("Video Link", rec.videoLink.file.url))
+    if rec.pdfLink != None:
+        recsList.append(("PDF Link", rec.pdfLink.file.url))
+    if rec.pmlLink != None:
+        recsList.append(("PML Link", rec.pmlLink.file.url))
+        
+    for link in ExternalLink.objects.filter(id=rec.id):
+        recsList.append((link.description,link.link))
+        
+    return RecsSummary(rec.text,recsList)
         
 class FactState(object):
     def __init__(self, test_ids, pass_ids=[], answers=[], falseFactIDs=[], notAnswered=[]):
