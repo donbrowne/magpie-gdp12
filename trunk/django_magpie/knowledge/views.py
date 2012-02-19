@@ -31,61 +31,53 @@ def index(request):
         return redirect('knowledge/ask')
     return render_to_response('knowledge/index.html', context)
 
+def ask_or_done(request, state):
+    context = RequestContext(request)
+    questions = state.get_questions()
+    summaryClosure = recSummaryClosure(request.user.groups.all())
+    recommends = map(summaryClosure,state.get_recommends())
+    nonRecommended = state.getNonRecommended()
+    reasons = state.get_reasons()
+    reasonsNon = state.getNonReasons()
+    unansweredReasons = state.getUnansweredReasons()
+    put_state(request.session, state)
+    # check if all done
+    if len(questions) == 0:
+        return render_to_response(
+            'knowledge/done.html', {
+                'recommend_list': recommends,
+                'reason_list' : reasons,
+                'nonRecommendedList' : nonRecommended,
+                'reasonsNonList': reasonsNon,
+                'unansweredList' : unansweredReasons
+            },
+            context)
+    # keep going
+    return render_to_response(
+        'knowledge/ask.html', {
+        'question_list': questions,
+        'recommend_list': recommends,
+        'reason_list': reasons,
+        'nonRecommendedList': nonRecommended,
+        'reasonsNonList': reasonsNon,
+        'unansweredList' : unansweredReasons
+        },
+        context)
+
+
 def ask(request):
     context = RequestContext(request)
     if request.method == 'POST':
+        # user answered some questions
         answers =  get_answers(request.POST.items())
         state = get_state(request.session)
         state = state.next_state(answers)
-        questions = state.get_questions()
-        summaryClosure = recSummaryClosure(request.user.groups.all())
-        recommends = map(summaryClosure,state.get_recommends())
-        nonRecommended = state.getNonRecommended()
-        reasons = state.get_reasons()
-        reasonsNon = state.getNonReasons()
-        unansweredReasons = state.getUnansweredReasons()
-        if len(questions) == 0:
-            # all done
-            return render_to_response(
-                'knowledge/done.html', {
-                    'recommend_list': recommends,
-                    'reason_list' : reasons,
-                    'nonRecommendedList' : nonRecommended,
-                    'reasonsNonList': reasonsNon,
-                    'unansweredList' : unansweredReasons
-                },
-                context)
-        # keep going
-        put_state(request.session, state)
-        return render_to_response(
-            'knowledge/ask.html', {
-            'question_list': questions,
-            'recommend_list': recommends,
-            'reason_list': reasons,
-            'nonRecommendedList': nonRecommended,
-            'reasonsNonList': reasonsNon,
-            'unansweredList' : unansweredReasons
-            },
-            context)
-    state = start_state()
-    put_state(request.session, state)
-    questions = state.get_questions()
-    if len(questions) == 0:
-        # all done
-        return render_to_response(
-                'knowledge/done.html', {
-                    'recommend_list': recommends,
-                    'reason_list' : reasons,
-                    'nonRecommendedList' : nonRecommended,
-                    'reasonsNonList': reasonsNon,
-                    'unansweredList' : unansweredReasons
-                },
-                context)
-    return render_to_response(
-        'knowledge/ask.html', {
-        'question_list': state.get_questions()
-        },
-        context)
+        rsp = ask_or_done(request, state)
+    else:
+        # first time
+        state = start_state()
+        rsp = ask_or_done(request, state)
+    return rsp
 
 # save state here if logged in (else keep in cookie)
 def done(request):
