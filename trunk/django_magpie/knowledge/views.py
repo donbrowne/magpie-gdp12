@@ -92,5 +92,13 @@ def ask(request):
 
 # save state here if logged in (else keep in cookie)
 def done(request):
+    if request.user.is_authenticated():
+        # save answers for authenticated users.
+        state = get_state(request.session)
+        profile = request.user.get_profile()
+        profile.save_answers(state.get_answers())
+    else:
+        # Do something for anonymous users.
+        pass
     return redirect('/')
     

@@ -109,6 +109,9 @@ class FactState(object):
         self.notAnswered = notAnswered
         self.answers = answers
 
+    def get_answers(self):
+        return self.answers
+
     # return list of questions for fact set not yet answered
     def get_questions(self):
         questions = []
