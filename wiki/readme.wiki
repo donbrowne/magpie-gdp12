@@ -1,0 +1,3 @@
+#summary The MAGPIE readme file
+
+= readme.txt =
