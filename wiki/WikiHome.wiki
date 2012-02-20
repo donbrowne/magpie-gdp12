@@ -1,12 +1,11 @@
-#summary One-sentence summary of this page.
+This is the Wiki for MAGPIE, squak squak!
 
 = Introduction =
 
-
-This is the Wiki for MAGPIE, squak squak!
+Use this Wiki to store the supporting documentation for installation and use of the MAGPIE.
 
 
 = Pages =
 
-
-  * Automatic links to other wiki pages needed here
+  * Link to the current readme file
+  * Post Mortem Reports
