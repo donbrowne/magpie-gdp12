@@ -102,7 +102,16 @@ def recSummaryClosure(userGroup):
     return getRecSummary
 
 class FactState(object):
-    def __init__(self, test_ids, pass_ids=[], answers=[], falseFactIDs=[], notAnswered=[]):
+    def __init__(self, test_ids, pass_ids=None, answers=None, falseFactIDs=None, notAnswered=None):
+        # default arguments beware
+        if pass_ids is None: 
+            pass_ids = []
+        if answers is None:
+            answers = []
+        if falseFactIDs is None:
+            falseFactIDs = []
+        if notAnswered is None:
+            notAnswered=[]
         self.test_ids = test_ids
         self.pass_ids = pass_ids
         self.falseFactIDs = falseFactIDs
@@ -234,7 +243,6 @@ class FactState(object):
                     if child_fact.id not in test_ids:
                         test_ids.append(child_fact.id)
         return FactState(test_ids, pass_ids, ans_dict.items(), falseFactIDs, notAnswered)
-
 
 # Factory start a q+a session
 def start_state():
