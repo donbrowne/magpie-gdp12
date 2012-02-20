@@ -246,12 +246,22 @@ class FactState(object):
         return FactState(test_ids, pass_ids, ans_dict.items(), falseFactIDs, notAnswered)
 
 # Factory start a q+a session
-def start_state():
+def start_state(user):
     test_ids = []
+    profile= user.get_profile()
+    user_types = profile.types.all()
     for fact in Fact.objects.filter(requires__isnull=True):
-        if fact.id not in test_ids:
-            test_ids.append(fact.id)
+        num_utypes = 0 
+        user_fact = False
+        for utype in fact.usertype_set.all():
+            num_utypes = num_utypes + 1
+            if utype in user_types:
+                user_fact = True
+                break
+        if (user_fact or num_utypes == 0) and fact.id not in test_ids:
+            if len(fact.factquestion_set.all()) == 0:
+                ids = get_ids(fact.fact_set.all())
+                test_ids.extend(ids)
+            else:
+                test_ids.append(fact.id)
     return FactState(test_ids)
-
-
-

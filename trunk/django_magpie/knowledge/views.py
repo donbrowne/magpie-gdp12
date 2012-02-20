@@ -46,7 +46,7 @@ def index(request):
 @login_required
 def saved(request):
     context = RequestContext(request)
-    state = start_state()
+    state = start_state(request.user)
     profile = request.user.get_profile()
     state = state.next_state(profile.get_answers())
     return render_to_response('knowledge/saved.html', {
@@ -101,7 +101,7 @@ def ask(request):
         rsp = ask_or_done(request, state)
     else:
         # first time
-        state = start_state()
+        state = start_state(request.user)
         rsp = ask_or_done(request, state)
     return rsp
 
