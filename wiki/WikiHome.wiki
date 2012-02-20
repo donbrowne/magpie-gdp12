@@ -7,5 +7,5 @@ Use this Wiki to store the supporting documentation for installation and use of 
 
 = Pages =
 
-  * Link to the current readme[http://code.google.com/p/magpie-gdp12/wiki/readme] file
+  * Link to the current readme[readme] file
   * Post Mortem Reports
