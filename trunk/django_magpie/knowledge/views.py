@@ -3,6 +3,7 @@ from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response,redirect
 from knowledge.models import FactState, start_state, get_answers, recSummaryClosure
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 import subprocess 
 import pydot
 
@@ -41,6 +42,20 @@ def index(request):
         del_state(request.session)
         return redirect('knowledge/ask')
     return render_to_response('knowledge/index.html', context)
+
+@login_required
+def saved(request):
+    context = RequestContext(request)
+    state = start_state()
+    profile = request.user.get_profile()
+    state = state.next_state(profile.get_answers())
+    return render_to_response('knowledge/saved.html', {
+                'recommend_list': state.get_recommends(),
+                'reason_list' : state.get_reasons(),
+                'nonRecommendedList' : state.getNonRecommended(),
+                'reasonsNonList': state.getNonReasons(),
+                'unansweredList' : state.getUnansweredReasons()
+                }, context)
 
 def ask_or_done(request, state):
     context = RequestContext(request)
