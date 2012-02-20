@@ -33,6 +33,7 @@ def profile(request):
         if 'cancel' not in request.POST:
             form = UserProfileForm(request.POST,instance=profile) # A form bound to the POST data
             if form.is_valid(): # All validation rules pass
+                print 'here'
                 form.save()
         return HttpResponseRedirect(redirect_to)
     else:

@@ -11,12 +11,11 @@ class UserProfileForm(forms.ModelForm):
 
     first_name = forms.CharField(label='first name', max_length=30)
     last_name = forms.CharField(label='last name', max_length=30)
-    email = forms.EmailField(label="Primary email",help_text='')
+    email = forms.EmailField(label='email',help_text='')
 
     class Meta:
         model = UserProfile
-        fields = ('types',) #put fileds You want user to edit here
-        filter_horizontal = ('types',)
+        fields = ('types',)
 
     def save(self, *args, **kwargs):
         u = self.instance.user
