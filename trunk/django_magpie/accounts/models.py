@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from knowledge.models import Fact,Question
+from knowledge.models import Fact,Question,get_ids
 
 """
 class UserType(models.Model):
@@ -14,7 +14,16 @@ class UserProfile(models.Model):
     facts = models.ManyToManyField(Fact,blank=True)
 
     def save_answers(self, answers):
-        print 'in here'
+        ans_dict = dict(answers)
+        keys = ans_dict.keys()
+        # first update existing answers
+        for uanswer in self.useranswer_set.filter(id__in=keys):
+            uanswer.answer = ans_dict[uanswer.question_id]
+            uanswer.save()
+            del ans_dict[uanswer.question_id]
+        # now add new ones
+        for key,value in ans_dict.items():
+            self.useranswer_set.create(question_id=key, answer=value)
 
     def __unicode__(self):
         return self.user.username
