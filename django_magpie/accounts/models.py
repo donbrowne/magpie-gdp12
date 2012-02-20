@@ -13,6 +13,12 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     facts = models.ManyToManyField(Fact,blank=True)
 
+    def get_answers(self):
+        answers = []
+        for uanswer in self.useranswer_set.all():
+            answers.append((uanswer.question_id, uanswer.answer))
+        return answers
+
     def save_answers(self, answers):
         ans_dict = dict(answers)
         keys = ans_dict.keys()

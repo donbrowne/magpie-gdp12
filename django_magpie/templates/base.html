@@ -21,9 +21,7 @@
     <!-- Header -->
     <div id="header">
         <div id="branding">
-        {% block branding %}
         <h1 id="site-name">{% trans 'MAGPIE'  %}</h1>
-        {% endblock %}
         </div>
 
         <div id="user-tools">
@@ -39,6 +37,8 @@
         
         
         {% block nav-global %}{% endblock %}
+        <a href="{% url 'index' %}">Index</a>
+        <a href="{% url 'saved' %}">Saved</a>
     </div>
     <!-- END Header -->
     {% endif %}
