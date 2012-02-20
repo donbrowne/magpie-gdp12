@@ -7,5 +7,5 @@ Use this Wiki to store the supporting documentation for installation and use of 
 
 = Pages =
 
-  * Link to the current readme[readme] file
+  * [readme] file
   * Post Mortem Reports
