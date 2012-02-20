@@ -1,3 +1,181 @@
 #summary The MAGPIE readme file
 
 = magpieinstructions.txt =
+
+NEW FOR ITERATION 2:
+
+DEPENDENCIES:
+
+The pydot module for Python is required for graphing PML processes. This is a 
+wrapper for Graphviz. It has been confirmed to be available from the package 
+manager repos for a variety of Linux distros including Ubuntu, Mint, Fedora and
+Arch. Installation of pydot from OS repos will also install Graphviz. If it is 
+not available in your distro, or your distro's version is out of date, the 
+latest version can be acquired from -
+
+http://code.google.com/p/pydot/
+
+In case of manual install, it will be necessary for the administrator to ensure
+that all dependencies, including but not limited to Graphviz, are installed.
+The documentation for pydot should be consulted.
+
+The PML tools, particularly traverse, are also required. If installing from the
+repo, it is necessary to cd to the pml folder of the trunk, and run make.
+
+FILE SERVING:
+
+The application now allows "Resource Files" to be uploaded to the web server.
+By default, these files are located in the 'resources' folder, which is located
+in the root folder alongside the django_magpie, docs and sqlite3 folder.
+Django handles the uploading of these files, but does not serve them, this is
+the task of the web server. For testing purposes, it is recommended that the
+inbuilt Python HTTP server is used. To do so, from the django_magpie folder -
+
+cd ../resources
+python -m SimpleHTTPServer 8888
+
+The settings.py file is configured such that MEDIA_URL (i.e. the URL where the
+files are accessed through) is http://127.0.0.1:8888/ Similarly, the MEDIA_ROOT
+folder, where the files are uploaded to is defined as MAGPIE_DIR/../resources,
+where MAGPIE_DIR is the location of the django_magpie folder. The admin may
+modify these locations as necessary.
+
+A resource file may have a set of user group associated with it. This is used
+to limit the display of links to this file to those users who are in one of the
+specified groups (see next section). However, at the minute, there is nothing
+to prevent an authorized user accessing the file by hotlinking to it.
+
+RECOMMENDATION LINKS:
+
+In addition to text, recommendations may optionally have links associated with 
+them. There are four types of link that can be associated with them -
+
+* External Links - these are simple HTTP links to external sites.
+* Internal Links - these are links to Resource Files stored locally. The 
+  maintainer selects from the list of uploaded files.
+* PML Link - A special case of internal link, it is used for creating graphs.
+* Video Link - Will be used for embedded video players in future versions.
+
+GRAPHING:
+
+If a PML file is associated with the recommendation, then the program will
+attempt to render a graph using pml-to-dot converter provided (traverse)
+and then use graphviz to produce a PNG representation of the graph. 
+This is then displayed on the page alongside recommendations. There are two
+issues with the current implementation -
+
+* If an unsuitable file is set as the PML description file, it will fail to 
+  produce a graph. This does not cause any problems as per se, but it may be
+  desirable in future versions to carry out a check (using pmlcheck) on the
+  file set as the PML file when the user is creating the recommendation.
+* The code that generates the graph executes the traverse program with the 
+  file name, given through a GET request, as an argument. This poses some
+  unpleasant security issues, and will need to be mitigated in future, either
+  by changing the data passed in the GET request, or calling the traverse
+  program's functions through Python using SWIG or the like.
+
+---END ITERATION 2---
+
+INITIALIZATION:
+
+On the first run of the application, it is necessary to cd to the django_magpie directory, and run -
+
+python manage.py syncdb
+
+This will set up the database, and will create a superuser account. Once this is
+done, the server can be started with -
+
+python manage.py runserver
+
+KNOWLEDGE BASE:
+
+Before explaining use of the program, it is probably best to consider how the 
+program works (from the user's perspective) -
+
+* The program models Questions, Facts and Recommendations.
+* A Question consists of the question text that the user is asked.
+* A Recommendation consists of text that is presented to the user.
+* A Fact consists of a name, a list of questions (and the expected answers) 
+  required for the Fact to be true, a list of recommendations provided when the 
+  Fact is true, and an optional list of requirements.
+* The program iterates through the list of facts, and asks the user the
+  questions associated with those facts. If the user gives the expected answers
+  to all the questions associated with that fact, then that fact is true.
+* The requirements list of a fact is the set of facts that must be true 
+  before the program will ask the user about it. For example, if there is a 
+  'Likes Chocolate Cake' fact that asks the user if they like chocolate cake, 
+  the maintainer could set the facts 'Likes Chocolate' and 'Likes Cake' as 
+  requirements for 'Likes Chocolate Cake', so that the program only asks the
+  user if they like chocolate cake if it has already established that they like
+  chocolate, and they like cake. 
+
+Assuming the server is running the default address, the admin page can be 
+accessed at -
+
+http://127.0.0.1:8000/admin
+
+Log in with the username/password that was specified when the database was set
+up. The admin page allows the maintainer to add/remove/modify the Facts,
+Questions and Recommendations. Questions and Recommendations are created by
+specifying the appropriate text. Facts are created by selecting a list of 
+requirements (if any), selecting the list of recommendations, and specifying the
+questions associated with that fact. When specifying questions, there's an 
+"Answers" tickbox. Select this if answering "Yes" to the question is the 
+expected answer. Leave unselected if "No" is the expected answer.
+
+USER ACCESS LEVELS:
+
+The system currently supports three levels of privilege -
+
+* Guest: A user that is not registered on the system is allowed to answer the 
+  questions, but cannot access the admin screen.
+* Superuser: The user created when the database was initialized is given full 
+  control over the system, including the ability to create other superusers.
+* Maintainer: This is not directly built in to the system but can be created in
+  a straightforward manner. Log in to the admin screen as a superuser, select
+  the Groups section, and create a group named that has all the privileges
+  prefixed with 'knowledge'. When creating a maintainer user, ensure that they
+  are a member of this group, and that the "Staff Status" option is selected. 
+  This user will be allowed to modify the knowledge base, but otherwise has no
+  administration powers.
+
+It is anticipated that the Maintainer group setup will be automated, either by
+using database fixtures, or by distributing the software with a template 
+database file.
+
+ANSWERING QUESTIONS:
+
+At the beginning, the user is presented with the questions associated with the
+facts that have no requirements. The user can select Yes, No, or not select an
+answer. When the user presses "Submit", the program processes the answers, and
+delivers -
+
+* More questions, if answers on the previous screens have asserted facts which
+  fill the requirements for other facts. If there are no applicable questions,
+  it will inform the user of this fact instead.
+* A list of recommendations (if any), along with a listing of reasons why this
+  recommendation was made (questions and the user's answers)
+* A list of suggestions that the user should not do. This is based on the user
+  giving the opposite answer to what was expected for a given fact. It also
+  shows the reasons.
+* A list of questions that have been skipped so far, and the recommendations
+  that would have been given if they had been answered.
+* A list of all other recommendations.
+
+The user can click the "Home" button near the top of the screen to go back to
+the start.
+
+UNIT TESTS:
+
+To run all tests do
+
+  ./manage.py test
+
+To run specific tests for the knowledge module do
+
+  ./manage.py test knowledge 
+
+KNOWN ISSUES:
+
+Refreshing the page after answering questions will throw an error. Navigate to
+the main page to start from the beginning.
