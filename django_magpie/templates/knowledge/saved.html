@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Magpie Site' %}{% endblock %}
+
+
+{% block content %}
+
+<h2>Recommmendations:</h2>
+{% if recommend_list %}
+<ol>
+{% for rec in recommend_list %}
+    <li>{{ rec.text }}
+    <ol>
+    {% for link in rec.links %}
+        <li><a href={{link.1}}>{{link.0}}</a> </li>
+    {% endfor %}
+    </ol>
+    {% if rec.pmlPath != None %}
+    {% with pmlReq="\"pmlGraph?path="|add:rec.pmlPath|add:"\"" %}
+        <img src={{pmlReq|safe}} />
+    {% endwith %}
+    {% endif %}
+    </li>
+{% endfor %}
+</ol>
+{% endif %}
+{% if reason_list %}
+<h2>Reasons:</h2>
+<ol class="treeview">
+{% for reason in reason_list %}
+    <li>{{ reason.text }}</li>
+    <ol>
+    {% for qa in reason.qa_list %}
+        <li>{{ qa.0|add:" You answered - " }} {{ qa.1|yesno:"Yes,No" }} </li>
+    {% endfor %}
+    </ol>
+{% endfor %}
+</ol>
+{% endif %}
+
+{% if nonRecommendedList %}
+<h2>Do not:</h2>
+<ol>
+{% for rec in nonRecommendedList %}
+    <li>{{ rec.text }}</li>
+{% endfor %}
+</ol>
+{% endif %}
+{% if reasonsNonList %}
+<h2>Reasons:</h2>
+<ol class="treeview">
+{% for reason in reasonsNonList %}
+    <li>{{ reason.text }}</li>
+    <ol>
+    {% for qa in reason.qa_list %}
+        <li>{{ qa.0|add:" You answered - " }} {{ qa.1|yesno:"Yes,No" }} </li>
+    {% endfor %}
+    </ol>
+{% endfor %}
+</ol>
+{% endif %}
+
+{% if unansweredList %}
+<h2>Questions you did not answer (and their recommendations):</h2>
+<ol class="treeview">
+{% for reason in unansweredList %}
+    <li>{{ reason.question }}</li>
+    <ol>
+    {% for rec in reason.recs %}
+        <li>{{ rec }} </li>
+    {% endfor %}
+    </ol>
+{% endfor %}
+</ol>
+{% endif %}
+
+{% endblock %}
