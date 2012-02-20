@@ -8,4 +8,5 @@ urlpatterns = patterns('django.contrib.auth.views',
 
 urlpatterns += patterns('accounts.views',
     url(r'^register/$', 'register', name='register'),
+    url(r'^profile/$', 'profile', name='profile'),
 )

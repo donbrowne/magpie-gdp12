@@ -3,15 +3,15 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from knowledge.models import Fact,Question,get_ids
 
-"""
 class UserType(models.Model):
     name = models.CharField(max_length=30)
-    facts = models.ManyToManyField('Fact',blank=True)
-"""
+    facts = models.ManyToManyField(Fact,blank=True)
+    def __unicode__(self):
+        return self.name
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    facts = models.ManyToManyField(Fact,blank=True)
+    types = models.ManyToManyField(UserType,blank=True)
 
     def get_answers(self):
         answers = []
