@@ -15,6 +15,9 @@ In case of manual install, it will be necessary for the administrator to ensure
 that all dependencies, including but not limited to Graphviz, are installed.
 The documentation for pydot should be consulted.
 
+The PML tools, particularly traverse, are also required. If installing from the
+repo, it is necessary to cd to the pml folder of the trunk, and run make.
+
 FILE SERVING:
 
 The application now allows "Resource Files" to be uploaded to the web server.
