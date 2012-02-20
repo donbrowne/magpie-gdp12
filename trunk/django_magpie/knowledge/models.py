@@ -96,7 +96,8 @@ def recSummaryClosure(userGroup):
         for others in rec.otherLinks.all():
             if compareGroups(userGroup,others.group.all()):
                 recsList.append((others.description,others.file.url))
-        for link in ExternalLink.objects.filter(id=rec.id):
+        for link in ExternalLink.objects.filter(rec=rec.id):
+            print link
             recsList.append((link.description,link.link))
         return RecsSummary(rec.text,recsList,pmlPath)
     return getRecSummary
