@@ -1,3 +1,74 @@
+NEW FOR ITERATION 2:
+
+DEPENDENCIES:
+
+The pydot module for Python is required for graphing PML processes. This is a 
+wrapper for Graphviz. It has been confirmed to be available from the package 
+manager repos for a variety of Linux distros including Ubuntu, Mint, Fedora and
+Arch. Installation of pydot from OS repos will also install Graphviz. If it is 
+not available in your distro, or your distro's version is out of date, the 
+latest version can be acquired from -
+
+http://code.google.com/p/pydot/
+
+In case of manual install, it will be necessary for the administrator to ensure
+that all dependencies, including but not limited to Graphviz, are installed.
+The documentation for pydot should be consulted.
+
+FILE SERVING:
+
+The application now allows "Resource Files" to be uploaded to the web server.
+By default, these files are located in the 'resources' folder, which is located
+in the root folder alongside the django_magpie, docs and sqlite3 folder.
+Django handles the uploading of these files, but does not serve them, this is
+the task of the web server. For testing purposes, it is recommended that the
+inbuilt Python HTTP server is used. To do so, from the django_magpie folder -
+
+cd ../resources
+python -m SimpleHTTPServer 8888
+
+The settings.py file is configured such that MEDIA_URL (i.e. the URL where the
+files are accessed through) is http://127.0.0.1:8888/ Similarly, the MEDIA_ROOT
+folder, where the files are uploaded to is defined as MAGPIE_DIR/../resources,
+where MAGPIE_DIR is the location of the django_magpie folder. The admin may
+modify these locations as necessary.
+
+A resource file may have a set of user group associated with it. This is used
+to limit the display of links to this file to those users who are in one of the
+specified groups (see next section). However, at the minute, there is nothing
+to prevent an authorized user accessing the file by hotlinking to it.
+
+RECOMMENDATION LINKS:
+
+In addition to text, recommendations may optionally have links associated with 
+them. There are four types of link that can be associated with them -
+
+* External Links - these are simple HTTP links to external sites.
+* Internal Links - these are links to Resource Files stored locally. The 
+  maintainer selects from the list of uploaded files.
+* PML Link - A special case of internal link, it is used for creating graphs.
+* Video Link - Will be used for embedded video players in future versions.
+
+GRAPHING:
+
+If a PML file is associated with the recommendation, then the program will
+attempt to render a graph using pml-to-dot converter provided (traverse)
+and then use graphviz to produce a PNG representation of the graph. 
+This is then displayed on the page alongside recommendations. There are two
+issues with the current implementation -
+
+* If an unsuitable file is set as the PML description file, it will fail to 
+  produce a graph. This does not cause any problems as per se, but it may be
+  desirable in future versions to carry out a check (using pmlcheck) on the
+  file set as the PML file when the user is creating the recommendation.
+* The code that generates the graph executes the traverse program with the 
+  file name, given through a GET request, as an argument. This poses some
+  unpleasant security issues, and will need to be mitigated in future, either
+  by changing the data passed in the GET request, or calling the traverse
+  program's functions through Python using SWIG or the like.
+
+---END ITERATION 2---
+
 INITIALIZATION:
 
 On the first run of the application, it is necessary to cd to the django_magpie directory, and run -
