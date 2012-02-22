@@ -1,7 +1,7 @@
 /*
  * File: Traverse.c
  * Traverse graph built by parser, printing nodes visited.
- * $Id: traverse.c,v 1.1 2005-05-27 01:58:57 jnoll Exp $
+ * $Id: traverse.c,v 1.2 2008/07/25 22:06:53 jnoll Exp $
  * Author: John Noll & Jigar Shah
  * Date Written: Aug 10 2003
  * Date Last Modified: Aug 11 2003
@@ -18,20 +18,18 @@
 # include <pml/parser.h>
 # include <pml/tokens.h>
 
-#define LABEL_LINKS 1
-
-typedef enum { FLOW = 0x1, XML=0x2, ANON=0x4} output_t;
+typedef enum { FLOW = 0x1, XML=0x2, ANON=0x4, NO_RESOURCE=0x8, 
+	       NO_LINK_LABELS=0x10} output_t;
 output_t graph_type = 0;
 
 typedef enum { GRAY, BLACK, WHITE } node_color_t;
 
 int node_num = 0;
+int node_count = 0;
+char *col_brk[250];
+Node col_heads[250];
+int cols=0, num_heads=0;
 
-static String usage = "\
-usage: %s [options] [file ...]\n\
-    -d  include dominator edges\n\
-    -f  include control flow edges (default)\n\
-    -m  include matching edges\n";
 
 
 /* Provide main with a prototype to eliminate compiler warnings. */
@@ -62,7 +60,13 @@ char *node_type(int type)
 char *node_shape(int type) 
 {
     switch (type) {
-    case (ACTION): return "box, style=rounded"; break;
+    case (ACTION): 
+	if (graph_type & NO_RESOURCE) {
+	    return "box, style=rounded"; 
+	} else {
+	    return "Mrecord"; 
+	}
+	break;
     case (ITERATION): return "diamond"; break; /* XXX Never happens. */
     case (SELECTION): return "circle, fixedsize = true"; break;
     case (JOIN): return "circle, fixedsize = true"; break;
@@ -105,7 +109,8 @@ void insert_iteration_links(Node from, Node to)
     /* Look for an unseen node to skip to. */
     for (i = 0; (p = (Node) ListIndex(from->successors, i)); i++) {
 	if ((node_color_t)p->data == WHITE) {
-	    printf("%ld -> %ld [label=\"skip\", weight=0]\n", (long)to, (long)p);
+	    printf("%s_%ld -> %s_%ld [label=\"skip\", weight=0]\n",
+		   to->name, (long)to, p->name, (long)p);
 	}
     }
 
@@ -122,48 +127,89 @@ void print_resources(Tree t)
 		    if (TREE_ID(t)[i] == '"') break;
 		    putchar(TREE_ID(t)[i]);
 		}
-		putchar(' ');
+		printf(" ");
 	    } else {
-		printf("%s ", TREE_ID(t));
+		printf("%s", TREE_ID(t));
 	    }
 	} else {
 	    print_resources(t->left);
+		printf(",\\n");
 	    print_resources(t->right);
 	}
     } else {
-	printf("[]");
+	printf("(none)");
     }
 }
 
 void print_link(Node from, Node to, int weight)
 {
+    static int col = 0;
+    int i, new_col = 0;
+    for (i = 0; i < cols; i++) {
+	if(strcmp(col_brk[i], from->name) == 0) {
+	    col++;
+	    new_col = 1;
+	    col_heads[num_heads++] = to;
+	    break;
+	}
+    }
 
     if (weight != 0) {
-	printf("%ld -> %ld [weight=%d, style=%s",
-	       (long)from, (long)to, weight, weight == 0 ? "invis" : "solid");
+	if (new_col) {
+	    /* Emit column separator node. */
+	    printf("start_%d [shape = point, label = \"\"];\n",
+		   col);
+	    printf("{ rank = same; %s_%ld; start_%d; }\n", 
+		   from->name, (long)from, col);
+#ifdef OLD
+	    /* Connect from to separator.  */
+	    printf("%s_%ld -> start_%d [weight=%d, style=%s];\n",
+		   from->name, (long)from, col,  weight, weight == 0 ? "invis" : "solid");
+#endif
+	    printf("%s_%ld -> start_%d [weight=%d, style=%s, arrowhead = none,",
+		   from->name, (long)from, col, weight, weight == 0 ? "invis" : "solid"); 
 
-#ifdef LABEL_LINKS
-	if (!(graph_type & ANON)) {
+	} else {
+	    printf("%s_%ld -> %s_%ld [weight=%d, style=%s",
+		   from->name, (long)from, to->name, (long)to, weight, weight == 0 ? "invis" : "solid");
+	}
+
+	if (!(graph_type & (ANON|NO_LINK_LABELS))) {
 	    if (from->type == ACTION) {
-		printf(", labelfloat=\"true\", labelfontcolor=\"black\", taillabel=\"p:");
+		printf(", labelfloat=\"true\", fontname=TimesItalic, labelfontcolor=\"black\", taillabel=\"");
 		print_resources((from->provides));
 		printf("\"");
 	    }
 	}
-	if (!(graph_type & ANON)) {
+	if (new_col) {
+
+	    printf("];\n") ;	/* Finish link in progress*/
+
+	    /* Emit column start node, then arrow from labeled diamond. */
+	    printf("end_%d [shape = point, label = \"\"];\n",
+		   col);
+
+	    printf("{ rank = same; end_%d; %s_%ld; }\n", 
+		   col, to->name, (long)to);
+	    printf("end_%d -> %s_%ld [weight=%d, style=%s]",
+		   col, to->name, (long)to, weight, weight == 0 ? "invis" : "solid");
+
+	    printf("end_%d -> start_%d [weight=%d, style=%s,  arrowhead = none,",
+		   col, col, weight, weight == 0 ? "invis" : "solid");
+	    node_count = 0;
+	}
+	if (!(graph_type & (ANON|NO_LINK_LABELS))) {
 	    if (to->type == ACTION) {
-		printf(", labelfloat=\"true\", fontcolor=\"BLACK\", label=\"r:");
+		printf(", labelfloat=\"true\", fontname=TimesItalic, fontcolor=\"BLACK\", headlabel=\"");
 		print_resources((to->requires));
 		printf("\"") ;
 	    }
 	}
-#endif
-	printf("] ;\n") ;
-
+	printf("] ;\n") ;	/* Finish link in progress*/
     } else {
 /*	printf("%ld -> %ld [label=\"again\", weight=%d, style=%s, headport=\"ne\", tailport=\"se\"] ;\n", */
-	printf("%ld -> %ld [weight=%d] ;\n",
-	       (long)from, (long)to, weight);
+	printf("%s_%ld -> %s_%ld [weight=%d] ;\n",
+	       from->name, (long)from, to->name, (long)to, weight);
     }
 }
 
@@ -172,35 +218,35 @@ void name_node(Node n)
     char buf[512];
 
     if (strcmp(n->name, "(anonymous)") == 0) {
-	free(n->name);
+	/*free(n->name);*/
 	sprintf(buf, "%s_%d", node_type(n->type), node_num++);
 	n->name = strdup(buf);
     }
 
     if (n->type == PROCESS) {
-	free(n->name);
+	/*free(n->name);*/
 	n->name = strdup("start");
     }
     /* This hack detects sink. */
     if (n->next == NULL) {
-	free(n->name);
+	/*free(n->name);*/
 	n->name = strdup("end");
     }
     if (graph_type != XML) {
-	printf("%ld [shape=%s, ", (long)n, node_shape(n->type));
+	printf("%s_%ld [shape=%s, ", n->name, (long)n, node_shape(n->type));
 	if (n->type == PROCESS) {
 	    printf("label=\"%s\"]\n", n->name);
-	} else 	if (!(graph_type & ANON) && (n->type == ACTION)) {
-#ifndef LABEL_LINKS
-	    printf("label=");
-	    printf("\"[");
-	    print_resources(n->requires);
-	    printf("]\\n%s\\n[", n->name);
-	    print_resources(n->provides);
-	    printf("]\"];\n");
-#else 
-	    printf("label=\"%s\"];\n", n->name);
-#endif
+	} else 	if (!(graph_type & (ANON)) && (n->type == ACTION)) {
+	    if (!(graph_type & NO_RESOURCE)) {
+		printf("label=");
+		printf("\"{");
+		print_resources(n->requires);
+		printf("|%s|", n->name);
+		print_resources(n->provides);
+		printf("}\"];\n");
+	    } else {
+		printf("label=\"%s\"];\n", n->name);
+	    }
 	} else {
 	    printf("label=\"\"];\n");
 	}
@@ -213,6 +259,8 @@ void has_cycle(Node n, int name)
     Node child;
 
     n->data = (void *)GRAY;
+    node_count++;
+
     if (graph_type == XML) {
 	printf("<%s name=\"%s\">\n", node_type(n->type), n->name);
     }
@@ -220,10 +268,15 @@ void has_cycle(Node n, int name)
 	if (n->type == SELECTION || n->type == BRANCH) {
 	    printf("{ rank = same;\n");
 	}
+	if (n->type == SEQUENCE) {
+	    printf("{ subgraph cluster_%s_%ld;\n", n->name, (long)n);
+	    printf("  style = filled; color = lightgrey; label = %s\n", 
+		   n->name);
+	}
 	for (i = 0; (child = (Node) ListIndex(n->successors, i)); i++) {
 	    name_node(child);
 	}
-	if (n->type == SELECTION || n->type == BRANCH) {
+	if (n->type == SELECTION || n->type == BRANCH || n->type == SEQUENCE) {
 	    printf("}\n");
 	}
     }
@@ -232,7 +285,7 @@ void has_cycle(Node n, int name)
 	if (graph_type != XML) {
 	    if (!name) {
 		print_link(n, child, 
-			  (node_color_t) child->data == GRAY ? 0 : 1);
+			   (node_color_t) child->data == GRAY ? 0 : 1);
 	    }
 	}
 	if ((node_color_t)child->data == WHITE) {
@@ -265,29 +318,57 @@ void traverse(Node n, int name)
 
 void name_nodes(Node n)
 {
+    int i; 
+    Node child;
+
+    /* Column head nodes should be same rank as first node after 'start' */
+    for (i = 0; (child = (Node) ListIndex(n->successors, i)); i++) {    
+	col_heads[num_heads++] = child;
+    }
     name_node(n);
     traverse(n, 1);
 }
 
+static String usage = "\
+usage: %s [options] [file ...]\n\
+    -a  don't print any labels (anonymous)\n\
+    -c  new column after this node\n\
+    -f  include control flow edges (default)\n\
+    -R  don't print resource names\n\
+    -L  don't label edges with resources\n\
+    -x  emit XML (not working)\n\
+";
 
 
 int main(argc, argv)
     int    argc;
     String argv [ ];
 {
-    int c, status;
+    int i, c, status;
 
     filename = "-";
     status = EXIT_SUCCESS;
 
-    while ((c = getopt (argc, argv, "adfmxh?")) != EOF) {
+    while ((c = getopt (argc, argv, "ac:dfLmxhR?")) != EOF) {
 	switch (c) {
 	case 'a':
 	    graph_type |= ANON;
 	    break;
 
+	case 'c':
+	    col_brk[cols++] = optarg;
+	    break;
+
 	case 'f':
 	    graph_type |= FLOW;
+	    break;
+
+	case 'R':
+	    graph_type |= NO_RESOURCE;
+	    break;
+
+	case 'L':
+	    graph_type |= NO_LINK_LABELS;
 	    break;
 
 	case 'x':
@@ -306,7 +387,7 @@ int main(argc, argv)
     }
 
     if (graph_type == 0) {
-	graph_type = FLOW;
+	graph_type = (FLOW);
     }
     do {
 	if (optind < argc) {
@@ -344,10 +425,21 @@ int main(argc, argv)
 	    }
 	    if (graph_type != XML) {
 		printf("digraph %s {\n", name);
-		printf("process [shape=plaintext];\n");
+		printf("  rankdir = TB;\n");
+		printf("  ordering = out;\n");
+/*
+		printf("process [shape=plaintext, label=\"%s\"];\n", filename);
+*/
+
 	    }
 	    name_nodes(program->source);
+	    node_count = 0;
 	    traverse(program->source, 0);
+	    printf("{ rank = same;\n");
+	    for (i = 0; i < num_heads; i++) {
+		printf("  %s_%ld; \n", col_heads[i]->name, (long)col_heads[i]);
+	    }
+	    printf(" }\n");
 	    if (graph_type != XML) {
 		printf("}\n");
 	    }

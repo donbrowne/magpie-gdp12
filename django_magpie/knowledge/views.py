@@ -25,6 +25,7 @@ def generatePmlGraph(request):
     pmlPath = request.GET.items()[0][1]
     traverse = subprocess.Popen([settings.TRAVERSE_PATH,pmlPath],stdout=subprocess.PIPE)
     dotDesc = traverse.communicate()[0]
+    print dotDesc
     graph = pydot.graph_from_dot_data(dotDesc)
     png = graph.create_png()
     return HttpResponse(png, mimetype="image/png")
