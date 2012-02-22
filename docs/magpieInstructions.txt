@@ -1,3 +1,40 @@
+INSTALLATION INSTRUCTIONS:
+
+For Ubuntu 10.04 32-bit:
+
+From the magpie directory (or trunk, if pulled from svn) run -
+
+chmod +x *.sh
+./setup.sh
+
+--IMPORTANT NOTE FOR UBUNTU 10.04 USERS -
+--Due to the age of the Ubuntu 10.04 package set, it is necessary to use
+--a third party repository to supply an updated version of Python. Thus,
+--it is also necessary to run
+    sudo ./setup_tenfour.sh
+--to set up Python 2.7 and Django 1.3 
+--This process will also automatically install Graphviz and pydot. Once
+--the script is run, the following command should be used instead of 
+--'python' for starting initializing the Django application -
+    python2.7
+--and all additional Python modules should be installed with -
+    sudo easy_install-2.7 <module name>
+    
+For users not running Ubuntu 10.04, it is necessary to install Graphviz,
+Django and Pydot. These packages are available in most common 
+distribution's repos.
+
+On the first run of the application, it is necessary to cd to the 
+django_magpie directory, and run -
+
+python manage.py syncdb
+
+This will set up the database, and will create a superuser account. 
+Once this is done, the server can be started from the django_magpie 
+directory with -
+
+python manage.py runserver
+
 NEW FOR ITERATION 2:
 
 DEPENDENCIES:
@@ -71,17 +108,6 @@ issues with the current implementation -
   program's functions through Python using SWIG or the like.
 
 ---END ITERATION 2---
-
-INITIALIZATION:
-
-On the first run of the application, it is necessary to cd to the django_magpie directory, and run -
-
-python manage.py syncdb
-
-This will set up the database, and will create a superuser account. Once this is
-done, the server can be started with -
-
-python manage.py runserver
 
 KNOWLEDGE BASE:
 
