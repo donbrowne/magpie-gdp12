@@ -92,7 +92,7 @@ def recSummaryClosure(userGroup):
             recsList.append(("Video Link", rec.videoLink.file.url))
         if rec.pmlLink != None and compareGroups(userGroup,rec.pmlLink.group.all()):
             recsList.append(("PML Link", rec.pmlLink.file.url))
-            pmlPath = rec.pmlLink.file.path
+            pmlPath = rec.pmlLink.file.name
         for others in rec.otherLinks.all():
             if compareGroups(userGroup,others.group.all()):
                 recsList.append((others.description,others.file.url))
