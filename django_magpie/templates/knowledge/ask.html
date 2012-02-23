@@ -18,6 +18,7 @@
 <input type="submit" value="Next" />
 </form>
 {% if recommend_list %}
+{% load customFilters %}
 <h2>Recommmendations:</h2>
 <ol>
 {% for rec in recommend_list %}
@@ -25,12 +26,28 @@
     <ol>
     {% for link in rec.links %}
         <li><a href={{link.1}}>{{link.0}}</a> </li>
+        {%if link.1|contains:"http://www.youtube.com/watch?v="%}
+            {% with sliced=link.1|lslice:"31" %}
+                {% with yTubeEmbed="\"http://www.youtube.com/embed/"|add:sliced|add:"\"" %}
+                <iframe width="640" height="480" src={{yTubeEmbed|safe}} frameborder="0" allowfullscreen></iframe> 
+                {% endwith %}
+            {% endwith %}
+        {%endif%}
     {% endfor %}
     </ol>
     {% if rec.pmlPath != None %}
     {% with pmlReq="\"pmlGraph?path="|add:rec.pmlPath|add:"\"" %}
         <img src={{pmlReq|safe}} />
     {% endwith %}
+    {% endif %}
+    {% if rec.vidLink != None %}
+        <a class="vidPlayer"
+             href={{rec.vidLink}}
+			 style="display:block;width:640px;height:480px"> 
+		</a> 
+        <script>
+			flowplayer("a.vidPlayer", "{% load adminmedia %}{% admin_media_prefix %}flowplayer-3.2.7.swf");
+		</script>
     {% endif %}
     </li>
 {% endfor %}
