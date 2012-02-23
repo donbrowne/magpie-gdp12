@@ -5,6 +5,7 @@ from knowledge.models import FactState, start_state, get_answers, recSummaryClos
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 import subprocess 
+import os
 import pydot
 
 # note sesson is a gui state so
@@ -23,12 +24,19 @@ def get_state(session):
 
 def generatePmlGraph(request):
     pmlPath = request.GET.items()[0][1]
-    traverse = subprocess.Popen([settings.TRAVERSE_PATH,'-R','-L',pmlPath],stdout=subprocess.PIPE)
-    dotDesc = traverse.communicate()[0]
-    print dotDesc
-    graph = pydot.graph_from_dot_data(dotDesc)
-    png = graph.create_png()
-    return HttpResponse(png, mimetype="image/png")
+    if pmlPath.find("../") != -1:
+        print ("[ERROR] '../' contained in specified file name, relative paths unallowed for security reasons")
+        return None
+    fullPath = settings.MEDIA_ROOT + pmlPath
+    if os.path.isfile(fullPath):
+        traverse = subprocess.Popen([settings.TRAVERSE_PATH,'-R','-L',fullPath],stdout=subprocess.PIPE)
+        dotDesc = traverse.communicate()[0]
+        graph = pydot.graph_from_dot_data(dotDesc)
+        png = graph.create_png()
+        return HttpResponse(png, mimetype="image/png")
+    else:
+        print ("[ERROR] File does not exist")
+        return None
 
 def put_state(session, state):
     session['test_ids'] = state.test_ids
