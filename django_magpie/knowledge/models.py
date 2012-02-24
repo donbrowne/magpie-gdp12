@@ -251,8 +251,11 @@ class FactState(object):
 # Factory start a q+a session
 def start_state(user):
     test_ids = []
-    profile= user.get_profile()
-    user_types = profile.types.all()
+    if user.is_anonymous():
+        user_types = []	
+    else:
+        profile= user.get_profile()
+        user_types = profile.types.all()
     for fact in Fact.objects.filter(requires__isnull=True):
         num_utypes = 0 
         user_fact = False
