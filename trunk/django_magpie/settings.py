@@ -64,7 +64,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = MAGPIE_DIR + '/../resources/'
+MEDIA_ROOT = MAGPIE_DIR + '/../resources/media/'
 
 #Path to the traverse tool
 TRAVERSE_PATH = MAGPIE_DIR + '/../pml/graph/traverse'
@@ -75,14 +75,14 @@ TRAVERSE_PATH = MAGPIE_DIR + '/../pml/graph/traverse'
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 
 #Hard coding for test purposes.
-MEDIA_URL = 'http://127.0.0.1:8888/'
+MEDIA_URL = '/media/'
 
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = MAGPIE + '../resources/static/'
 
 
 # URL prefix for static files.
