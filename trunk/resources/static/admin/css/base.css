@@ -1,4 +1,4 @@
-/*
+/ba*
     DJANGO Admin styles
 */
 
@@ -715,8 +715,8 @@ table#change-history tbody th {
 /* HEADER */
 
 #header {
-    background: #417690;
-    color: #ffc;
+    background: #2C643C;
+    color: #2C643C;
     overflow: hidden;
 }
 
@@ -733,7 +733,7 @@ table#change-history tbody th {
     font-size: 18px;
     margin: 8px 0;
     font-weight: normal;
-    color: #f4f379;
+    color: white;
 }
 
 #branding h2 {
@@ -741,7 +741,7 @@ table#change-history tbody th {
     font-size: 14px;
     margin: -8px 0 8px 0;
     font-weight: normal;
-    color: #ffc;
+    color: white;
 }
 
 #user-tools {
