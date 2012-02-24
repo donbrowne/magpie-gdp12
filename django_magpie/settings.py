@@ -65,7 +65,7 @@ USE_L10N = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = MAGPIE_DIR + '/../resources/media/'
-
+MEDIA_URL = '/media/'
 #Path to the traverse tool
 TRAVERSE_PATH = MAGPIE_DIR + '/../pml/graph/traverse'
 
@@ -74,15 +74,14 @@ TRAVERSE_PATH = MAGPIE_DIR + '/../pml/graph/traverse'
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 
-#Hard coding for test purposes.
-MEDIA_URL = '/media/'
+
 
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = MAGPIE_DIR + '../resources/static/'
+STATIC_ROOT = MAGPIE_DIR + '../resources/static'
 
 
 # URL prefix for static files.
@@ -144,7 +143,7 @@ TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
 
 
 
-ROOT_URLCONF = 'django_magpie.urls'
+ROOT_URLCONF = 'urls'
 
 
 TEMPLATE_DIRS = (
