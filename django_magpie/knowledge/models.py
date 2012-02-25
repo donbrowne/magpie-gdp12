@@ -84,6 +84,20 @@ def compareGroups(userGroup, fileGroup):
     else:
         return bool(list(set(userGroup) & set(fileGroup)))
         
+def compareGroupUrl(url,userGroup):
+   rFile = None
+   for files in ResourceFile.objects.all():
+       print url
+       print "HELLO"
+       print files.file.url
+       if files.file.url == url:
+           rFile = files
+           break
+   if not rFile:
+       return False
+   else:
+       return compareGroups(userGroup, rFile.group.all())
+        
 #Pack together the recommendation data in a nice way.        
 def recSummaryClosure(userGroup):
     def getRecSummary(rec):
