@@ -7,5 +7,5 @@ Use this Wiki to store the supporting documentation for installation and use of 
 
 = Pages =
 
-  * [readme] file
-  * Post Mortem Reports
+  * [readme] : the official readme file for MAGPIE
+  * [PostMortemDocs] : The list of PM docs
