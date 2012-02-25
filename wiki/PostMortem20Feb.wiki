@@ -10,7 +10,7 @@ This is our first PM report from 20th Feb.
 From: osullis9@tcd.ie
 Subject: Iteration 2 Post Mortem 
 
-Accomplishments
+==Accomplishments==
  Completed tasks for feature : #11 Display of Process Specifications in Graphical Form
    1. Build PML tools, test their operation - Don
    2. Find suitable Python tool for graphing, test with PML tools - Don
@@ -64,7 +64,7 @@ Accomplishments
    3. Modified recommendation link code so that it only displays links to internal content that that user is allowed to see - Don
   Acceptance test(s) passed: #17 Access (to Supporting Artifacts) Based on Login ID
 
-Obstacles
+==Obstacles==
 1. Django framework found to have good back end support but the front end is difficult to work with for complicted User Interfaces.
    A lot of time has been spent trying to figure out how to get a particular UI feature working. 
    It may have been a whole lot faster to do the whole thing in pure python server up the results
@@ -75,7 +75,7 @@ Obstacles
 3. Our knowledge model no longer works and needs to replaced ASAP by a proper rules based inference engine.
    Mitigation: As a result of rewrite feature 8 will be completed.
 
-Objectives
+==Objectives==
   Feature: #19 Enhanced Display of Media (Embedded Video)
    1. Investigate methods of embedding video into Django pages - Don
    2. Proof of concept: embed hard coded video from Resource Files onto page - Don
