@@ -19,8 +19,6 @@ def check_password(environ, user, password):
            return None
 
        if user.check_password(password): 
-           print environ
-           print environ['REQUEST_URI']
            return checkUserPermission(environ['REQUEST_URI'],user.groups.all())
        else:
            return False

@@ -87,9 +87,6 @@ def compareGroups(userGroup, fileGroup):
 def compareGroupUrl(url,userGroup):
    rFile = None
    for files in ResourceFile.objects.all():
-       print url
-       print "HELLO"
-       print files.file.url
        if files.file.url == url:
            rFile = files
            break
@@ -106,7 +103,6 @@ def recSummaryClosure(userGroup):
         vidLink = None
         if rec.videoLink != None and compareGroups(userGroup,rec.videoLink.group.all()):
             vidLink = rec.videoLink.file.url
-            print vidLink
         if rec.pmlLink != None and compareGroups(userGroup,rec.pmlLink.group.all()):
             recsList.append(("PML Link", rec.pmlLink.file.url))
             pmlPath = rec.pmlLink.file.name
@@ -114,7 +110,6 @@ def recSummaryClosure(userGroup):
             if compareGroups(userGroup,others.group.all()):
                 recsList.append((others.description,others.file.url))
         for link in ExternalLink.objects.filter(rec=rec.id):
-            print link
             recsList.append((link.description,link.link))
         return RecsSummary(rec.text,recsList,pmlPath,vidLink)
     return getRecSummary
