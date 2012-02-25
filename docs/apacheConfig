@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+  ServerName NAME.HOST
+  DocumentRoot PATH/resources
+
+  WSGIScriptAlias / PATH/django_magpie/magpie.wsgi
+   WSGIApplicationGroup %{GLOBAL} 
+  <Directory PATH/django_magpie>
+  Order allow,deny 
+  Allow from all 
+  </Directory> 
+  <Directory PATH/resources/media>
+     AddHandler flv-stream .flv 
+   </Directory> 
+  Alias /static PATH/resources/static 
+  Alias /media PATH/resources/media 
+</VirtualHost>

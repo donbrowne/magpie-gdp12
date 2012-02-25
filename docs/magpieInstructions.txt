@@ -1,13 +1,11 @@
 INSTALLATION INSTRUCTIONS:
 
-For Ubuntu 10.04 32-bit:
-
 From the magpie directory (or trunk, if pulled from svn) run -
 
 chmod +x *.sh
-./setup.sh
 
---IMPORTANT NOTE FOR UBUNTU 10.04 USERS -
+
+--IMPORTANT NOTE FOR UBUNTU 10.04/10.10 USERS -
 --Due to the age of the Ubuntu 10.04 package set, it is necessary to use
 --a third party repository to supply an updated version of Python. Thus,
 --it is also necessary to run
@@ -20,20 +18,70 @@ chmod +x *.sh
 --and all additional Python modules should be installed with -
     sudo easy_install-2.7 <module name>
     
-For users not running Ubuntu 10.04, it is necessary to install Graphviz,
-Django and Pydot. These packages are available in most common 
-distribution's repos.
+For users not running Ubuntu 10.04 or 10.10, the dependencies need to be
+manually installed. A list will be specified in accompanying docs.
+
+All users must then run -
+
+./setup.sh
 
 On the first run of the application, it is necessary to cd to the 
 django_magpie directory, and run -
 
 python manage.py syncdb
 
-This will set up the database, and will create a superuser account. 
-Once this is done, the server can be started from the django_magpie 
-directory with -
+CONFIGURING APACHE
 
-python manage.py runserver
+NOTE:
+The exact method of configuring Apache varies from one Linux 
+distribution to another. The following method is used to configure 
+Ubuntu 10.04 and 10.10 For other distributions, the OS documentation 
+should be consulted.
+
+First off, the following shorthand will be used in this section.
+Any time you see these mentioned, substitute these for the following
+values -
+
+PATH - The path to the magpie-gdp12 folder in the installation tarball
+        or the magpie-gdp12-read-only folder if pulling from svn.
+HOST - The hostname of your computer
+NAME - The subdomain where you want the site to run. If have no
+        preference, you can choose whatever you want for this name.
+
+You should ensure that your hostname is defined up in /etc/hosts. This 
+is usually done automatically in most instances. You can check easily
+by running -
+
+cat /etc/hosts
+
+and ensuring there is an entry to the effect of -
+
+SOME_IP_ADDRESS  HOST
+
+If this is not the case, you should manually configure the file to map
+the IP address to the host name. Consult your OS' documentation for 
+further advice.
+
+In the folder with this documentation, you will find a file named 
+apacheConfig. Assuming that the docs folder is the current directory, 
+run -
+
+sudo cp apacheConfig /etc/apache2/sites-enabled/NAME
+
+Open this file with your text editor of choice as root. For all 
+occurences of PATH, HOST and NAME, substitute them for the appropriate 
+values.
+
+Next, in your django_magpie folder, you will find a script named 
+magpie.wsgi Open this file and substitute PATH for the value of PATH as
+described above.
+
+Now run -
+
+sudo a2ensite NAME
+sudo /etc/init.d/apache2 reload
+
+The site can now be accessed at NAME.HOST
 
 NEW FOR ITERATION 2:
 
@@ -57,21 +105,15 @@ repo, it is necessary to cd to the pml folder of the trunk, and run make.
 
 FILE SERVING:
 
-The application now allows "Resource Files" to be uploaded to the web server.
-By default, these files are located in the 'resources' folder, which is located
-in the root folder alongside the django_magpie, docs and sqlite3 folder.
-Django handles the uploading of these files, but does not serve them, this is
-the task of the web server. For testing purposes, it is recommended that the
-inbuilt Python HTTP server is used. To do so, from the django_magpie folder -
+The application now allows "Resource Files" to be uploaded to the web 
+server. By default, these files are located in the 'resources' folder, 
+which is located in the root folder alongside the django_magpie, docs 
+and sqlite3 folder.
 
-cd ../resources
-python -m SimpleHTTPServer 8888
-
-The settings.py file is configured such that MEDIA_URL (i.e. the URL where the
-files are accessed through) is http://127.0.0.1:8888/ Similarly, the MEDIA_ROOT
-folder, where the files are uploaded to is defined as MAGPIE_DIR/../resources,
-where MAGPIE_DIR is the location of the django_magpie folder. The admin may
-modify these locations as necessary.
+The settings.py file is configured such that the MEDIA_ROOT folder, 
+where the files are uploaded to is defined as MAGPIE_DIR/../resources,
+where MAGPIE_DIR is the location of the django_magpie folder. The admin 
+may modify these locations as necessary.
 
 A resource file may have a set of user group associated with it. This is used
 to limit the display of links to this file to those users who are in one of the
@@ -87,7 +129,7 @@ them. There are four types of link that can be associated with them -
 * Internal Links - these are links to Resource Files stored locally. The 
   maintainer selects from the list of uploaded files.
 * PML Link - A special case of internal link, it is used for creating graphs.
-* Video Link - Will be used for embedded video players in future versions.
+* Video Link - Used for embedding a player for a locally stored video.
 
 GRAPHING:
 
@@ -97,15 +139,11 @@ and then use graphviz to produce a PNG representation of the graph.
 This is then displayed on the page alongside recommendations. There are two
 issues with the current implementation -
 
-* If an unsuitable file is set as the PML description file, it will fail to 
-  produce a graph. This does not cause any problems as per se, but it may be
-  desirable in future versions to carry out a check (using pmlcheck) on the
-  file set as the PML file when the user is creating the recommendation.
-* The code that generates the graph executes the traverse program with the 
-  file name, given through a GET request, as an argument. This poses some
-  unpleasant security issues, and will need to be mitigated in future, either
-  by changing the data passed in the GET request, or calling the traverse
-  program's functions through Python using SWIG or the like.
+If an unsuitable file is set as the PML description file, it will fail 
+to produce a graph. This does not cause any problems as per se, but it 
+may be desirable in future versions to carry out a check (using 
+pmlcheck) on the file set as the PML file when the user is creating the 
+recommendation.
 
 ---END ITERATION 2---
 
@@ -196,9 +234,4 @@ To run all tests do
 To run specific tests for the knowledge module do
 
   ./manage.py test knowledge 
-
-KNOWN ISSUES:
-
-Refreshing the page after answering questions will throw an error. Navigate to
-the main page to start from the beginning.
 

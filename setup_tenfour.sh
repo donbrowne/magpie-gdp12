@@ -6,7 +6,7 @@ else
 fi
 add-apt-repository ppa:fkrull/deadsnakes
 apt-get update
-apt-get --yes install python2.7 graphviz python-distribute-deadsnakes apache2-threaded-dev python2.7-dev flex bison apache2-mpm-worker
+apt-get --yes install python2.7 graphviz python-distribute-deadsnakes apache2-threaded-dev python2.7-dev flex bison apache2-mpm-worker libapache2-mod-wsgi
 easy_install-2.7 pydot django
 wget http://modwsgi.googlecode.com/files/mod_wsgi-3.3.tar.gz
 tar -xzvf mod_wsgi-3.3.tar.gz
