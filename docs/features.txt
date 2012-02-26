@@ -114,10 +114,21 @@ may be desirable in future versions to carry out a check (using
 pmlcheck) on the file set as the PML file when the user is creating the 
 recommendation.
 
-USER ACCESS LEVELS:
+USERS:
+
+User registration is possible from the main page (top right corner.)
+When logged in, the user can access their Profile, and select their user
+type. The user type can be used to steer the questioning in a particular
+way.
+
+User types are created by the admin or maintainer. First, they should
+create a Fact corresponding to that user type with no prerequisites or
+questions. Then from the Accounts section they create a new User Type, 
+and it is associated with that facts. When creating new facts, the 
+maintainer is able to select such facts as pre requisites for facts, 
+thus factoring in user types into the inference process.
 
 The system currently supports four levels of privilege -
-
 * Guest: A user that is not registered on the system is allowed to 
   answer the questions, but cannot access the admin screen.
 * Registered User: A user that is registered on the site. The 
