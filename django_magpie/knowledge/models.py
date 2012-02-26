@@ -1,18 +1,19 @@
 from django.db import models
-import django.contrib.auth.models
+import django.contrib.auth.models as AuthModels
 
 class Question(models.Model):
     text = models.CharField(max_length=255)
     def __unicode__(self):
         return self.text
+
+def userPath(instance, filename):
+    return '/'.join(['content', instance.user.username, filename])
         
 class ResourceFile(models.Model):
     description = models.CharField(max_length=255)
-#Upload to the media root directory 
-#(upload_to is the subdir of the media root directory
-#TODO: Replace . with user name
-    file  = models.FileField(upload_to=".")
-    group = models.ManyToManyField(django.contrib.auth.models.Group,blank=True,null=True)
+    file  = models.FileField(upload_to='.')
+    group = models.ManyToManyField(AuthModels.Group,blank=True,null=True)
+    owner = models.ForeignKey(AuthModels.User,blank=True,null=True)
     def __unicode__(self):
         return self.description    
 
