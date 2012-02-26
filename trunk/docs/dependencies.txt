@@ -15,5 +15,21 @@ Pydot
 flex
 bison
 
+---Video---
 
+A module named mod_flvx is used to stream videos from Apache. The file
+can be grabbed from here -
+
+  wget http://people.apache.org/~pquerna/modules/mod_flvx.c
+  
+The Ubuntu packages apache2-threaded-dev and apache2-mpm-worker are 
+needed. For other distributions, you should find the suitable
+equivalents.
+
+Run as root -
+
+  apxs2 -i -a -c mod_flvx.c
+
+(apxs2 may be named differently under different distributions)
+And then restart Apache.
 
