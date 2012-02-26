@@ -95,7 +95,7 @@ current directory, run -
 
   sudo cp apacheConfig /etc/apache2/sites-available/NAME
 
-Open /etc/apache2/sites-enabled/NAME file with your text editor of 
+Open /etc/apache2/sites-available/NAME file with your text editor of 
 choice as root. For all occurences of PATH, HOST and NAME, substitute 
 them for the appropriate values.
 
