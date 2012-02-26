@@ -11,9 +11,9 @@
 <input type="submit" value="Done" />
 </form>
 
-<h2>Recommmendations:</h2>
 {% if recommend_list %}
 {% load customFilters %}
+<h2>Recommmendations:</h2>
 <ol>
 {% for rec in recommend_list %}
     <li>{{ rec.text }}
