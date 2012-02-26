@@ -39,15 +39,19 @@ All users must then run -
 
   ./setup.sh
 
-On the first run of the application, it is necessary to cd to the 
-django_magpie directory, and run -
+If building from svn, the following must be run. If installing from 
+the tarball, omit this step.
 
+  cd django_magpie
   python2.7 manage.py syncdb
-  cd .. 
+  cd ..
+  
+Both svn and tarball users need to run -
+
   sudo chown -R www-data resources/ sqlite3/
 
-www-data is the Apache user for Ubuntu. This username varies from 
-distribution to distribution, consult the OS documentation if in doubt. 
+www-data is the Apache user for Ubuntu. This username may be different 
+for other distributions. Consult OS documentation if in doubt. 
 
 CONFIGURING APACHE
 
