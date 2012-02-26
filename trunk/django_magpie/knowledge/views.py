@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response,redirect
-from knowledge.models import FactState, start_state, get_answers, recSummaryClosure, compareGroup
+from knowledge.models import FactState, start_state, get_answers, recSummaryClosure, compareGroupUrl
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 import subprocess 
