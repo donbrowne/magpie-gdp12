@@ -1,0 +1,135 @@
+KNOWLEDGE BASE:
+
+Before explaining use of the program, it is probably best to consider how the 
+program works (from the user's perspective) -
+
+* The program models Questions, Facts and Recommendations.
+* A Question consists of the question text that the user is asked.
+* A Recommendation consists of text that is presented to the user.
+* A Fact consists of a name, a list of questions (and the expected answers) 
+  required for the Fact to be true, a list of recommendations provided when the 
+  Fact is true, and an optional list of requirements.
+* The program iterates through the list of facts, and asks the user the
+  questions associated with those facts. If the user gives the expected answers
+  to all the questions associated with that fact, then that fact is true.
+* The requirements list of a fact is the set of facts that must be true 
+  before the program will ask the user about it. For example, if there is a 
+  'Likes Chocolate Cake' fact that asks the user if they like chocolate cake, 
+  the maintainer could set the facts 'Likes Chocolate' and 'Likes Cake' as 
+  requirements for 'Likes Chocolate Cake', so that the program only asks the
+  user if they like chocolate cake if it has already established that they like
+  chocolate, and they like cake. 
+
+Assuming the server is running the default address, the admin page can be 
+accessed at -
+
+  NAME.HOST/admin
+
+Log in with the username/password that was specified when the database was set
+up. The admin page allows the maintainer to add/remove/modify the Facts,
+Questions and Recommendations. Questions and Recommendations are created by
+specifying the appropriate text. Facts are created by selecting a list of 
+requirements (if any), selecting the list of recommendations, and specifying the
+questions associated with that fact. When specifying questions, there's an 
+"Answers" tickbox. Select this if answering "Yes" to the question is the 
+expected answer. Leave unselected if "No" is the expected answer.
+
+ANSWERING QUESTIONS:
+
+At the beginning, the user is presented with the questions associated with the
+facts that have no requirements. The user can select Yes, No, or not select an
+answer. When the user presses "Submit", the program processes the answers, and
+delivers -
+
+* More questions, if answers on the previous screens have asserted facts which
+  fill the requirements for other facts. If there are no applicable questions,
+  it will inform the user of this fact instead.
+* A list of recommendations (if any), along with a listing of reasons why this
+  recommendation was made (questions and the user's answers)
+* A list of suggestions that the user should not do. This is based on the user
+  giving the opposite answer to what was expected for a given fact. It also
+  shows the reasons.
+* A list of questions that have been skipped so far, and the recommendations
+  that would have been given if they had been answered.
+* A list of all other recommendations.
+
+The user can click the "Home" button near the top of the screen to go back to
+the start.
+
+FILE SERVING:
+
+From the admin screen, it is possible to upload files that can be served
+from the server. By default, the files are uploaded to 
+
+  PATH/resources/media
+  
+When adding a file, the user adds a descriptive name, selects the file
+to be uploaded, and selects whether or not it is a restricted. Selecting
+Save from the bottom of the screen will upload the file to the server.
+
+A Restricted file is a file that can only be accessed by a maintainer,
+an admin or a regular user that has been assigned the following 
+permission by an admin from the Users admin interface -
+  
+  "knowledge | resourcefile | Can access restricted files"
+
+A caveat of the current implementation is that Apache will ask the user
+for their username/password even if they are already logged in. The same
+username/password needs to be entered in when prompted. After logging in
+with Apache once, it should not bother the user for the rest of the 
+session.
+
+RECOMMENDATION LINKS:
+
+In addition to text, recommendations may optionally have links associated with 
+them. There are four types of link that can be associated with them -
+
+* External Links - these are simple HTTP links to external sites.
+* Internal Links - these are links to Resource Files stored locally. The 
+  maintainer selects from the list of uploaded files.
+* PML Link - A special case of internal link, it is used for creating graphs.
+* Video Link - Used for embedding a player for a locally stored video.
+
+If an external link is a link to a Youtube video, the site will embed a 
+player for that video if it is part of a recommendation presented to the
+user. The video link uses Flow Player for embedding a video player.
+
+GRAPHING:
+
+If a PML file is associated with the recommendation, then the program will
+attempt to render a graph using pml-to-dot converter provided (traverse)
+and then use graphviz to produce a PNG representation of the graph. 
+This is then displayed on the page alongside recommendations. There are two
+issues with the current implementation -
+
+If an unsuitable file is set as the PML description file, it will fail 
+to produce a graph. This does not cause any problems as per se, but it 
+may be desirable in future versions to carry out a check (using 
+pmlcheck) on the file set as the PML file when the user is creating the 
+recommendation.
+
+USER ACCESS LEVELS:
+
+The system currently supports four levels of privilege -
+
+* Guest: A user that is not registered on the system is allowed to 
+  answer the questions, but cannot access the admin screen.
+* Registered User: A user that is registered on the site. The 
+  recommendations they receive are saved when they press "Done" at the
+  end of a question cycle. Depending on whether or not the admin gives
+  them the appropriate permissions, a registered user can access 
+  restricted files.
+* Superuser: The user created when the database was initialized is given 
+  full control over the system, including the ability to create other 
+  superusers.
+* Maintainer: This is not directly built in to the system but can be 
+  created in a straightforward manner. Log in to the admin screen as a 
+  superuser, select the Groups section, and create a group named that 
+  has all the privileges prefixed with 'knowledge'. When creating a 
+  maintainer user, ensure that they are a member of this group, and that 
+  the "Staff Status" option is selected. This user will be allowed to 
+  modify the knowledge base, but otherwise has no administration powers.
+
+It is anticipated that the Maintainer group setup will be automated, either by
+using database fixtures, or by distributing the software with a template 
+database file.
