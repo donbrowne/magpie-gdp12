@@ -35,9 +35,7 @@ class ResourceFileAdmin(admin.ModelAdmin):
         self.exclude = None
         return super(ResourceFileAdmin, self).change_view(request, form_url, extra_context)
 
-
-
-admin.site.register(Fact, FactAdmin)
 admin.site.register(Question)
-admin.site.register(Recommend, RecsAdmin)
 admin.site.register(ResourceFile, ResourceFileAdmin)
+admin.site.register(Recommend, RecsAdmin)
+admin.site.register(Fact, FactAdmin)
