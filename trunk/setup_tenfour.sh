@@ -17,7 +17,7 @@ make install
 make clean
 wget http://people.apache.org/~pquerna/modules/mod_flvx.c
 apxs2 -i -a -c mod_flvx.c
-rm mod_flvx.c
+a2enmod flvx wsgi
 /etc/init.d/apache2 reload
 cd ..
 rm -rf mod_wsgi-3.3*
