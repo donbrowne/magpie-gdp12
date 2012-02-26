@@ -67,6 +67,12 @@ When adding a file, the user adds a descriptive name, selects the file
 to be uploaded, and selects whether or not it is a restricted. Selecting
 Save from the bottom of the screen will upload the file to the server.
 
+When maintainers access the Resource File change screen, they are only
+allowed to modify the files that they have created. An admin user may
+access all the files. The owner of a file, and the super user, are
+allowed to change the owner of that file. Irrespecitve of the owner, any
+maintainer may select any file for attachment to a recommendation.
+
 A Restricted file is a file that can only be accessed by a maintainer,
 an admin or a regular user that has been assigned the following 
 permission by an admin from the Users admin interface -
