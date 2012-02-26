@@ -1,13 +1,11 @@
 import os 
 import sys
 
-sys.path.append('/var/www/magpie-gdp12-read-only/django_magpie')
-sys.path.append('/var/www/magpie-gdp12-read-only/django_magpie/knowledge')
+sys.path.append('PATH/django_magpie')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 from django.contrib.auth.models import User
 from django import db
-from views import checkUserPermission
 
 def check_password(environ, user, password):
    db.reset_queries()
@@ -19,7 +17,7 @@ def check_password(environ, user, password):
            return None
 
        if user.check_password(password): 
-           return checkUserPermission(environ['REQUEST_URI'],user.groups.all())
+           return user.is_staff or user.has_perm('knowledge.restricted_access') or user.is_superuser
        else:
            return False
    finally: 

@@ -5,12 +5,20 @@
   WSGIScriptAlias / PATH/django_magpie/magpie.wsgi
    WSGIApplicationGroup %{GLOBAL} 
   <Directory PATH/django_magpie>
-  Order allow,deny 
-  Allow from all 
+    Order allow,deny 
+    Allow from all 
   </Directory> 
   <Directory PATH/resources/media>
      AddHandler flv-stream .flv 
-   </Directory> 
+  </Directory>
+  <Directory PATH/resources/media/restricted>
+    WSGIApplicationGroup django
+    AuthType Basic
+    AuthName "Magpie - Restricted Media. Please log in."
+    AuthBasicProvider wsgi
+    WSGIAuthUserScript PATH/django_magpie/auth.wsgi
+    Require valid-user
+  </Directory>
   Alias /static PATH/resources/static 
   Alias /media PATH/resources/media 
 </VirtualHost>

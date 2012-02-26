@@ -7,13 +7,22 @@ class Question(models.Model):
         return self.text
 
 def userPath(instance, filename):
-    return '/'.join(['content', instance.user.username, filename])
+    if instance.restricted:
+        return '/'.join(['restricted', filename])
+    else:
+        return filename
         
 class ResourceFile(models.Model):
     description = models.CharField(max_length=255)
-    file  = models.FileField(upload_to='.')
-    group = models.ManyToManyField(AuthModels.Group,blank=True,null=True)
+    file  = models.FileField(upload_to=userPath)
+    restricted = models.BooleanField()
     owner = models.ForeignKey(AuthModels.User,blank=True,null=True)
+    
+    class Meta:
+        permissions = (
+            ("restricted_access", "Can access restricted files"),
+        )
+    
     def __unicode__(self):
         return self.description    
 
@@ -79,36 +88,20 @@ class RecsSummary(object):
         self.pmlPath = pmlPath
         self.vidLink = vidLink
         
-def compareGroups(userGroup, fileGroup):
-    if not fileGroup: 
-        return True
-    else:
-        return bool(list(set(userGroup) & set(fileGroup)))
-        
-def compareGroupUrl(url,userGroup):
-   rFile = None
-   for files in ResourceFile.objects.all():
-       if files.file.url == url:
-           rFile = files
-           break
-   if not rFile:
-       return False
-   else:
-       return compareGroups(userGroup, rFile.group.all())
-        
 #Pack together the recommendation data in a nice way.        
-def recSummaryClosure(userGroup):
+def recSummaryClosure(user):
+    restrictedAccess = user.is_staff or user.is_superuser or user.has_perm('knowledge.restricted_access')
     def getRecSummary(rec):
         recsList = []
         pmlPath = None
         vidLink = None
-        if rec.videoLink != None and compareGroups(userGroup,rec.videoLink.group.all()):
+        if rec.videoLink != None and (not rec.videoLink.restricted or restrictedAccess):
             vidLink = rec.videoLink.file.url
-        if rec.pmlLink != None and compareGroups(userGroup,rec.pmlLink.group.all()):
+        if rec.pmlLink != None and (not rec.pmlLink.restricted or restrictedAccess):
             recsList.append(("PML Link", rec.pmlLink.file.url))
             pmlPath = rec.pmlLink.file.name
         for others in rec.otherLinks.all():
-            if compareGroups(userGroup,others.group.all()):
+            if (not others.restricted or restrictedAccess):
                 recsList.append((others.description,others.file.url))
         for link in ExternalLink.objects.filter(rec=rec.id):
             recsList.append((link.description,link.link))
