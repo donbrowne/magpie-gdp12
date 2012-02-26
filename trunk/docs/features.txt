@@ -12,13 +12,14 @@ program works (from the user's perspective) -
 * The program iterates through the list of facts, and asks the user the
   questions associated with those facts. If the user gives the expected answers
   to all the questions associated with that fact, then that fact is true.
-* The requirements list of a fact is the set of facts that must be true 
-  before the program will ask the user about it. For example, if there is a 
-  'Likes Chocolate Cake' fact that asks the user if they like chocolate cake, 
-  the maintainer could set the facts 'Likes Chocolate' and 'Likes Cake' as 
-  requirements for 'Likes Chocolate Cake', so that the program only asks the
-  user if they like chocolate cake if it has already established that they like
-  chocolate, and they like cake. 
+* Maintainer: This is not directly built in to the system but can be 
+  created in a straightforward manner. Log in to the admin screen as a 
+  superuser, select the Groups section, and create a group named that 
+  has all the privileges prefixed with 'knowledge' and 'accounts'. 
+  When creating a maintainer user, ensure that they are a member of this 
+  group, and that the "Staff Status" option is selected. This user will 
+  be allowed to modify the knowledge base, but otherwise has no 
+  administration powers.
 
 Assuming the server is running the default address, the admin page can be 
 accessed at -
@@ -53,8 +54,8 @@ delivers -
   that would have been given if they had been answered.
 * A list of all other recommendations.
 
-The user can click the "Home" button near the top of the screen to go back to
-the start.
+The user can click the "Index" button near the top of the screen to go 
+back to the start. Clicking "Done" will save answers to the questions.
 
 FILE SERVING:
 
@@ -150,3 +151,11 @@ The system currently supports four levels of privilege -
 It is anticipated that the Maintainer group setup will be automated, either by
 using database fixtures, or by distributing the software with a template 
 database file.
+
+---KNOWN ISSUES---
+
+The Saved section, which allows users to view the recommendations 
+provided to them when they previously finished, does not display links
+alongside the recommendations. It also does not feature a reset 
+mechanism which may cause inaccurate information to be stored if the 
+user repeatedly goes through the questioning process.
