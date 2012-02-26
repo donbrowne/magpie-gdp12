@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response,redirect
-from knowledge.models import FactState, start_state, get_answers, recSummaryClosure, compareGroupUrl
+from knowledge.models import FactState, start_state, get_answers, recSummaryClosure
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 import subprocess 
@@ -21,12 +21,6 @@ def get_state(session):
     answers = session['answers']
     falseFactIDs = session['falseFactIDs']
     return FactState(test_ids, pass_ids, answers, falseFactIDs)
-                
-def checkUserPermission(reqURI,userGroups):
-    if reqURI == settings.MEDIA_URL:
-        return True
-    else:
-        return compareGroupUrl(reqURI,userGroups)
 
 def generatePmlGraph(request):
     pmlPath = request.GET.items()[0][1]
@@ -75,7 +69,7 @@ def saved(request):
 def ask_or_done(request, state):
     context = RequestContext(request)
     questions = state.get_questions()
-    summaryClosure = recSummaryClosure(request.user.groups.all())
+    summaryClosure = recSummaryClosure(request.user)
     recommends = map(summaryClosure,state.get_recommends())
     nonRecommended = state.getNonRecommended()
     reasons = state.get_reasons()
