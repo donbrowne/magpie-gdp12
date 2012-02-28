@@ -1,65 +1,10 @@
-INSTALLATION INSTRUCTIONS:
-
----Installing Dependencies---
-
-From the magpie directory (or trunk, if pulled from svn) run -
-
-  chmod +x *.sh
-
-Due to the age of the Ubuntu 10.04/10.10 package set, it is necessary to 
-use a third party repository to supply an updated version of Python. To 
-automatically handle the Python and the other dependencies under these
-platforms, run the following -
-
-  sudo ./setup_tenfour.sh
-   
-For users not running Ubuntu 10.04 or 10.10, the dependencies need to be
-manually installed, and the setup_tenfour script should not be run.
-Skip to the "Preparing Django" section. A list of dependencies will be 
-specified in accompanying documentation. 
-  
-Once the script is run, the following command should be used instead of 
-'python' for starting initializing the Django application -
-
-  python2.7
-
-and all additional Python modules should be installed with -
-
-  sudo easy_install-2.7 <module name>
-
-'python2.7' is used in the rest of this documentation. If you are 
-running a distribution of Linux where Python 2.7 is the default, use
-'python' instead. In theory, a symlink could be set up between python2.7
-and python, but this can cause other applications to break, and is not
-recommended.
-
----Preparing Django---
-
-All users must then run -
-
-  ./setup.sh
-
-If building from svn, the following must be run. If installing from 
-the tarball, omit this step.
-
-  cd django_magpie
-  python2.7 manage.py syncdb
-  cd ..
-  
-Both svn and tarball users need to run -
-
-  sudo chown -R www-data resources/ sqlite3/
-
-www-data is the Apache user for Ubuntu. This username may be different 
-for other distributions. Consult OS documentation if in doubt. 
-
 CONFIGURING APACHE
 
 NOTE:
 The exact method of configuring Apache varies from one Linux 
 distribution to another. The following method is used to configure 
 Ubuntu 10.04 and 10.10 For other distributions, the OS documentation 
-should be consulted.
+should be consulted. However, the same general outline applies.
 
 The following shorthand will be used in this section, and the
 accompanying features.txt, any time you see these mentioned, substitute 
