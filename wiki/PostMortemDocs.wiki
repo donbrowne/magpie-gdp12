@@ -1,6 +1,6 @@
-#summary Links to Post Mortum Reports
+#summary Links to Post Mortem Reports
 
-= Post Mortum Docs =
+= Post Mortem Docs =
 
 
 * Iteration 2:  [PostMortem20Feb]
