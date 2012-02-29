@@ -6,7 +6,7 @@ This is our first PM report from 20th Feb.
 
 = Details =
 
-From: osull***@tcd.ie
+From: osull___@tcd.ie
 Subject: Iteration 2 Post Mortem 
 
 ==Accomplishments==
