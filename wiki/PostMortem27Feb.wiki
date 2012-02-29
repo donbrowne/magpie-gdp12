@@ -5,7 +5,7 @@ Our second post mortem report.
 
 
 = Details =
-From: osull***@tcd.ie
+From: osull___@tcd.ie
 Subject: Iteration 3 Post Mortem
 
 Accomplishments
