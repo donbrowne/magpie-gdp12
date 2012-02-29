@@ -1,4 +1,4 @@
-#summary Iteration 2 Post Mortum Report
+#summary Iteration 2 Post Mortem Report
 = Introduction =
 
 This is our first PM report from 20th Feb.
