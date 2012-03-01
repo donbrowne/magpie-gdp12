@@ -295,6 +295,9 @@ class Engine(object):
         non_recommended = []
         return non_recommended
 
+    def get_answers(self):
+        return []
+
     def next_premises(self, search_premises, qa_list, node_set):
         if len(search_premises) == 0:
             return

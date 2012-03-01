@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response,redirect
-from knowledge.models import FactState, start_state, get_answers, recSummaryClosure
+#from knowledge.models import FactState, start_state, get_answers, recSummaryClosure
+from knowledge.models import Engine,start_state,state_encode,state_decode,recSummaryClosure
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 import subprocess 
@@ -10,6 +11,32 @@ import pydot
 
 # note sesson is a gui state so
 # should not pass to business logic layer
+def get_answers(items):
+    answers = []
+    for name,value in items:
+        if name.startswith('answer_'):
+            qid = int(name[len('answer_'):])
+            istrue = value == 'y'
+            answers.append((qid, istrue))
+    return answers
+
+def del_state(session):
+    try:
+      del session['engine']
+    except KeyError:
+      pass
+
+def put_state(session, state):
+    session['engine'] = state_encode(state) 
+
+def get_state(session):
+    if 'engine' in session:
+        slist = session['engine']
+    else:
+        slist = []
+    return state_decode(slist) 
+
+"""
 def del_state(session):
     for key in ['test_ids','pass_ids','answers','falseFactIDs']:
         if key in session:
@@ -21,6 +48,7 @@ def get_state(session):
     answers = session['answers']
     falseFactIDs = session['falseFactIDs']
     return FactState(test_ids, pass_ids, answers, falseFactIDs)
+"""
 
 def generatePmlGraph(request):
     pmlPath = request.GET.items()[0][1]
@@ -38,11 +66,13 @@ def generatePmlGraph(request):
         print ("[ERROR] File does not exist")
         return None
 
+"""
 def put_state(session, state):
     session['test_ids'] = state.test_ids
     session['pass_ids'] = state.pass_ids
     session['answers'] = state.answers
     session['falseFactIDs'] = state.falseFactIDs
+"""
 
 # TODO move this to questions url
 def index(request):
@@ -57,7 +87,7 @@ def saved(request):
     context = RequestContext(request)
     state = start_state(request.user)
     profile = request.user.get_profile()
-    state = state.next_state(profile.get_answers())
+    state.next_state(profile.get_answers())
     return render_to_response('knowledge/saved.html', {
                 'recommend_list': state.get_recommends(),
                 'reason_list' : state.get_reasons(),
@@ -106,11 +136,13 @@ def ask(request):
         # user answered some questions
         answers =  get_answers(request.POST.items())
         state = get_state(request.session)
-        state = state.next_state(answers)
+        #state = state.next_state(answers)
+        state.next_state(answers)
         rsp = ask_or_done(request, state)
     else:
         # first time
         state = start_state(request.user)
+        state.next_state()
         rsp = ask_or_done(request, state)
     return rsp
 
