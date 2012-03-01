@@ -1,12 +1,15 @@
-from knowledge.models import *
 from django.contrib import admin
+from django import forms
+from django.db import models
+from models import Variable,Recommend,RuleSet,Rule,RulePremise,RuleConclusion,RuleRecommend
+from models import ExternalLink,ResourceFile
+from django.utils.safestring import mark_safe
+from django.http import HttpResponseRedirect
+from django.conf.urls.defaults import patterns
+from django.utils.encoding import iri_to_uri
+from django.contrib.admin.util import unquote
+from django.utils import html
 
-class FactQuestionInline(admin.TabularInline):
-    model = FactQuestion
-
-class FactAdmin(admin.ModelAdmin):
-    filter_horizontal = ('requires','recommends',)
-    inlines = [FactQuestionInline]
 
 class ExtLinkInline(admin.TabularInline):
     model = ExternalLink
@@ -35,26 +38,6 @@ class ResourceFileAdmin(admin.ModelAdmin):
         self.exclude = None
         return super(ResourceFileAdmin, self).change_view(request, form_url, extra_context)
 
-
-
-admin.site.register(Question)
-admin.site.register(ResourceFile, ResourceFileAdmin)
-admin.site.register(Recommend, RecsAdmin)
-admin.site.register(Fact, FactAdmin)
-
-from django.contrib import admin
-from django import forms
-from django.db import models
-from models import Variable,Recommend,RuleSet,Rule,RulePremise,RuleConclusion,RuleRecommend
-from models import ExternalLink,ResourceFile
-from django.utils.safestring import mark_safe
-from django.http import HttpResponseRedirect
-from django.conf.urls.defaults import patterns
-from django.utils.encoding import iri_to_uri
-from django.contrib.admin.util import unquote
-
-from django import forms
-from django.utils import html
 
 # django snippet 2673
 class ButtonAdmin(admin.ModelAdmin):
@@ -240,9 +223,8 @@ class VariableAdmin(admin.ModelAdmin):
     list_display = ['name', 'ask','prompt']
 
 
+admin.site.register(ResourceFile, ResourceFileAdmin)
+admin.site.register(Recommend, RecsAdmin)
 admin.site.register(Variable, VariableAdmin)
 admin.site.register(RuleSet, RuleSetAdmin)
-#admin.site.register(Recommend, RecsAdmin)
-#admin.site.register(ResourceFile)
-
 
