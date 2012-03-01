@@ -139,19 +139,19 @@ class RuleRecommendInline(admin.TabularInline):
     model = RuleRecommend
     extra = 0
     verbose_name_plural = "RECOMMENDATIONS"
-    template = 'admin/testapp/edit_inline/tabular.html'
+    template = 'admin/knowledge/edit_inline/tabular.html'
 
 class RuleConclusionInline(admin.TabularInline):
     model = RuleConclusion
     extra = 0
     verbose_name_plural = "CONCLUSIONS"
-    template = 'admin/testapp/edit_inline/tabular.html'
+    template = 'admin/knowledge/edit_inline/tabular.html'
 
 class RulePremiseInline(admin.TabularInline):
     model = RulePremise
     extra = 0
     verbose_name_plural = "PREMISES"
-    template = 'admin/testapp/edit_inline/tabular.html'
+    template = 'admin/knowledge/edit_inline/tabular.html'
 
 
 class RuleForm(forms.ModelForm):
@@ -167,14 +167,14 @@ class RuleAdmin(admin.ModelAdmin):
         if request.POST:
             if 'parent' in request.POST:
                 parent= request.POST['parent']
-                result['Location'] = iri_to_uri("/admin/testapp/ruleset/%s" % parent)
+                result['Location'] = iri_to_uri("/admin/knowledge/ruleset/%s" % parent)
         return result
 
     def change_view(self, request, object_id, extra_context=None):
         result = super(RuleAdmin, self).change_view(request, object_id, extra_context)
         obj = self.get_object(request, unquote(object_id))
         if not request.POST.has_key('_addanother') and not request.POST.has_key('_continue'): 
-            result['Location'] = iri_to_uri("/admin/testapp/ruleset/%s" % obj.parent_id)
+            result['Location'] = iri_to_uri("/admin/knowledge/ruleset/%s" % obj.parent_id)
         return result
     
 class RuleInline(admin.TabularInline):
@@ -185,7 +185,7 @@ class RuleInline(admin.TabularInline):
     def details(self, obj):
         astr = mark_safe(u'<a href="edit_rule/%d">%s</a>' % (obj.id, obj.get_dets()))
         return astr
-    template = 'admin/testapp/edit_inline/tabular.html'
+    template = 'admin/knowledge/edit_inline/tabular.html'
     readonly_fields = ('details',)
 
     def formfield_for_dbfield(self, db_field, **kwargs):
