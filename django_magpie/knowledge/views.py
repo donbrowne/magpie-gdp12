@@ -36,20 +36,6 @@ def get_state(session):
         slist = []
     return state_decode(slist) 
 
-"""
-def del_state(session):
-    for key in ['test_ids','pass_ids','answers','falseFactIDs']:
-        if key in session:
-            del session[key]
-
-def get_state(session):
-    test_ids = session['test_ids']
-    pass_ids = session['pass_ids']
-    answers = session['answers']
-    falseFactIDs = session['falseFactIDs']
-    return FactState(test_ids, pass_ids, answers, falseFactIDs)
-"""
-
 def generatePmlGraph(request):
     pmlPath = request.GET.items()[0][1]
     if pmlPath.find("../") != -1:
@@ -66,13 +52,6 @@ def generatePmlGraph(request):
         print ("[ERROR] File does not exist")
         return None
 
-"""
-def put_state(session, state):
-    session['test_ids'] = state.test_ids
-    session['pass_ids'] = state.pass_ids
-    session['answers'] = state.answers
-    session['falseFactIDs'] = state.falseFactIDs
-"""
 
 # TODO move this to questions url
 def index(request):
