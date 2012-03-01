@@ -26,8 +26,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': DATABASE_PATH,                      # Or path to database file if using sqlite3.
-        'USER': 'magpie',                      # Not used with sqlite3.
-        'PASSWORD': 'magpie',                  # Not used with sqlite3.
+        'USER': 'admin',                      # Not used with sqlite3.
+        'PASSWORD': 'admin',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -75,7 +75,8 @@ TRAVERSE_PATH = MAGPIE_DIR + '/../pml/graph/traverse'
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 
 
-
+LOGIN_URL = '/register/login/'
+LOGOUT_URL = '/register/logout/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -164,12 +165,12 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'knowledge',
-    'accounts',
+    'register',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+AUTH_PROFILE_MODULE = 'register.Account'
 
 
 # A sample logging configuration. The only tangible logging
