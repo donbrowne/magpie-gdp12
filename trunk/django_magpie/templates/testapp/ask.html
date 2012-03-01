@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Magpie Site' %}{% endblock %}
+
+{% block content %}
+<h2>Questions:</h2>
+<form action="/testapp/ask" method="post">
+{% csrf_token %}
+<ol>
+{% for question in question_list %}
+    <li>{{ question.prompt}}
+    <input type="radio" name='answer_{{question.id}}' value="y">Yes
+    <input type="radio" name='answer_{{question.id}}' value="n">No
+    </li>
+{% endfor %}
+</ol>
+<input type="submit" value="Next" />
+</form>
+
+{% if recommend_list %}
+{% load customFilters %}
+<h2>Recommmendations:</h2>
+<ol>
+{% for rec in recommend_list %}
+    <li>{{ rec.text }} 
+    <ol>
+    {% for link in rec.links %}
+        <li><a href={{link.1}}>{{link.0}}</a> </li>
+        {%if link.1|contains:"http://www.youtube.com/watch?v="%}
+            {% with sliced=link.1|lslice:"31" %}
+                {% with yTubeEmbed="\"http://www.youtube.com/embed/"|add:sliced|add:"\"" %}
+                <iframe width="640" height="480" src={{yTubeEmbed|safe}} frameborder="0" allowfullscreen></iframe> 
+                {% endwith %}
+            {% endwith %}
+        {%endif%}
+    {% endfor %}
+    </ol>
+    {% if rec.pmlPath != None %}
+    {% with pmlReq="\"pmlGraph?path="|add:rec.pmlPath|add:"\"" %}
+        <img src={{pmlReq|safe}} />
+    {% endwith %}
+    {% endif %}
+    {% if rec.vidLink != None %}
+        <a class="vidPlayer"
+             href={{rec.vidLink}}
+			 style="display:block;width:640px;height:480px"> 
+		</a> 
+        <script>
+			flowplayer("a.vidPlayer", "{% load adminmedia %}{% admin_media_prefix %}flowplayer-3.2.7.swf");
+		</script>
+    {% endif %}
+    </li>
+{% endfor %}
+</ol>
+{% endif %}
+
+{% if reason_list %}
+<h2>Reasons:</h2>
+<ol class="treeview">
+{% for reason in reason_list %}
+    <li>{{ reason.text }}</li>
+    <ol>
+    {% for qa in reason.qa_list %}
+        <li>{{ qa.0|add:" You answered - " }} {{ qa.1|yesno:"Yes,No" }} </li>
+    {% endfor %}
+    </ol>
+{% endfor %}
+</ol>
+{% endif %}
+
+{% if nonRecommendedList %}
+<h2>Do not:</h2>
+<ol>
+{% for rec in nonRecommendedList %}
+    <li>{{ rec.text }}</li>
+{% endfor %}
+</ol>
+{% endif %}
+
+{% if reasonsNonList %}
+<h2>Reasons:</h2>
+<ol class="treeview">
+{% for reason in reasonsNonList %}
+    <li>{{ reason.text }}</li>
+    <ol>
+    {% for qa in reason.qa_list %}
+        <li>{{ qa.0|add:" You answered - " }} {{ qa.1|yesno:"Yes,No" }} </li>
+    {% endfor %}
+    </ol>
+{% endfor %}
+</ol>
+{% endif %}
+
+{% if unansweredList %}
+<h2>Questions you did not answer (and their recommendations):</h2>
+<ol class="treeview">
+{% for reason in unansweredList %}
+    <li>{{ reason.question }}</li>
+    <ol>
+    {% for rec in reason.recs %}
+        <li>{{ rec }} </li>
+    {% endfor %}
+    </ol>
+{% endfor %}
+</ol>
+{% endif %}
+{% endblock %}
