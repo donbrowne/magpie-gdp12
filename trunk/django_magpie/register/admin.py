@@ -16,7 +16,7 @@ class AccountAnswerInline(admin.TabularInline):
 
 class AccountAdmin(admin.ModelAdmin):
     inlines = [AccountAnswerInline]
-    # readonly_fields = ('user',)
+    readonly_fields = ('user',)
         
 
 """
