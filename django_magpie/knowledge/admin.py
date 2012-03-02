@@ -4,11 +4,13 @@ from django.db import models
 from models import Variable,Recommend,RuleSet,Rule,RulePremise,RuleConclusion,RuleRecommend
 from models import ExternalLink,ResourceFile
 from django.utils.safestring import mark_safe
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.conf.urls.defaults import patterns
 from django.utils.encoding import iri_to_uri
 from django.contrib.admin.util import unquote
 from django.utils import html
+from django.utils.html import escape, escapejs
+from django.shortcuts import render_to_response, get_object_or_404
 
 
 class ExtLinkInline(admin.TabularInline):
@@ -117,7 +119,7 @@ YN_CHOICES = (
     (True, "Yes"),
     (False, "No")
 )
-    
+
 class RuleRecommendInline(admin.TabularInline):
     model = RuleRecommend
     extra = 0
@@ -130,35 +132,38 @@ class RuleConclusionInline(admin.TabularInline):
     verbose_name_plural = "CONCLUSIONS"
     template = 'admin/knowledge/edit_inline/tabular.html'
 
+    
 class RulePremiseInline(admin.TabularInline):
     model = RulePremise
     extra = 0
     verbose_name_plural = "PREMISES"
     template = 'admin/knowledge/edit_inline/tabular.html'
 
-
-class RuleForm(forms.ModelForm):
-     parent = forms.ModelChoiceField(label="",queryset=RuleSet.objects.all(), widget=forms.HiddenInput())
-     #hidden_fields = ('parent','order',)
-
 class RuleAdmin(admin.ModelAdmin):
+
     inlines = [RulePremiseInline, RuleConclusionInline, RuleRecommendInline]
     exclude = ('order',)
 
-    def add_view(self, request, form_url='', extra_context=None):
-        result = super(RuleAdmin, self).add_view(request, form_url, extra_context)
-        if request.POST:
-            if 'parent' in request.POST:
-                parent= request.POST['parent']
-                result['Location'] = iri_to_uri("/admin/knowledge/ruleset/%s" % parent)
-        return result
+    def __init__(self, model, admin_site, ruleset=None):
+        super(RuleAdmin, self).__init__(model, admin_site)
+        self.ruleset = ruleset
 
-    def change_view(self, request, object_id, extra_context=None):
-        result = super(RuleAdmin, self).change_view(request, object_id, extra_context)
-        obj = self.get_object(request, unquote(object_id))
-        if not request.POST.has_key('_addanother') and not request.POST.has_key('_continue'): 
-            result['Location'] = iri_to_uri("/admin/knowledge/ruleset/%s" % obj.parent_id)
-        return result
+    def get_model_perms(self, request):
+        return {}
+
+    def response_change(self, request, obj):
+        if "_popup" in request.POST:
+            pk_value = obj._get_pk_val()
+            return HttpResponse('<script type="text/javascript">opener.dismissAddAnotherPopup(window, "%s", "%s");</script>' % \
+                # escape() calls force_unicode.
+                (escape(pk_value), escapejs(obj)))
+        return super(RuleAdmin, self).response_change(request, obj, *args, **kwargs)
+
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.parent  = self.ruleset
+        obj.save()
     
 class RuleInline(admin.TabularInline):
     model = Rule
@@ -166,7 +171,7 @@ class RuleInline(admin.TabularInline):
     max_num = 0
     fields = ('order', 'details')
     def details(self, obj):
-        astr = mark_safe(u'<a href="edit_rule/%d">%s</a>' % (obj.id, obj.get_dets()))
+        astr = mark_safe(u'<a onclick=\'return showAddAnotherPopup(this);\' href="edit_rule/%d">%s</a>' % (obj.id, obj.get_dets()))
         return astr
     template = 'admin/knowledge/edit_inline/tabular.html'
     readonly_fields = ('details',)
@@ -185,33 +190,25 @@ class RuleInline(admin.TabularInline):
         )
 
 
-class RuleSetAdmin(ButtonAdmin):
+class RuleSetAdmin(admin.ModelAdmin):
     inlines = [RuleInline]
 
     def get_urls(self):
         urls = super(RuleSetAdmin, self).get_urls()
         my_urls = patterns('',
+            (r'^(?P<ruleset_id>\d+)/add_rule/$', self.admin_site.admin_view(self.add_rule)),
             (r'^(?P<ruleset_id>\d+)/edit_rule/(?P<rule_id>\d+)/$', self.admin_site.admin_view(self.edit_rule))
         )
         return my_urls + urls
-
-    def add_rule(self, request, ruleset):
-        if request.method == 'GET':
-            initial = dict(request.GET.items())
-            initial['parent']  = ruleset.pk
-            request.GET = initial
-        admin = RuleAdmin(Rule, self.admin_site)
-        admin.form = RuleForm
+ 
+    def add_rule(self, request, ruleset_id):
+        ruleset = get_object_or_404(RuleSet, pk=int(ruleset_id))
+        admin = RuleAdmin(Rule, self.admin_site, ruleset)
         return admin.add_view(request)
 
     def edit_rule(self, request, ruleset_id, rule_id):
-        admin = RuleAdmin(Rule, self.admin_site)
-        admin.form = RuleForm
+        admin = RuleAdmin(Rule, self.admin_site, None)
         return admin.change_view(request, rule_id)
-
-    add_rule.short_description = 'Add rule'
-
-    change_buttons = [ add_rule ]
 
 class ExtLinkInline(admin.TabularInline):
     model = ExternalLink
@@ -227,4 +224,5 @@ admin.site.register(ResourceFile, ResourceFileAdmin)
 admin.site.register(Recommend, RecsAdmin)
 admin.site.register(Variable, VariableAdmin)
 admin.site.register(RuleSet, RuleSetAdmin)
+admin.site.register(Rule, RuleAdmin)
 

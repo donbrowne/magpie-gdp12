@@ -24,7 +24,7 @@ class ProfileAnswer(models.Model):
     value = models.BooleanField()
 
 class Account(models.Model):
-    user = models.OneToOneField(User, editable=False)
+    user = models.OneToOneField(User)
     profile = models.ForeignKey(Profile, null=True)
 
     def get_answers(self):

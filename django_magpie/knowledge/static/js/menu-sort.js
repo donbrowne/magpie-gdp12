@@ -21,3 +21,8 @@ jQuery(document).ready(function($){
     $('.add-row a').click(update);
 });
 
+
+function dismissAddAnotherPopup(win) {
+    win.close();
+    location.reload();
+}

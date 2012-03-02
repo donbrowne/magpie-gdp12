@@ -103,7 +103,7 @@ class RuleSet(models.Model):
         return self.name
 
 class Rule(models.Model):
-    parent = models.ForeignKey(RuleSet)
+    parent = models.ForeignKey(RuleSet, editable=False)
     order = models.IntegerField(default=0)
     def get_dets(self):
         tostr = lambda names: ' AND '.join(names)
