@@ -67,8 +67,10 @@ def saved(request):
     state = start_state(request.user)
     profile = request.user.get_profile()
     state.next_state(profile.get_answers())
+    summaryClosure = recSummaryClosure(request.user)
+    recommends = map(summaryClosure,state.get_recommends())
     return render_to_response('knowledge/saved.html', {
-                'recommend_list': state.get_recommends(),
+                'recommend_list': recommends,
                 'reason_list' : state.get_reasons()
                 }, context)
 
