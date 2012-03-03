@@ -40,7 +40,10 @@ def account(request):
             form = AccountForm(request.POST,instance=account) # A form bound to the POST data
             if form.is_valid(): # All validation rules pass
                 form.save()
+                messages.info(request, "Account updated.")
                 return HttpResponseRedirect(redirect_to)
+            else:
+                form.reload_disabled()
     else:
         user = request.user
         account = user.account

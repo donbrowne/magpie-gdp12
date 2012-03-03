@@ -10,11 +10,15 @@ class AccountForm(forms.ModelForm):
             max_length=30, 
             widget=forms.TextInput(
                 attrs={
-                    'readonly':'readonly'
-                }))
+                    'disabled':'disabled'
+                }),required=False)
     first_name = forms.CharField(label='first name', max_length=30)
     last_name = forms.CharField(label='last name', max_length=30)
     email = forms.EmailField(label='email',help_text='',required=False)
+
+    class Meta:
+        model = Account
+        exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
         super(AccountForm, self).__init__(*args, **kwargs)
@@ -23,9 +27,15 @@ class AccountForm(forms.ModelForm):
         self.fields['last_name'].initial = self.instance.user.last_name
         self.fields['email'].initial = self.instance.user.email
 
-    class Meta:
-        model = Account
-        exclude = ('user',)
+    # we call this because post form does not contain disabled field data
+    def reload_disabled(self):
+        self.fields['username'].widget.value_from_datadict = lambda *args: self.instance.user.username
+    def clean_username(self):
+        instance = getattr(self, 'instance', None)
+        if instance:
+            return instance.user.username
+        else:
+            return self.cleaned_data.get('username', None)
 
     def save(self, *args, **kwargs):
         u = self.instance.user
