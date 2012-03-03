@@ -115,7 +115,6 @@ def ask(request):
         # user answered some questions
         answers =  get_answers(request.POST.items())
         state = get_state(request.session)
-        #state = state.next_state(answers)
         state.next_state(answers)
         rsp = ask_or_done(request, state)
     else:

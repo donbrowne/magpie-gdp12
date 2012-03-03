@@ -33,7 +33,6 @@ def account(request):
         if 'cancel' not in request.POST:
             form = AccountForm(request.POST,instance=account) # A form bound to the POST data
             if form.is_valid(): # All validation rules pass
-                print 'here'
                 form.save()
         return HttpResponseRedirect(redirect_to)
     else:

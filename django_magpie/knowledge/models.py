@@ -1,5 +1,6 @@
 from django.db import models
-import django.contrib.auth.models as AuthModels
+from django.contrib.auth.models import User
+
 
 def userPath(instance, filename):
     if instance.restricted:
@@ -11,7 +12,7 @@ class ResourceFile(models.Model):
     description = models.CharField(max_length=255)
     file  = models.FileField(upload_to=userPath)
     restricted = models.BooleanField()
-    owner = models.ForeignKey(AuthModels.User,blank=True,null=True)
+    owner = models.ForeignKey(User,blank=True,null=True)
     
     class Meta:
         permissions = (
@@ -596,8 +597,38 @@ def state_decode(slist):
     answers = sdict.get('answers',None)
     return Engine(ruleset_ids, var_list, test_ids, answers)
 
+def get_user_ruleset(user):
+    account = user.get_profile()
+    if account.profile and account.profile.ruleset:
+        return account.profile.ruleset
+    return None
+
+def get_guest_ruleset():
+    try:
+        guest = User.objects.get(username='guest')
+        ruleset = get_user_ruleset(guest)
+    except User.DoesNotExist:
+        ruleset = None
+    return ruleset
+
+def get_ruleset(user):
+    if user.is_authenticated():
+        # first try the users profile
+        ruleset = get_user_ruleset(user)
+        if not ruleset:
+            # try the guest instead
+            ruleset = get_guest_ruleset()
+    else:
+        ruleset = get_guest_ruleset()
+    return ruleset
+
 def start_state(user):
     ruleset_ids = []
-    for ruleset in RuleSet.objects.all():
+    ruleset = get_ruleset(user)
+    if ruleset:
         ruleset_ids.append(ruleset.id)
+    else:
+        # hack remove when dev
+        for ruleset in RuleSet.objects.all():
+            ruleset_ids.append(ruleset.id)
     return Engine(ruleset_ids)
