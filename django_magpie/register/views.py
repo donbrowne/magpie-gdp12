@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import Context, RequestContext
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 from forms import AccountForm,RegistrationForm
 
@@ -16,6 +18,10 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
+            messages.info(request, "Thanks for registering. You are now logged in.")
+            new_user = authenticate(username=request.POST['username'],
+                                    password=request.POST['password1'])
+            login(request, new_user)
             return HttpResponseRedirect(redirect_to)
     else:
         form = RegistrationForm()
