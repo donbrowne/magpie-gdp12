@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from register.models import Profile
 
 
 def userPath(instance, filename):
@@ -598,40 +599,60 @@ def state_decode(slist):
     answers = sdict.get('answers',None)
     return Engine(ruleset_ids, var_list, test_ids, answers)
 
-def get_user_ruleset(user):
-    account = user.get_profile()
-    if account.profile and account.profile.ruleset:
-        return account.profile.ruleset
-    return None
+class FactStart(object):
 
-def get_guest_ruleset():
-    if not settings.GUEST_USER:
-        return
-    try:
-        guest = User.objects.get(username=settings.GUEST_USER)
-        ruleset = get_user_ruleset(guest)
-    except User.DoesNotExist:
-        ruleset = None
-    return ruleset
+    def __init__(self):
+        self.rulesets = []
+        self.facts = []
 
-def get_ruleset(user):
-    if user.is_authenticated():
-        # first try the users profile
-        ruleset = get_user_ruleset(user)
-        if not ruleset:
-            # try the guest instead
-            ruleset = get_guest_ruleset()
-    else:
-        ruleset = get_guest_ruleset()
-    return ruleset
+    def add_ruleset(self, ruleset):
+        if ruleset and ruleset not in self.rulesets:
+            self.rulesets.append(ruleset)
+
+    def add_facts(self, facts):
+        self.facts.extend(facts)
+
+    def get_guest_profile(self):
+        if not settings.GUEST_PROFILE:
+            return None
+
+        try:
+            profile = Profile.objects.get(name=settings.GUEST_PROFILE)
+        except Profile.DoesNotExist:
+            profile = None
+
+        return profile
+
+    def get_user_profile(self, user):
+        account = user.get_profile()
+        return account.profile
+
+    def get_profile(self, user):
+        if user.is_authenticated():
+            profile = self.get_user_profile(user)
+            if not profile:
+                # try the guest instead
+                profile = self.get_guest_profile()
+        else:
+            profile = self.get_guest_profile()
+        return profile
+
+    def load_profile(self, user):
+        profile = self.get_profile(user)
+        if profile:
+            self.add_ruleset(profile.ruleset)
+            self.add_facts(profile.get_answers())
+
+    def get_facts(self):
+        return self.facts
+
+    def get_ruleset_ids(self):
+        ruleset_ids = []
+        for ruleset in self.rulesets:
+            ruleset_ids.append(ruleset.id)
+        return ruleset_ids
 
 def start_state(user):
-    ruleset_ids = []
-    ruleset = get_ruleset(user)
-    if ruleset:
-        ruleset_ids.append(ruleset.id)
-    else:
-        # hack remove when dev
-        for ruleset in RuleSet.objects.all():
-            ruleset_ids.append(ruleset.id)
-    return Engine(ruleset_ids)
+    start = FactStart()
+    start.load_profile(user)
+    return Engine(start.get_ruleset_ids(), start.get_facts())
