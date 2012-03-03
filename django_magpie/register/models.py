@@ -73,26 +73,39 @@ signals.post_syncdb.disconnect(
     dispatch_uid='django.contrib.auth.management.create_superuser')
 
 def create_testuser(app, created_models, verbosity, **kwargs):
-  if not settings.DEBUG:
-    return
 
-  try:
-    dbconfig = settings.DATABASES['default']
-    user = dbconfig['USER']
-    password = dbconfig['PASSWORD']
-  except KeyError:
-    print 'Invalid settings.py'
-    return
+    if settings.GUEST_USER:
+        try:
+            auth_models.User.objects.get(username=settings.GUEST_USER)
+        except auth_models.User.DoesNotExist:
+            print 'Creating Guest user -- login: %s' % settings.GUEST_USER
+            u = auth_models.User(username=settings.GUEST_USER, 
+                first_name='Anonymous', 
+                last_name='User',
+                password=settings.GUEST_USER)
+            u.set_unusable_password()
+            u.save()
+    
+    if not settings.DEBUG:
+        return
 
-  try:
-    auth_models.User.objects.get(username=user)
-  except auth_models.User.DoesNotExist:
-    print '*' * 80
-    print 'Creating test user -- login: %s, password: %s' %( user, password)
-    print '*' * 80
-    assert auth_models.User.objects.create_superuser(user, 'x@x.com', password)
-  else:
-    print 'Admin user already exists.'
+    try:
+        dbconfig = settings.DATABASES['default']
+        user = dbconfig['USER']
+        password = dbconfig['PASSWORD']
+    except KeyError:
+        print 'Invalid settings.py'
+        return
+
+    try:
+        auth_models.User.objects.get(username=user)
+    except auth_models.User.DoesNotExist:
+        print '*' * 80
+        print 'Creating test user -- login: %s, password: %s' %( user, password)
+        print '*' * 80
+        assert auth_models.User.objects.create_superuser(user, 'x@x.com', password)
+    else:
+        print 'Admin user already exists.'
 
 signals.post_syncdb.connect(create_testuser,
     sender=auth_models, dispatch_uid='common.models.create_testuser')
