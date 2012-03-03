@@ -43,7 +43,7 @@ class Account(models.Model):
             del ans_dict[uanswer.variable_id]
         # now add new ones
         for key,value in ans_dict.items():
-            self.useranswer_set.create(variable_id=key, value=value)
+            self.accountanswer_set.create(variable_id=key, value=value)
 
     def __unicode__(self):
         return self.user.username
