@@ -346,11 +346,6 @@ class Engine(object):
             recommends.append(recommend)
         return recommends
 
-    #Return list of recommendations that have been ruled out
-    def getNonRecommended(self):
-        non_recommended = []
-        return non_recommended
-
     # TODO replace this hack
     def add_answers(self, answers):
         for vid,value in answers:
@@ -399,14 +394,6 @@ class Engine(object):
                     qa_list))
 
         return sorted(reasons, key=lambda reason: reason.rank, reverse=True)
-        
-    def getNonReasons(self):
-        reasons = []
-        return reasons
-        
-    def getUnansweredReasons(self):
-        reasons = []
-        return reasons
 
     # asserted fact = variable that has been assinged a value
     def add_var(self, var_id, value):

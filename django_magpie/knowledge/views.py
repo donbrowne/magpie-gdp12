@@ -69,10 +69,7 @@ def saved(request):
     state.next_state(profile.get_answers())
     return render_to_response('knowledge/saved.html', {
                 'recommend_list': state.get_recommends(),
-                'reason_list' : state.get_reasons(),
-                'nonRecommendedList' : state.getNonRecommended(),
-                'reasonsNonList': state.getNonReasons(),
-                'unansweredList' : state.getUnansweredReasons()
+                'reason_list' : state.get_reasons()
                 }, context)
 
 def ask_or_done(request, state):
@@ -80,20 +77,14 @@ def ask_or_done(request, state):
     questions = state.get_questions()
     summaryClosure = recSummaryClosure(request.user)
     recommends = map(summaryClosure,state.get_recommends())
-    nonRecommended = state.getNonRecommended()
     reasons = state.get_reasons()
-    reasonsNon = state.getNonReasons()
-    unansweredReasons = state.getUnansweredReasons()
     put_state(request.session, state)
     # check if all done
     if len(questions) == 0:
         return render_to_response(
             'knowledge/done.html', {
                 'recommend_list': recommends,
-                'reason_list' : reasons,
-                'nonRecommendedList' : nonRecommended,
-                'reasonsNonList': reasonsNon,
-                'unansweredList' : unansweredReasons
+                'reason_list' : reasons
             },
             context)
     # keep going
@@ -101,10 +92,7 @@ def ask_or_done(request, state):
         'knowledge/ask.html', {
         'question_list': questions,
         'recommend_list': recommends,
-        'reason_list': reasons,
-        'nonRecommendedList': nonRecommended,
-        'reasonsNonList': reasonsNon,
-        'unansweredList' : unansweredReasons
+        'reason_list': reasons
         },
         context)
 

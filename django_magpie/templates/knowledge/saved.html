@@ -39,40 +39,4 @@
 </ol>
 {% endif %}
 
-{% if nonRecommendedList %}
-<h2>Do not:</h2>
-<ol>
-{% for rec in nonRecommendedList %}
-    <li>{{ rec.text }}</li>
-{% endfor %}
-</ol>
-{% endif %}
-{% if reasonsNonList %}
-<h2>Reasons:</h2>
-<ol class="treeview">
-{% for reason in reasonsNonList %}
-    <li>{{ reason.text }}</li>
-    <ol>
-    {% for qa in reason.qa_list %}
-        <li>{{ qa.0|add:" You answered - " }} {{ qa.1|yesno:"Yes,No" }} </li>
-    {% endfor %}
-    </ol>
-{% endfor %}
-</ol>
-{% endif %}
-
-{% if unansweredList %}
-<h2>Questions you did not answer (and their recommendations):</h2>
-<ol class="treeview">
-{% for reason in unansweredList %}
-    <li>{{ reason.question }}</li>
-    <ol>
-    {% for rec in reason.recs %}
-        <li>{{ rec }} </li>
-    {% endfor %}
-    </ol>
-{% endfor %}
-</ol>
-{% endif %}
-
 {% endblock %}
