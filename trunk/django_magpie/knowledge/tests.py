@@ -6,10 +6,10 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-#from knowledge.models import Question,Recommend,Fact,get_ids, get_answers,start_state
 from models import *
 from views import get_answers
 from django.contrib.auth.models import User
+from register.models import Profile,Account
 
 # dummy class used for tests
 class TestModel:
@@ -169,7 +169,6 @@ class EngineTests(TestCase):
 class ViewTests(TestCase):
 
     def setUp(self):
-        self.u1 = User.objects.create(username='user1')
         self.v1 = Variable.objects.create(name='v1', ask=False)
         self.v2 = Variable.objects.create(name='v2', ask=False)
 
@@ -177,6 +176,12 @@ class ViewTests(TestCase):
         rule1 = self.rs_view.rule_set.create()
         rule1.rulepremise_set.create(variable=self.v1, value=True)
         rule1.ruleconclusion_set.create(variable=self.v2, value=True)
+
+        self.profile1 = Profile.objects.create(name='profile1', ruleset=self.rs_view)
+        self.user1 = User.objects.create_user('user1','user1@aha.com','user1')
+        account = self.user1.get_profile()
+        account.profile = self.profile1
+        account.save()
 
     def test_get_ids(self):
         slist = [ id for id in xrange(10) ]
@@ -193,12 +198,12 @@ class ViewTests(TestCase):
     def test_start_state(self):
         # check initial facts with no requires are selected
         test_ids = []
-        state = start_state(self.u1)
+        state = start_state(self.user1)
         self.assertEquals(state.get_tests(), test_ids)
 
     def test_next_state(self):
         # check pass facts are returned when given appropriate answers
-        state = start_state(self.u1)
+        state = start_state(self.user1)
         answers = [ (self.v1.id, True) ]
         nvars = [ (self.v1.id, True), 
                   (self.v2.id, True)]
