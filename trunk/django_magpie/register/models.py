@@ -36,7 +36,7 @@ class ProfileAnswer(models.Model):
 
 class Account(models.Model):
     user = models.OneToOneField(User)
-    profile = models.ForeignKey(Profile, null=True)
+    profile = models.ForeignKey(Profile, blank=True, null=True)
 
     def get_answers(self):
         answers = []

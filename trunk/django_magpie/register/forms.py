@@ -4,20 +4,28 @@ from django.contrib.auth.models import User
 from models import Account
 
 class AccountForm(forms.ModelForm):
- 
+
+    username = forms.CharField(
+            label='username', 
+            max_length=30, 
+            widget=forms.TextInput(
+                attrs={
+                    'readonly':'readonly'
+                }))
+    first_name = forms.CharField(label='first name', max_length=30)
+    last_name = forms.CharField(label='last name', max_length=30)
+    email = forms.EmailField(label='email',help_text='',required=False)
+
     def __init__(self, *args, **kwargs):
         super(AccountForm, self).__init__(*args, **kwargs)
+        self.fields['username'].initial = self.instance.user.username
         self.fields['first_name'].initial = self.instance.user.first_name
         self.fields['last_name'].initial = self.instance.user.last_name
         self.fields['email'].initial = self.instance.user.email
 
-    first_name = forms.CharField(label='first name', max_length=30)
-    last_name = forms.CharField(label='last name', max_length=30)
-    email = forms.EmailField(label='email',help_text='')
-
     class Meta:
         model = Account
-        fields = ('profile',)
+        exclude = ('user',)
 
     def save(self, *args, **kwargs):
         u = self.instance.user
