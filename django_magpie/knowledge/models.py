@@ -261,19 +261,23 @@ class FactTree(object):
     def del_root(self, node):
         if node in self.root_nodes:
             self.root_nodes.remove(node)
-        
+
+FACT_ASSERTED = 0
+FACT_INFERRED = 1
+FACT_ANSWERED = 2
 
 # rules that fired
 # facts that have been tested/established
 # recommends given
 class Engine(object):
 
-    def __init__(self, ruleset_ids=None, var_list=None, test_ids=None):
+    def __init__(self, ruleset_ids=None, var_list=None, test_ids=None, answers=None):
         self.ruleset_ids = []
         self.fired_ids = []
         self.var_list = []
         self.test_ids = []
-        self.vars_tested = set()
+        self.answers = []
+        self.null_facts = set()
         self.true_facts = set()
         self.test_ids = []
         self.rec_trees = []
@@ -287,6 +291,9 @@ class Engine(object):
         if test_ids:
             for var_id in test_ids:
                 self.test_ids.append(var_id)
+        if answers:
+            self.add_answers(answers)
+            
 
     # list of ruleset to use
     def get_rulesets(self):
@@ -311,7 +318,7 @@ class Engine(object):
         key = self.gen_fact_key(var_id, value)
         if key in self.true_facts:
             state = NODE_PASSED
-        elif var_id in self.vars_tested:
+        elif var_id in self.null_facts:
             state = NODE_TESTED
         else:
             state = NODE_UNTESTED
@@ -341,8 +348,13 @@ class Engine(object):
         non_recommended = []
         return non_recommended
 
+    # TODO replace this hack
+    def add_answers(self, answers):
+        for vid,value in answers:
+            self.answers.append((vid,value))
+
     def get_answers(self):
-        return []
+        return self.answers
 
     def next_premises(self, search_premises, qa_list, node_set):
         if len(search_premises) == 0:
@@ -395,14 +407,16 @@ class Engine(object):
 
     # asserted fact = variable that has been assinged a value
     def add_var(self, var_id, value):
-        if var_id not in self.vars_tested:
-            self.vars_tested.add(var_id)
-        if value != None:
-            # we got an answer
+        if value:
+            # we have a fact
             key = self.gen_fact_key(var_id, value)
             if key not in self.true_facts:
-                self.var_list.append((var_id, value))
                 self.true_facts.add(key)
+                self.var_list.append((var_id, value))
+        else:
+            if var_id not in self.null_facts:
+                self.null_facts.add(var_id)
+                self.var_list.append((var_id, value))
 
     def add_vars(self, facts):
         for item in facts:
@@ -551,9 +565,10 @@ class Engine(object):
         # first add asserted facts
         if answers:
             self.add_vars(answers)
+            self.add_answers(answers)
         # now add variables for which we did not get answers
         for var_id in self.test_ids:
-            self.add_var(var_id,None)
+            self.add_var(var_id, None)
         # and reset testable node list
         self.test_ids = []
         # reset rule list
@@ -570,6 +585,7 @@ def state_encode(state):
     sdict['rulesets'] = state.get_rulesets()
     sdict['vars'] = state.get_vars()
     sdict['tests'] = state.get_tests()
+    sdict['answers'] = state.get_answers()
     return sdict.items()
 
 def state_decode(slist):
@@ -577,7 +593,8 @@ def state_decode(slist):
     ruleset_ids = sdict.get('rulesets', None)
     var_list = sdict.get('vars', None)
     test_ids = sdict.get('tests', None)
-    return Engine(ruleset_ids, var_list, test_ids)
+    answers = sdict.get('answers',None)
+    return Engine(ruleset_ids, var_list, test_ids, answers)
 
 def start_state(user):
     ruleset_ids = []
