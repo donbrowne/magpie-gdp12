@@ -77,7 +77,7 @@ TRAVERSE_PATH = MAGPIE_DIR + '/../pml/graph/traverse'
 
 LOGIN_URL = '/register/login/'
 LOGOUT_URL = '/register/logout/'
-GUEST_USER = 'guest'
+GUEST_PROFILE = 'guest'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files

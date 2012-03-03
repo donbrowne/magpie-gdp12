@@ -1,7 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from knowledge.models import RuleSet,Variable
+#from knowledge.models import RuleSet,Variable
+
+YN_CHOICES = (
+    (True, 'Yes'),
+    (False, 'No')
+)
 
 # Note
 # In django user profile is normaly used to mean
@@ -12,7 +17,13 @@ from knowledge.models import RuleSet,Variable
 
 class Profile(models.Model):
     name = models.SlugField(max_length=30, unique=True)
-    ruleset = models.ForeignKey(RuleSet)
+    ruleset = models.ForeignKey('knowledge.RuleSet', blank=True, null=True)
+
+    def get_answers(self):
+        answers = []
+        for answer in self.profileanswer_set.all():
+            answers.append((answer.variable_id, answer.value))
+        return answers
 
     def __unicode__(self):
         return self.name
@@ -20,8 +31,8 @@ class Profile(models.Model):
 # assert some facts before using a ruleset
 class ProfileAnswer(models.Model):
     parent = models.ForeignKey(Profile, editable=False)
-    variable = models.ForeignKey(Variable)
-    value = models.BooleanField()
+    variable = models.ForeignKey('knowledge.Variable')
+    value = models.BooleanField(choices=YN_CHOICES, blank=False, default=False)
 
 class Account(models.Model):
     user = models.OneToOneField(User)
@@ -33,17 +44,25 @@ class Account(models.Model):
             answers.append((answer.variable_id, answer.value))
         return answers
 
+    # TODO: safer to just delete extsing set and replace with new ones ?
     def save_answers(self, answers):
         ans_dict = dict(answers)
         keys = ans_dict.keys()
+        del_set = []
         # first update existing answers
-        for uanswer in self.accountanswer_set.filter(id__in=keys):
-            uanswer.value = ans_dict[uanswer.variable_id]
-            uanswer.save()
-            del ans_dict[uanswer.variable_id]
+        for answer in self.accountanswer_set.all():
+            if answer.variable_id in ans_dict:
+                answer.value = ans_dict[answer.variable_id]
+                answer.save()
+                del ans_dict[answer.variable_id]
+            else:
+                del_set.append(answer)
         # now add new ones
         for key,value in ans_dict.items():
             self.accountanswer_set.create(variable_id=key, value=value)
+        # delete unused
+        for answer in del_set:
+            answer.delete()
 
     def __unicode__(self):
         return self.user.username
@@ -51,8 +70,8 @@ class Account(models.Model):
 # We store a users answers here
 class AccountAnswer(models.Model):
     parent = models.ForeignKey(Account, editable=False)
-    variable = models.ForeignKey(Variable)
-    value = models.BooleanField()
+    variable = models.ForeignKey('knowledge.Variable')
+    value = models.BooleanField(choices=YN_CHOICES, blank=False, default=False)
 
 def create_account(sender, instance, created, **kwargs):
     if created:
@@ -74,18 +93,6 @@ signals.post_syncdb.disconnect(
 
 def create_testuser(app, created_models, verbosity, **kwargs):
 
-    if settings.GUEST_USER:
-        try:
-            auth_models.User.objects.get(username=settings.GUEST_USER)
-        except auth_models.User.DoesNotExist:
-            print 'Creating Guest user -- login: %s' % settings.GUEST_USER
-            u = auth_models.User(username=settings.GUEST_USER, 
-                first_name='Anonymous', 
-                last_name='User',
-                password=settings.GUEST_USER)
-            u.set_unusable_password()
-            u.save()
-    
     if not settings.DEBUG:
         return
 
