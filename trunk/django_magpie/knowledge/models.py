@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 def userPath(instance, filename):
@@ -604,8 +605,10 @@ def get_user_ruleset(user):
     return None
 
 def get_guest_ruleset():
+    if not settings.GUEST_USER:
+        return
     try:
-        guest = User.objects.get(username='guest')
+        guest = User.objects.get(username=settings.GUEST_USER)
         ruleset = get_user_ruleset(guest)
     except User.DoesNotExist:
         ruleset = None
