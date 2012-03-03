@@ -10,6 +10,7 @@ from models import *
 from views import get_answers
 from django.contrib.auth.models import User
 from register.models import Profile,Account
+from templatetags.customFilters import *
 
 # dummy class used for tests
 class TestModel:
@@ -209,3 +210,31 @@ class ViewTests(TestCase):
                   (self.v2.id, True)]
         state.next_state(answers)
         self.assertEquals(state.get_vars(), nvars)
+        
+    #Custom filter tests
+        
+    def test_img_filter(self):
+        imgLink1 = "www.foo.com/test1.jpg"
+        imgLink2 = "www.foo.com/test1.jpeg"
+        imgLink3 = "www.foo.com/test1.gif"
+        imgLink4 = "www.foo.com/test1.svg"
+        imgLink5 = "www.foo.com/test1.png"
+        nonImgLink = "www.bar.com/foo.exe"
+        self.assertEquals(isImg(imgLink1),True)
+        self.assertEquals(isImg(imgLink2),True)
+        self.assertEquals(isImg(imgLink3),True)
+        self.assertEquals(isImg(imgLink4),True)
+        self.assertEquals(isImg(imgLink5),True)
+        self.assertEquals(isImg(nonImgLink),False)
+        
+    def test_contains(self):
+        superString = "A quick brown fox jumps over the lazy dog"
+        subString = "quick brown"
+        nonSubString = "slow red"
+        self.assertEquals(contains(superString,subString),True)
+        self.assertEquals(contains(superString,nonSubString),False)
+    
+    def test_lslice(self):
+        string = "A quick brown fox jumps over the lazy dog"
+        test = lslice(string,"5")
+        self.assertEquals(test,string[5:])
