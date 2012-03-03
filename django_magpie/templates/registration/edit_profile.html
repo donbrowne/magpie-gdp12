@@ -2,9 +2,6 @@
 {% block title %}Title text{% endblock %}
 {% block content %}
  
-{% if form.errors %}
-<p class="error">Invalid input</p>
-{% endif %}
 <form method="post" action="/register/account/">
 {% csrf_token %}
 <table class="entryTable">

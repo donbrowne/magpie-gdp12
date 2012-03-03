@@ -40,7 +40,7 @@ def account(request):
             form = AccountForm(request.POST,instance=account) # A form bound to the POST data
             if form.is_valid(): # All validation rules pass
                 form.save()
-        return HttpResponseRedirect(redirect_to)
+                return HttpResponseRedirect(redirect_to)
     else:
         user = request.user
         account = user.account
