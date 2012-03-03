@@ -14,8 +14,8 @@ class ResourceFile(models.Model):
     description = models.CharField(max_length=255)
     file  = models.FileField(upload_to=userPath)
     restricted = models.BooleanField()
+    restricted_to = models.ManyToManyField(User,blank=True,null=True,related_name='+')
     owner = models.ForeignKey(User,blank=True,null=True)
-    
     class Meta:
         permissions = (
             ("restricted_access", "Can access restricted files"),
@@ -63,13 +63,13 @@ def recSummaryClosure(user):
         recsList = []
         pmlPath = None
         vidLink = None
-        if rec.videoLink != None and (not rec.videoLink.restricted or restrictedAccess):
+        if rec.videoLink != None and (not rec.videoLink.restricted or restrictedAccess or user in rec.videoLink.restricted_to.all()):
             vidLink = rec.videoLink.file.url
-        if rec.pmlLink != None and (not rec.pmlLink.restricted or restrictedAccess):
+        if rec.pmlLink != None and (not rec.pmlLink.restricted or restrictedAccess  or user in rec.pmlLink.restricted_to.all()):
             recsList.append(("PML Link", rec.pmlLink.file.url))
             pmlPath = rec.pmlLink.file.name
         for others in rec.otherLinks.all():
-            if (not others.restricted or restrictedAccess):
+            if (not others.restricted or restrictedAccess  or user in others.restricted_to.all()):
                 recsList.append((others.description,others.file.url))
         for link in ExternalLink.objects.filter(rec=rec.id):
             recsList.append((link.description,link.link))
