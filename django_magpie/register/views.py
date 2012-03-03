@@ -7,18 +7,18 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import Context, RequestContext
 
-from forms import AccountForm
+from forms import AccountForm,RegistrationForm
 
 def register(request):
     redirect_to = request.REQUEST.get('next', '')
     context = RequestContext(request)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
             return HttpResponseRedirect(redirect_to)
     else:
-        form = UserCreationForm()
+        form = RegistrationForm()
     return render_to_response("registration/register.html", {
         'form': form,
         'next': redirect_to,
