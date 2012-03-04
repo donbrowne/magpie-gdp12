@@ -12,8 +12,8 @@ class AccountForm(forms.ModelForm):
                 attrs={
                     'disabled':'disabled'
                 }),required=False)
-    first_name = forms.CharField(label='first name', max_length=30)
-    last_name = forms.CharField(label='last name', max_length=30)
+    first_name = forms.CharField(label='first name', max_length=30, required=False)
+    last_name = forms.CharField(label='last name', max_length=30, required=False)
     email = forms.EmailField(label='email',help_text='',required=False)
 
     class Meta:
