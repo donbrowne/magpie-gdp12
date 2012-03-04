@@ -2,8 +2,10 @@
 {% block title %}Title text{% endblock %}
 {% block content %}
 <div class="box">
-<h2>Register Account</h2>
+<h2>Edit Account</h2>
 <form method="post" action={% url account %}>
+<div id="content">
+
 {% csrf_token %}
 <table class="entryTable">
 <tbody>
@@ -16,6 +18,8 @@
 </td></tr>
 </tbody>
 </table>
+
+</div>
 </form>
 </div>
 {% endblock %}
