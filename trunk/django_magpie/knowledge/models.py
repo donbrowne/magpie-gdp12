@@ -369,7 +369,9 @@ class Engine(object):
         for tnode in search_premises[0].get_nodes():
             if tnode.node_id not in node_set:
                 var = Variable.objects.get(pk=tnode.node_id)
-                qa = (var.name, tnode.value)
+                # FIXME this really should be the fact name
+                text = var.prompt if len(var.prompt) > 0 else var.name
+                qa = (text, tnode.value)
                 qa_list.append(qa)
                 tnode_list.append(tnode)
                 node_set.add(tnode.node_id)
