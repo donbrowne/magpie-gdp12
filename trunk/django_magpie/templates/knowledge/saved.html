@@ -8,6 +8,7 @@
 
 {% if recommend_list %}
 {% load customFilters %}
+<div class="box">
 <h2>Recommmendations:</h2>
 <ol>
 {% for rec in recommend_list %}
@@ -45,8 +46,10 @@
 {% endfor %}
 </ol>
 		<!-- this will install flowplayer inside previous A- tag. -->
+</div>
 {% endif %}
 {% if reason_list %}
+<div class="box">
 <h2>Reasons:</h2>
 <ol class="treeview">
 {% for reason in reason_list %}
@@ -58,6 +61,7 @@
     </ol>
 {% endfor %}
 </ol>
+</div>
 {% endif %}
 
 {% endblock %}

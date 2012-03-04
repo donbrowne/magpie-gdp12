@@ -4,7 +4,9 @@
 {% block title %}{{ title }} | {% trans 'Magpie Site' %}{% endblock %}
 
 {% block content %}
-<h2>Questions:</h2>
+
+<div class="box">
+<h2>Questions</h2>
 <form action={% url knowledge.views.ask %} method="post">
 {% csrf_token %}
 <ol>
@@ -17,12 +19,14 @@
 </ol>
 <input type="submit" value="Next" />
 </form>
+</div>
 {% endblock %}
 
 {% block sidebar %}
 {% if recommend_list %}
 {% load customFilters %}
-<h2>Recommmendations:</h2>
+<div class="box">
+<h2>Recommmendations</h2>
 <ol>
 {% for rec in recommend_list %}
     <li>{{ rec.text }} 
@@ -58,10 +62,12 @@
     </li>
 {% endfor %}
 </ol>
+</div>
 {% endif %}
 
 {% if reason_list %}
-<h2>Reasons:</h2>
+<div class="box">
+<h2>Reasons</h2>
 <ol class="treeview">
 {% for reason in reason_list %}
     <li>{{ reason.text }}</li>
@@ -72,6 +78,7 @@
     </ol>
 {% endfor %}
 </ol>
+</div>
 {% endif %}
 
 {% if nonRecommendedList %}
