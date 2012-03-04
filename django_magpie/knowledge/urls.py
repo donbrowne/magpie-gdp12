@@ -5,5 +5,6 @@ urlpatterns = patterns('knowledge.views',
     url(r'^ask$', 'ask'),
     url(r'^done$', 'done'),
     url(r'^state$', 'saved', name='saved'),
+    url(r'^logout$', 'logout_view', name='logout_view'),
     (r'^pmlGraph/', 'generatePmlGraph'),
 )
