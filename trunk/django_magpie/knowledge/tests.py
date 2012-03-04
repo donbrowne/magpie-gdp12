@@ -213,7 +213,7 @@ class ViewTests(TestCase):
         
     #Custom filter tests
         
-    def test_img_filter(self):
+    def test_isImg(self):
         imgLink1 = "www.foo.com/test1.jpg"
         imgLink2 = "www.foo.com/test1.jpeg"
         imgLink3 = "www.foo.com/test1.gif"
@@ -238,3 +238,8 @@ class ViewTests(TestCase):
         string = "A quick brown fox jumps over the lazy dog"
         test = lslice(string,"5")
         self.assertEquals(test,string[5:])
+
+    def test_recSummaryClosure(self):
+        user1 = User.objects.create(username='user1')
+        user2 = User.objects.create(username='user2')
+        user3 = User.objects.create(username='user3')

@@ -5,7 +5,7 @@
 
 {% block content %}
 <h2>Questions:</h2>
-<form action="/knowledge/ask" method="post">
+<form action={% url knowledge.views.ask %} method="post">
 {% csrf_token %}
 <ol>
 {% for question in question_list %}
