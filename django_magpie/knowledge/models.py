@@ -162,7 +162,8 @@ def get_ids(alist):
     return map(lambda elem:elem.id, alist)
 
 class Reason(object):
-    def __init__(self, name, text, rank, qa_list):
+    def __init__(self, rid, name, text, rank, qa_list):
+        self.rid = rid
         self.name = name
         self.text = text
         self.rank = rank
@@ -337,13 +338,27 @@ class Engine(object):
     def get_recommends(self):
         recommends = []
         recommend_ids = []
-        # TODO order by rank
+        # first get unique list of recommends nodes
+        rdict = {}
         for rec_tree in self.rec_trees:
-            for rnode in  rec_tree.get_roots():
-                recommend_ids.append(rnode.node_id)
-        for recommend in Recommend.objects.filter(id__in=recommend_ids):
+            for rnode in rec_tree.get_roots():
+                if rnode.node_id in rdict:
+                    # replace only if node has higher rank
+                    onode = rdict[rnode.node_id]
+                    if rnode.value > onode.value:
+                        rdict[rnode.node_id] = rnode
+                else:
+                    rdict[rnode.node_id] = rnode
+
+        # TODO fix views to use only get_reasons call
+        recommends = []
+        for rnode in rdict.values():
+            recommend = Recommend.objects.get(pk=rnode.node_id)
+            # FIXME - this is a hack
+            recommend.rank = rnode.value
             recommends.append(recommend)
-        return recommends
+
+        return sorted(recommends, key=lambda recommend: recommend.rank, reverse=True)
 
     # TODO replace this hack
     def add_answers(self, answers):
@@ -387,6 +402,7 @@ class Engine(object):
             self.next_premises(rnode.get_premises(), qa_list, node_set)
             recommend = Recommend.objects.get(pk=rnode.node_id)
             reasons.append(Reason(
+                    recommend.id,
                     recommend.name,
                     recommend.text, 
                     rnode.value, 
