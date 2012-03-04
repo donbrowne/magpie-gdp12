@@ -280,9 +280,8 @@ class Engine(object):
         self.var_list = []
         self.test_ids = []
         self.answers = []
-        self.null_facts = set()
         self.true_facts = set()
-        self.test_ids = []
+        self.vars_tested = set()
         self.rec_trees = []
         self.debug = False
         # restore state
@@ -321,7 +320,7 @@ class Engine(object):
         key = self.gen_fact_key(var_id, value)
         if key in self.true_facts:
             state = NODE_PASSED
-        elif var_id in self.null_facts:
+        elif var_id in self.vars_tested:
             state = NODE_TESTED
         else:
             state = NODE_UNTESTED
@@ -397,15 +396,19 @@ class Engine(object):
 
     # asserted fact = variable that has been assinged a value
     def add_var(self, var_id, value):
-        if value:
+        # record that we've seen this variable
+        if var_id not in self.vars_tested:
+            self.vars_tested.add(var_id)
+        if value is None:
+            # we have an unanswered fact
+            if self.debug: print 'have unanswerd', var_id
+            self.var_list.append((var_id, value))
+        else:
             # we have a fact
+            if self.debug: print 'have fact', var_id, value
             key = self.gen_fact_key(var_id, value)
             if key not in self.true_facts:
                 self.true_facts.add(key)
-                self.var_list.append((var_id, value))
-        else:
-            if var_id not in self.null_facts:
-                self.null_facts.add(var_id)
                 self.var_list.append((var_id, value))
 
     def add_vars(self, facts):
@@ -555,11 +558,13 @@ class Engine(object):
     def next_state(self, answers=None):
         # first add asserted facts
         if answers:
+            if self.debug: print 'Got answers', answers
             self.add_vars(answers)
             self.add_answers(answers)
         # now add variables for which we did not get answers
         for var_id in self.test_ids:
-            self.add_var(var_id, None)
+            if var_id not in self.fact_ids:
+                self.add_var(var_id, None)
         # and reset testable node list
         self.test_ids = []
         # reset rule list
