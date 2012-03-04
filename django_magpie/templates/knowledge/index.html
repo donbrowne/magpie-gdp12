@@ -4,12 +4,14 @@
 {% block title %}{{ title }} | {% trans 'Magpie Site' %}{% endblock %}
 
 {% block content %}
+<div class="box">
+<h2>Welcome to MAGPIE</h2>
 <form action={% url index %} method="post">
-<p> Welcome to the MAGPIE </p>
-Model Advice Guidance Process Integration Explorer.</p>
-<p>Take some time to answer some questions by pressing the start button below</p>
+<p> Welcome to the MAGPIE 
+Model Advice Guidance Process Integration Explorer.
+Take some time to answer some questions by pressing the start button below</p>
 {% csrf_token %}
 <input type="submit" value="Start" />
 </form>
-
+</div>
 {% endblock %}
