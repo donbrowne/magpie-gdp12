@@ -83,7 +83,7 @@ GUEST_PROFILE = 'guest'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-#STATIC_ROOT = MAGPIE_DIR + '/../resources/static'
+STATIC_ROOT = MAGPIE_DIR + '/../resources/static'
 
 
 # URL prefix for static files.
