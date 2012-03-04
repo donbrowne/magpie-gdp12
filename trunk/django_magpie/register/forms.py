@@ -6,13 +6,13 @@ from models import Account
 class AccountForm(forms.ModelForm):
 
     username = forms.CharField(
-            label='username', 
+            label='Username', 
             max_length=30, 
             widget=forms.TextInput(
                 attrs={
                     'disabled':'disabled'
                 }),required=False)
-    first_name = forms.CharField(label='first name', max_length=30, required=False)
+    first_name = forms.CharField(label='First name', max_length=30, required=False)
     last_name = forms.CharField(label='last name', max_length=30, required=False)
     email = forms.EmailField(label='email',help_text='',required=False)
 
@@ -51,12 +51,9 @@ class RegistrationForm(forms.ModelForm):
     A form that creates a user, with no privileges, from the given username and password.
     """
     username = forms.RegexField(label=_("Username"), max_length=30, regex=r'^[\w.@+-]+$',
-        help_text = _("Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."),
         error_messages = {'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
-    password2 = forms.CharField(label=_("Password confirmation"), widget=forms.PasswordInput,
-        help_text = _("Enter the same password as above, for verification."))
-
+    password2 = forms.CharField(label=_("Re-enter Password"), widget=forms.PasswordInput)
     email = forms.EmailField(label=_("E-mail"), max_length=75, required=False)
 
     class Meta:

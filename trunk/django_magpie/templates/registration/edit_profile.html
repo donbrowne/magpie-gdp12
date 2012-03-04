@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Title text{% endblock %}
 {% block content %}
- 
+<div class="box">
+<h2>Register Account</h2>
 <form method="post" action={% url account %}>
 {% csrf_token %}
 <table class="entryTable">
@@ -16,4 +17,5 @@
 </tbody>
 </table>
 </form>
+</div>
 {% endblock %}

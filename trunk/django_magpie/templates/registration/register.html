@@ -4,13 +4,22 @@
 
 {% block content %}
 
-<h1>Create an account</h1>
+<div class="box">
+<h2>Edit Account</h1>
 
 <form action="" method="post">
 {% csrf_token %}
-    {{ form.as_p }}
-    <input type="hidden" name="next" value="{{ next }}" />
-    <input type="submit" value="Register">
+<table class="entryTable">
+<tbody>
+{{ form.as_table }}
+<br><br>
+<tr><td class="buttons" colspan="2">
+<input type="hidden" name="next" value="{{ next }}" />
+<input type="submit" value="Register">
+</td></tr>
+</tbody>
+</table>
 </form>
+</div>
 
 {% endblock %}
