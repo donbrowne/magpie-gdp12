@@ -126,8 +126,6 @@ def done(request):
         pass
     context = RequestContext(request)
     #Force redirect to index, instead of redirecting to '/'
-    if request.method == 'POST':
-        del_state(request.session)
-        return redirect('knowledge/ask')
-    return render_to_response('knowledge/index.html', context)
+    context = RequestContext(request)
+    return redirect(index)
     
