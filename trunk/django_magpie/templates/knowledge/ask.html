@@ -8,6 +8,7 @@
 <div class="box">
 <h2>Questions</h2>
 <form action={% url knowledge.views.ask %} method="post">
+<div id="content">
 {% csrf_token %}
 <ol>
 {% for question in question_list %}
@@ -18,6 +19,7 @@
 {% endfor %}
 </ol>
 <input type="submit" value="Next" />
+</div>
 </form>
 </div>
 {% endblock %}
