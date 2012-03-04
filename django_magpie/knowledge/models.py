@@ -43,12 +43,6 @@ class ExternalLink(models.Model):
 
 #BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
         
-
-class UnansweredReason(object): 
-    def __init__(self, recs, question):
-        self.question = question
-        self.recs = recs
-        
 class RecsSummary(object): 
     def __init__(self, text, details, pmlPath, vidLink):
         self.text = text
