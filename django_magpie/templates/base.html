@@ -3,7 +3,7 @@
 <head>
 <script type="text/javascript" src="{% load adminmedia %}{% admin_media_prefix %}flowplayer-3.2.6.min.js"></script>
 <title>{% block title %}{% endblock %}</title>
-<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% load adminmedia %}{{ STATIC_URL }}admin/css/base.css{% endblock %}" />
+<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% load adminmedia %}{{ STATIC_URL }}/css/base.css{% endblock %}" />
 {% block extrastyle %}{% endblock %}
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% load adminmedia %}{% admin_media_prefix %}css/ie.css{% endblock %}" /><![endif]-->
 {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% admin_media_prefix %}css/rtl.css{% endblock %}" />{% endif %}
@@ -52,15 +52,16 @@
         {% endif %}
 
     <!-- Content -->
-    <div id="content" class="{% block coltype %}colM{% endblock %}">
-        {% block pretitle %}{% endblock %}
-        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+    <div id="content">
+    <div id="content-main" class="{% block coltype %}colM{% endblock %}">
         {% block content %}
-        {% block object-tools %}{% endblock %}
         {{ content }}
         {% endblock %}
-        {% block sidebar %}{% endblock %}
         <br class="clear" />
+    </div>
+    <div id="content-related">
+    {% block sidebar %}{% endblock %}
+    </div>
     </div>
     <!-- END Content -->
 
