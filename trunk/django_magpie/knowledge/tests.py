@@ -240,6 +240,6 @@ class ViewTests(TestCase):
         self.assertEquals(test,string[5:])
 
     def test_recSummaryClosure(self):
-        user1 = User.objects.create(username='user1')
-        user2 = User.objects.create(username='user2')
-        user3 = User.objects.create(username='user3')
+        user11 = User.objects.create(username='user11')
+        user21 = User.objects.create(username='user21')
+        user31 = User.objects.create(username='user31')
