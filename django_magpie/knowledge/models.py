@@ -477,7 +477,8 @@ class Engine(object):
                 search_nodes = []
 
         # remember for later
-        self.test_ids.extend(test_ids)
+        if test_ids:
+            self.test_ids.append(test_ids[0])
     
     # upside down truth tree (roots are the recommends)
     def build_ttree(self, ruleset):
