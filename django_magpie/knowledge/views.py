@@ -124,5 +124,10 @@ def done(request):
     else:
         # Do something for anonymous users.
         pass
-    return redirect('/')
+    context = RequestContext(request)
+    #Force redirect to index, instead of redirecting to '/'
+    if request.method == 'POST':
+        del_state(request.session)
+        return redirect('knowledge/ask')
+    return render_to_response('knowledge/index.html', context)
     

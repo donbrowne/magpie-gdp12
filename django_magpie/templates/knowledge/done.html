@@ -6,7 +6,7 @@
 {% block content %}
 <h2>All Done!</h2>
 
-<form action="/knowledge/done" method="post">
+<form action={% url knowledge.views.done %} method="post">
 {% csrf_token %}
 <input type="submit" value="Done" />
 </form>

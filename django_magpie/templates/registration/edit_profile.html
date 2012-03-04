@@ -2,7 +2,7 @@
 {% block title %}Title text{% endblock %}
 {% block content %}
  
-<form method="post" action="/register/account/">
+<form method="post" action={% url register.views.account %}>
 {% csrf_token %}
 <table class="entryTable">
 <tbody>
