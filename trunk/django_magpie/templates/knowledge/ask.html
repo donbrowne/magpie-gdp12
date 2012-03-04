@@ -17,7 +17,9 @@
 </ol>
 <input type="submit" value="Next" />
 </form>
+{% endblock %}
 
+{% block sidebar %}
 {% if recommend_list %}
 {% load customFilters %}
 <h2>Recommmendations:</h2>
@@ -80,5 +82,4 @@
 {% endfor %}
 </ol>
 {% endif %}
-
 {% endblock %}

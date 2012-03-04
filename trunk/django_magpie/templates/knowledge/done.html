@@ -10,7 +10,9 @@
 {% csrf_token %}
 <input type="submit" value="Done" />
 </form>
+{% endblock %}
 
+{% block sidebar %}
 {% if recommend_list %}
 {% load customFilters %}
 <h2>Recommmendations:</h2>
@@ -64,5 +66,4 @@
 {% endfor %}
 </ol>
 {% endif %}
-
 {% endblock %}
