@@ -36,14 +36,15 @@ def account(request):
     user = request.user
     account = user.account
     if request.method == 'POST': # If the form has been submitted...
-        if 'cancel' not in request.POST:
-            form = AccountForm(request.POST,instance=account) # A form bound to the POST data
-            if form.is_valid(): # All validation rules pass
-                form.save()
-                messages.info(request, "Account updated.")
-                return HttpResponseRedirect(redirect_to)
-            else:
-                form.reload_disabled()
+        if 'cancel' in request.POST:
+            return HttpResponseRedirect(redirect_to)
+        form = AccountForm(request.POST,instance=account) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            form.save()
+            messages.info(request, "Account updated.")
+            return HttpResponseRedirect(redirect_to)
+        else:
+            form.reload_disabled()
     else:
         user = request.user
         account = user.account
