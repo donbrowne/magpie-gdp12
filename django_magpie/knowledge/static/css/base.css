@@ -662,14 +662,19 @@ table#change-history tbody th {
 }
 
 #content-main {
+-moz-box-shadow: 10px 10px 5px #888;
+-webkit-box-shadow: 10px 10px 5px #888;
+box-shadow: 10px 10px 5px #888;
     float: left;
-    width: 50%;
+    width: 40%;
 }
 
 #content-related {
+-moz-box-shadow: 10px 10px 5px #888;
+-webkit-box-shadow: 10px 10px 5px #888;
+box-shadow: 10px 10px 5px #888;
     float: right;
-    width: 50%;
-    margin-right: -19em;
+    width: 55%;
 }
 
 #footer {
