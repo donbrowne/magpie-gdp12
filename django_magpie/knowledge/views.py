@@ -5,7 +5,6 @@ from django.shortcuts import render_to_response,redirect
 from knowledge.models import Engine,start_state,state_encode,state_decode,recSummaryClosure
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 import subprocess 
 import os
 import pydot
@@ -129,8 +128,3 @@ def done(request):
     #Force redirect to index, instead of redirecting to '/'
     context = RequestContext(request)
     return redirect(index)
-    
-def logout_view(request):
-    logout(request)
-    return redirect(index)
-    

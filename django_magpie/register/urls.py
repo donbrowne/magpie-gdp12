@@ -7,9 +7,7 @@ urlpatterns = patterns('django.contrib.auth.views',
 
 urlpatterns += patterns('register.views',
     url(r'^register/$', 'register', name='register'),
-    url(r'^account/$', 'account', name='account'),
+    url(r'^account/$', 'edit_account', name='account'),
+    url(r'^logout/$', 'logout_magpie', name='logout'),
 )
 
-urlpatterns += patterns('knowledge.views',
-    url(r'^logout/$', 'logout_view', name='logout'),
-)

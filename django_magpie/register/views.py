@@ -4,9 +4,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template import Context, RequestContext
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from forms import AccountForm,RegistrationForm
@@ -31,7 +31,7 @@ def register(request):
     }, context)
 
 @login_required
-def account(request):
+def edit_account(request):
     redirect_to = request.REQUEST.get('next', '')
     user = request.user
     account = user.account
@@ -54,3 +54,6 @@ def account(request):
                 'next': redirect_to,
                 }, context_instance=RequestContext(request))
 
+def logout_magpie(request):
+    logout(request)
+    return redirect('index')
