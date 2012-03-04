@@ -3,12 +3,12 @@
 
 {% block title %}{{ title }} | {% trans 'Magpie Site' %}{% endblock %}
 
-
 {% block sidebar %}
-{% if recommend_list %}
 {% load customFilters %}
 <div class="box">
 <h2>Recommmendations</h2>
+<div id="content">
+{% if recommend_list %}
 <ol>
 {% for rec in recommend_list %}
     <li>{{ rec.text }}
@@ -44,12 +44,17 @@
     </li>
 {% endfor %}
 </ol>
+{% else %}
+<strong>None found!</strong>
+{% endif %}
+</div>
 		<!-- this will install flowplayer inside previous A- tag. -->
 </div>
-{% endif %}
-{% if reason_list %}
+
 <div class="box">
 <h2>Reasons</h2>
+<div id="content">
+{% if reason_list %}
 <ol class="treeview">
 {% for reason in reason_list %}
     <li>{{ reason.text }}</li>
@@ -60,7 +65,10 @@
     </ol>
 {% endfor %}
 </ol>
-</div>
+{% else %}
+<strong>None found!</strong>
 {% endif %}
+</div>
+</div>
 
 {% endblock %}
