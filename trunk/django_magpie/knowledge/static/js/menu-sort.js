@@ -1,3 +1,4 @@
+/*
 jQuery(function($) {
     $("div.inline-group").sortable({ 
         axis: 'y',
@@ -20,6 +21,8 @@ jQuery(document).ready(function($){
     $(this).find('input[id$=order]').parent('div').parent('div').hide().parent().parent().css('cursor','move');
     $('.add-row a').click(update);
 });
+
+*/
 
 
 function dismissAddAnotherPopup(win) {

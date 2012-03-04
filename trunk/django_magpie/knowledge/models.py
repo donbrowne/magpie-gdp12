@@ -107,7 +107,7 @@ class RuleSet(models.Model):
 
 class Rule(models.Model):
     parent = models.ForeignKey(RuleSet, editable=False)
-    order = models.IntegerField(default=0)
+    order = models.PositiveIntegerField(default=0)
     def get_dets(self):
         tostr = lambda names: ' AND '.join(names)
         pnames = []
@@ -122,7 +122,7 @@ class Rule(models.Model):
 
     def save(self, *args, **kwargs):
         # ensure the order is set and unique
-        if self.order == 0:
+        if self.pk is None:
             qset = Rule.objects.filter(parent=self.parent).aggregate(models.Max('order'))
             try:
                 self.order = qset['order__max'] + 1
