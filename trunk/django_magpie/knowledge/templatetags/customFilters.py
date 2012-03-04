@@ -9,7 +9,7 @@ def contains(string, substring):
     return substring in string
     
 def isImg(string):
-    types = ['jpg','jpeg','png','svg','gif']
+    types = ['jpg','jpeg','png','svg','gif','bmp']
     stringArray = string.split(".")[-1:]
     return stringArray[0] in types
 
