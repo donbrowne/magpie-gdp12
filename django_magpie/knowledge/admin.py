@@ -124,20 +124,20 @@ class RuleRecommendInline(admin.TabularInline):
     model = RuleRecommend
     extra = 0
     verbose_name_plural = "RECOMMENDATIONS"
-    template = 'admin/knowledge/edit_inline/tabular.html'
+    #template = 'admin/knowledge/edit_inline/tabular.html'
 
 class RuleConclusionInline(admin.TabularInline):
     model = RuleConclusion
     extra = 0
     verbose_name_plural = "CONCLUSIONS"
-    template = 'admin/knowledge/edit_inline/tabular.html'
+    #template = 'admin/knowledge/edit_inline/tabular.html'
 
     
 class RulePremiseInline(admin.TabularInline):
     model = RulePremise
     extra = 0
     verbose_name_plural = "PREMISES"
-    template = 'admin/knowledge/edit_inline/tabular.html'
+    #template = 'admin/knowledge/edit_inline/tabular.html'
 
 class RuleAdmin(admin.ModelAdmin):
 
@@ -173,21 +173,22 @@ class RuleInline(admin.TabularInline):
     def details(self, obj):
         astr = mark_safe(u'<a onclick=\'return showAddAnotherPopup(this);\' href="edit_rule/%d">%s</a>' % (obj.id, obj.get_dets()))
         return astr
-    template = 'admin/knowledge/edit_inline/tabular.html'
+    #template = 'admin/knowledge/edit_inline/tabular.html'
     readonly_fields = ('details',)
+    sortable_field_name = "order"
 
+    """
     def formfield_for_dbfield(self, db_field, **kwargs):
         form_field = super(RuleInline,self).formfield_for_dbfield(db_field, **kwargs)
         if db_field.name == 'order':
             form_field.widget.attrs.update({'readonly':  'readonly'} )
         return form_field
+    """
 
     class Media: 
-        js = (
-            'js/jquery-1.5.1.min.js',
-            'js/jquery-ui-1.8.11.custom.min.js',
-            'js/menu-sort.js'
-        )
+         js = (
+           'js/menu-sort.js',
+         )
 
 
 class RuleSetAdmin(admin.ModelAdmin):

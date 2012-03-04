@@ -1,11 +1,8 @@
 {% extends "admin/change_form.html" %}
 {% load i18n admin_modify adminmedia %}
-{% block object-tools %}
+{% block object-tools-items %}
 {% if change %}{% if not is_popup %}
-  <ul class="object-tools">
-     {% for button in buttons %}
-             <li><a href="{{ button.func_name }}/">{{ button.short_description }}</a></li>
-     {% endfor %}
+  <ul class="object-tools-items">
      <li><a href="add_rule/" class="addlink" onclick="return showAddAnotherPopup(this);">{% trans "Add Rule" %}</a></li>
      <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
   </ul>

@@ -83,7 +83,7 @@ GUEST_PROFILE = 'guest'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = MAGPIE_DIR + '/../resources/static'
+#STATIC_ROOT = MAGPIE_DIR + '/../resources/static'
 
 
 # URL prefix for static files.
@@ -94,7 +94,8 @@ STATIC_URL = '/static/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+#ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = '/static/grappelli/'
 
 
 # Additional locations of static files
@@ -164,6 +165,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
+    'grappelli',
     'django.contrib.admin',
     'knowledge',
     'register',
