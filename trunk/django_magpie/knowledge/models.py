@@ -563,7 +563,7 @@ class Engine(object):
             self.add_answers(answers)
         # now add variables for which we did not get answers
         for var_id in self.test_ids:
-            if var_id not in self.fact_ids:
+            if var_id not in self.vars_tested:
                 self.add_var(var_id, None)
         # and reset testable node list
         self.test_ids = []
