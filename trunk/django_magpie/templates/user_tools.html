@@ -16,7 +16,7 @@
                 {% trans 'Change password' %}</a> /
                 {% url 'admin:logout' as logout_url %}
                 {% if logout_url %}
-                    <a href="{{ logout_url }}">
+                    <a href="{% knowledge.views.logout_view %}">
                 {% else %}
                     <a href="{{ root_path }}logout/">
                 {% endif %}
