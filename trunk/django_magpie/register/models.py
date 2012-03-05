@@ -4,8 +4,8 @@ from django.db.models.signals import post_save
 #from knowledge.models import RuleSet,Variable
 
 YN_CHOICES = (
-    (True, 'Yes'),
-    (False, 'No')
+    ('Y', 'Yes'),
+    ('N', 'No')
 )
 
 # Note
@@ -32,10 +32,10 @@ class Profile(models.Model):
 class ProfileAnswer(models.Model):
     parent = models.ForeignKey(Profile, editable=False)
     variable = models.ForeignKey('knowledge.Variable')
-    value = models.BooleanField(choices=YN_CHOICES, blank=False, default=False)
+    value = models.CharField(max_length=1,choices=YN_CHOICES,default='N')
 
 class Account(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, editable=False)
     profile = models.ForeignKey(Profile, blank=True, null=True)
 
     def get_answers(self):
@@ -71,7 +71,7 @@ class Account(models.Model):
 class AccountAnswer(models.Model):
     parent = models.ForeignKey(Account, editable=False)
     variable = models.ForeignKey('knowledge.Variable')
-    value = models.BooleanField(choices=YN_CHOICES, blank=False, default=False)
+    value = models.CharField(max_length=1,choices=YN_CHOICES, default='N')
 
 def create_account(sender, instance, created, **kwargs):
     if created:
