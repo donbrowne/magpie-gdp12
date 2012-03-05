@@ -92,7 +92,11 @@ The button "Add rule set" allows you to input a list of rules which are run in o
 Rule sets have a name to identify them for administration.
 
 The button "Add Rule" will launch a form to allow you to add an inference rule to the rule set.
-Rules take the form of: Premises - Conclusions - Recommendations
+
+Rules take the form of: 
+
+Premises - Conclusions - Recommendations
+
 You can add multiple premises to ask the user questions that set the values for variables.
 Premises are aggregated with a logical AND operation to determine if a rule fires.
 Conclusions may then fire in order to set the value of further variables.
