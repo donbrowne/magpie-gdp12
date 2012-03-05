@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object pk="1" model="register.profile">
+    <field type="SlugField" name="name">testProfile</field>
+    <field to="knowledge.ruleset" name="ruleset" rel="ManyToOneRel">1</field>
+  </object>
+  <object pk="2" model="register.profile">
+    <field type="SlugField" name="name">IngestUserProfile</field>
+    <field to="knowledge.ruleset" name="ruleset" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="3" model="register.profile">
+    <field type="SlugField" name="name">guest</field>
+    <field to="knowledge.ruleset" name="ruleset" rel="ManyToOneRel">2</field>
+  </object>
+</django-objects>

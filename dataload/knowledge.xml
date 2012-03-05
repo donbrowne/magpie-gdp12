@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object pk="1" model="knowledge.resourcefile">
+    <field type="CharField" name="description">testPML</field>
+    <field type="FileField" name="file">netbeans_req_release_2.pml</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="2" model="knowledge.resourcefile">
+    <field type="CharField" name="description">TestFlowPlayer</field>
+    <field type="FileField" name="file">flowplayer-700.flv</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="3" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of a cake</field>
+    <field type="FileField" name="file">cake.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="4" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of ice cream</field>
+    <field type="FileField" name="file">270px-Italian_ice_cream.jpg</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="5" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of rasberry sorbet</field>
+    <field type="FileField" name="file">rasberry_sorbet.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="6" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of water</field>
+    <field type="FileField" name="file">water.png</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="7" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of chocolate</field>
+    <field type="FileField" name="file">chocolate.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="8" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of hot chocolate</field>
+    <field type="FileField" name="file">hot_chocolate.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="9" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of tea</field>
+    <field type="FileField" name="file">tea.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="10" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of William-Adolphe Bouguereau's Thirst (1886)</field>
+    <field type="FileField" name="file">thirst.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="11" model="knowledge.resourcefile">
+    <field type="CharField" name="description">hungry magpie</field>
+    <field type="FileField" name="file">hungry.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="12" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of biscuits</field>
+    <field type="FileField" name="file">biscuits.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="1" model="knowledge.recommend">
+    <field type="SlugField" name="name">testRecommend</field>
+    <field type="CharField" name="text">testRecommend text text text</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">1</field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">2</field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+  </object>
+  <object pk="2" model="knowledge.recommend">
+    <field type="SlugField" name="name">recEat</field>
+    <field type="CharField" name="text">Eat some food.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="11"/>
+    </field>
+  </object>
+  <object pk="3" model="knowledge.recommend">
+    <field type="SlugField" name="name">recDrink</field>
+    <field type="CharField" name="text">Have a drink.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="10"/>
+    </field>
+  </object>
+  <object pk="4" model="knowledge.recommend">
+    <field type="SlugField" name="name">eatIceCream</field>
+    <field type="CharField" name="text">Eat ice cream.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="4"/>
+    </field>
+  </object>
+  <object pk="5" model="knowledge.recommend">
+    <field type="SlugField" name="name">eatBiscuits</field>
+    <field type="CharField" name="text">Eat biscuits.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="12"/>
+    </field>
+  </object>
+  <object pk="6" model="knowledge.recommend">
+    <field type="SlugField" name="name">eatCake</field>
+    <field type="CharField" name="text">Eat cake.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+  </object>
+  <object pk="7" model="knowledge.recommend">
+    <field type="SlugField" name="name">drinkColdWater</field>
+    <field type="CharField" name="text">Drink some cold water.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="6"/>
+    </field>
+  </object>
+  <object pk="8" model="knowledge.recommend">
+    <field type="SlugField" name="name">eatSomeSorbet</field>
+    <field type="CharField" name="text">Eat some sorbet.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="5"/>
+    </field>
+  </object>
+  <object pk="9" model="knowledge.recommend">
+    <field type="SlugField" name="name">eatChocolate</field>
+    <field type="CharField" name="text">Eat chocolate.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="7"/>
+    </field>
+  </object>
+  <object pk="10" model="knowledge.recommend">
+    <field type="SlugField" name="name">drinkHotChocolate</field>
+    <field type="CharField" name="text">Drink some hot chocolate.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="8"/>
+    </field>
+  </object>
+  <object pk="11" model="knowledge.recommend">
+    <field type="SlugField" name="name">drinkTea</field>
+    <field type="CharField" name="text">Drink some tea.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="9"/>
+    </field>
+  </object>
+  <object pk="12" model="knowledge.recommend">
+    <field type="SlugField" name="name">dontEat</field>
+    <field type="CharField" name="text">Don't Eat.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="11"/>
+    </field>
+  </object>
+  <object pk="13" model="knowledge.recommend">
+    <field type="SlugField" name="name">dontDrink</field>
+    <field type="CharField" name="text">Don't Drink.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">2</field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+  </object>
+  <object pk="14" model="knowledge.recommend">
+    <field type="SlugField" name="name">MakeFoodYourself</field>
+    <field type="CharField" name="text">Make these foods in your own kitchen.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">1</field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+  </object>
+  <object pk="1" model="knowledge.externallink">
+    <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">2</field>
+    <field type="CharField" name="description">Hungry Magpie on Youtube</field>
+    <field type="CharField" name="link">http://www.youtube.com/watch?v=Ooa7hDrZvRk</field>
+  </object>
+  <object pk="2" model="knowledge.externallink">
+    <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">12</field>
+    <field type="CharField" name="description">Hungry Magpie on Youtube</field>
+    <field type="CharField" name="link">http://www.youtube.com/watch?v=Ooa7hDrZvRk</field>
+  </object>
+  <object pk="3" model="knowledge.externallink">
+    <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">14</field>
+    <field type="CharField" name="description">Cooking according to Wikipedia</field>
+    <field type="CharField" name="link">http://en.wikipedia.org/wiki/Cooking</field>
+  </object>
+  <object pk="1" model="knowledge.variable">
+    <field type="SlugField" name="name">testVariable</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">testVariable?</field>
+  </object>
+  <object pk="2" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesCake</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like cake?</field>
+  </object>
+  <object pk="3" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesBiscuits</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like biscuits?</field>
+  </object>
+  <object pk="4" model="knowledge.variable">
+    <field type="SlugField" name="name">IsHungry</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Are you hungry?</field>
+  </object>
+  <object pk="5" model="knowledge.variable">
+    <field type="SlugField" name="name">IsThirsty</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Are you thirsty?</field>
+  </object>
+  <object pk="6" model="knowledge.variable">
+    <field type="SlugField" name="name">IsHot</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Are you hot?</field>
+  </object>
+  <object pk="7" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesIceCream</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like ice cream?</field>
+  </object>
+  <object pk="8" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesSorbet</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like sorbet?</field>
+  </object>
+  <object pk="9" model="knowledge.variable">
+    <field type="SlugField" name="name">IsCold</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Are you cold?</field>
+  </object>
+  <object pk="10" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesTea</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like tea?</field>
+  </object>
+  <object pk="11" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesHotChocolate</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like hot chocolate?</field>
+  </object>
+  <object pk="12" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesChocolate</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like chocolate?</field>
+  </object>
+  <object pk="14" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesBiscuitsChocolateCake</field>
+    <field type="BooleanField" name="ask">False</field>
+    <field type="CharField" name="prompt">User likes biscuits, chocolate and cake.</field>
+  </object>
+  <object pk="15" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesCooking</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like cooking?</field>
+  </object>
+  <object pk="16" model="knowledge.variable">
+    <field type="SlugField" name="name">HasKitchen</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you have a kitchen?</field>
+  </object>
+  <object pk="17" model="knowledge.variable">
+    <field type="SlugField" name="name">CanCookFood</field>
+    <field type="BooleanField" name="ask">False</field>
+    <field type="CharField" name="prompt">User has facility to cook own food.</field>
+  </object>
+  <object pk="1" model="knowledge.ruleset">
+    <field type="SlugField" name="name">testRuleset</field>
+  </object>
+  <object pk="2" model="knowledge.ruleset">
+    <field type="SlugField" name="name">IngestUser</field>
+  </object>
+  <object pk="1" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">1</field>
+    <field type="PositiveIntegerField" name="order">1</field>
+  </object>
+  <object pk="5" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">1</field>
+  </object>
+  <object pk="3" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">2</field>
+  </object>
+  <object pk="6" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">3</field>
+  </object>
+  <object pk="7" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">4</field>
+  </object>
+  <object pk="2" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">5</field>
+  </object>
+  <object pk="4" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">6</field>
+  </object>
+  <object pk="12" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">7</field>
+  </object>
+  <object pk="8" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">8</field>
+  </object>
+  <object pk="9" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">9</field>
+  </object>
+  <object pk="10" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">10</field>
+  </object>
+  <object pk="11" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">11</field>
+  </object>
+  <object pk="13" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">12</field>
+  </object>
+  <object pk="14" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">13</field>
+  </object>
+  <object pk="15" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">14</field>
+  </object>
+  <object pk="1" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">1</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="2" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">2</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="3" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">3</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="4" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">4</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="5" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">5</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="6" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">2</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">2</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="7" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">4</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">3</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="8" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">6</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="9" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">7</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="10" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">8</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">6</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="11" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">8</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="12" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">9</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="13" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="14" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">10</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="15" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="16" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">9</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="17" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">11</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="18" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="19" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">6</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="20" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">7</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="21" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">12</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="22" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">12</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">12</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="23" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="24" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">10</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="25" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">11</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="26" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">16</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="27" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">15</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="28" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="29" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">17</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="1" model="knowledge.ruleconclusion">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">17</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="1" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">1</field>
+    <field type="IntegerField" name="rank">100</field>
+  </object>
+  <object pk="3" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">2</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">6</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="4" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">3</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">2</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="5" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">4</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">5</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="6" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">5</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">12</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="7" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">6</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">13</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="8" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">7</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">3</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="9" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">8</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">7</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="10" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">11</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="11" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">10</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="12" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">4</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="13" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">12</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">9</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="14" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">7</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="15" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">14</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+</django-objects>
