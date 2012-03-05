@@ -62,13 +62,17 @@ Once satisfied with all the details you will need to choose one of the save opti
 In this manner you can build up a list of all the various different recommendations which are served based on the inference rules,
 as specified in "Rule sets"(see details below).
 
+_Note: Video links (in the recommends) to resources hosted locally on the Magpie server) must be in FLV format. Users must convert the FLVs themselves as we feel that conversion on our end is outside the scope of requirements._
+
 
 === 4.2.2 Resource files ===
 
 This section allows you to upload resource files to the Magpie server for attaching to the recommendations.
 You must specify a description of the resource for ease of administration.
 You must specify a local path to the file or simply click the button "Browse..." and select the file.
-You may specify that the file be restricted so that is may only be viewed by specific user(s).
+Restricted files - tick the box, and the file can only be accessed by an admin, maintainer, or user who has the view restricted files permission.
+You can also select users from the list to be allowed.
+
 Once satisfied with all the details you will need to choose one of the save options along the bottom menu banner to complete the "Add resource file" process.
 Additionally you can edit any exsiting resource file as well as view any historical edits.
 
