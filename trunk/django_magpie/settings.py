@@ -5,7 +5,7 @@ import os
 
 CURRENT_DIR = os.path.dirname(__file__)
 MAGPIE_DIR = CURRENT_DIR
-
+URL_ROOT = INSERT-URL-ROOT
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -65,7 +65,7 @@ USE_L10N = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = MAGPIE_DIR + '/../resources/media/'
-MEDIA_URL = '/media/'
+MEDIA_URL = URL_ROOT + '/media/'
 #Path to the traverse tool
 TRAVERSE_PATH = MAGPIE_DIR + '/../pml/graph/traverse'
 
@@ -88,14 +88,14 @@ STATIC_ROOT = MAGPIE_DIR + '/../resources/static'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = URL_ROOT + '/static/'
 
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 #ADMIN_MEDIA_PREFIX = '/static/admin/'
-ADMIN_MEDIA_PREFIX = '/static/grappelli/'
+ADMIN_MEDIA_PREFIX = URL_ROOT + '/static/grappelli/'
 
 
 # Additional locations of static files
