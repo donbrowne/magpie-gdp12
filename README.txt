@@ -98,4 +98,16 @@ http://code.google.com/p/magpie-gdp12/wiki/Features
 The admin interface can be found at -
 
  THE_URL_TO_SERVE_FOLDER/magpie.wsgi/admin
+ 
+---Note about Django runserver---
+
+If you wish to run with the local Django runserver, run process as above
+making sure that when you run the './installer.sh install' step that you
+leave the fields blank when the script asks you for the path and the URL
+
+Functionality relating to media upload will not function as Django 
+requires an external web server to serve files. You can simulate this
+behavior by using python's SimpleHTTPServer, and configuring settings.py
+appropriately, but some functionality, such as video streaming, will be
+lost.
 
