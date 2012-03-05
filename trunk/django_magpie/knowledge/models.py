@@ -287,7 +287,7 @@ class Engine(object):
         self.true_facts = set()
         self.vars_tested = set()
         self.rec_trees = []
-        self.debug = True
+        self.debug = False
         self.rec_hacks = []
         # restore state
         if ruleset_ids:
