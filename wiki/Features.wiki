@@ -127,13 +127,23 @@ Register administration consists of sections Profiles and Accounts.
 
 === 4.3.1 Profiles ===
 
-Profiles are created with a profile name and associated with a rule set.
-Profiles may have variables set to specific default values by adding Profile answers.
+Profiles lists all the profiles set up on the system.  New profiles can be created in this section.
+
+* Profiles are created with a profile name. 
+* Profiles are associated with a rule set.
+* Profiles may have variables set to specific default values by adding Profile answers.
 
 
 === 4.3.1 Accounts ===
 
-Accounts lists all user accounts registered on the system and displays which profile is assiciated with each account.
+Accounts lists all of the user accounts registered on the system.
+Accounts can be created by guest users registering to get a user account on the system.
+
+Clicking on an account in the list allows you to edit its associated parameters.  
+
+  * Accounts are associated with the login name of a user.
+  * An account should be associated with a profile and thus may inherit Profile answers.  
+  * An account may have variables set to specific default values by adding Account answers.
 
 
 == 4.4 Sites ==
