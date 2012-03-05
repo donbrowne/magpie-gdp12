@@ -11,7 +11,8 @@ def contains(string, substring):
 def isImg(string):
     types = ['jpg','jpeg','png','svg','gif','bmp']
     stringArray = string.split(".")[-1:]
-    return stringArray[0] in types
+    extension = stringArray[0].lower()
+    return extension in types
 
 register.filter('lslice', lslice)
 register.filter('contains', contains)
