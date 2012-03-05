@@ -110,3 +110,7 @@ Register administration consists of two sections Accounts and Profiles.
 Profiles are created with a profile name and associated with a rule set.
 Profiles may have variables set to specific default values by adding Profile answers.
 Accounts lists the user accounts registered on the system and displays which profile is assiciated with each account.
+
+== 4.4 Sites ==
+
+<to be completed later>
