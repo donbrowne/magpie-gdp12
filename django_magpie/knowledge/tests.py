@@ -29,35 +29,35 @@ class EngineTests(TestCase):
 
         self.rs_simple = RuleSet.objects.create(name='rs-simple')
         rule1 = self.rs_simple.rule_set.create()
-        rule1.rulepremise_set.create(variable=self.v1, value=True)
-        rule1.ruleconclusion_set.create(variable=self.v2, value=True)
+        rule1.rulepremise_set.create(variable=self.v1, value='Y')
+        rule1.ruleconclusion_set.create(variable=self.v2, value='Y')
 
         self.rs_and = RuleSet.objects.create(name='rs-and')
         rule1 = self.rs_and.rule_set.create()
-        rule1.rulepremise_set.create(variable=self.v1, value=True)
-        rule1.rulepremise_set.create(variable=self.v2, value=True)
-        rule1.ruleconclusion_set.create(variable=self.v3, value=True)
+        rule1.rulepremise_set.create(variable=self.v1, value='Y')
+        rule1.rulepremise_set.create(variable=self.v2, value='Y')
+        rule1.ruleconclusion_set.create(variable=self.v3, value='Y')
 
         self.rs_or = RuleSet.objects.create(name='rs-or')
         rule1 = self.rs_or.rule_set.create()
-        rule1.rulepremise_set.create(variable=self.v1, value=True)
-        rule1.ruleconclusion_set.create(variable=self.v3, value=True)
+        rule1.rulepremise_set.create(variable=self.v1, value='Y')
+        rule1.ruleconclusion_set.create(variable=self.v3, value='Y')
         rule2 = self.rs_or.rule_set.create()
-        rule2.rulepremise_set.create(variable=self.v2, value=True)
-        rule2.ruleconclusion_set.create(variable=self.v3, value=True)
+        rule2.rulepremise_set.create(variable=self.v2, value='Y')
+        rule2.ruleconclusion_set.create(variable=self.v3, value='Y')
 
         self.rs_infer = RuleSet.objects.create(name='rs-infer')
         rule1 = self.rs_infer.rule_set.create()
-        rule1.rulepremise_set.create(variable=self.v1, value=True)
-        rule1.ruleconclusion_set.create(variable=self.v2, value=True)
+        rule1.rulepremise_set.create(variable=self.v1, value='Y')
+        rule1.ruleconclusion_set.create(variable=self.v2, value='Y')
 
         rule2 = self.rs_infer.rule_set.create()
-        rule2.rulepremise_set.create(variable=self.v2, value=True)
-        rule2.ruleconclusion_set.create(variable=self.v3, value=True)
+        rule2.rulepremise_set.create(variable=self.v2, value='Y')
+        rule2.ruleconclusion_set.create(variable=self.v3, value='Y')
 
         rule3 = self.rs_infer.rule_set.create()
-        rule3.rulepremise_set.create(variable=self.v3, value=True)
-        rule3.ruleconclusion_set.create(variable=self.v4, value=True)
+        rule3.rulepremise_set.create(variable=self.v3, value='Y')
+        rule3.ruleconclusion_set.create(variable=self.v4, value='Y')
 
     def test_empty(self):
         empty_list = []
@@ -69,9 +69,9 @@ class EngineTests(TestCase):
         
     def test_simple(self):
         rulesets = [ self.rs_simple.id ]
-        answers = [ (self.v1.id, True) ]
+        answers = [ (self.v1.id, 'Y') ]
         nvars = list(answers)
-        nvars.append((self.v2.id, True))
+        nvars.append((self.v2.id, 'Y'))
         tests = []
         state = Engine(rulesets)
         state.next_state(answers)
@@ -80,9 +80,9 @@ class EngineTests(TestCase):
 
     def test_and_tt(self):
         rulesets = [ self.rs_and.id ]
-        answers = [ (self.v1.id, True), (self.v2.id, True) ]
+        answers = [ (self.v1.id, 'Y'), (self.v2.id, 'Y') ]
         nvars = list(answers)
-        nvars.append((self.v3.id,True)) 
+        nvars.append((self.v3.id, 'Y')) 
         state = Engine(rulesets)
         state.next_state(answers)
         self.assertEquals(state.get_vars(), nvars)
@@ -90,7 +90,7 @@ class EngineTests(TestCase):
 
     def test_and_tf(self):
         rulesets = [ self.rs_and.id ]
-        answers = [ (self.v1.id, True), (self.v2.id, False) ]
+        answers = [ (self.v1.id, 'Y'), (self.v2.id, 'N') ]
         nvars = list(answers)
         state = Engine(rulesets)
         state.next_state(answers)
@@ -99,7 +99,7 @@ class EngineTests(TestCase):
 
     def test_and_ft(self):
         rulesets = [ self.rs_and.id ]
-        answers = [ (self.v1.id, False), (self.v2.id, True) ]
+        answers = [ (self.v1.id, 'N'), (self.v2.id, 'Y') ]
         nvars = list(answers)
         state = Engine(rulesets)
         state.next_state(answers)
@@ -108,7 +108,7 @@ class EngineTests(TestCase):
 
     def test_and_ff(self):
         rulesets = [ self.rs_and.id ]
-        answers = [ (self.v1.id, False), (self.v2.id, False) ]
+        answers = [ (self.v1.id, 'N'), (self.v2.id, 'N') ]
         nvars = list(answers)
         state = Engine(rulesets)
         state.next_state(answers)
@@ -117,9 +117,9 @@ class EngineTests(TestCase):
 
     def test_or_tt(self):
         rulesets = [ self.rs_or.id ]
-        answers = [ (self.v1.id, True), (self.v2.id, True) ]
+        answers = [ (self.v1.id, 'Y'), (self.v2.id, 'Y') ]
         nvars = list(answers)
-        nvars.append((self.v3.id,True)) 
+        nvars.append((self.v3.id, 'Y')) 
         state = Engine(rulesets)
         state.next_state(answers)
         self.assertEquals(state.get_vars(), nvars)
@@ -127,9 +127,9 @@ class EngineTests(TestCase):
 
     def test_or_tf(self):
         rulesets = [ self.rs_or.id ]
-        answers = [ (self.v1.id, True), (self.v2.id, False) ]
+        answers = [ (self.v1.id, 'Y'), (self.v2.id, 'N') ]
         nvars = list(answers)
-        nvars.append((self.v3.id,True)) 
+        nvars.append((self.v3.id,'Y')) 
         state = Engine(rulesets)
         state.next_state(answers)
         self.assertEquals(state.get_vars(), nvars)
@@ -137,9 +137,9 @@ class EngineTests(TestCase):
 
     def test_or_ft(self):
         rulesets = [ self.rs_or.id ]
-        answers = [ (self.v1.id, False), (self.v2.id, True) ]
+        answers = [ (self.v1.id, 'N'), (self.v2.id, 'Y') ]
         nvars = list(answers)
-        nvars.append((self.v3.id,True)) 
+        nvars.append((self.v3.id,'Y')) 
         state = Engine(rulesets)
         state.next_state(answers)
         self.assertEquals(state.get_vars(), nvars)
@@ -147,7 +147,7 @@ class EngineTests(TestCase):
 
     def test_or_ff(self):
         rulesets = [ self.rs_or.id ]
-        answers = [ (self.v1.id, False), (self.v2.id, False) ]
+        answers = [ (self.v1.id, 'N'), (self.v2.id, 'N') ]
         nvars = list(answers)
         state = Engine(rulesets)
         state.next_state(answers)
@@ -156,11 +156,11 @@ class EngineTests(TestCase):
 
     def test_inference(self):
         rulesets = [ self.rs_infer.id ]
-        answers = [ (self.v1.id, True) ]
-        nvars = [ (self.v1.id, True), 
-                  (self.v2.id, True),
-                  (self.v3.id, True), 
-                  (self.v4.id, True) 
+        answers = [ (self.v1.id, 'Y') ]
+        nvars = [ (self.v1.id, 'Y'), 
+                  (self.v2.id, 'Y'),
+                  (self.v3.id, 'Y'), 
+                  (self.v4.id, 'Y') 
                 ]
         state = Engine(rulesets)
         state.next_state(answers)
@@ -175,8 +175,8 @@ class ViewTests(TestCase):
 
         self.rs_view = RuleSet.objects.create(name='rs_view')
         rule1 = self.rs_view.rule_set.create()
-        rule1.rulepremise_set.create(variable=self.v1, value=True)
-        rule1.ruleconclusion_set.create(variable=self.v2, value=True)
+        rule1.rulepremise_set.create(variable=self.v1, value='Y')
+        rule1.ruleconclusion_set.create(variable=self.v2, value='Y')
 
         self.profile1 = Profile.objects.create(name='profile1', ruleset=self.rs_view)
         self.user1 = User.objects.create_user('user1','user1@aha.com','user1')
@@ -205,9 +205,9 @@ class ViewTests(TestCase):
     def test_next_state(self):
         # check pass facts are returned when given appropriate answers
         state = start_state(self.user1)
-        answers = [ (self.v1.id, True) ]
-        nvars = [ (self.v1.id, True), 
-                  (self.v2.id, True)]
+        answers = [ (self.v1.id, 'Y') ]
+        nvars = [ (self.v1.id, 'Y'), 
+                  (self.v2.id, 'Y')]
         state.next_state(answers)
         self.assertEquals(state.get_vars(), nvars)
         

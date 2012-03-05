@@ -85,8 +85,8 @@ class VariableChoice(models.Model):
         return self.value
 
 YN_CHOICES = (
-    (True, 'Yes'),
-    (False, 'No')
+    ('Y', 'Yes'),
+    ('N', 'No')
 )
 
 def val2str(val):
@@ -134,14 +134,14 @@ class Rule(models.Model):
 class RulePremise(models.Model):
     parent = models.ForeignKey(Rule)
     variable = models.ForeignKey(Variable)
-    value = models.BooleanField(choices=YN_CHOICES, blank=False, default=False)
+    value = models.CharField(max_length=1,choices=YN_CHOICES, default='N')
     def __unicode__(self):
         return self.variable.name + '=' + val2str(self.value)
 
 class RuleConclusion(models.Model):
     parent = models.ForeignKey(Rule)
     variable = models.ForeignKey(Variable)
-    value = models.BooleanField(choices=YN_CHOICES, blank=False, default=False)
+    value = models.CharField(max_length=1,choices=YN_CHOICES, default='N')
     def __unicode__(self):
         return self.variable.name + '=' + val2str(self.value)
 
@@ -195,7 +195,7 @@ class FactNode(object):
 
     @staticmethod
     def gen_key(ntype, nid, nvalue):
-        return '%d:%d:%d' % (ntype, nid, nvalue)
+        return '%d:%d:%s' % (ntype, nid, nvalue)
 
     def __init__(self, ntype, nid, value, state=NODE_UNTESTED):
         self.node_type = ntype
@@ -310,7 +310,7 @@ class Engine(object):
         return self.test_ids
 
     def gen_fact_key(self, var_id, value):
-        return '%d:%d' % (var_id, value)
+        return '%d:%s' % (var_id, value)
 
     def create_vnode(self, var_id, value):
         key = self.gen_fact_key(var_id, value)

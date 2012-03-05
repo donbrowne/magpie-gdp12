@@ -11,6 +11,7 @@ class ProfileAnswerInline(admin.TabularInline):
 class ProfileAdmin(admin.ModelAdmin):
     inlines = [ProfileAnswerInline]
 
+
 class AccountAnswerInline(admin.TabularInline):
     model = AccountAnswer
     extra = 0
@@ -18,23 +19,6 @@ class AccountAnswerInline(admin.TabularInline):
 class AccountAdmin(admin.ModelAdmin):
     inlines = [AccountAnswerInline]
     readonly_fields = ('user',)
-        
-
-"""
-class UserProfileInline(admin.StackedInline):
-    filter_horizontal = ('facts',)
-    inlines = [UserAnswerInline]
-    model = UserProfile
-    fk_name = 'user'
-    max_num = 1
-
-class UserProfileAdmin(UserAdmin):
-    inlines = [UserProfileInline,]
-
-admin.site.unregister(User)
-admin.site.register(User, UserProfileAdmin)
-"""
-
 
 admin.site.register(Profile,  ProfileAdmin)
 admin.site.register(Account,  AccountAdmin)
