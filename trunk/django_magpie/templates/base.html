@@ -40,7 +40,9 @@
         
         {% block nav-global %}{% endblock %}
         <a href="{% url 'index' %}">Index</a>
+        {% if user.is_authenticated %}
         <a href="{% url 'saved' %}">Saved</a>
+        {% endif %}
     </div>
     <!-- END Header -->
     {% endif %}
