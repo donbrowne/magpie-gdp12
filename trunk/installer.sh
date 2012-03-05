@@ -27,7 +27,7 @@ echo "DO NOT PLACE A FORWARD SLASH (/) AT THE END OF THE URL"
 read urlPath
 echo "Configuring wsgi script and settings.py"
 sed -i "s/PATH/$escaped/g" ./django_magpie/magpie.wsgi
-sed -i "1 c\ URL_ROOT='$urlPath'" ./django_magpie/settings.py
+sed -i "1 c\URL_ROOT='$urlPath'" ./django_magpie/settings.py
 
 if [ ! -z $fsPath ]; 
 then

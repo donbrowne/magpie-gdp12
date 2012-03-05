@@ -72,6 +72,9 @@ After doing this, the user will need to ensure that the following
 subdirectories of the folder containing this file, and their contents, 
 are readable and writable by the Apache user (www-data in Ubuntu) 
 
+When running 'build', you will be asked if you want to copy, noting that
+it will overwrite files. Answer 'yes'.
+
   resources
   sqlite3 (created by 'build' stage)
 
