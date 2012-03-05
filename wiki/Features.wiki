@@ -52,9 +52,9 @@ Contains four subsections: Recommends, Resource files, Rule sets, Variables.
 This section contains the list of the set of recommendations that have been input.
 The process of having the user answer questions allows a subset of recommendations to be generated from this list and displayed to the user.
 Clicking on the button "Add recommend" opens a window to allow you to input details for a given recommend.
-  *Recommends must consist of an identifying name, some descriptive text.  
-  *Optionally they can have a PML model, Video file or other multimedia link attached from resources stored on the Magpie server.
-  *Optionally they can also have external links attached (along with some required descriptive text for the link) e.g. linking to an internet site.
+  * Recommends must consist of an identifying name, some descriptive text.  
+  * Optionally they can have a PML model, Video file or other multimedia link attached from resources stored on the Magpie server.
+  * Optionally they can also have external links attached (along with some required descriptive text for the link) e.g. linking to an internet site.
 Once satisfied with all the details you will need to choose one of the save options along the bottom menu banner to complete the "Add recommend" process.
 In this manner you can build up a list of all the various different recommendations which are served based on the inference rules,
 as specified in "Rule sets"(see details below).
@@ -68,13 +68,3 @@ You must specify a local path to the file or simply click the button "Browse..."
 You may specify that the file be restricted so that is may only be viewed by specific user(s).
 Once satisfied with all the details you will need to choose one of the save options along the bottom menu banner to complete the "Add resource file" process.
 When viewing a 
-
-
-
-++++
-This section outlines the various features of Magpie.
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
