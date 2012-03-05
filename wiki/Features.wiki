@@ -29,11 +29,10 @@ User profiles can save one line of recommendations at a time (and will overwrite
 
 = Administration Interface =
 
-Once logged in to the administration interface the Home   
-The system overview is broken down into four sections: Auth (authorisation), Knowledge, Register and Sites.
+When an admin logs in to the Magpie administration interface the Magpie site admin Home screen is displayed which gives a system overview.  
+The overview is broken down into four sections: Auth (authorisation), Knowledge, Register and Sites.
 
-
-* Auth
+== Auth ==
 
 Auth(authorisation) is utilised to manage Magpie administration rights at group and account level.
 
@@ -41,28 +40,32 @@ Contains two subsections: Groups, Users.
 Various permissions can be specified relating to how a unique account or accounts belonging to a particular group can interact with the system.
 
 
-* Knowledge
+== Knowledge ==
 
 Knowledge is where you can create recommendations, upload multimedia content and specify rules of inferrence to tailor recommendations to users.
 
 Contains four subsections: Recommends, Resource files, Rule sets, Variables.
 
-Recommends
+
+=== Recommends ===
+
 This section contains the list of the set of recommendations that have been input.
 The process of having the user answer questions allows a subset of recommendations to be generated from this list and displayed to the user.
 Clicking on the button "Add recommend" opens a window to allow you to input details for a given recommend.
-*Recommends must consist of an identifying name, some descriptive text.  
-*Optionally they can have a PML model, Video file or other multimedia link attached from resources stored on the Magpie server.
-*Optionally they can also have external links attached (along with some required descriptive text for the link) e.g. linking to an internet site.
+Recommends must consist of an identifying name, some descriptive text.  
+Optionally they can have a PML model, Video file or other multimedia link attached from resources stored on the Magpie server.
+Optionally they can also have external links attached (along with some required descriptive text for the link) e.g. linking to an internet site.
 Once satisfied with all the details you will need to choose one of the save options along the bottom menu banner to complete the "Add recommend" process.
 In this manner you can build up a list of all the various different recommendations which are served based on the inference rules,
 as specified in "Rule sets"(see details below).
 
-Resource files
+
+=== Resource files ===
+
 This section allows you to upload resource files to the Magpie server for attaching to the recommendations.
-*You must specify a description of the resource for ease of administration.
-*You must specify a local path to the file or simply click the button "Browse..." and select the file.
-*You may specify that the file be restricted so that is may only be viewed by specific user(s).
+You must specify a description of the resource for ease of administration.
+You must specify a local path to the file or simply click the button "Browse..." and select the file.
+You may specify that the file be restricted so that is may only be viewed by specific user(s).
 Once satisfied with all the details you will need to choose one of the save options along the bottom menu banner to complete the "Add resource file" process.
 When viewing a 
 
