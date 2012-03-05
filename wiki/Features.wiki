@@ -68,3 +68,34 @@ You must specify a local path to the file or simply click the button "Browse..."
 You may specify that the file be restricted so that is may only be viewed by specific user(s).
 Once satisfied with all the details you will need to choose one of the save options along the bottom menu banner to complete the "Add resource file" process.
 Additionally you can edit any exsiting resource file as well as view any historical edits.
+
+
+== Rule sets ==
+
+This is where you may create multiple rule sets to govern which information is asked of users and which recommendations are presented to them.
+A users profile is associated a rule set to determine which questions are posed to the user.  
+Thus different user profiles may be posed different sets of questions to get different recommendations from the same knowledge base.
+
+The button "Add rule set" allows you to input a list of rules which are run in order.  
+Rule sets have a name to identify them for administration.
+
+The button "Add Rule" will launch a form to allow you to add an inference rule to the rule set.
+Rules take the form of: Premises - Conclusions - Recommendations
+You can add multiple premises to ask the user questions that set the values for variables.
+Premises are aggregated with a logical AND operation to determine if a rule fires.
+Conclusions may then fire in order to set the value of further variables.
+The associated recommendations are presented to the user when the rule fires.
+
+
+Once rules are added to the rule set is it necessary to choose one of the options to save along the bottom banner menu.
+The order in which the rules are fired can be changed from the GUI by dragging and dropping with the <|> arrows icon on the left of the X icon.
+
+
+== Variables ==
+
+The variable values we are interested in are both yes/no answers to questions posed to users as well as values inferred from answered questions.
+From: Home->Knowledge->Variables, they can be added with the button "Add variable".
+Variables require a "Name:" to identify them to the Admin system and a "Prompt:" which is typically the text of a question that we pose to a user.
+There is a tick box labeled "Ask" which determines whether or not the variable is asked of a user.  
+We may not want to ask a user about a variable if we intended on inferring the variables value with a conclusion.
+In this sort of case it is probably best to set the "Prompt:" to something sensibly descriptive.
