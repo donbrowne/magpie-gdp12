@@ -67,4 +67,4 @@ You must specify a description of the resource for ease of administration.
 You must specify a local path to the file or simply click the button "Browse..." and select the file.
 You may specify that the file be restricted so that is may only be viewed by specific user(s).
 Once satisfied with all the details you will need to choose one of the save options along the bottom menu banner to complete the "Add resource file" process.
-When viewing a 
+Additionally you can edit any exsiting resource file as well as view any historical edits.
