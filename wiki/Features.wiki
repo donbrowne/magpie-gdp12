@@ -99,3 +99,10 @@ Variables require a "Name:" to identify them to the Admin system and a "Prompt:"
 There is a tick box labeled "Ask" which determines whether or not the variable is asked of a user.  
 We may not want to ask a user about a variable if we intended on inferring the variables value with a conclusion.
 In this sort of case it is probably best to set the "Prompt:" to something sensibly descriptive.
+
+== Register ==
+
+Register administration consists of two sections Accounts and Profiles.
+Profiles are created with a profile name and associated with a rule set.
+Profiles may have variables set to specific default values by adding Profile answers.
+Accounts lists the user accounts registered on the system and displays which profile is assiciated with each account.
