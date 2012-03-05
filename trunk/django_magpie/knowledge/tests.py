@@ -214,8 +214,8 @@ class ViewTests(TestCase):
     #Custom filter tests
         
     def test_isImg(self):
-        imgLink1 = "www.foo.com/test1.jpg"
-        imgLink2 = "www.foo.com/test1.jpeg"
+        imgLink1 = "www.foo.com/test1.JPG"
+        imgLink2 = "www.foo.com/test1.Jpeg"
         imgLink3 = "www.foo.com/test1.gif"
         imgLink4 = "www.foo.com/test1.svg"
         imgLink5 = "www.foo.com/test1.png"
