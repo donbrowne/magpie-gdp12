@@ -5,7 +5,7 @@
 This page contains some details about accounts, basic user instruction information and an overview of Magpie features for administration.
 
 
-= GUEST AND USER ACCOUNTS =
+= Guest and User Accounts =
 
 When a user visits the site they are provided by default with guest level access to features.
 Users can register with the site in order to utilise some additional features for saving the last recommendations and providing profile specific lines of questioning.
@@ -15,7 +15,7 @@ Users may select a profile type to help tailor recomendations.
 Users last questions and recommendations session is saved by system.
 
 
-= BASIC USER INSTRUCTIONS =
+= Basic Client User Instructions =
 
 From the "Welcome" screen click the start button to begin a questions and recommendation session.
 Under "Questions" answer by selecting with the yes/no radio button and clicking Next.
@@ -52,9 +52,9 @@ Contains four subsections: Recommends, Resource files, Rule sets, Variables.
 This section contains the list of the set of recommendations that have been input.
 The process of having the user answer questions allows a subset of recommendations to be generated from this list and displayed to the user.
 Clicking on the button "Add recommend" opens a window to allow you to input details for a given recommend.
-Recommends must consist of an identifying name, some descriptive text.  
-Optionally they can have a PML model, Video file or other multimedia link attached from resources stored on the Magpie server.
-Optionally they can also have external links attached (along with some required descriptive text for the link) e.g. linking to an internet site.
+  *Recommends must consist of an identifying name, some descriptive text.  
+  *Optionally they can have a PML model, Video file or other multimedia link attached from resources stored on the Magpie server.
+  *Optionally they can also have external links attached (along with some required descriptive text for the link) e.g. linking to an internet site.
 Once satisfied with all the details you will need to choose one of the save options along the bottom menu banner to complete the "Add recommend" process.
 In this manner you can build up a list of all the various different recommendations which are served based on the inference rules,
 as specified in "Rule sets"(see details below).
