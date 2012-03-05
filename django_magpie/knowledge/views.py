@@ -16,8 +16,10 @@ def get_answers(items):
     for name,value in items:
         if name.startswith('answer_'):
             qid = int(name[len('answer_'):])
+            # hack to prevent python 2.6 coerce
             istrue = value == 'y'
-            answers.append((qid, istrue))
+            value = 'Y' if istrue else 'N'
+            answers.append((qid, value))
     return answers
 
 def del_state(session):
