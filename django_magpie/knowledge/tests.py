@@ -191,8 +191,8 @@ class ViewTests(TestCase):
         self.assertEqual(slist, elist)
 
     def test_get_answers(self):
-        slist =  [ (num, True if (num % 2) else False) for num in xrange(10) ] 
-        tlist = [ ( 'answer_%d' % num, 'y' if value else 'n')  for num,value in slist ]
+        slist =  [ (num, 'Y' if (num % 2) else 'N') for num in xrange(10) ] 
+        tlist = [ ( 'answer_%d' % num, 'y' if value=='Y' else 'n')  for num,value in slist ]
         elist = get_answers(tlist)
         self.assertEquals(slist, elist)
 
