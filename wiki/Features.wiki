@@ -8,9 +8,10 @@ This page contains some details about accounts, basic user instruction informati
 = 2.0 Guest and User Accounts =
 
 When a user visits the site they are provided by default with guest level access to features.
+
 Users can register with the site in order to utilise some additional features for saving the last recommendations and providing profile specific lines of questioning.
 Users register accounts by clicking on the link along the top menu banner and then supplying username, password and email address.
-Users may modify their account, from the link along the top menu banner, to modify the account details. 
+Users may modify their account, from the link along the top menu banner, to modify the account details.
 Users may select a profile type to help tailor recomendations.  
 A registered users last questions and recommendations session is saved by system.
 
