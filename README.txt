@@ -68,15 +68,9 @@ Then run
   ./installer.sh install
   ./installer.sh test
   
-The install stage of the script will symlink the wsgi script, as well
-as the media and static files folders to a folder served by Apache (or
-not if the user leaves the appropriate field blank when prompted by the
-script.) The page can be accessed by navigating to the URL where that
-folder is served, and launching the wsgi script.
-
-The user will need to ensure that the following subdirectories of the 
-folder containing this file, and their contents are readable and 
-writable by the Apache user (www-data in Ubuntu) 
+After doing this, the user will need to ensure that the following 
+subdirectories of the folder containing this file, and their contents, 
+are readable and writable by the Apache user (www-data in Ubuntu) 
 
   resources
   sqlite3 (created by 'build' stage)
@@ -85,7 +79,23 @@ One solution is to run
   
   chown -R www-data <name of folder>
   
+The install stage of the script will symlink the wsgi script, as well
+as the media and static files folders to a folder served by Apache (or
+not if the user leaves the appropriate field blank when prompted by the
+script.) The page can be accessed by navigating to the URL where that
+folder is served, and launching the wsgi script. This assumes that the
+folder from which Apache servers has a suitable htaccess file for 
+serving wsgi files, and that Apache has been suitably configured. The
+htaccess file will look like -
+
+  Options +ExecCGI 
+  AddHandler wsgi-script .wsgi
+  
 Details of features can be found at -
 
 http://code.google.com/p/magpie-gdp12/wiki/Features
+
+The admin interface can be found at -
+
+ THE_URL_TO_SERVE_FOLDER/magpie.wsgi/admin
 

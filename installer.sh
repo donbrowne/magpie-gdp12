@@ -8,8 +8,6 @@ cd django_magpie
 python manage.py collectstatic
 python manage.py syncdb
 cd ..
-chown -R 775 sqlite3
-chown -R 755 resources
             ;;
         install)
 echo "Setting up Magpie application instance"
