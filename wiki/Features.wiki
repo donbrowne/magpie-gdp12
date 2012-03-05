@@ -1,11 +1,11 @@
 #summary A description of Magpie features
 
-= Introduction =
+= 1.0 Introduction =
 
 This page contains some details about accounts, basic user instruction information and an overview of Magpie features for administration.
 
 
-= Guest and User Accounts =
+= 2.0 Guest and User Accounts =
 
 When a user visits the site they are provided by default with guest level access to features.
 Users can register with the site in order to utilise some additional features for saving the last recommendations and providing profile specific lines of questioning.
@@ -15,7 +15,7 @@ Users may select a profile type to help tailor recomendations.
 A registered users last questions and recommendations session is saved by system.
 
 
-= Basic Client User Instructions =
+= 3.0 Basic Client User Instructions =
 
 From the "Welcome" screen click the start button to begin a questions and recommendation session.
 Under "Questions" answer by selecting with the yes/no radio button and clicking Next.
@@ -29,13 +29,13 @@ This "Done" button saves the line of questions recommendations to the user profi
 User profiles may save one line of recommendations at a time (and will overwrite the old one with a new line of questions).
 
 
-= Administration Interface =
+= 4.0 Administration Interface =
 
 When an admin logs in to the Magpie administration interface the Magpie site admin Home screen is displayed which gives a system overview.  
 The overview is broken down into four sections: Auth (authorisation), Knowledge, Register and Sites.
 
 
-== Auth ==
+== 4.1 Auth ==
 
 Auth(authorisation) is utilised to manage Magpie administration rights at group and account level.
 
@@ -43,14 +43,14 @@ Contains two subsections: Groups, Users.
 Various permissions can be specified relating to how a unique account or accounts belonging to a particular group can interact with the system.
 
 
-== Knowledge ==
+== 4.2 Knowledge ==
 
 Knowledge is where you can create recommendations, upload multimedia content and specify rules of inferrence to tailor recommendations to users.
 
 Contains four subsections: Recommends, Resource files, Rule sets, Variables.
 
 
-=== Recommends ===
+=== 4.2.1 Recommends ===
 
 This section contains the list of the set of recommendations that have been input.
 The process of having the user answer questions allows a subset of recommendations to be generated from this list and displayed to the user.
@@ -63,7 +63,7 @@ In this manner you can build up a list of all the various different recommendati
 as specified in "Rule sets"(see details below).
 
 
-=== Resource files ===
+=== 4.2.2 Resource files ===
 
 This section allows you to upload resource files to the Magpie server for attaching to the recommendations.
 You must specify a description of the resource for ease of administration.
@@ -73,7 +73,7 @@ Once satisfied with all the details you will need to choose one of the save opti
 Additionally you can edit any exsiting resource file as well as view any historical edits.
 
 
-=== Rule sets ===
+=== 4.2.3 Rule sets ===
 
 This is where you may create multiple rule sets to govern which information is asked of users and which recommendations are presented to them.
 A users profile is associated a rule set to determine which questions are posed to the user.  
@@ -94,7 +94,7 @@ Once rules are added to the rule set is it necessary to choose one of the option
 The order in which the rules are fired can be changed from the GUI by dragging and dropping with the <|> arrows icon on the left of the X icon.
 
 
-=== Variables ===
+=== 4.2.4 Variables ===
 
 The variable values we are interested in are both yes/no answers to questions posed to users as well as values inferred from answered questions.
 From: Home->Knowledge->Variables, they can be added with the button "Add variable".
@@ -104,7 +104,7 @@ We may not want to ask a user about a variable if we intended on inferring the v
 In this sort of case it is probably best to set the "Prompt:" to something sensibly descriptive.
 
 
-== Register ==
+== 4.3 Register ==
 
 Register administration consists of two sections Accounts and Profiles.
 Profiles are created with a profile name and associated with a rule set.
