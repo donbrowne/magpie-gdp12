@@ -1,6 +1,7 @@
 case "$1" in
         build)
 mkdir sqlite3
+cp ./dataload/magpie.db ./sqlite3/
 cd pml
 make
 cd ..
