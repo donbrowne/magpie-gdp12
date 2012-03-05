@@ -64,11 +64,9 @@ as specified in "Rule sets"(see details below).
 
 _Notes:_ 
 
-  # Video links (in the recommends) to resources hosted locally on the    Magpie server) must be in FLV format. Users must convert the FLVs themselves as we feel that conversion on our end is outside the scope of requirements.
-
-  # External links to youtube vids are embeded automatically.
-
-  # Any links to images are embedded on the page.
+  * Video links (in the recommends) to resources hosted locally on the Magpie server) must be in FLV format. Users must convert the FLVs themselves as we feel that conversion on our end is outside the scope of requirements.
+  * External links to youtube vids are embeded automatically.
+  * Any links to images are embedded on the page.
 
 
 === 4.2.2 Resource files ===
