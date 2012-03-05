@@ -12,7 +12,7 @@ Users can register with the site in order to utilise some additional features fo
 Users register accounts by clicking on the link along the top menu banner and then supplying username, password and email address.
 Users may modify their account, from the link along the top menu banner, to modify the account details. 
 Users may select a profile type to help tailor recomendations.  
-Users last questions and recommendations session is saved by system.
+A registered users last questions and recommendations session is saved by system.
 
 
 = Basic Client User Instructions =
@@ -20,17 +20,20 @@ Users last questions and recommendations session is saved by system.
 From the "Welcome" screen click the start button to begin a questions and recommendation session.
 Under "Questions" answer by selecting with the yes/no radio button and clicking Next.
 "Questions" will then display any follow up questions on the left or change to "All Done" if there are no more follow up questions.
+
 Recomendations inferred from the answers to previous questions are listed on the right.
 Recomendations can take various formats such as PML, images, links to websites embedded video etc.
+
 When "All Done" is displayed there is a button underneath labeled "Done".
-The "Done" button saves the line of questions recommendations to the user profile (not available for guests).
-User profiles can save one line of recommendations at a time (and will overwrite the old one with a new line of questions).
+This "Done" button saves the line of questions recommendations to the user profile (not available for guests).
+User profiles may save one line of recommendations at a time (and will overwrite the old one with a new line of questions).
 
 
 = Administration Interface =
 
 When an admin logs in to the Magpie administration interface the Magpie site admin Home screen is displayed which gives a system overview.  
 The overview is broken down into four sections: Auth (authorisation), Knowledge, Register and Sites.
+
 
 == Auth ==
 
@@ -70,7 +73,7 @@ Once satisfied with all the details you will need to choose one of the save opti
 Additionally you can edit any exsiting resource file as well as view any historical edits.
 
 
-== Rule sets ==
+=== Rule sets ===
 
 This is where you may create multiple rule sets to govern which information is asked of users and which recommendations are presented to them.
 A users profile is associated a rule set to determine which questions are posed to the user.  
@@ -91,7 +94,7 @@ Once rules are added to the rule set is it necessary to choose one of the option
 The order in which the rules are fired can be changed from the GUI by dragging and dropping with the <|> arrows icon on the left of the X icon.
 
 
-== Variables ==
+=== Variables ===
 
 The variable values we are interested in are both yes/no answers to questions posed to users as well as values inferred from answered questions.
 From: Home->Knowledge->Variables, they can be added with the button "Add variable".
@@ -99,6 +102,7 @@ Variables require a "Name:" to identify them to the Admin system and a "Prompt:"
 There is a tick box labeled "Ask" which determines whether or not the variable is asked of a user.  
 We may not want to ask a user about a variable if we intended on inferring the variables value with a conclusion.
 In this sort of case it is probably best to set the "Prompt:" to something sensibly descriptive.
+
 
 == Register ==
 
