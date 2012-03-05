@@ -62,7 +62,11 @@ Once satisfied with all the details you will need to choose one of the save opti
 In this manner you can build up a list of all the various different recommendations which are served based on the inference rules,
 as specified in "Rule sets"(see details below).
 
-_Note: Video links (in the recommends) to resources hosted locally on the Magpie server) must be in FLV format. Users must convert the FLVs themselves as we feel that conversion on our end is outside the scope of requirements._
+_Notes: Video links (in the recommends) to resources hosted locally on the Magpie server) must be in FLV format. Users must convert the FLVs themselves as we feel that conversion on our end is outside the scope of requirements.
+
+External links to youtube vids are embeded automatically.
+
+Any links to images are embedded on the page._
 
 
 === 4.2.2 Resource files ===
