@@ -47,7 +47,6 @@ cd ..
         distclean)
 rm -rf sqlite3
 rm -rf ./resources/static/*
-rm -rf ./resources/media/*
 echo "Please enter the path to the folder from which Apache serves files"
 echo "e.g. /home/magpie/public_html/"
 echo "If left blank, symlinks to the wsgi script and static/media folders won't be deleted"
