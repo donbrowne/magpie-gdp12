@@ -1,3 +1,4 @@
+URL_ROOT = ''
 # Django settings for django_magpie project.
 import django.conf.global_settings as DEFAULT_SETTINGS
 import os
@@ -5,7 +6,7 @@ import os
 
 CURRENT_DIR = os.path.dirname(__file__)
 MAGPIE_DIR = CURRENT_DIR
-URL_ROOT = INSERT-URL-ROOT
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
