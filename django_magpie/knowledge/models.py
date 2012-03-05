@@ -186,7 +186,16 @@ class FactGroup(object):
         return True
 
     def check_fail(self):
-        pass
+        for node in self.nodes:
+            if node.check_state(NODE_TESTED):
+                return True
+        return False
+
+    def del_root(self, tree):
+        for node in self.nodes:
+            tree.del_root(node)
+            if node.check_state(NODE_UNTESTED):
+                node.set_state(NODE_TESTED)
         
 VAR_NODE = 0
 REC_NODE = 1
@@ -278,7 +287,7 @@ class Engine(object):
         self.true_facts = set()
         self.vars_tested = set()
         self.rec_trees = []
-        self.debug = False
+        self.debug = True
         self.rec_hacks = []
         # restore state
         if ruleset_ids:
@@ -416,8 +425,8 @@ class Engine(object):
             self.var_list.append((var_id, value))
         else:
             # we have a fact
-            if self.debug: print 'have fact', var_id, value
             key = self.gen_fact_key(var_id, value)
+            if self.debug: print 'have fact', var_id, value, key
             if key not in self.true_facts:
                 self.true_facts.add(key)
                 self.var_list.append((var_id, value))
@@ -427,7 +436,7 @@ class Engine(object):
             self.add_var(item[0], item[1])
 
     def add_consequent(self, rule):
-        if self.debug: print 'rule=', rule
+        if self.debug: print 'adding consequent rule=', rule
         for conclusion in rule.ruleconclusion_set.all():
             if self.debug: print 'conclusion=', conclusion
             self.add_var(conclusion.variable_id, conclusion.value)
@@ -477,6 +486,7 @@ class Engine(object):
         if len(search_nodes) == 0:
             # blast theres a loop in the rules 
             # find the the first applicable node in the rules
+            if self.debug: print 'possible loop'
             for rule in ruleset.rule_set.exclude(id__in=self.fired_ids):
                 for premise in rule.rulepremise_set.all():
                     node = tree.get_fact(premise.variable_id, premise.value)
@@ -544,7 +554,12 @@ class Engine(object):
                     node = self.create_vnode(premise.variable_id, premise.value)
                     tree.add_root(node)
                 premise_group.add_node(node)
-            premise_group.check_fail()
+            # all the nodes must be one of untested or passed
+            if premise_group.check_fail():
+                if self.debug: print 'rule fail', rule
+                premise_group.del_root(tree)
+                continue
+            if self.debug: print 'rule pass', rule
             conclusion_nodes = []
             for conclusion in rule.ruleconclusion_set.all():
                 node = tree.get_fact(conclusion.variable_id, conclusion.value)
