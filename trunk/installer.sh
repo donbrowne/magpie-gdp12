@@ -19,12 +19,12 @@ echo "Please enter the path to the folder from which Apache serves files"
 echo "e.g. /home/magpie/public_html"
 echo "If left blank, symlinks to the wsgi script and static/media folders won't be made"
 echo "DO NOT PLACE A FORWARD SLASH (/) AT THE END OF THE URL"
-read $fsPath
+read fsPath
 echo "Please enter the URL that Apache serves this folder as"
 echo "e.g. http://proisis.lero.ie/~magpie"
 echo "If setting up with the Django test server, you should leave this blank"
 echo "DO NOT PLACE A FORWARD SLASH (/) AT THE END OF THE URL"
-read $urlPath
+read urlPath
 echo "Configuring wsgi script and settings.py"
 sed -i "s/PATH/$escaped/g" ./django_magpie/magpie.wsgi
 sed -i "1 c\ URL_ROOT='$urlPath'" ./django_magpie/magpie.wsgi
@@ -50,7 +50,7 @@ rm -rf ./resources/static/*
 echo "Please enter the path to the folder from which Apache serves files"
 echo "e.g. /home/magpie/public_html/"
 echo "If left blank, symlinks to the wsgi script and static/media folders won't be deleted"
-read $public_path
+read public_path
 
 if [ ! -z $fsPath ]; 
 then
