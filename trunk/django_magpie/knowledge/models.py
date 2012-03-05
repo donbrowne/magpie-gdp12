@@ -279,6 +279,7 @@ class Engine(object):
         self.vars_tested = set()
         self.rec_trees = []
         self.debug = False
+        self.rec_hacks = []
         # restore state
         if ruleset_ids:
             for rsid in ruleset_ids:
@@ -332,24 +333,22 @@ class Engine(object):
     def get_recommends(self):
         recommends = []
         recommend_ids = []
-        # first get unique list of recommends nodes
+        # first get unique list of recommend nodes
         rdict = {}
-        for rec_tree in self.rec_trees:
-            for rnode in rec_tree.get_roots():
-                if rnode.node_id in rdict:
-                    # replace only if node has higher rank
-                    onode = rdict[rnode.node_id]
-                    if rnode.value > onode.value:
-                        rdict[rnode.node_id] = rnode
-                else:
-                    rdict[rnode.node_id] = rnode
+        for rid,rank in self.rec_hacks:
+            if rid in rdict:
+                # replace only if node has higher rank
+                if rank > rdict[rid]:
+                    rdict[rid] = rank
+            else:
+                rdict[rid] = rank
 
         # TODO fix views to use only get_reasons call
         recommends = []
-        for rnode in rdict.values():
-            recommend = Recommend.objects.get(pk=rnode.node_id)
+        for rid,rank in rdict.items():
+            recommend = Recommend.objects.get(pk=rid)
             # FIXME - this is a hack
-            recommend.rank = rnode.value
+            recommend.rank = rank
             recommends.append(recommend)
 
         return sorted(recommends, key=lambda recommend: recommend.rank, reverse=True)
@@ -434,7 +433,9 @@ class Engine(object):
             self.add_var(conclusion.variable_id, conclusion.value)
         for rrecommend in rule.rulerecommend_set.all():
             if self.debug: print 'recommend=', rrecommend
+            self.rec_hacks.append((rrecommend.recommend_id, rrecommend.rank))
 
+    # TODO fix this for loop detection
     def add_recommends(self, rule, tree):
         premise_group = FactGroup()
         for premise in rule.rulepremise_set.all():
@@ -468,11 +469,20 @@ class Engine(object):
                 return False
         return True
 
-    def find_tests(self, tree):
+    def find_tests(self, tree, ruleset):
         # now find next set of variables to test
         loop_check = set()
         test_ids = []
         search_nodes = tree.get_roots()
+        if len(search_nodes) == 0:
+            # blast theres a loop in the rules 
+            # find the the first applicable node in the rules
+            for rule in ruleset.rule_set.exclude(id__in=self.fired_ids):
+                for premise in rule.rulepremise_set.all():
+                    node = tree.get_fact(premise.variable_id, premise.value)
+                    if node and node.state == NODE_UNTESTED:
+                        self.test_ids.append(node.node_id)
+                        return
         while len(search_nodes) > 0:
             next_search = []
             for node in search_nodes:
@@ -581,12 +591,14 @@ class Engine(object):
         self.test_ids = []
         # reset rule list
         self.fire_ids = []
+        # this really needs to be fixed
         self.rec_trees = []
+        self.rec_hacks = []
 
         for ruleset in RuleSet.objects.filter(id__in=self.ruleset_ids):
             self.forward_chain(ruleset)
             tree = self.build_aotree(ruleset)
-            self.find_tests(tree)
+            self.find_tests(tree, ruleset)
 
 def state_encode(state):
     sdict = {}
