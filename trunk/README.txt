@@ -2,7 +2,15 @@
 
 DESCRIPTION -
 
-
+Magpie -  Model Advice Guidance Process Intergration Explorer
+A software system specifically designed for knowledge management of 
+information relating to software processes. Magpie is hosted on a server 
+and can be accessed and administered from a web browser. When 
+configured, Magpie will ask users a series of yes/no questions and based 
+on this can infer a list of recommendations for the user.
+Recommendations that provide the process modeling information can 
+contain a mix of various multimedia formats such as images, video, 
+rendered PML models, hyperlinks etc.
 
 DEPENDENCIES -
 
@@ -66,9 +74,9 @@ not if the user leaves the appropriate field blank when prompted by the
 script.) The page can be accessed by navigating to the URL where that
 folder is served, and launching the wsgi script.
 
-The user will need to ensure that the following folders, and their
-contents are readable and writable by the Apache user (www-data in 
-Ubuntu) 
+The user will need to ensure that the following subdirectories of the 
+folder containing this file, and their contents are readable and 
+writable by the Apache user (www-data in Ubuntu) 
 
   resources
   sqlite3 (created by 'build' stage)
@@ -76,3 +84,8 @@ Ubuntu)
 One solution is to run 
   
   chown -R www-data <name of folder>
+  
+Details of features can be found at -
+
+http://code.google.com/p/magpie-gdp12/wiki/Features
+
