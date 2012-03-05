@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object pk="1" model="register.profile">
+    <field type="SlugField" name="name">testProfile</field>
+    <field to="knowledge.ruleset" name="ruleset" rel="ManyToOneRel">1</field>
+  </object>
+  <object pk="2" model="register.profile">
+    <field type="SlugField" name="name">IngestUserProfile</field>
+    <field to="knowledge.ruleset" name="ruleset" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="3" model="register.profile">
+    <field type="SlugField" name="name">guest</field>
+    <field to="knowledge.ruleset" name="ruleset" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="1" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">1</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="2" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">2</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">
+      <None/>
+    </field>
+  </object>
+  <object pk="3" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">3</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">1</field>
+  </object>
+  <object pk="4" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">4</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="5" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">5</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="6" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">6</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="7" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">7</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="8" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">8</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">
+      <None/>
+    </field>
+  </object>
+  <object pk="4" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">7</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">2</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="5" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">7</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="13" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">7</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="16" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">6</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="19" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">6</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+</django-objects>

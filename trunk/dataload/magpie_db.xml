@@ -1,0 +1,3138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object pk="21" model="contenttypes.contenttype">
+    <field type="CharField" name="name">account</field>
+    <field type="CharField" name="app_label">register</field>
+    <field type="CharField" name="model">account</field>
+  </object>
+  <object pk="22" model="contenttypes.contenttype">
+    <field type="CharField" name="name">account answer</field>
+    <field type="CharField" name="app_label">register</field>
+    <field type="CharField" name="model">accountanswer</field>
+  </object>
+  <object pk="5" model="contenttypes.contenttype">
+    <field type="CharField" name="name">content type</field>
+    <field type="CharField" name="app_label">contenttypes</field>
+    <field type="CharField" name="model">contenttype</field>
+  </object>
+  <object pk="11" model="contenttypes.contenttype">
+    <field type="CharField" name="name">external link</field>
+    <field type="CharField" name="app_label">knowledge</field>
+    <field type="CharField" name="model">externallink</field>
+  </object>
+  <object pk="2" model="contenttypes.contenttype">
+    <field type="CharField" name="name">group</field>
+    <field type="CharField" name="app_label">auth</field>
+    <field type="CharField" name="model">group</field>
+  </object>
+  <object pk="8" model="contenttypes.contenttype">
+    <field type="CharField" name="name">log entry</field>
+    <field type="CharField" name="app_label">admin</field>
+    <field type="CharField" name="model">logentry</field>
+  </object>
+  <object pk="4" model="contenttypes.contenttype">
+    <field type="CharField" name="name">message</field>
+    <field type="CharField" name="app_label">auth</field>
+    <field type="CharField" name="model">message</field>
+  </object>
+  <object pk="1" model="contenttypes.contenttype">
+    <field type="CharField" name="name">permission</field>
+    <field type="CharField" name="app_label">auth</field>
+    <field type="CharField" name="model">permission</field>
+  </object>
+  <object pk="19" model="contenttypes.contenttype">
+    <field type="CharField" name="name">profile</field>
+    <field type="CharField" name="app_label">register</field>
+    <field type="CharField" name="model">profile</field>
+  </object>
+  <object pk="20" model="contenttypes.contenttype">
+    <field type="CharField" name="name">profile answer</field>
+    <field type="CharField" name="app_label">register</field>
+    <field type="CharField" name="model">profileanswer</field>
+  </object>
+  <object pk="10" model="contenttypes.contenttype">
+    <field type="CharField" name="name">recommend</field>
+    <field type="CharField" name="app_label">knowledge</field>
+    <field type="CharField" name="model">recommend</field>
+  </object>
+  <object pk="9" model="contenttypes.contenttype">
+    <field type="CharField" name="name">resource file</field>
+    <field type="CharField" name="app_label">knowledge</field>
+    <field type="CharField" name="model">resourcefile</field>
+  </object>
+  <object pk="15" model="contenttypes.contenttype">
+    <field type="CharField" name="name">rule</field>
+    <field type="CharField" name="app_label">knowledge</field>
+    <field type="CharField" name="model">rule</field>
+  </object>
+  <object pk="17" model="contenttypes.contenttype">
+    <field type="CharField" name="name">rule conclusion</field>
+    <field type="CharField" name="app_label">knowledge</field>
+    <field type="CharField" name="model">ruleconclusion</field>
+  </object>
+  <object pk="16" model="contenttypes.contenttype">
+    <field type="CharField" name="name">rule premise</field>
+    <field type="CharField" name="app_label">knowledge</field>
+    <field type="CharField" name="model">rulepremise</field>
+  </object>
+  <object pk="18" model="contenttypes.contenttype">
+    <field type="CharField" name="name">rule recommend</field>
+    <field type="CharField" name="app_label">knowledge</field>
+    <field type="CharField" name="model">rulerecommend</field>
+  </object>
+  <object pk="14" model="contenttypes.contenttype">
+    <field type="CharField" name="name">rule set</field>
+    <field type="CharField" name="app_label">knowledge</field>
+    <field type="CharField" name="model">ruleset</field>
+  </object>
+  <object pk="6" model="contenttypes.contenttype">
+    <field type="CharField" name="name">session</field>
+    <field type="CharField" name="app_label">sessions</field>
+    <field type="CharField" name="model">session</field>
+  </object>
+  <object pk="7" model="contenttypes.contenttype">
+    <field type="CharField" name="name">site</field>
+    <field type="CharField" name="app_label">sites</field>
+    <field type="CharField" name="model">site</field>
+  </object>
+  <object pk="3" model="contenttypes.contenttype">
+    <field type="CharField" name="name">user</field>
+    <field type="CharField" name="app_label">auth</field>
+    <field type="CharField" name="model">user</field>
+  </object>
+  <object pk="12" model="contenttypes.contenttype">
+    <field type="CharField" name="name">variable</field>
+    <field type="CharField" name="app_label">knowledge</field>
+    <field type="CharField" name="model">variable</field>
+  </object>
+  <object pk="13" model="contenttypes.contenttype">
+    <field type="CharField" name="name">variable choice</field>
+    <field type="CharField" name="app_label">knowledge</field>
+    <field type="CharField" name="model">variablechoice</field>
+  </object>
+  <object pk="b7343696ce0ddfeef3f5c09aae95a23a" model="sessions.session">
+    <field type="TextField" name="session_data">MWVmODlkMTQ5YTk0ZmUyNGQ1MDI1Y2ZmZTZhMmZhOTFkN2JkODc4ODqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdhnEFVQV0ZXN0c3EGXYZxB1UIcnVsZXNldHNxCF2GcQlVBHZhcnNxCl2G
+cQtlcy4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 09:39:31</field>
+  </object>
+  <object pk="c29310a16876bf7aa090a835edb0ab05" model="sessions.session">
+    <field type="TextField" name="session_data">MGU4NTUxMWIwZDQ5NWYyNzhhZGZmMTAwMGU0Mjg3YzA5YjI1YjBmZDqAAn1xAVUKdGVzdGNvb2tp
+ZXECVQZ3b3JrZWRxA3Mu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 06:23:47</field>
+  </object>
+  <object pk="ed6fe893faff6d804fc7c1d636bb9ee9" model="sessions.session">
+    <field type="TextField" name="session_data">ODJjNGZhMmY3ODdjNDliNGZlZWU5NDQyMzI1ZWJmOWM4MWY2OGUwNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 12:28:34</field>
+  </object>
+  <object pk="71b7a92a2099e42336a291ac3e0d7580" model="sessions.session">
+    <field type="TextField" name="session_data">YjZlYTVjZmU3ZGRiZDIzZWNiMGUxODJhNDlmOWY4OGIxMjNkOTcyNzqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc3EEXXEFKEsBiIZxBksBiIZxB2WGcQhVBXRlc3RzcQldhnEKVQhydWxlc2V0
+c3ELXXEMSwFhhnENVQR2YXJzcQ5dcQ8oSwGIhnEQSwFOhnERZYZxEmVVEl9hdXRoX3VzZXJfYmFj
+a2VuZHETVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEUVQ1fYXV0
+aF91c2VyX2lkcRVLAXUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 14:22:44</field>
+  </object>
+  <object pk="f03250750722b8cf56efca28d513c61b" model="sessions.session">
+    <field type="TextField" name="session_data">MWVmODlkMTQ5YTk0ZmUyNGQ1MDI1Y2ZmZTZhMmZhOTFkN2JkODc4ODqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdhnEFVQV0ZXN0c3EGXYZxB1UIcnVsZXNldHNxCF2GcQlVBHZhcnNxCl2G
+cQtlcy4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 14:39:15</field>
+  </object>
+  <object pk="bb4f6b0617d471d6135e212f49e9df1f" model="sessions.session">
+    <field type="TextField" name="session_data">ZDdhOGY4NmFjOGUxYjM5NzE0NjRjZmQzNDQ2NGRjNDM5MWM5YTllNjqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc3EEXYZxBVUFdGVzdHNxBl1xB0sBYYZxCFUIcnVsZXNldHNxCV1xCksBYYZx
+C1UEdmFyc3EMXYZxDWVVDV9hdXRoX3VzZXJfaWRxDksBVRJfYXV0aF91c2VyX2JhY2tlbmRxD1Up
+ZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxEHUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 15:53:06</field>
+  </object>
+  <object pk="96b74fe4dcb6f6dbc2d334335464286b" model="sessions.session">
+    <field type="TextField" name="session_data">YTQ2ZjUzMmZmYzJiMjk1NjYwMjNjNzlkZjQ2ODNiNDc2Mzk3YjhiMzqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLAYmGcQZhhnEHVQV0ZXN0c3EIXYZxCVUIcnVsZXNldHNxCl1xC0sB
+YYZxDFUEdmFyc3ENXXEOSwGJhnEPYYZxEGVzLg==</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 16:22:20</field>
+  </object>
+  <object pk="1c0fd00c3d52444a4c3a3739b7a4d03c" model="sessions.session">
+    <field type="TextField" name="session_data">OWY3MGI1MTcxNTNlYzY1MmJkYWMwYzUzNmRiNjVmNjI1NmNlM2QwNTqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc11xBEsBiIZxBWGGcQZVBXRlc3RzXYZxB1UIcnVsZXNldHNdcQhLAWGGcQlV
+BHZhcnNdcQooSwGIhnELSwFOhnEMZYZxDWVVCnRlc3Rjb29raWVxDlUGd29ya2VkcQ91Lg==</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 10:45:59</field>
+  </object>
+  <object pk="66294240e38b90809177bb07a8eb6f53" model="sessions.session">
+    <field type="TextField" name="session_data">ODJjNGZhMmY3ODdjNDliNGZlZWU5NDQyMzI1ZWJmOWM4MWY2OGUwNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 11:12:38</field>
+  </object>
+  <object pk="bb9a26d82f371df468ca935824541097" model="sessions.session">
+    <field type="TextField" name="session_data">NmIxZmUwYzg2ZjBlYzM0ZjRkYWNhMmZmYzBiYWIwMDU0N2JjNDkxOTqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc3EEXXEFKEsBiIZxBksBiIZxB0sBiIZxCGWGcQlVBXRlc3RzcQpdhnELVQhy
+dWxlc2V0c3EMXXENSwFhhnEOVQR2YXJzcQ9dcRAoSwGIhnERSwFOhnESZYZxE2VVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHEUVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEV
+VQ1fYXV0aF91c2VyX2lkcRZLAXUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 21:18:15</field>
+  </object>
+  <object pk="7efa4edcdbb1bac341813d6a9f1c27f5" model="sessions.session">
+    <field type="TextField" name="session_data">NjY4MzBmYmJkYjI3NGYyYzM0MzBkNDFkYjQ5NmI1OGVkNGMwMmQzODqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLAYiGcQZhhnEHVQV0ZXN0c3EIXYZxCVUIcnVsZXNldHNxCl1xC0sB
+YYZxDFUEdmFyc3ENXXEOKEsBiIZxD0sBToZxEGWGcRFlcy4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 19:55:47</field>
+  </object>
+  <object pk="90868e48489723e2aeb922615ef70b02" model="sessions.session">
+    <field type="TextField" name="session_data">YTQ2ZjUzMmZmYzJiMjk1NjYwMjNjNzlkZjQ2ODNiNDc2Mzk3YjhiMzqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLAYmGcQZhhnEHVQV0ZXN0c3EIXYZxCVUIcnVsZXNldHNxCl1xC0sB
+YYZxDFUEdmFyc3ENXXEOSwGJhnEPYYZxEGVzLg==</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 19:25:08</field>
+  </object>
+  <object pk="6359faae9d9359c2beafa5839b69181d" model="sessions.session">
+    <field type="TextField" name="session_data">NjY4MzBmYmJkYjI3NGYyYzM0MzBkNDFkYjQ5NmI1OGVkNGMwMmQzODqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLAYiGcQZhhnEHVQV0ZXN0c3EIXYZxCVUIcnVsZXNldHNxCl1xC0sB
+YYZxDFUEdmFyc3ENXXEOKEsBiIZxD0sBToZxEGWGcRFlcy4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 19:44:31</field>
+  </object>
+  <object pk="39c9061a341a968138a4b3f60071e672" model="sessions.session">
+    <field type="TextField" name="session_data">ZDUxYzVlY2NkZWJlZjg4ODczYzM0YWMzMDk0NjAwZWI2MDU2YTNmZDqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc3EEXXEFSwGJhnEGYYZxB1UFdGVzdHNxCF2GcQlVCHJ1bGVzZXRzcQpdcQtL
+AWGGcQxVBHZhcnNxDV1xDksBiYZxD2GGcRBlVQp0ZXN0Y29va2llcRFVBndvcmtlZHESdS4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 14:57:50</field>
+  </object>
+  <object pk="ecbd310a79b4dcf049b02cffc2c56004" model="sessions.session">
+    <field type="TextField" name="session_data">MTQ1OWQ5NDgyOWI1MTc3YzZmZjNkMTM0ZWY1MTE0NGY0OTU5NzhlYjqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc3EEXXEFSwGJhnEGYYZxB1UFdGVzdHNxCF2GcQlVCHJ1bGVzZXRzcQpdcQtL
+AWGGcQxVBHZhcnNxDV1xDksBiYZxD2GGcRBlVQ1fYXV0aF91c2VyX2lkcRFLAVUSX2F1dGhfdXNl
+cl9iYWNrZW5kcRJVKWRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kcRN1
+Lg==</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 21:41:07</field>
+  </object>
+  <object pk="77513bdfd50754ad5fc1af08aad2a87b" model="sessions.session">
+    <field type="TextField" name="session_data">MmM0YmZiMGEzZThhZmQzNzc4Nzk1YTQ0YzhkNDUxMzc3MjY5ZGVjMzqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc3EEXXEFSwSJhnEGYYZxB1UFdGVzdHNxCF1xCUsFYYZxClUIcnVsZXNldHNx
+C11xDEsCYYZxDVUEdmFyc3EOXXEPSwSJhnEQYYZxEWVVEl9hdXRoX3VzZXJfYmFja2VuZHESVSlk
+amFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHETVQ1fYXV0aF91c2VyX2lk
+cRRLBnUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 20:22:14</field>
+  </object>
+  <object pk="ef8fbd5918649da9d3115f93619626c5" model="sessions.session">
+    <field type="TextField" name="session_data">NjY4MzBmYmJkYjI3NGYyYzM0MzBkNDFkYjQ5NmI1OGVkNGMwMmQzODqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLAYiGcQZhhnEHVQV0ZXN0c3EIXYZxCVUIcnVsZXNldHNxCl1xC0sB
+YYZxDFUEdmFyc3ENXXEOKEsBiIZxD0sBToZxEGWGcRFlcy4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 20:35:13</field>
+  </object>
+  <object pk="f5706b00133e7883fad9c548f3def9bc" model="sessions.session">
+    <field type="TextField" name="session_data">NmQxYjk1YzEzMDMzYTBkNDNlMDRiZmQ0NTkzMGRhY2Q1M2ZlMDgyODqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc11xBEsBiYZxBWGGcQZVBXRlc3RzXYZxB1UIcnVsZXNldHNdcQhLAWGGcQlV
+BHZhcnNdcQpLAYmGcQthhnEMZVUKdGVzdGNvb2tpZXENVQZ3b3JrZWRxDnUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 20:40:04</field>
+  </object>
+  <object pk="d7f6b089c03b559bea8be07404cf660b" model="sessions.session">
+    <field type="TextField" name="session_data">YTQ2ZjUzMmZmYzJiMjk1NjYwMjNjNzlkZjQ2ODNiNDc2Mzk3YjhiMzqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLAYmGcQZhhnEHVQV0ZXN0c3EIXYZxCVUIcnVsZXNldHNxCl1xC0sB
+YYZxDFUEdmFyc3ENXXEOSwGJhnEPYYZxEGVzLg==</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 21:11:42</field>
+  </object>
+  <object pk="a499a1a1f854cd80a326177f6f503f56" model="sessions.session">
+    <field type="TextField" name="session_data">N2Y5YjA1NjNlZTQyMDliNDgwZGZlZjUyMTg3YWIyYTY4ZmNmNmUyMzqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc11xBEsBiIZxBWGGcQZVBXRlc3RzXYZxB1UIcnVsZXNldHNdcQhLAWGGcQlV
+BHZhcnNdcQooSwGIhnELSwFOhnEMZYZxDWVVEl9hdXRoX3VzZXJfYmFja2VuZHEOVSlkamFuZ28u
+Y29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEPVQ1fYXV0aF91c2VyX2lkcRBLAXUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 21:23:06</field>
+  </object>
+  <object pk="adeea9c715a9ec7046f9ce139d9cd202" model="sessions.session">
+    <field type="TextField" name="session_data">ZDg3M2ZjNTNmMzFmMzgyNWI5OGViNzViMjE2NDdhODhhNWU0ZjMzNTqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc11xBChLAYiGcQVLAYiGcQZlhnEHVQV0ZXN0c12GcQhVCHJ1bGVzZXRzXXEJ
+SwFhhnEKVQR2YXJzXXELKEsBiIZxDEsBToZxDWWGcQ5lVQp0ZXN0Y29va2llcQ9VBndvcmtlZHEQ
+dS4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 21:30:58</field>
+  </object>
+  <object pk="9295d150ddc286859e19718a4583bf82" model="sessions.session">
+    <field type="TextField" name="session_data">NzI3N2Q3ODI2NzUxNWY4OTBiODdkNzc4MGE5ZTgxZTI3NjBmMDc2NzqAAn1xAS4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 15:33:56</field>
+  </object>
+  <object pk="b07dc174d92cfa77aeb5ee167711097c" model="sessions.session">
+    <field type="TextField" name="session_data">NzYyYzA3MzAyN2UyYzJmMjI5YWM2M2Y1MmI5Yjc1MWE0YmI0NDVmMzqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc3EEXXEFKEsEiYZxBksFiYZxB0sCiYZxCEsDiIZxCUsGiIZxCmWGcQtVBXRl
+c3RzcQxdcQ1LCWGGcQ5VCHJ1bGVzZXRzcQ9dcRBLAmGGcRFVBHZhcnNxEl1xEyhLBImGcRRLBYmG
+cRVLAomGcRZLA4iGcRdLDE6GcRhLBoiGcRllhnEaZVUKdGVzdGNvb2tpZXEbVQZ3b3JrZWRxHHUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 17:14:43</field>
+  </object>
+  <object pk="5d32e966999ded47eba9b8dd8e79c392" model="sessions.session">
+    <field type="TextField" name="session_data">NzI3N2Q3ODI2NzUxNWY4OTBiODdkNzc4MGE5ZTgxZTI3NjBmMDc2NzqAAn1xAS4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 16:02:20</field>
+  </object>
+  <object pk="8d0642d1e1dd661fb63b6b493c60b950" model="sessions.session">
+    <field type="TextField" name="session_data">ODIzNjdhNWEyYjVmZTMxYTgxMjU4ODFiZDYzNzczNzVlYWMwODQyMTqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLBIiGcQZhhnEHVQV0ZXN0c3EIXXEJSwVhhnEKVQhydWxlc2V0c3EL
+XXEMSwJhhnENVQR2YXJzcQ5dcQ8oSwSIhnEQSwROhnERZYZxEmVzLg==</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 22:34:16</field>
+  </object>
+  <object pk="2cb0582d711de351eaba1b5b38fb73ea" model="sessions.session">
+    <field type="TextField" name="session_data">ZDU2NDBlNTg3NzY3Y2MzZmM2M2E2NDM1OWY3MmQ5Zjg2MTg4MzE1NTqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLBImGcQZhhnEHVQV0ZXN0c3EIXXEJSwVhhnEKVQhydWxlc2V0c3EL
+XXEMSwJhhnENVQR2YXJzcQ5dcQ9LBImGcRBhhnERZXMu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 22:56:30</field>
+  </object>
+  <object pk="cb5fc4e9150173103fbf65ea238b894b" model="sessions.session">
+    <field type="TextField" name="session_data">ODg3MTcwY2I0OWFlMTNkZTE3YmVjM2QzZmEyY2M1MGFmNWM5ZTg0NTqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUHYW5zd2Vyc3EEXXEFKEsEiIZxBksFiIZxB0sCiIZxCEsDiIZxCUsMiIZxCksGiIZxC0sJ
+iIZxDEsKiIZxDUsLiIZxDksHiIZxD0sQiIZxEEsPiIZxEWWGcRJVBXRlc3RzcRNdhnEUVQhydWxl
+c2V0c3EVXXEWSwJhhnEXVQR2YXJzcRhdcRkoSwSIhnEaSwWIhnEbSwKIhnEcSwOIhnEdSwyIhnEe
+SwaIhnEfSwmIhnEgSwqIhnEhSwuIhnEiSweIhnEjSxCIhnEkSw+IhnElSxGIhnEmZYZxJ2VVEl9h
+dXRoX3VzZXJfYmFja2VuZHEoVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFj
+a2VuZHEpVQ1fYXV0aF91c2VyX2lkcSpLAXUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 17:44:11</field>
+  </object>
+  <object pk="b02a84db422d3eeb3bb7cb8900f40b75" model="sessions.session">
+    <field type="TextField" name="session_data">ZDU2NDBlNTg3NzY3Y2MzZmM2M2E2NDM1OWY3MmQ5Zjg2MTg4MzE1NTqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLBImGcQZhhnEHVQV0ZXN0c3EIXXEJSwVhhnEKVQhydWxlc2V0c3EL
+XXEMSwJhhnENVQR2YXJzcQ5dcQ9LBImGcRBhhnERZXMu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 23:40:20</field>
+  </object>
+  <object pk="e1d5037603da7b4f7cc062c4b623516d" model="sessions.session">
+    <field type="TextField" name="session_data">NDVmZTk2ZmJiZDY1MDIzYzhmZTBkOTFmODJiYzIyOWIxNWZhMjVlMTqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLBIiGcQZhhnEHVQV0ZXN0c3EIXXEJSwVhhnEKVQhydWxlc2V0c3EL
+XXEMSwJhhnENVQR2YXJzcQ5dcQ9LBIiGcRBhhnERZXMu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 23:38:56</field>
+  </object>
+  <object pk="9a9bce12b2b70878e08c9f02efea1909" model="sessions.session">
+    <field type="TextField" name="session_data">ZDU2NDBlNTg3NzY3Y2MzZmM2M2E2NDM1OWY3MmQ5Zjg2MTg4MzE1NTqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQVLBImGcQZhhnEHVQV0ZXN0c3EIXXEJSwVhhnEKVQhydWxlc2V0c3EL
+XXEMSwJhhnENVQR2YXJzcQ5dcQ9LBImGcRBhhnERZXMu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 18:52:01</field>
+  </object>
+  <object pk="424ab8dd371c2163ee3eb568fb5407bf" model="sessions.session">
+    <field type="TextField" name="session_data">NTFjMzBkODczMmQwZWUxM2Y1MmRkYzhjYTkxNWZlOWY4NmNkNzhjZjqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQUoSwSIhnEGSwWIhnEHZYZxCFUFdGVzdHNxCV1xCksCYYZxC1UIcnVs
+ZXNldHNxDF1xDUsCYYZxDlUEdmFyc3EPXXEQKEsEiIZxEUsFiIZxEmWGcRNlcy4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 23:46:32</field>
+  </object>
+  <object pk="237fc70fbcda009c09e1f68f7ee4e52d" model="sessions.session">
+    <field type="TextField" name="session_data">ZTcyOGM2ZmM0YjZmMWY3ZjE0ZWI1MTVkMmRmMTcxOTYyZTZlNTI4YjqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQUoSwSJhnEGSwWIhnEHSwKJhnEISwyIhnEJSwaIhnEKZYZxC1UFdGVz
+dHNxDF1xDUsJYYZxDlUIcnVsZXNldHNxD11xEEsCYYZxEVUEdmFyc3ESXXETKEsEiYZxFEsFiIZx
+FUsCiYZxFksDToZxF0sMiIZxGEsGiIZxGWWGcRplcy4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-19 00:57:52</field>
+  </object>
+  <object pk="4f7899818ea6e6cbbba2ea92e505bc7b" model="sessions.session">
+    <field type="TextField" name="session_data">MmI4ZjE1ZjJmZWVmZDQyMDA5MWQ5YTRmNzIyYTZjZWE1YTJiNGY1MDqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQUoSwSIhnEGSwWIhnEHSwKIhnEISwOIhnEJZYZxClUFdGVzdHNxC11x
+DEsMYYZxDVUIcnVsZXNldHNxDl1xD0sCYYZxEFUEdmFyc3ERXXESKEsEiIZxE0sFiIZxFEsCiIZx
+FUsDiIZxFmWGcRdlcy4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 18:52:51</field>
+  </object>
+  <object pk="e9197a9c2f739e6639aa41e38eeee783" model="sessions.session">
+    <field type="TextField" name="session_data">ODM4N2U4YjkyNWZkMDhmZGU5YjcwMWZkNGU1NmYzNGJkZWY3NTkzMTqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdcQUoSwSJhnEGSwWJhnEHSwKIhnEISwOIhnEJSwyIhnEKSwaJhnELSwmI
+hnEMSwqJhnENZYZxDlUFdGVzdHNxD11xEEsLYYZxEVUIcnVsZXNldHNxEl1xE0sCYYZxFFUEdmFy
+c3EVXXEWKEsEiYZxF0sFiYZxGEsCiIZxGUsDiIZxGksMiIZxG0sGiYZxHEsJiIZxHUsKiYZxHmWG
+cR9lcy4=</field>
+    <field type="DateTimeField" name="expire_date">2012-03-18 18:56:14</field>
+  </object>
+  <object pk="033ba9d16e96e2b4b28f210425d5de24" model="sessions.session">
+    <field type="TextField" name="session_data">ODJjNGZhMmY3ODdjNDliNGZlZWU5NDQyMzI1ZWJmOWM4MWY2OGUwNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-19 01:02:18</field>
+  </object>
+  <object pk="2127ff7b743185b6236f15324cdc4b60" model="sessions.session">
+    <field type="TextField" name="session_data">ZTUxNzcwNDY2ZmYwYmM1YzJiM2YxYzkxMDc0OTQ2ZjdiNTYyMzZjNTqAAn1xAVUGZW5naW5lcQJd
+cQMoVQdhbnN3ZXJzcQRdhnEFVQV0ZXN0c3EGXXEHSwRhhnEIVQhydWxlc2V0c3EJXXEKSwJhhnEL
+VQR2YXJzcQxdhnENZXMu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-19 01:06:26</field>
+  </object>
+  <object pk="1d4c7a86e700e9e1ab970e742f4708ab" model="sessions.session">
+    <field type="TextField" name="session_data">ODJjNGZhMmY3ODdjNDliNGZlZWU5NDQyMzI1ZWJmOWM4MWY2OGUwNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu</field>
+    <field type="DateTimeField" name="expire_date">2012-03-19 01:12:40</field>
+  </object>
+  <object pk="7b6dad9a004f3f68167e860bde84213c" model="sessions.session">
+    <field type="TextField" name="session_data">ODJjNGZhMmY3ODdjNDliNGZlZWU5NDQyMzI1ZWJmOWM4MWY2OGUwNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+</field>
+    <field type="DateTimeField" name="expire_date">2012-03-19 02:40:13</field>
+  </object>
+  <object pk="1" model="sites.site">
+    <field type="CharField" name="domain">example.com</field>
+    <field type="CharField" name="name">example.com</field>
+  </object>
+  <object pk="180" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-05 01:25:26</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+    <field type="TextField" name="object_id">7</field>
+    <field type="CharField" name="object_repr">testuser02</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed groups.</field>
+  </object>
+  <object pk="179" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-05 01:24:40</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">Ingest Users Group</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="178" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:20:50</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">15</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND CanCookFood=Yes THEN Make these foods in your own kitchen.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="177" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:20:23</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">IF HasKitchen=Yes AND LikesCooking=Yes THEN CanCookFood=Yes</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="176" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:20:07</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">IF HasKitchen=Yes AND LikesCooking=Yes THEN CanCookFood=Yes</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule premise "LikesCooking=Yes". Changed variable for rule premise "HasKitchen=Yes". Added rule conclusion "CanCookFood=Yes". Deleted rule recommend "Make these foods in your own kitchen.".</field>
+  </object>
+  <object pk="175" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:17:21</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Make these foods in your own kitchen.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule premise "HasKitchen=Yes". Deleted rule premise "CanCookFood=Yes".</field>
+  </object>
+  <object pk="174" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:16:23</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND HasKitchen=Yes AND CanCookFood=Yes THEN Make these foods in your own kitchen.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="173" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:15:11</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">Make these foods in your own kitchen.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="172" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:12:15</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">LikesBiscuitsChocolateCake</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed prompt.</field>
+  </object>
+  <object pk="171" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:11:54</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">17</field>
+    <field type="CharField" name="object_repr">CanCookFood</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="170" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:09:50</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">16</field>
+    <field type="CharField" name="object_repr">HasKitchen</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="169" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:09:02</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">15</field>
+    <field type="CharField" name="object_repr">LikesCooking</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="168" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:08:08</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">drinkTea</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">3</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="167" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:07:43</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">drinkTea</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="166" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:07:10</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">drinkTea</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed prompt.</field>
+  </object>
+  <object pk="165" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 22:06:04</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">LikesBiscuitsChocolateCake</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed ask.</field>
+  </object>
+  <object pk="164" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 21:58:07</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added external link "Hungry Magpie on Youtube".</field>
+  </object>
+  <object pk="162" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 21:54:40</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">testProfile</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="159" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 21:53:48</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">21</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed profile.</field>
+  </object>
+  <object pk="155" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 21:44:35</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">7</field>
+    <field type="CharField" name="object_repr">Drink some cold water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed name and text.</field>
+  </object>
+  <object pk="154" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 21:44:01</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">8</field>
+    <field type="CharField" name="object_repr">IF IsHot=Yes AND IsThirsty=Yes THEN Drink some water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="152" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 19:00:09</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed order for rule "IF IsHot=Yes AND IsThirsty=Yes THEN Drink some water.". Changed order for rule "IF IsCold=Yes AND IsThirsty=Yes AND LikesTea=Yes THEN Drink some tea.". Changed order for rule "IF IsThirsty=Yes AND IsCold=Yes AND LikesHotChocolate=Yes THEN Drink some hot chocolate.". Changed order for rule "IF IsHungry=Yes AND IsHot=Yes AND LikesIceCream=Yes THEN Eat ice cream.". Changed order for rule "IF IsHungry=Yes AND LikesChocolate=Yes THEN Eat chocolate.".</field>
+  </object>
+  <object pk="151" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:59:46</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Yes AND LikesTea=No AND LikesHotChocolate=No THEN Drink some water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="150" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:57:56</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND LikesChocolate=Yes THEN Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule premise "LikesChocolate=Yes".</field>
+  </object>
+  <object pk="149" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:57:33</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule conclusion "LikesChocolate=Yes".</field>
+  </object>
+  <object pk="147" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:56:42</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN LikesChocolate=No,Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="146" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:52:54</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="145" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:52:47</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">10</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Yes AND IsCold=Yes AND LikesHotChocolate=Yes THEN Drink some hot chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed variable for rule premise "IsThirsty=Yes". Changed variable for rule premise "IsCold=Yes". Changed variable for rule premise "LikesHotChocolate=Yes".</field>
+  </object>
+  <object pk="144" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:52:24</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">11</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND IsHot=Yes AND LikesIceCream=Yes THEN Eat ice cream.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed variable for rule premise "IsHot=Yes". Changed variable for rule premise "LikesIceCream=Yes".</field>
+  </object>
+  <object pk="143" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:52:02</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND LikesBiscuits=Yes THEN Eat biscuits.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed variable for rule premise "IsHungry=Yes". Changed variable for rule premise "LikesBiscuits=Yes".</field>
+  </object>
+  <object pk="141" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:47:51</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="140" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:47:20</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">11</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND LikesIceCream=Yes AND IsHot=Yes THEN Eat ice cream.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="138" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:45:06</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">10</field>
+    <field type="CharField" name="object_repr">IF IsCold=Yes AND LikesHotChocolate=Yes THEN Drink some hot chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="136" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:34:32</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">8</field>
+    <field type="CharField" name="object_repr">IF IsHot=Yes AND IsThirsty=Yes THEN Drink some water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="135" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:32:48</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed order for rule "IF LikesCake=Yes AND IsHungry=Yes THEN Eat cake.". Changed order for rule "IF LikesBiscuits=Yes AND IsHungry=Yes THEN Eat biscuits.". Changed order for rule "IF IsThirsty=No THEN Don't Drink.". Changed order for rule "IF IsThirsty=Yes THEN Have a drink.".</field>
+  </object>
+  <object pk="133" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:31:29</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">6</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=No THEN Don't Drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="131" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:29:18</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="130" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:28:49</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">IF LikesBiscuits=Yes AND IsHungry=Yes THEN Eat biscuits.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule premise "IsHungry=Yes".</field>
+  </object>
+  <object pk="129" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:28:36</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF LikesCake=Yes AND IsHungry=Yes THEN Eat cake.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule premise "IsHungry=Yes".</field>
+  </object>
+  <object pk="128" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:28:14</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=No THEN Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed recommend for rule recommend "Don't Eat.".</field>
+  </object>
+  <object pk="127" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:26:54</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=No THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed value for rule premise "IsHungry=No".</field>
+  </object>
+  <object pk="126" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:24:25</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">IF IsHungry=No THEN Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="125" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:23:36</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed otherLinks.</field>
+  </object>
+  <object pk="124" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:21:16</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">IF IsHungry=No THEN Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="123" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:20:05</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed order for rule "IF IsHungry=Yes THEN Eat some food.". Changed order for rule "IF LikesCake=Yes THEN Eat cake.". Changed order for rule "IF LikesBiscuits=Yes THEN Eat biscuits.". Changed order for rule "IF IsHungry=No THEN Don't Eat.".</field>
+  </object>
+  <object pk="119" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:15:24</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF LikesCake=Yes THEN Eat cake.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed variable for rule premise "LikesCake=Yes". Changed recommend for rule recommend "Eat cake.". Deleted rule recommend "Eat ice cream.". Deleted rule recommend "Eat biscuits.". Deleted rule recommend "Eat cake.". Deleted rule recommend "Eat chocolate.".</field>
+  </object>
+  <object pk="117" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:12:11</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed order for rule "IF IsHungry=Yes AND LikesCake=Yes AND LikesBiscuits=Yes AND LikesIceCream=Yes AND LikesSorbet=Yes THEN Eat some food.,Eat ice cream.,Eat biscuits.,Eat cake.,Eat chocolate.". Changed order for rule "IF IsHungry=Yes THEN Eat some food.".</field>
+  </object>
+  <object pk="116" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:11:10</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">LikesBiscuitsChocolateCake</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="115" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:06:29</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="114" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:06:23</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule conclusion "LikesCake=Yes".</field>
+  </object>
+  <object pk="113" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:05:52</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND LikesCake=Yes AND LikesBiscuits=Yes AND LikesIceCream=Yes AND LikesSorbet=Yes THEN Eat some food.,Eat ice cream.,Eat biscuits.,Eat cake.,Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="112" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:05:35</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND LikesCake=Yes AND LikesBiscuits=Yes AND LikesIceCream=Yes AND LikesSorbet=Yes THEN Eat some food.,Eat ice cream.,Eat biscuits.,Eat cake.,Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule premise "LikesCake=Yes". Added rule premise "LikesBiscuits=Yes". Added rule premise "LikesIceCream=Yes". Added rule premise "LikesSorbet=Yes". Added rule recommend "Eat ice cream.". Added rule recommend "Eat biscuits.". Added rule recommend "Eat cake.". Added rule recommend "Eat chocolate.".</field>
+  </object>
+  <object pk="111" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:03:54</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule recommend "Eat cake.".</field>
+  </object>
+  <object pk="110" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 18:03:44</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat cake.,Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule conclusion "LikesCake=Yes".</field>
+  </object>
+  <object pk="108" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 17:11:33</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN LikesCake=No,Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="106" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 17:09:56</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN LikesCake=Yes,Eat cake.,Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule recommend "Eat some food.".</field>
+  </object>
+  <object pk="105" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 17:09:32</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN LikesCake=Yes,Eat cake.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule conclusion "LikesCake=Yes". Changed recommend for rule recommend "Eat cake.".</field>
+  </object>
+  <object pk="101" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:51:52</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND LikesCake=Yes AND LikesBiscuits=Yes AND LikesIceCream=Yes AND LikesChocolate=Yes THEN IsHungry=Yes,Eat some food.,Eat biscuits.,Eat ice cream.,Eat cake.,Eat some sorbet.,Eat chocol</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule premise "IsHungry=Yes". Added rule premise "LikesCake=Yes". Added rule premise "LikesBiscuits=Yes". Added rule premise "LikesIceCream=Yes". Added rule premise "LikesChocolate=Yes". Added rule recommend "Eat biscuits.". Added rule recommend "Eat ice cream.". Added rule recommend "Eat cake.". Added rule recommend "Eat some sorbet.". Added rule recommend "Eat chocolate.".</field>
+  </object>
+  <object pk="100" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:36:10</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF  THEN IsHungry=Yes,Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed variable for rule conclusion "IsHungry=Yes". Changed recommend for rule recommend "Eat some food.".</field>
+  </object>
+  <object pk="99" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:33:26</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF  THEN IsThirsty=Yes,Have a drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule conclusion "IsThirsty=Yes".</field>
+  </object>
+  <object pk="98" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:29:40</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="95" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:24:14</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule "IF  THEN ".</field>
+  </object>
+  <object pk="94" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:23:41</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=No THEN Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="93" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:22:53</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="92" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:21:37</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="91" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:21:31</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule "IF  THEN ".</field>
+  </object>
+  <object pk="90" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:19:44</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed order for rule "IF IsHungry=Yes THEN Eat some food.". Changed order for rule "IF IsHungry=No THEN Don't Eat.".</field>
+  </object>
+  <object pk="89" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:19:38</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="88" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:19:24</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=No THEN Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="87" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:19:17</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=No THEN Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="86" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:18:24</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=No THEN Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="85" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:17:38</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">Don't Drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="84" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:17:23</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="83" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:17:01</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="82" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:15:27</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="81" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:15:19</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule conclusion "IsHungry=Yes".</field>
+  </object>
+  <object pk="80" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:14:16</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">21</field>
+    <field type="TextField" name="object_id">6</field>
+    <field type="CharField" name="object_repr">testuser01</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="79" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:13:22</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUserProfile</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="78" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:12:35</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN IsHungry=Yes,Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="77" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:11:22</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN IsHungry=Yes,Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule conclusion "IsHungry=Yes".</field>
+  </object>
+  <object pk="76" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:10:37</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule "IF  THEN ". Deleted rule "IF  THEN ".</field>
+  </object>
+  <object pk="75" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:04:52</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">testRecommend text text text</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed otherLinks.</field>
+  </object>
+  <object pk="74" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 16:02:29</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">guest</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed ruleset.</field>
+  </object>
+  <object pk="73" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:59:38</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">guest</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="72" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:57:37</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">guest</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="163" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:57:30</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">Don't Drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed videoLink.</field>
+  </object>
+  <object pk="161" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:54:35</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUserProfile</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="160" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:54:29</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">guest</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed ruleset.</field>
+  </object>
+  <object pk="71" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:53:56</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUserProfile</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="158" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:53:40</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">21</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">jbloggs</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed profile.</field>
+  </object>
+  <object pk="157" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:53:26</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">21</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">guest</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed profile.</field>
+  </object>
+  <object pk="70" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:53:07</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND IsHot=Yes AND LikesIceCream=Yes THEN Eat ice cream.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="156" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:51:49</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">21</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">admin</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed profile. Deleted account answer "AccountAnswer object".</field>
+  </object>
+  <object pk="69" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:51:13</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Yes THEN Have a drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="68" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:49:54</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="67" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:49:19</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">IF testVariable=Yes THEN testRecommend text text text</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="66" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:49:14</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule premise "IsHungry=Yes". Added rule recommend "Eat some food.".</field>
+  </object>
+  <object pk="65" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:48:46</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">drinkTea</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="64" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:47:57</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF  THEN</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="63" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:47:35</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="62" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:44:33</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="61" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:44:21</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added external link "Hungry Magpie on Youtube".</field>
+  </object>
+  <object pk="60" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:42:19</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">7</field>
+    <field type="CharField" name="object_repr">Drink some water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed otherLinks.</field>
+  </object>
+  <object pk="59" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:42:09</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">Have a drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed otherLinks.</field>
+  </object>
+  <object pk="58" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:41:41</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">11</field>
+    <field type="CharField" name="object_repr">Drink some tea.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="57" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:41:12</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed otherLinks.</field>
+  </object>
+  <object pk="56" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:40:48</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">10</field>
+    <field type="CharField" name="object_repr">Drink some hot chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="55" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:40:14</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">Eat biscuits.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed otherLinks.</field>
+  </object>
+  <object pk="54" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:40:10</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">picture of biscuits</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="53" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:39:31</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">Eat ice cream.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed otherLinks.</field>
+  </object>
+  <object pk="52" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:39:10</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">8</field>
+    <field type="CharField" name="object_repr">Eat some sorbet.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed otherLinks.</field>
+  </object>
+  <object pk="51" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:38:55</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">9</field>
+    <field type="CharField" name="object_repr">Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="50" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:36:28</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">11</field>
+    <field type="CharField" name="object_repr">hungry magpie</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="49" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:30:24</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">10</field>
+    <field type="CharField" name="object_repr">picture of William-Adolphe Bouguereau's Thirst (1886)</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="48" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:28:41</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">9</field>
+    <field type="CharField" name="object_repr">picture of tea</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="47" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:27:02</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">8</field>
+    <field type="CharField" name="object_repr">picture of hot chocolate</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="46" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:23:23</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">7</field>
+    <field type="CharField" name="object_repr">picture of chocolate</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="45" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:18:39</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">LikesChocolate</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="44" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:18:23</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">11</field>
+    <field type="CharField" name="object_repr">LikesHotChocolate</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="43" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:17:54</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">10</field>
+    <field type="CharField" name="object_repr">LikesTea</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="42" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:17:12</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">9</field>
+    <field type="CharField" name="object_repr">IsCold</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="41" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:16:43</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">6</field>
+    <field type="CharField" name="object_repr">picture of water</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="40" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:13:51</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">picture of rasberry sorbet</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed description and file.</field>
+  </object>
+  <object pk="39" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:11:35</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">picture of strawberry sorbet</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="38" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:09:22</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">picture of ice cream</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="37" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:07:59</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">picture of a cake</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed description.</field>
+  </object>
+  <object pk="36" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 15:07:30</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">A picture of a cake.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="35" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:56:34</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">8</field>
+    <field type="CharField" name="object_repr">Eat some sorbet.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="34" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:56:15</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">7</field>
+    <field type="CharField" name="object_repr">Drink some water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="33" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:56:05</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">6</field>
+    <field type="CharField" name="object_repr">Eat cake.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="32" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:55:49</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">Eat biscuits.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="31" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:55:33</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">Eat ice cream.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="30" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:54:50</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">Have a drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="29" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:54:15</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="28" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:51:39</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">8</field>
+    <field type="CharField" name="object_repr">LikesSorbet</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="27" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:50:46</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">7</field>
+    <field type="CharField" name="object_repr">LikesIceCream</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="26" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:50:45</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">7</field>
+    <field type="CharField" name="object_repr">LikesIceCream</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="25" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:49:16</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">6</field>
+    <field type="CharField" name="object_repr">IsHot</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="24" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:49:15</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">6</field>
+    <field type="CharField" name="object_repr">IsHot</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="23" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:48:58</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">IsThirsty</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="22" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:48:38</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">IsHungry</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="21" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:48:09</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">LikesBiscuits</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="20" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:48:07</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">LikesBiscuits</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="19" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:47:48</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">LikesCake</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="18" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:46:56</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">testVariable</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="17" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:46:43</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">testRecommend text text text</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed otherLinks.</field>
+  </object>
+  <object pk="16" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:11:49</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">testRecommend text text text</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed name and text.</field>
+  </object>
+  <object pk="15" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:07:57</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">testPML</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed description.</field>
+  </object>
+  <object pk="14" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:07:47</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">TestFlowPlayer</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed description.</field>
+  </object>
+  <object pk="13" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:07:44</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="12" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:07:00</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">testVariable</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed name and prompt.</field>
+  </object>
+  <object pk="11" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:05:39</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">testProfile</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed name.</field>
+  </object>
+  <object pk="10" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 14:05:07</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">testRuleset</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed name.</field>
+  </object>
+  <object pk="153" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 13:01:07</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="148" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 12:56:56</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN LikesChocolate=Yes,Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed value for rule conclusion "LikesChocolate=Yes".</field>
+  </object>
+  <object pk="142" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 12:51:41</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes AND LikesCake=Yes THEN Eat cake.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed variable for rule premise "IsHungry=Yes". Changed variable for rule premise "LikesCake=Yes".</field>
+  </object>
+  <object pk="139" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 12:45:47</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">10</field>
+    <field type="CharField" name="object_repr">IF IsCold=Yes AND LikesHotChocolate=Yes AND IsThirsty=Yes THEN Drink some hot chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added rule premise "IsThirsty=Yes".</field>
+  </object>
+  <object pk="137" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 12:43:22</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">9</field>
+    <field type="CharField" name="object_repr">IF IsCold=Yes AND IsThirsty=Yes AND LikesTea=Yes THEN Drink some tea.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="134" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 12:31:57</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">7</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Yes THEN Have a drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="132" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 12:30:59</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed value for rule premise "IsHungry=Yes". Changed recommend for rule recommend "Eat some food.".</field>
+  </object>
+  <object pk="122" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 12:16:42</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="121" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 12:16:33</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">IF IsHungry=No THEN Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="120" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 12:16:10</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">IF LikesBiscuits=Yes THEN Eat biscuits.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="118" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 12:14:29</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.,Eat ice cream.,Eat biscuits.,Eat cake.,Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule premise "LikesCake=Yes". Deleted rule premise "LikesBiscuits=Yes". Deleted rule premise "LikesIceCream=Yes". Deleted rule premise "LikesSorbet=Yes".</field>
+  </object>
+  <object pk="109" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 11:11:43</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="107" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 11:10:24</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN LikesCake=Yes,Eat cake.,Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="104" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 11:08:13</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="103" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 11:07:35</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Yes THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="102" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 11:05:56</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Deleted rule "IF  THEN ".</field>
+  </object>
+  <object pk="97" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 10:29:34</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF  THEN Have a drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="96" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 10:24:21</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="9" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 09:46:53</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed videoLink.</field>
+  </object>
+  <object pk="8" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 09:46:39</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">Test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="7" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 09:26:51</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed pmlLink.</field>
+  </object>
+  <object pk="6" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 09:25:05</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="5" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 09:04:36</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="4" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 09:03:24</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">IF test=Yes THEN test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="3" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 09:02:59</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="2" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 09:02:44</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="1" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-03-04 09:02:09</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">test</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="1" model="knowledge.resourcefile">
+    <field type="CharField" name="description">testPML</field>
+    <field type="FileField" name="file">netbeans_req_release_2.pml</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="2" model="knowledge.resourcefile">
+    <field type="CharField" name="description">TestFlowPlayer</field>
+    <field type="FileField" name="file">flowplayer-700.flv</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="3" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of a cake</field>
+    <field type="FileField" name="file">cake.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="4" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of ice cream</field>
+    <field type="FileField" name="file">270px-Italian_ice_cream.jpg</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="5" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of rasberry sorbet</field>
+    <field type="FileField" name="file">rasberry_sorbet.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="6" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of water</field>
+    <field type="FileField" name="file">water.png</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="7" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of chocolate</field>
+    <field type="FileField" name="file">chocolate.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="8" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of hot chocolate</field>
+    <field type="FileField" name="file">hot_chocolate.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="9" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of tea</field>
+    <field type="FileField" name="file">tea.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="10" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of William-Adolphe Bouguereau's Thirst (1886)</field>
+    <field type="FileField" name="file">thirst.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="11" model="knowledge.resourcefile">
+    <field type="CharField" name="description">hungry magpie</field>
+    <field type="FileField" name="file">hungry.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="12" model="knowledge.resourcefile">
+    <field type="CharField" name="description">picture of biscuits</field>
+    <field type="FileField" name="file">biscuits.bmp</field>
+    <field type="BooleanField" name="restricted">False</field>
+    <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
+    <field to="auth.user" name="restricted_to" rel="ManyToManyRel"/>
+  </object>
+  <object pk="1" model="knowledge.recommend">
+    <field type="SlugField" name="name">testRecommend</field>
+    <field type="CharField" name="text">testRecommend text text text</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">1</field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">2</field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+  </object>
+  <object pk="2" model="knowledge.recommend">
+    <field type="SlugField" name="name">recEat</field>
+    <field type="CharField" name="text">Eat some food.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="11"/>
+    </field>
+  </object>
+  <object pk="3" model="knowledge.recommend">
+    <field type="SlugField" name="name">recDrink</field>
+    <field type="CharField" name="text">Have a drink.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="10"/>
+    </field>
+  </object>
+  <object pk="4" model="knowledge.recommend">
+    <field type="SlugField" name="name">eatIceCream</field>
+    <field type="CharField" name="text">Eat ice cream.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="4"/>
+    </field>
+  </object>
+  <object pk="5" model="knowledge.recommend">
+    <field type="SlugField" name="name">eatBiscuits</field>
+    <field type="CharField" name="text">Eat biscuits.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="12"/>
+    </field>
+  </object>
+  <object pk="6" model="knowledge.recommend">
+    <field type="SlugField" name="name">eatCake</field>
+    <field type="CharField" name="text">Eat cake.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+  </object>
+  <object pk="7" model="knowledge.recommend">
+    <field type="SlugField" name="name">drinkColdWater</field>
+    <field type="CharField" name="text">Drink some cold water.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="6"/>
+    </field>
+  </object>
+  <object pk="8" model="knowledge.recommend">
+    <field type="SlugField" name="name">eatSomeSorbet</field>
+    <field type="CharField" name="text">Eat some sorbet.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="5"/>
+    </field>
+  </object>
+  <object pk="9" model="knowledge.recommend">
+    <field type="SlugField" name="name">eatChocolate</field>
+    <field type="CharField" name="text">Eat chocolate.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="7"/>
+    </field>
+  </object>
+  <object pk="10" model="knowledge.recommend">
+    <field type="SlugField" name="name">drinkHotChocolate</field>
+    <field type="CharField" name="text">Drink some hot chocolate.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="8"/>
+    </field>
+  </object>
+  <object pk="11" model="knowledge.recommend">
+    <field type="SlugField" name="name">drinkTea</field>
+    <field type="CharField" name="text">Drink some tea.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="9"/>
+    </field>
+  </object>
+  <object pk="12" model="knowledge.recommend">
+    <field type="SlugField" name="name">dontEat</field>
+    <field type="CharField" name="text">Don't Eat.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="11"/>
+    </field>
+  </object>
+  <object pk="13" model="knowledge.recommend">
+    <field type="SlugField" name="name">dontDrink</field>
+    <field type="CharField" name="text">Don't Drink.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">2</field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+  </object>
+  <object pk="14" model="knowledge.recommend">
+    <field type="SlugField" name="name">MakeFoodYourself</field>
+    <field type="CharField" name="text">Make these foods in your own kitchen.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">1</field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+  </object>
+  <object pk="1" model="knowledge.externallink">
+    <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">2</field>
+    <field type="CharField" name="description">Hungry Magpie on Youtube</field>
+    <field type="CharField" name="link">http://www.youtube.com/watch?v=Ooa7hDrZvRk</field>
+  </object>
+  <object pk="2" model="knowledge.externallink">
+    <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">12</field>
+    <field type="CharField" name="description">Hungry Magpie on Youtube</field>
+    <field type="CharField" name="link">http://www.youtube.com/watch?v=Ooa7hDrZvRk</field>
+  </object>
+  <object pk="3" model="knowledge.externallink">
+    <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">14</field>
+    <field type="CharField" name="description">Cooking according to Wikipedia</field>
+    <field type="CharField" name="link">http://en.wikipedia.org/wiki/Cooking</field>
+  </object>
+  <object pk="1" model="knowledge.variable">
+    <field type="SlugField" name="name">testVariable</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">testVariable?</field>
+  </object>
+  <object pk="2" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesCake</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like cake?</field>
+  </object>
+  <object pk="3" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesBiscuits</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like biscuits?</field>
+  </object>
+  <object pk="4" model="knowledge.variable">
+    <field type="SlugField" name="name">IsHungry</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Are you hungry?</field>
+  </object>
+  <object pk="5" model="knowledge.variable">
+    <field type="SlugField" name="name">IsThirsty</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Are you thirsty?</field>
+  </object>
+  <object pk="6" model="knowledge.variable">
+    <field type="SlugField" name="name">IsHot</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Are you hot?</field>
+  </object>
+  <object pk="7" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesIceCream</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like ice cream?</field>
+  </object>
+  <object pk="8" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesSorbet</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like sorbet?</field>
+  </object>
+  <object pk="9" model="knowledge.variable">
+    <field type="SlugField" name="name">IsCold</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Are you cold?</field>
+  </object>
+  <object pk="10" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesTea</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like tea?</field>
+  </object>
+  <object pk="11" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesHotChocolate</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like hot chocolate?</field>
+  </object>
+  <object pk="12" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesChocolate</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like chocolate?</field>
+  </object>
+  <object pk="14" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesBiscuitsChocolateCake</field>
+    <field type="BooleanField" name="ask">False</field>
+    <field type="CharField" name="prompt">User likes biscuits, chocolate and cake.</field>
+  </object>
+  <object pk="15" model="knowledge.variable">
+    <field type="SlugField" name="name">LikesCooking</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you like cooking?</field>
+  </object>
+  <object pk="16" model="knowledge.variable">
+    <field type="SlugField" name="name">HasKitchen</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="CharField" name="prompt">Do you have a kitchen?</field>
+  </object>
+  <object pk="17" model="knowledge.variable">
+    <field type="SlugField" name="name">CanCookFood</field>
+    <field type="BooleanField" name="ask">False</field>
+    <field type="CharField" name="prompt">User has facility to cook own food.</field>
+  </object>
+  <object pk="1" model="knowledge.ruleset">
+    <field type="SlugField" name="name">testRuleset</field>
+  </object>
+  <object pk="2" model="knowledge.ruleset">
+    <field type="SlugField" name="name">IngestUser</field>
+  </object>
+  <object pk="1" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">1</field>
+    <field type="PositiveIntegerField" name="order">1</field>
+  </object>
+  <object pk="5" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">1</field>
+  </object>
+  <object pk="3" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">2</field>
+  </object>
+  <object pk="6" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">3</field>
+  </object>
+  <object pk="7" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">4</field>
+  </object>
+  <object pk="2" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">5</field>
+  </object>
+  <object pk="4" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">6</field>
+  </object>
+  <object pk="12" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">7</field>
+  </object>
+  <object pk="8" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">8</field>
+  </object>
+  <object pk="9" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">9</field>
+  </object>
+  <object pk="10" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">10</field>
+  </object>
+  <object pk="11" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">11</field>
+  </object>
+  <object pk="13" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">12</field>
+  </object>
+  <object pk="14" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">13</field>
+  </object>
+  <object pk="15" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">14</field>
+  </object>
+  <object pk="1" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">1</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="2" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">2</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="3" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">3</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="4" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">4</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="5" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">5</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="6" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">2</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">2</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="7" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">4</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">3</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="8" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">6</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="9" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">7</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="10" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">8</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">6</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="11" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">8</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="12" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">9</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="13" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="14" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">10</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="15" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="16" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">9</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="17" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">11</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="18" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="19" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">6</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="20" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">7</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="21" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">12</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="22" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">12</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">12</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="23" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="24" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">10</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="25" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">11</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="26" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">16</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="27" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">15</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="28" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="29" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">17</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="1" model="knowledge.ruleconclusion">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">17</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="1" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">1</field>
+    <field type="IntegerField" name="rank">100</field>
+  </object>
+  <object pk="3" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">2</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">6</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="4" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">3</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">2</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="5" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">4</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">5</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="6" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">5</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">12</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="7" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">6</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">13</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="8" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">7</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">3</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="9" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">8</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">7</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="10" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">11</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="11" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">10</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="12" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">4</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="13" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">12</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">9</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="14" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">7</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="15" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">14</field>
+    <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="1" model="register.profile">
+    <field type="SlugField" name="name">testProfile</field>
+    <field to="knowledge.ruleset" name="ruleset" rel="ManyToOneRel">1</field>
+  </object>
+  <object pk="2" model="register.profile">
+    <field type="SlugField" name="name">IngestUserProfile</field>
+    <field to="knowledge.ruleset" name="ruleset" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="3" model="register.profile">
+    <field type="SlugField" name="name">guest</field>
+    <field to="knowledge.ruleset" name="ruleset" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="1" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">1</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="2" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">2</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">
+      <None/>
+    </field>
+  </object>
+  <object pk="3" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">3</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">1</field>
+  </object>
+  <object pk="4" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">4</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="5" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">5</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="6" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">6</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="7" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">7</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="8" model="register.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">8</field>
+    <field to="register.profile" name="profile" rel="ManyToOneRel">
+      <None/>
+    </field>
+  </object>
+  <object pk="4" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">7</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">2</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="5" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">7</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="13" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">7</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="16" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">6</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="19" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">6</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="22" model="auth.permission">
+    <field type="CharField" name="name">Can add log entry</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">8</field>
+    <field type="CharField" name="codename">add_logentry</field>
+  </object>
+  <object pk="23" model="auth.permission">
+    <field type="CharField" name="name">Can change log entry</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">8</field>
+    <field type="CharField" name="codename">change_logentry</field>
+  </object>
+  <object pk="24" model="auth.permission">
+    <field type="CharField" name="name">Can delete log entry</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">8</field>
+    <field type="CharField" name="codename">delete_logentry</field>
+  </object>
+  <object pk="4" model="auth.permission">
+    <field type="CharField" name="name">Can add group</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+    <field type="CharField" name="codename">add_group</field>
+  </object>
+  <object pk="5" model="auth.permission">
+    <field type="CharField" name="name">Can change group</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+    <field type="CharField" name="codename">change_group</field>
+  </object>
+  <object pk="6" model="auth.permission">
+    <field type="CharField" name="name">Can delete group</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+    <field type="CharField" name="codename">delete_group</field>
+  </object>
+  <object pk="10" model="auth.permission">
+    <field type="CharField" name="name">Can add message</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="codename">add_message</field>
+  </object>
+  <object pk="11" model="auth.permission">
+    <field type="CharField" name="name">Can change message</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="codename">change_message</field>
+  </object>
+  <object pk="12" model="auth.permission">
+    <field type="CharField" name="name">Can delete message</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="codename">delete_message</field>
+  </object>
+  <object pk="1" model="auth.permission">
+    <field type="CharField" name="name">Can add permission</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">1</field>
+    <field type="CharField" name="codename">add_permission</field>
+  </object>
+  <object pk="2" model="auth.permission">
+    <field type="CharField" name="name">Can change permission</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">1</field>
+    <field type="CharField" name="codename">change_permission</field>
+  </object>
+  <object pk="3" model="auth.permission">
+    <field type="CharField" name="name">Can delete permission</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">1</field>
+    <field type="CharField" name="codename">delete_permission</field>
+  </object>
+  <object pk="7" model="auth.permission">
+    <field type="CharField" name="name">Can add user</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+    <field type="CharField" name="codename">add_user</field>
+  </object>
+  <object pk="8" model="auth.permission">
+    <field type="CharField" name="name">Can change user</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+    <field type="CharField" name="codename">change_user</field>
+  </object>
+  <object pk="9" model="auth.permission">
+    <field type="CharField" name="name">Can delete user</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+    <field type="CharField" name="codename">delete_user</field>
+  </object>
+  <object pk="13" model="auth.permission">
+    <field type="CharField" name="name">Can add content type</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="codename">add_contenttype</field>
+  </object>
+  <object pk="14" model="auth.permission">
+    <field type="CharField" name="name">Can change content type</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="codename">change_contenttype</field>
+  </object>
+  <object pk="15" model="auth.permission">
+    <field type="CharField" name="name">Can delete content type</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="codename">delete_contenttype</field>
+  </object>
+  <object pk="32" model="auth.permission">
+    <field type="CharField" name="name">Can add external link</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">11</field>
+    <field type="CharField" name="codename">add_externallink</field>
+  </object>
+  <object pk="33" model="auth.permission">
+    <field type="CharField" name="name">Can change external link</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">11</field>
+    <field type="CharField" name="codename">change_externallink</field>
+  </object>
+  <object pk="34" model="auth.permission">
+    <field type="CharField" name="name">Can delete external link</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">11</field>
+    <field type="CharField" name="codename">delete_externallink</field>
+  </object>
+  <object pk="29" model="auth.permission">
+    <field type="CharField" name="name">Can add recommend</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="CharField" name="codename">add_recommend</field>
+  </object>
+  <object pk="30" model="auth.permission">
+    <field type="CharField" name="name">Can change recommend</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="CharField" name="codename">change_recommend</field>
+  </object>
+  <object pk="31" model="auth.permission">
+    <field type="CharField" name="name">Can delete recommend</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="CharField" name="codename">delete_recommend</field>
+  </object>
+  <object pk="25" model="auth.permission">
+    <field type="CharField" name="name">Can add resource file</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="CharField" name="codename">add_resourcefile</field>
+  </object>
+  <object pk="26" model="auth.permission">
+    <field type="CharField" name="name">Can change resource file</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="CharField" name="codename">change_resourcefile</field>
+  </object>
+  <object pk="27" model="auth.permission">
+    <field type="CharField" name="name">Can delete resource file</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="CharField" name="codename">delete_resourcefile</field>
+  </object>
+  <object pk="28" model="auth.permission">
+    <field type="CharField" name="name">Can access restricted files</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+    <field type="CharField" name="codename">restricted_access</field>
+  </object>
+  <object pk="44" model="auth.permission">
+    <field type="CharField" name="name">Can add rule</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="CharField" name="codename">add_rule</field>
+  </object>
+  <object pk="45" model="auth.permission">
+    <field type="CharField" name="name">Can change rule</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="CharField" name="codename">change_rule</field>
+  </object>
+  <object pk="46" model="auth.permission">
+    <field type="CharField" name="name">Can delete rule</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="CharField" name="codename">delete_rule</field>
+  </object>
+  <object pk="50" model="auth.permission">
+    <field type="CharField" name="name">Can add rule conclusion</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">17</field>
+    <field type="CharField" name="codename">add_ruleconclusion</field>
+  </object>
+  <object pk="51" model="auth.permission">
+    <field type="CharField" name="name">Can change rule conclusion</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">17</field>
+    <field type="CharField" name="codename">change_ruleconclusion</field>
+  </object>
+  <object pk="52" model="auth.permission">
+    <field type="CharField" name="name">Can delete rule conclusion</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">17</field>
+    <field type="CharField" name="codename">delete_ruleconclusion</field>
+  </object>
+  <object pk="47" model="auth.permission">
+    <field type="CharField" name="name">Can add rule premise</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">16</field>
+    <field type="CharField" name="codename">add_rulepremise</field>
+  </object>
+  <object pk="48" model="auth.permission">
+    <field type="CharField" name="name">Can change rule premise</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">16</field>
+    <field type="CharField" name="codename">change_rulepremise</field>
+  </object>
+  <object pk="49" model="auth.permission">
+    <field type="CharField" name="name">Can delete rule premise</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">16</field>
+    <field type="CharField" name="codename">delete_rulepremise</field>
+  </object>
+  <object pk="53" model="auth.permission">
+    <field type="CharField" name="name">Can add rule recommend</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">18</field>
+    <field type="CharField" name="codename">add_rulerecommend</field>
+  </object>
+  <object pk="54" model="auth.permission">
+    <field type="CharField" name="name">Can change rule recommend</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">18</field>
+    <field type="CharField" name="codename">change_rulerecommend</field>
+  </object>
+  <object pk="55" model="auth.permission">
+    <field type="CharField" name="name">Can delete rule recommend</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">18</field>
+    <field type="CharField" name="codename">delete_rulerecommend</field>
+  </object>
+  <object pk="41" model="auth.permission">
+    <field type="CharField" name="name">Can add rule set</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="CharField" name="codename">add_ruleset</field>
+  </object>
+  <object pk="42" model="auth.permission">
+    <field type="CharField" name="name">Can change rule set</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="CharField" name="codename">change_ruleset</field>
+  </object>
+  <object pk="43" model="auth.permission">
+    <field type="CharField" name="name">Can delete rule set</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="CharField" name="codename">delete_ruleset</field>
+  </object>
+  <object pk="35" model="auth.permission">
+    <field type="CharField" name="name">Can add variable</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="CharField" name="codename">add_variable</field>
+  </object>
+  <object pk="36" model="auth.permission">
+    <field type="CharField" name="name">Can change variable</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="CharField" name="codename">change_variable</field>
+  </object>
+  <object pk="37" model="auth.permission">
+    <field type="CharField" name="name">Can delete variable</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="CharField" name="codename">delete_variable</field>
+  </object>
+  <object pk="38" model="auth.permission">
+    <field type="CharField" name="name">Can add variable choice</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
+    <field type="CharField" name="codename">add_variablechoice</field>
+  </object>
+  <object pk="39" model="auth.permission">
+    <field type="CharField" name="name">Can change variable choice</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
+    <field type="CharField" name="codename">change_variablechoice</field>
+  </object>
+  <object pk="40" model="auth.permission">
+    <field type="CharField" name="name">Can delete variable choice</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
+    <field type="CharField" name="codename">delete_variablechoice</field>
+  </object>
+  <object pk="62" model="auth.permission">
+    <field type="CharField" name="name">Can add account</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">21</field>
+    <field type="CharField" name="codename">add_account</field>
+  </object>
+  <object pk="63" model="auth.permission">
+    <field type="CharField" name="name">Can change account</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">21</field>
+    <field type="CharField" name="codename">change_account</field>
+  </object>
+  <object pk="64" model="auth.permission">
+    <field type="CharField" name="name">Can delete account</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">21</field>
+    <field type="CharField" name="codename">delete_account</field>
+  </object>
+  <object pk="65" model="auth.permission">
+    <field type="CharField" name="name">Can add account answer</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">22</field>
+    <field type="CharField" name="codename">add_accountanswer</field>
+  </object>
+  <object pk="66" model="auth.permission">
+    <field type="CharField" name="name">Can change account answer</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">22</field>
+    <field type="CharField" name="codename">change_accountanswer</field>
+  </object>
+  <object pk="67" model="auth.permission">
+    <field type="CharField" name="name">Can delete account answer</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">22</field>
+    <field type="CharField" name="codename">delete_accountanswer</field>
+  </object>
+  <object pk="56" model="auth.permission">
+    <field type="CharField" name="name">Can add profile</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="CharField" name="codename">add_profile</field>
+  </object>
+  <object pk="57" model="auth.permission">
+    <field type="CharField" name="name">Can change profile</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="CharField" name="codename">change_profile</field>
+  </object>
+  <object pk="58" model="auth.permission">
+    <field type="CharField" name="name">Can delete profile</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">19</field>
+    <field type="CharField" name="codename">delete_profile</field>
+  </object>
+  <object pk="59" model="auth.permission">
+    <field type="CharField" name="name">Can add profile answer</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">20</field>
+    <field type="CharField" name="codename">add_profileanswer</field>
+  </object>
+  <object pk="60" model="auth.permission">
+    <field type="CharField" name="name">Can change profile answer</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">20</field>
+    <field type="CharField" name="codename">change_profileanswer</field>
+  </object>
+  <object pk="61" model="auth.permission">
+    <field type="CharField" name="name">Can delete profile answer</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">20</field>
+    <field type="CharField" name="codename">delete_profileanswer</field>
+  </object>
+  <object pk="16" model="auth.permission">
+    <field type="CharField" name="name">Can add session</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">6</field>
+    <field type="CharField" name="codename">add_session</field>
+  </object>
+  <object pk="17" model="auth.permission">
+    <field type="CharField" name="name">Can change session</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">6</field>
+    <field type="CharField" name="codename">change_session</field>
+  </object>
+  <object pk="18" model="auth.permission">
+    <field type="CharField" name="name">Can delete session</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">6</field>
+    <field type="CharField" name="codename">delete_session</field>
+  </object>
+  <object pk="19" model="auth.permission">
+    <field type="CharField" name="name">Can add site</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">7</field>
+    <field type="CharField" name="codename">add_site</field>
+  </object>
+  <object pk="20" model="auth.permission">
+    <field type="CharField" name="name">Can change site</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">7</field>
+    <field type="CharField" name="codename">change_site</field>
+  </object>
+  <object pk="21" model="auth.permission">
+    <field type="CharField" name="name">Can delete site</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">7</field>
+    <field type="CharField" name="codename">delete_site</field>
+  </object>
+  <object pk="1" model="auth.group">
+    <field type="CharField" name="name">Ingest Users Group</field>
+    <field to="auth.permission" name="permissions" rel="ManyToManyRel"/>
+  </object>
+  <object pk="1" model="auth.user">
+    <field type="CharField" name="username">admin</field>
+    <field type="CharField" name="first_name">Joe</field>
+    <field type="CharField" name="last_name">Bloggs</field>
+    <field type="CharField" name="email">jbloggs@software.com</field>
+    <field type="CharField" name="password">sha1$d2a32$00fea4481b6bca66ac2a78602d90a50dee08c31a</field>
+    <field type="BooleanField" name="is_staff">True</field>
+    <field type="BooleanField" name="is_active">True</field>
+    <field type="BooleanField" name="is_superuser">True</field>
+    <field type="DateTimeField" name="last_login">2012-03-05 02:40:13</field>
+    <field type="DateTimeField" name="date_joined">2012-03-04 08:59:11</field>
+    <field to="auth.group" name="groups" rel="ManyToManyRel"/>
+    <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"/>
+  </object>
+  <object pk="2" model="auth.user">
+    <field type="CharField" name="username">oho</field>
+    <field type="CharField" name="first_name"/>
+    <field type="CharField" name="last_name"/>
+    <field type="CharField" name="email"/>
+    <field type="CharField" name="password">sha1$61d6b$27cc61309a737a2e92bfdccae76e22fb22eba23c</field>
+    <field type="BooleanField" name="is_staff">False</field>
+    <field type="BooleanField" name="is_active">True</field>
+    <field type="BooleanField" name="is_superuser">False</field>
+    <field type="DateTimeField" name="last_login">2012-03-04 09:52:27</field>
+    <field type="DateTimeField" name="date_joined">2012-03-04 09:52:26</field>
+    <field to="auth.group" name="groups" rel="ManyToManyRel"/>
+    <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"/>
+  </object>
+  <object pk="3" model="auth.user">
+    <field type="CharField" name="username">test</field>
+    <field type="CharField" name="first_name">a</field>
+    <field type="CharField" name="last_name">b</field>
+    <field type="CharField" name="email"/>
+    <field type="CharField" name="password">sha1$fb136$3b472c330fe0d343389181f578bcb347aa2a80a1</field>
+    <field type="BooleanField" name="is_staff">False</field>
+    <field type="BooleanField" name="is_active">True</field>
+    <field type="BooleanField" name="is_superuser">False</field>
+    <field type="DateTimeField" name="last_login">2012-03-04 10:18:53</field>
+    <field type="DateTimeField" name="date_joined">2012-03-04 10:04:03</field>
+    <field to="auth.group" name="groups" rel="ManyToManyRel"/>
+    <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"/>
+  </object>
+  <object pk="4" model="auth.user">
+    <field type="CharField" name="username">jbloggs</field>
+    <field type="CharField" name="first_name"/>
+    <field type="CharField" name="last_name"/>
+    <field type="CharField" name="email">jbloggs@software.com</field>
+    <field type="CharField" name="password">sha1$c7161$7a8b3b670071fd2108a16edfb77d9431cc2538e8</field>
+    <field type="BooleanField" name="is_staff">False</field>
+    <field type="BooleanField" name="is_active">True</field>
+    <field type="BooleanField" name="is_superuser">False</field>
+    <field type="DateTimeField" name="last_login">2012-03-04 14:42:09</field>
+    <field type="DateTimeField" name="date_joined">2012-03-04 13:51:52</field>
+    <field to="auth.group" name="groups" rel="ManyToManyRel"/>
+    <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"/>
+  </object>
+  <object pk="5" model="auth.user">
+    <field type="CharField" name="username">guest</field>
+    <field type="CharField" name="first_name"/>
+    <field type="CharField" name="last_name"/>
+    <field type="CharField" name="email"/>
+    <field type="CharField" name="password">sha1$c1560$fc0a9f04fd3b2e288607eb056f82f529345bacfd</field>
+    <field type="BooleanField" name="is_staff">False</field>
+    <field type="BooleanField" name="is_active">True</field>
+    <field type="BooleanField" name="is_superuser">False</field>
+    <field type="DateTimeField" name="last_login">2012-03-04 15:57:37</field>
+    <field type="DateTimeField" name="date_joined">2012-03-04 15:57:37</field>
+    <field to="auth.group" name="groups" rel="ManyToManyRel"/>
+    <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"/>
+  </object>
+  <object pk="6" model="auth.user">
+    <field type="CharField" name="username">testuser01</field>
+    <field type="CharField" name="first_name">Test</field>
+    <field type="CharField" name="last_name">User01</field>
+    <field type="CharField" name="email">testuser01@testers.com</field>
+    <field type="CharField" name="password">sha1$0a002$c5970deb45d21300f3baf0e6fb4b826d38dde11a</field>
+    <field type="BooleanField" name="is_staff">False</field>
+    <field type="BooleanField" name="is_active">True</field>
+    <field type="BooleanField" name="is_superuser">False</field>
+    <field type="DateTimeField" name="last_login">2012-03-05 00:28:45</field>
+    <field type="DateTimeField" name="date_joined">2012-03-04 15:58:59</field>
+    <field to="auth.group" name="groups" rel="ManyToManyRel"/>
+    <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"/>
+  </object>
+  <object pk="7" model="auth.user">
+    <field type="CharField" name="username">testuser02</field>
+    <field type="CharField" name="first_name"/>
+    <field type="CharField" name="last_name"/>
+    <field type="CharField" name="email">testuser02@testers.com</field>
+    <field type="CharField" name="password">sha1$50f3a$a645af18ec7851d872488cba9fb94e00945dbd79</field>
+    <field type="BooleanField" name="is_staff">False</field>
+    <field type="BooleanField" name="is_active">True</field>
+    <field type="BooleanField" name="is_superuser">False</field>
+    <field type="DateTimeField" name="last_login">2012-03-04 18:53:13</field>
+    <field type="DateTimeField" name="date_joined">2012-03-04 16:24:55</field>
+    <field to="auth.group" name="groups" rel="ManyToManyRel">
+      <object pk="1"/>
+    </field>
+    <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"/>
+  </object>
+  <object pk="8" model="auth.user">
+    <field type="CharField" name="username">testuser03</field>
+    <field type="CharField" name="first_name"/>
+    <field type="CharField" name="last_name"/>
+    <field type="CharField" name="email">testuser03@testers.com</field>
+    <field type="CharField" name="password">sha1$5d208$fd5322313ca973ec74208a0a916abb5e0f2828b0</field>
+    <field type="BooleanField" name="is_staff">False</field>
+    <field type="BooleanField" name="is_active">True</field>
+    <field type="BooleanField" name="is_superuser">False</field>
+    <field type="DateTimeField" name="last_login">2012-03-04 17:47:26</field>
+    <field type="DateTimeField" name="date_joined">2012-03-04 17:47:26</field>
+    <field to="auth.group" name="groups" rel="ManyToManyRel"/>
+    <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"/>
+  </object>
+</django-objects>
