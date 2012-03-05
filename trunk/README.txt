@@ -68,6 +68,15 @@ Then run
   ./installer.sh install
   ./installer.sh test
   
+Build copies the default database and puts it in the application database
+folder, it also builds the tools.
+
+Clean cleans the pml build.
+
+Install symlinks the django_magpie/magpie.wsgi and the resources/static 
+and resources/media folders to a specified Apache serving folder. It will
+also set the appropriate paths in the wsgi script, and settings.py
+
 After doing this, the user will need to ensure that the following 
 subdirectories of the folder containing this file, and their contents, 
 are readable and writable by the Apache user (www-data in Ubuntu) 
