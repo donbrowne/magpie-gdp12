@@ -7,7 +7,8 @@ The 3rd post mortem report.  This was for release 1.  It was intended to be sent
 
 = Details =
 
-Acomplishments
+=== Acomplishments ===
+
 Completed tasks for feature: #19 Enhanced Display of Media (Embedded Video) - Don
 
 Acceptance test(s) passed: #19 Enhanced Display of Media (Embedded Video)
@@ -33,13 +34,13 @@ Completed tasks for feature: #18 Evolving profiles - Cyril
 Acceptance test(s) passed: 
 
 
-Obstacles
+=== Obstacles ===
 
-1. 
-2. 
-3.
+1# 
+2# 
+3#
 
-Objectives
+=== Objectives ===
   Feature: #?? ????????
   .
   .
