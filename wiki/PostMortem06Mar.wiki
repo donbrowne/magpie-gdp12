@@ -2,12 +2,38 @@
 
 = Introduction =
 
-Add your content here.
+The 3rd post mortem report.  This was for release 1.  It was intended to be sent in late due to confusion over there not being a meeting on Monday 05th.
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Acomplishments
+Completed tasks for feature: #19 Enhanced Display of Media (Embedded Video) - Don
+Acceptance test(s) passed: #19 Enhanced Display of Media (Embedded Video)
+
+Completed tasks for feature: #20 Separate Maintenance Folders - Don
+Acceptance test(s) passed: 
+
+Completed tasks for feature: #16 Specification of Resources for Recommendations(by maintainer) - Don
+Acceptance test(s) passed: 
+
+Completed tasks for feature: #17 Access (to Supporting Artifacts) Based on Login ID - Don
+Acceptance test(s) passed:
+
+Completed tasks for feature: #8 Reduction in "conceptual noise" - Cyril
+Acceptance test(s) passed: 
+
+Completed tasks for feature: #18 Evolving profiles - Cyril
+Acceptance test(s) passed: 
+
+Obstacles
+
+1. 
+2. 
+3.
+
+Objectives
+  Feature: #?? ????????
+  .
+  .
+  .
