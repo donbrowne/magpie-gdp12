@@ -54,13 +54,18 @@ Acceptance test(s) passed:  #18 Evolving profiles
 
 === Obstacles ===
 
-#1 Delay in getting access to a production test server.
-#2 ? 
-#3 ?
+#1 Delay in getting access to the production test server has caused some strain for hitting our targets for quality of development.
+
+#2 Some issues around changing inferrence engine took longer than expected to resolve.
+
+#3 Generally tasks are taking more time than we bargained for. This is partly due to time required for the additional technical and administrative overheads which, unforseen by the team during feature planning, are demanding on our time budget.
+
 
 === Objectives ===
 
 _No meeting with client so perhaps these ones?_
+
+
 Feature: #1 Knowledge Representation, with fan-in and fan-out.
 
 Feature: #9 Process "roadmaps." _A roadmap in this context is a narrative description of the sequence of steps required to achieve some goal. One approach is to automatically generate them from a PML specification that is suitably elaborated with textual annotations._
