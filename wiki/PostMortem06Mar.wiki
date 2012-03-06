@@ -47,4 +47,10 @@ Acceptance test(s) passed:  #18 Evolving profiles
 #3
 
 === Objectives ===
-Feature: #nn ????????
+#nn ????????
+
+Feature: #1 Knowledge Representation, with fan-in and fan-out.
+
+Feature: #9 Process "roadmaps." _A roadmap in this context is a narrative description of the sequence of steps required to achieve some goal. One approach is to automatically generate them from a PML specification that is suitably elaborated with textual annotations._
+
+Feature: #10 Step-wise refinement of "high-level" models.
