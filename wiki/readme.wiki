@@ -76,7 +76,7 @@ issues with the current implementation -
 
 ---END ITERATION 2---
 
-INITIALIZATION:
+== 0. Initialization ==
 
 On the first run of the application, it is necessary to cd to the django_magpie directory, and run -
 
@@ -87,23 +87,30 @@ done, the server can be started with -
 
 python manage.py runserver
 
+Assuming the server is running the default address, the admin page can be 
+accessed at:
 
---- ITERATION 3 ---
+http://127.0.0.1:8000/admin
+
+Log in with the username/password that was specified when the database was set
+up (default is admin/admin). The admin page allows the maintainer to add/remove/modify items the the 4 areas desribed below.
+
+== 1. Overview ==
 
 Before explaining use of the program, it is probably best to consider how the 
 program works (from the admin user's perspective) -
 
 The program consists of 4 areas: 
 
- Knowledge - Consists of variables,ruleset's and recommendations and resources
- Register  - Hold info about user account and their profiles.
- Auth      - django own authentication system 
- Sites     - djangos default site name
+  * Knowledge - Consists of variables,ruleset's and recommendations and resources
+  * Register  - Hold info about user account and their profiles.
+  * Auth      - django own authentication system 
+  * Sites     - djangos default site name
 
 Note that the django install creates the auth and sites automatically. 
 We associate magpie accounts with django users. This allows us to reuse the django authentication systems while at the same time store magpie speific user data in a separate place. In djando this is known as user profiles (AUTH_PROFILE_MODULE) where you can essentially extend or subclass the django authentication user objects and add your own application specific data. Unfortunately due to features planning user profiles has become to mean user types rather than the user specific data so to save confusion we named our django authentication user profiles accounts.
 
-1. Knowledge
+== 2. Knowledge ==
 
 
 The knowlege base consists of Variables, Rulesets, Recommendations and Resources.
@@ -115,26 +122,26 @@ Rulesets are a collection of rules relating to some speific area e.g food_rules 
 IF premise  THEN conclusions, recommendations
 
 When creating a rule you first define its:
-1. premise  - a list of variables with assigned values (the facts.
-2. conclusions -  a list of variable to be inferred to be true 
-3. recommendations - a list of recommendations to be added (along with a ranking)
+ # premise  - a list of variables with assigned values (the facts.
+ # conclusions -  a list of variable to be inferred to be true 
+ # recommendations - a list of recommendations to be added (along with a ranking)
 
 Recommendation's are simply named suggestions which can either be simple text, pml links, video objects.  Resources are physical objects store outside the system such as video files,pictures and pml models.
 
 
-2. Register
+== 3. Register ==
 
 The register consists of user profiles and accounts.
 
-A user profile is named user type that which can be associated with any of the defined ruleset's. In addition a list of facts (assigned variable) can be added to the profile which will be automatically be asserted as true for a user account uses that profile.
+A user profile is named user type that which can be associated with any of the defined ruleset's. In addition a list of facts (assigned variable) can be added to the profile which will be automatically asserted as true for anyone using that profile.
 
-An account is created anytime a user register themselves with the system. A user can choose their own profile which in turn will select the ruleset that will be used (as well as predefined facts) during a question and answer session.
+An account is created anytime a user registers themselves with the system. A user can choose their own profile which in turn will select both the ruleset that will be used and a set of predefined facts during a question and answer session.
 
-Note that for guest user who have no logged in we use the guest profile which is then named user profile contained in the variable GUEST_PROFILE defined in settings.py (currently set to the name 'guest')
+Note that for users who have no logged we use the guest user profile which is defined by the variable GUEST_PROFILE in settings.py (currently set to the name 'guest').
 
 
-Overview
-========
+== 4. Engine ===
+
 To understand how all of the above is used a brief overview of how the magpies inference engine works may help.
 
 At the start the engine is given a list of asserted facts loaded from a user profile. It then iterates over all the rules in a ruleset associated with the user profile checking for rules that have fired (all their premises are true). If the premise of a rule is found to be true is said to fire and and all of its consequence's are added the list of known facts and the list recommendations are also updated.This process repeats until no more new facts can be inferred. This is what's known as forward chaining. 
@@ -142,19 +149,7 @@ At the start the engine is given a list of asserted facts loaded from a user pro
 Next the engine looks at the the list of rules not yet fired and checks to see if any of the premises can be checked with the user (the variables have the ask flag set to true). If so it will issue a list of questions for those premises to the user. The list of answers given by the user will then be added to the list of already known facts and the cycle of forward chaining will be repeated all over again. This will continue until no more new facts can be ascertained either by inference or by querying the user.
 
 
-Assuming the server is running the default address, the admin page can be 
-accessed at -
-
-http://127.0.0.1:8000/admin
-
-Log in with the username/password that was specified when the database was set
-up. The admin page allows the maintainer to add/remove/modify the Facts,
-Questions and Recommendations. Questions and Recommendations are created by
-specifying the appropriate text. Facts are created by selecting a list of 
-requirements (if any), selecting the list of recommendations, and specifying the
-questions associated with that fact. When specifying questions, there's an 
-"Answers" tickbox. Select this if answering "Yes" to the question is the 
-expected answer. Leave unselected if "No" is the expected answer.
+== Other ==
 
 USER ACCESS LEVELS:
 
@@ -178,22 +173,14 @@ database file.
 
 ANSWERING QUESTIONS:
 
-At the beginning, the user is presented with the questions associated with the
-facts that have no requirements. The user can select Yes, No, or not select an
-answer. When the user presses "Submit", the program processes the answers, and
-delivers -
+At the beginning, the user is presented with the questions associated with rule premsese that the magpie engine is trying to establish are true.The user can select Yes, No, or not select an answer. When the user presses "Submit", the program processes the answers, and delivers -
 
 * More questions, if answers on the previous screens have asserted facts which
   fill the requirements for other facts. If there are no applicable questions,
   it will inform the user of this fact instead.
+
 * A list of recommendations (if any), along with a listing of reasons why this
   recommendation was made (questions and the user's answers)
-* A list of suggestions that the user should not do. This is based on the user
-  giving the opposite answer to what was expected for a given fact. It also
-  shows the reasons.
-* A list of questions that have been skipped so far, and the recommendations
-  that would have been given if they had been answered.
-* A list of all other recommendations.
 
 The user can click the "Home" button near the top of the screen to go back to
 the start.
@@ -207,8 +194,3 @@ To run all tests do
 To run specific tests for the knowledge module do
 
   ./manage.py test knowledge 
-
-KNOWN ISSUES:
-
-Refreshing the page after answering questions will throw an error. Navigate to
-the main page to start from the beginning.
