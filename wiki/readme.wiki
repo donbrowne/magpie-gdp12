@@ -108,7 +108,7 @@ The program consists of 4 areas:
   * Sites     - djangos default site name
 
 Note that the django install creates the auth and sites automatically. 
-We associate magpie accounts with django users. This allows us to reuse the django authentication systems while at the same time store magpie speific user data in a separate place. In djando this is known as user profiles (AUTH_PROFILE_MODULE) where you can essentially extend or subclass the django authentication user objects and add your own application specific data. Unfortunately due to features planning user profiles has become to mean user types rather than the user specific data so to save confusion we named our django authentication user profiles accounts.
+We associate magpie accounts with django users. This allows us to reuse the django authentication systems while at the same time store magpie speific user data in a separate place. In djando this is known as user profiles (AUTH_PROFILE_MODULE) where you can essentially extend or subclass the django authentication user objects and add your own application specific data. Unfortunately due to features planning user profiles is taken to mean user types rather than than user specific data so to save confusion we named our django authentication user profiles accounts although this may confuse django developers where user profiles are taken to mean an extension of djano authention users - sigh.
 
 == 2. Knowledge ==
 
