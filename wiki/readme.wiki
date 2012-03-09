@@ -107,18 +107,22 @@ The program consists of 4 areas:
   * Auth      - django own authentication system 
   * Sites     - djangos default site name
 
-Note that the django install creates the auth and sites automatically. 
-We associate magpie accounts with django users. This allows us to reuse the django authentication systems while at the same time store magpie speific user data in a separate place. In djando this is known as user profiles (AUTH_PROFILE_MODULE) where you can essentially extend or subclass the django authentication user objects and add your own application specific data. Unfortunately due to features planning user profiles is taken to mean user types rather than than user specific data so to save confusion we named our django authentication user profiles accounts although this may confuse django developers where user profiles are taken to mean an extension of djano authention users - sigh.
+Note that the django install creates the auth and sites automatically.
+We associate magpie accounts with django users. This allows us to reuse the django authentication systems while at the same time store magpie specific user data in a separate place. 
+
+In django this is known as user profiles (AUTH_PROFILE_MODULE) where you can essentially extend or subclass the django authentication user objects and add your own application specific data. 
+
+Unfortunately due to features planning list user profiles is taken to mean user types rather than than user specific data so to save time we named our django authentication user profiles 'accounts' although this may confuse django developers where user profiles are taken to mean an extension of django authentication users - sigh.
 
 == 2. Knowledge ==
 
 
-The knowlege base consists of Variables, Rulesets, Recommendations and Resources.
+The knowledge base consists of Variables, Rulesets, Recommendations and Resources.
 A variable is named item representing a set of values. When a variable is assigned a value it becomes a fact in magpies inference engine. Currently we only support boolean variables consisting of the set True/False.
   
 The ask flag controls whether magpie can query the user for the value of this variable. The ask prompt is question that will be presented to the user.
 
-Rulesets are a collection of rules relating to some speific area e.g food_rules or business_rules. A rule is modelled on very simple IF/THEN logic along the lines of:
+Ruleset's are a collection of rules relating to some specific area e.g food_rules or business_rules. A rule is modelled on very simple IF/THEN logic along the lines of:
 IF premise  THEN conclusions, recommendations
 
 When creating a rule you first define its:
