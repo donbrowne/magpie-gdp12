@@ -7,6 +7,6 @@ Use this Wiki to store the supporting documentation for installation and use of 
 
 = Pages =
 
-  * [readme] : the (outdated) official readme file for MAGPIE
+  * [readme] : the somewhat official readme file for MAGPIE
   * [PostMortemDocs] : The list of PM docs
   * [Features] : A description of features
