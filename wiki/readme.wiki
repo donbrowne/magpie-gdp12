@@ -1,7 +1,13 @@
 #summary The MAGPIE readme file
 #labels Featured
 
+
 = magpieinstructions.txt =
+
+M.A.G.P.I.E. 
+
+Model Advice Guidance Process Integration Explorer
+
 
 NEW FOR ITERATION 2:
 
