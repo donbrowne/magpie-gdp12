@@ -177,7 +177,7 @@ database file.
 
 ANSWERING QUESTIONS:
 
-At the beginning, the user is presented with the questions associated with rule premsese that the magpie engine is trying to establish are true.The user can select Yes, No, or not select an answer. When the user presses "Submit", the program processes the answers, and delivers -
+At the beginning, the user is presented with the questions associated with rule premise that the magpie inference engine is trying to establish are true.The user can select Yes, No, or not select an answer. When the user presses "Submit", the program processes the answers, and delivers -
 
 * More questions, if answers on the previous screens have asserted facts which
   fill the requirements for other facts. If there are no applicable questions,
