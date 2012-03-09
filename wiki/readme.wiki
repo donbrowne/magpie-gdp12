@@ -90,24 +90,55 @@ python manage.py runserver
 KNOWLEDGE BASE:
 
 Before explaining use of the program, it is probably best to consider how the 
-program works (from the user's perspective) -
+program works (from the admin user's perspective) -
 
-* The program models Questions, Facts and Recommendations.
-* A Question consists of the question text that the user is asked.
-* A Recommendation consists of text that is presented to the user.
-* A Fact consists of a name, a list of questions (and the expected answers) 
-  required for the Fact to be true, a list of recommendations provided when the 
-  Fact is true, and an optional list of requirements.
-* The program iterates through the list of facts, and asks the user the
-  questions associated with those facts. If the user gives the expected answers
-  to all the questions associated with that fact, then that fact is true.
-* The requirements list of a fact is the set of facts that must be true 
-  before the program will ask the user about it. For example, if there is a 
-  'Likes Chocolate Cake' fact that asks the user if they like chocolate cake, 
-  the maintainer could set the facts 'Likes Chocolate' and 'Likes Cake' as 
-  requirements for 'Likes Chocolate Cake', so that the program only asks the
-  user if they like chocolate cake if it has already established that they like
-  chocolate, and they like cake. 
+The program consists of 4 areas: 
+
+ Knowledge - Consists of variables,rulesets and recommendations and resources
+ Register  - Hold info about user account and their profiles.
+ Auth      - django own authentciation system 
+ Sites     - djangos default site name
+
+Note that the django install creates the auth and sites automatically. 
+We associate magpie accounts with django users. This allows us to reuse the django authentcation systems while at the same time store magpie speific user data in a seperate place. In djando this is known as user profiles (AUTH_PROFILE_MODULE) where you can essentially extend or subclass the django authentication user objects and add your own applicaton speific data. Unfortunaly due to features planning user profiles has become to mean user types rather than the user spefici data so to save confusion we namde our django authtentication user profiles accounts.
+
+1. Knowledge
+
+
+The knowlege base consists of Variables, Rulesets, Recommendations and Resources.
+A variable is named item representing a set of values. When a variable is assigned a value it becomes a fact in magpies inference engine. Currently we only support boolean variables consisting of the set True/False.  
+The ask flag controls whether magpie can query the user for the value of this variable. The ask prompt is question that will be presented to the user.
+
+Rulesets are a collection of rules relating to some speific area e.g food_rules or business_rules. A rule is modelled on very simple IF/THEN logic along the lines of:
+IF premise  THEN conclusions, recommedations
+
+When creating a rule you first define its:
+1. premise  - a list of variables with assigned values (the facts.
+2. conclusions -  a list of variable to be inferred to be true 
+3. recommendations - a list of recommendations to be added (along with a ranking)
+
+Recomemdations are simply named suggestions which can either be simple text, pml links, video objects.  Resources are physcial objects store outside the system such as videfiles,picutres and pml models.
+
+
+2. Register
+
+The register consists of user profiles and accounts.
+
+A user profile is named user type that which can be assoicated with any of the defined rulesets. In addtion a list of facts (assigned variable) can be added to the profile which will be automically be asserted as true for a user account uses that profile.
+
+An account is created anytime a user register themselves with the system. A user can choose their own profile which in turn will select the ruleset that will be used (as well as predefined facts) during a question and answer session.
+
+Note that for guest user who have no logged in we use the guest profile which is then named user profile contained in the variable GUEST_PROFILE defined in settings.py (currently set to the name 'guest')
+
+
+Overview
+========
+To understand how all of the above is used a brief overview of how the magpies inference engine works may help.
+
+At the start the engine is given a list of asserted facts loaded from a user profile. It then iterates over all the rules in a ruleset associated with the user profile checking for rules that have fired (all their premises are true). If the premise of a rule is found to be true is said to fire and and all of its consequence's are added the list of known facts and the list recommendations are also updated.This process repeats until no more new facts can be inferred. This is what's known as forward chaining. 
+
+Next the engine looks at the the list of rules not yet fired and checks to see if any of the premises can be checked with the user (the variables have the ask flag set to true). If so it will issue a list of questions for those premises to the user. The list of answers given by the user will then be added to the list of already known facts and the cycle of forward chaining will be repeated all over again. This will continue until no more new facts can be ascertained either by inference or by querying the user.
+
 
 Assuming the server is running the default address, the admin page can be 
 accessed at -
