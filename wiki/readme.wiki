@@ -1,4 +1,5 @@
 #summary The MAGPIE readme file
+#labels Featured
 
 = magpieinstructions.txt =
 
