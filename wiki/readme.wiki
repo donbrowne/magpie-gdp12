@@ -160,7 +160,7 @@ At the start the engine is given a list of asserted facts loaded from a user pro
 Next the engine looks at the the list of rules not yet fired and checks to see if any of the premises can be checked with the user (the variables have the ask flag set to true). If so it will issue a list of questions for those premises to the user. The list of answers given by the user will then be added to the list of already known facts and the cycle of forward chaining will be repeated all over again. This will continue until no more new facts can be ascertained either by inference or by querying the user.
 
 
-== Other ==
+== 5. Other ==
 
 USER ACCESS LEVELS:
 
