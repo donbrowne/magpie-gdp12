@@ -17,7 +17,7 @@ DEPENDENCIES -
 The following packages need to be installed for this application to work
 
 For the installation of Python modules, it is recommended that the user
-user a Python module installer such as python-pip to install the Python
+uses a Python module installer such as python-pip to install the Python
 modules. This ensures that the modules are up to date.
 
 ---Main Application---
@@ -77,12 +77,12 @@ Install symlinks the django_magpie/magpie.wsgi and the resources/static
 and resources/media folders to a specified Apache serving folder. It will
 also set the appropriate paths in the wsgi script, and settings.py
 
+When running 'build', you will be asked if you want to copy, noting that
+it will overwrite files. Answer 'yes'.
+
 After doing this, the user will need to ensure that the following 
 subdirectories of the folder containing this file, and their contents, 
 are readable and writable by the Apache user (www-data in Ubuntu) 
-
-When running 'build', you will be asked if you want to copy, noting that
-it will overwrite files. Answer 'yes'.
 
   resources
   sqlite3 (created by 'build' stage)
@@ -113,9 +113,10 @@ The admin interface can be found at -
  
 ---Note about Django runserver---
 
-If you wish to run with the local Django runserver, run process as above
-making sure that when you run the './installer.sh install' step that you
-leave the fields blank when the script asks you for the path and the URL
+If you wish to run with the local Django runserver, run the install 
+process as above making sure that when you run the './installer.sh 
+install' step that you leave the fields blank when the script asks you 
+for the path and the URL
 
 Functionality relating to media upload will not function as Django 
 requires an external web server to serve files. You can simulate this
