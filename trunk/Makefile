@@ -1,6 +1,5 @@
 SHELL='/bin/bash'
-ESCPATH=$(subst /,\/,$(PWD))
-MAGDIR = $(PWD)
+MAGDIR=$(PWD)
 
 all: install
 
@@ -26,13 +25,6 @@ test:
 	python ./django_magpie/manage.py test
 	
 distclean: clean 
-	rm -rf sqlite3
-	rm -rf ./resources/static/*
-
-	if [ ! -z $(DESTDIR) ]; 
-	then
-	echo "Destroying symlinks"
-	rm $(DESTDIR)/magpie.wsgi
-	rm $(DESTDIR)/media
-	rm $(DESTDIR)/static
-	fi
+        rm -rf sqlite3
+        rm -rf ./resources/static/*
+        if [ ! -z $(DESTDIR) ]; then echo "Destroying symlinks"; cd $(DESTDIR); rm magpie.wsgi; rm media; rm static; cd $(MAGDIR); fi;
