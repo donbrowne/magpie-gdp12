@@ -1,16 +1,18 @@
 SHELL='/bin/bash'
 MAGDIR=$(PWD)
-FILE_MODE=ug+rwX,o+rX
+FILE_MODE=660
+DIR_MODE=770
 INSTALL=install --mode=${FILE_MODE}
+MKDIR=mkdir -m {DIR_MODE} -p
 
 all: install
 
 build:
 	$(MAKE) -C pml
-	mkdir -m 775 -p sqlite3
-	mkdir -m 775 -p resources
-	mkdir -m 775 -p ./resources/media
-	mkdir -m 775 -p ./resources/static
+	$(MKDIR) sqlite3
+	$(MKDIR) resources
+	$(MKDIR) ./resources/media
+	$(MKDIR) ./resources/static
 	$(INSTALL) ./dataload/magpie.db ./sqlite3/
 	$(INSTALL) ./dataload/media/* ./resources/media/
 	python2 ./django_magpie/manage.py collectstatic

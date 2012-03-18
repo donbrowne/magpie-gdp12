@@ -71,16 +71,10 @@ folders to the folder specified by DESTDIR.
 During installation, you will be asked if you want to copy static files, 
 noting that it will overwrite existing files. Answer 'yes'.
 
-After doing this, the user will need to ensure that the following 
-subdirectories of the folder containing this file, and their contents, 
-are readable and writable by the Apache user (www-data in Ubuntu) 
-
-  resources
-  sqlite3 (created by 'build' stage)
-
-One solution is to run 
-  
-  chown -R www-data <name of folder>
+The installation process will set permissions so that the user and group
+of the file have full access, but they are otherwise inaccessible by
+other users. The user must make sure that the Apache user (called 
+'www-data' in Ubuntu) is either the owner or in the group of the file.
   
 The install stage of the script will symlink the wsgi script, as well
 as the media and static files folders to the DESTDIR folder. The page 
