@@ -87,6 +87,9 @@ like -
   Options +ExecCGI 
   AddHandler wsgi-script .wsgi
   
+After the install, the resources/media/ folder contains a .htaccess
+file to serve FLV videos.
+  
 Details of features can be found at -
 
 http://code.google.com/p/magpie-gdp12/wiki/Features
