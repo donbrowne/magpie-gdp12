@@ -2,8 +2,8 @@ SHELL='/bin/bash'
 MAGDIR=$(PWD)
 FILE_MODE=660
 DIR_MODE=770
-INSTALL=install --mode=${FILE_MODE}
-MKDIR=mkdir -m {DIR_MODE} -p
+INSTALL=install --mode=$(FILE_MODE)
+MKDIR=mkdir -m $(DIR_MODE) -p
 
 all: install
 
