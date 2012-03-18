@@ -1,7 +1,11 @@
 import os
 import sys
-
-sys.path.append('PATH/django_magpie')
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 import django.core.handlers.wsgi
-application = django.core.handlers.wsgi.WSGIHandler()
+
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+_app = django.core.handlers.wsgi.WSGIHandler()
+
+def application(environ, start_response):
+    os.environ['DJANGO_URL_ROOT'] = os.path.dirname(environ['SCRIPT_NAME'])
+    return _app(environ, start_response)

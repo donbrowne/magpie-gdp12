@@ -1,30 +1,30 @@
 SHELL='/bin/bash'
 ESCPATH=$(subst /,\/,$(PWD))
 
-all: build
+all: install
 
 build:
 	$(MAKE) -C pml
-	mkdir sqlite3
+	mkdir -p sqlite3
 	cp ./dataload/magpie.db ./sqlite3/
 	python2 ./django_magpie/manage.py collectstatic
+	touch build
 
-clean:
+clean: 
 	$(MAKE) clean -C pml
+	rm build
 
-install: sqlite3
+install: build
 	@echo "Setting up Magpie application instance"
 	@echo "Using the current working directory as the path to this folder"
 	@echo "Configuring wsgi script and settings.py"
-	sed -i "s/PATH/$(ESCPATH)/g" ./django_magpie/magpie.wsgi
-	sed -i "1 c\URL_ROOT='$(URL)'" ./django_magpie/settings.py
 	@if [ ! -z $(DESTDIR) ]; then echo "Creating symlinks"; cd $(fsPath); ln -s $path/django_magpie/magpie.wsgi magpie.wsgi; ln -s $path/resources/media media; ln -s $path/resources/static static; fi
 	@echo "Done!"
 	
 test:
 	python ./django_magpie/manage.py test
 	
-distclean: sqlite3 
+distclean: clean 
 	rm -rf sqlite3
 	rm -rf ./resources/static/*
 
