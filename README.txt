@@ -66,10 +66,10 @@ that folder) -
 This will copy the default database and puts it in the application 
 database folder, builds the PML tools, and create the symlinks to  
 django_magpie/magpie.wsgi and the resources/static and resources/media 
-folders to a specified Apache serving folder. 
+folders to the folder specified by DESTDIR. 
 
-During installation, you will be asked if you want to copy, noting that
-it will overwrite files. Answer 'yes'.
+During installation, you will be asked if you want to copy static files, 
+noting that it will overwrite existing files. Answer 'yes'.
 
 After doing this, the user will need to ensure that the following 
 subdirectories of the folder containing this file, and their contents, 
@@ -83,13 +83,12 @@ One solution is to run
   chown -R www-data <name of folder>
   
 The install stage of the script will symlink the wsgi script, as well
-as the media and static files folders to a folder served by Apache (or
-not if the user leaves the appropriate field blank when prompted by the
-script.) The page can be accessed by navigating to the URL where that
-wsgi script is served, and launching the wsgi script. This assumes that 
-the folder from which Apache servers has a suitable htaccess file for 
-serving wsgi files, and that Apache has been suitably configured. The
-htaccess file will look like -
+as the media and static files folders to the DESTDIR folder. The page 
+can be accessed by navigating to the URL where that folder is served, 
+and launching the wsgi script. This assumes that the folder from which 
+Apache servers has a suitable htaccess file for serving wsgi files, and 
+that Apache has been suitably configured. The htaccess file will look 
+like -
 
   Options +ExecCGI 
   AddHandler wsgi-script .wsgi
@@ -104,10 +103,11 @@ The admin interface can be found at -
  
 ---Note about Django runserver---
 
-If you wish to run with the local Django runserver, run the install 
-process as above making sure that when you run the './installer.sh 
-install' step that you leave the field blank when the script asks you 
-for the path.
+If you wish to run with the local Django runserver, run -
+  
+  make build
+  
+'make install' is not necessary as it only creates symlinks for Apache.
 
 Functionality relating to media upload will not function as Django 
 requires an external web server to serve files. You can simulate this
@@ -115,3 +115,22 @@ behavior by using python's SimpleHTTPServer, and configuring settings.py
 appropriately, but some functionality, such as video streaming, will be
 lost.
 
+UNINSTALLATION
+
+Run the following (where DESTDIR should be the same path that was 
+specified during installation) -
+
+  make distclean DESTDIR=/home/magpie/public_html/
+
+This deletes the symlinks in DESTDIR, as well as cleaning up the static
+and media folders.
+
+If the user wishes to serve the application from a different folder, 
+they should cd to the DESTDIR directory specified during installation 
+and run the following -
+
+  cp -P magpie.wsgi media static /path/to/new/folder/
+  rm magpie.wsgi media static
+  
+The site should be served from the new directory. Alternatively, they
+can uninstall from the old location, and reinstall to the new location.
