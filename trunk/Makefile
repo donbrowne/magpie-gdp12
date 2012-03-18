@@ -24,7 +24,7 @@ build:
 clean: 
 	$(MAKE) clean -C pml
 	rm build
-	rm ./django_magpie/*.pyc
+	find ./django_magpie/ -type f -name "*.pyc" -exec rm -f {} \;
 
 install: build
 	@if [ ! -z $(DESTDIR) ]; then echo "Creating symlinks"; cd $(DESTDIR); ln -s $(MAGDIR)/django_magpie/magpie.wsgi magpie.wsgi; ln -s $(MAGDIR)/resources/media media; ln -s $(MAGDIR)/resources/static static; fi
