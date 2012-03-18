@@ -13,7 +13,8 @@ build:
 	$(MKDIR) resources
 	$(MKDIR) ./resources/media
 	$(MKDIR) ./resources/static
-	$(INSTALL) ./dataload/magpie.db ./sqlite3/
+	cp -n ./dataload/magpie.db ./sqlite3/
+	chmod $(FILE_MODE) ./sqlite3/magpie.db
 	$(INSTALL) ./dataload/media/* ./resources/media/
 	python2 ./django_magpie/manage.py collectstatic
 	touch build
