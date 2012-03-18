@@ -1,5 +1,6 @@
 SHELL='/bin/bash'
 ESCPATH=$(subst /,\/,$(PWD))
+MAGDIR = $(PWD)
 
 all: install
 
@@ -18,7 +19,7 @@ install: build
 	@echo "Setting up Magpie application instance"
 	@echo "Using the current working directory as the path to this folder"
 	@echo "Configuring wsgi script and settings.py"
-	@if [ ! -z $(DESTDIR) ]; then echo "Creating symlinks"; cd $(fsPath); ln -s $path/django_magpie/magpie.wsgi magpie.wsgi; ln -s $path/resources/media media; ln -s $path/resources/static static; fi
+	@if [ ! -z $(DESTDIR) ]; then echo "Creating symlinks"; cd $(DESTDIR); ln -s $(MAGDIR)/django_magpie/magpie.wsgi magpie.wsgi; ln -s $(MAGDIR)/resources/media media; ln -s $(MAGDIR)/resources/static static; fi
 	@echo "Done!"
 	
 test:
