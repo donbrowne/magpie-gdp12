@@ -57,26 +57,18 @@ The folder in which this readme is contained should not be located in
 the document root of Apache, but can otherwise be located where the user
 wishes.
 
-First of all, run
+Run the following (where DESTDIR should be the file system path to the 
+folder that serves as the Apache document root, or a subdirectory of
+that folder) -
 
-  chmod +x installer.sh
+  make install DESTDIR=/home/magpie/public_html/
   
-Then run
+This will copy the default database and puts it in the application 
+database folder, builds the PML tools, and create the symlinks to  
+django_magpie/magpie.wsgi and the resources/static and resources/media 
+folders to a specified Apache serving folder. 
 
-  ./installer.sh build
-  ./installer.sh clean
-  ./installer.sh install
-  ./installer.sh test
-  
-Build copies the default database and puts it in the application database
-folder, it also builds the tools.
-
-Clean cleans the pml build.
-
-Install symlinks the django_magpie/magpie.wsgi and the resources/static 
-and resources/media folders to a specified Apache serving folder. 
-
-When running 'build', you will be asked if you want to copy, noting that
+During installation, you will be asked if you want to copy, noting that
 it will overwrite files. Answer 'yes'.
 
 After doing this, the user will need to ensure that the following 
