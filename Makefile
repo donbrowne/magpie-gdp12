@@ -8,6 +8,7 @@ MKDIR=mkdir -m $(DIR_MODE) -p
 all: install
 
 build:
+	@echo "Building Magpie environment"
 	$(MAKE) -C pml
 	$(MKDIR) sqlite3
 	$(MKDIR) resources
@@ -16,8 +17,9 @@ build:
 	cp -n ./dataload/magpie.db ./sqlite3/
 	chmod $(FILE_MODE) ./sqlite3/magpie.db
 	$(INSTALL) ./dataload/media/* ./resources/media/
-	python2 ./django_magpie/manage.py collectstatic
+	python ./django_magpie/manage.py collectstatic --noinput
 	touch build
+	@echo "Done!"
 
 clean: 
 	$(MAKE) clean -C pml
@@ -25,9 +27,6 @@ clean:
 	rm ./django_magpie/*.pyc
 
 install: build
-	@echo "Setting up Magpie application instance"
-	@echo "Using the current working directory as the path to this folder"
-	@echo "Configuring wsgi script and settings.py"
 	@if [ ! -z $(DESTDIR) ]; then echo "Creating symlinks"; cd $(DESTDIR); ln -s $(MAGDIR)/django_magpie/magpie.wsgi magpie.wsgi; ln -s $(MAGDIR)/resources/media media; ln -s $(MAGDIR)/resources/static static; fi
 	@echo "Done!"
 	

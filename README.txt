@@ -68,9 +68,6 @@ database folder, builds the PML tools, and create the symlinks to
 django_magpie/magpie.wsgi and the resources/static and resources/media 
 folders to the folder specified by DESTDIR. 
 
-During installation, you will be asked if you want to copy static files, 
-noting that it will overwrite existing files. Answer 'yes'.
-
 The installation process will set permissions so that the user and group
 of the file have full access, but they are otherwise inaccessible by
 other users. The user must make sure that the Apache user (called 
