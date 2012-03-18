@@ -74,8 +74,7 @@ folder, it also builds the tools.
 Clean cleans the pml build.
 
 Install symlinks the django_magpie/magpie.wsgi and the resources/static 
-and resources/media folders to a specified Apache serving folder. It will
-also set the appropriate paths in the wsgi script, and settings.py
+and resources/media folders to a specified Apache serving folder. 
 
 When running 'build', you will be asked if you want to copy, noting that
 it will overwrite files. Answer 'yes'.
@@ -95,8 +94,8 @@ The install stage of the script will symlink the wsgi script, as well
 as the media and static files folders to a folder served by Apache (or
 not if the user leaves the appropriate field blank when prompted by the
 script.) The page can be accessed by navigating to the URL where that
-folder is served, and launching the wsgi script. This assumes that the
-folder from which Apache servers has a suitable htaccess file for 
+wsgi script is served, and launching the wsgi script. This assumes that 
+the folder from which Apache servers has a suitable htaccess file for 
 serving wsgi files, and that Apache has been suitably configured. The
 htaccess file will look like -
 
@@ -115,8 +114,8 @@ The admin interface can be found at -
 
 If you wish to run with the local Django runserver, run the install 
 process as above making sure that when you run the './installer.sh 
-install' step that you leave the fields blank when the script asks you 
-for the path and the URL
+install' step that you leave the field blank when the script asks you 
+for the path.
 
 Functionality relating to media upload will not function as Django 
 requires an external web server to serve files. You can simulate this
