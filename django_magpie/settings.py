@@ -1,7 +1,7 @@
 # Django settings for django_magpie project.
 import django.conf.global_settings as DEFAULT_SETTINGS
 import os
-URL_ROOT = os.environ['DJANGO_URL_ROOT']
+URL_ROOT = os.environ['DJANGO_URL_ROOT'] if 'DJANGO_URL_ROOT' in os.environ else ''
 CURRENT_DIR = os.path.dirname(__file__)
 MAGPIE_DIR = CURRENT_DIR
 
