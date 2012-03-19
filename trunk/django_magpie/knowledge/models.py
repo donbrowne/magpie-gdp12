@@ -5,10 +5,7 @@ from register.models import Profile
 
 
 def userPath(instance, filename):
-    if instance.restricted:
-        return '/'.join(['restricted', filename])
-    else:
-        return filename
+    return filename
         
 class ResourceFile(models.Model):
     description = models.CharField(max_length=255)

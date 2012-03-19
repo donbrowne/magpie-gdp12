@@ -2,7 +2,6 @@ SHELL='/bin/bash'
 MAGDIR=$(PWD)
 FILE_MODE=660
 DIR_MODE=770
-INSTALL=install --mode=$(FILE_MODE)
 MKDIR=mkdir -m $(DIR_MODE) -p
 
 all: install
@@ -12,11 +11,10 @@ build:
 	$(MAKE) -C pml
 	$(MKDIR) sqlite3
 	$(MKDIR) resources
-	$(MKDIR) ./resources/media
-	$(MKDIR) ./resources/static
 	cp -n ./dataload/magpie.db ./sqlite3/
-	chmod $(FILE_MODE) ./sqlite3/magpie.db
-	$(INSTALL) ./dataload/media/* ./resources/media/
+	cp -r ./dataload/media/ ./resources/
+	chmod $(DIR_MODE) ./resources/media
+	chmod $(FILE_MODE) ./sqlite3/magpie.db ./resources/*
 	python ./django_magpie/manage.py collectstatic --noinput
 	touch build
 	@echo "Done!"
