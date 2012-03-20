@@ -1,7 +1,7 @@
 SHELL='/bin/bash'
 MAGDIR=$(PWD)
-FILE_MODE=660
-DIR_MODE=770
+FILE_MODE=ug+rwX,o+rX
+DIR_MODE=ug+rwXs,o+rX
 MKDIR=mkdir -m $(DIR_MODE) -p
 
 all: install
@@ -21,7 +21,6 @@ build:
 
 clean: 
 	$(MAKE) clean -C pml
-	rm build
 	find ./django_magpie/ -type f -name "*.pyc" -exec rm -f {} \;
 
 install: build
@@ -38,3 +37,4 @@ distclean: clean
 	rm ./pml/graph/traverse
 	rm ./pml/graph/print_io
 	if [ ! -z $(DESTDIR) ]; then echo "Destroying symlinks"; cd $(DESTDIR); rm magpie.wsgi; rm media; rm static; cd $(MAGDIR); fi;
+	rm build
