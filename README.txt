@@ -63,6 +63,9 @@ that folder) -
 
   make install DESTDIR=/home/magpie/public_html/
   
+Alternatively, the user can edit the Makefile, and set the DESTDIR
+variable as desired. It defaults to the current working directory.
+  
 This will copy the default database and puts it in the application 
 database folder, builds the PML tools, and create the symlinks to  
 django_magpie/magpie.wsgi and the resources/static and resources/media 
