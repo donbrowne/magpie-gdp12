@@ -45,7 +45,7 @@ def generatePmlGraph(request):
         return None
     fullPath = settings.MEDIA_ROOT + pmlPath
     if os.path.isfile(fullPath):
-        traverse = subprocess.Popen([settings.TRAVERSE_PATH,'-R','-L',fullPath],stdout=subprocess.PIPE)
+        traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',fullPath],stdout=subprocess.PIPE)
         dotDesc = traverse.communicate()[0]
         graph = pydot.graph_from_dot_data(dotDesc)
         png = graph.create_png()
