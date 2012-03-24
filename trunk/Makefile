@@ -1,3 +1,4 @@
+DESTDIR=$(PWD)
 SHELL='/bin/bash'
 MAGDIR=$(PWD)
 FILE_MODE=ug+rw,o-rw
@@ -17,7 +18,7 @@ build:
 	chmod $(FILE_MODE) ./sqlite3/magpie.db ./resources/*
 	python2 ./django_magpie/manage.py collectstatic --noinput
 	touch build
-	@echo "Done!"
+	@echo "Done!"z
 
 clean: 
 	$(MAKE) clean -C pml
