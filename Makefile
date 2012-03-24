@@ -3,20 +3,20 @@ SHELL='/bin/bash'
 MAGDIR=$(PWD)
 FILE_MODE=ug+rw,o-rw
 DIR_MODE=ug+rwX,o-rwX
-MKDIR=install --mode=$(DIR_MODE) -d
+INST=install --mode=$(DIR_MODE)
 
 all: install
 
 build:
 	@echo "Building Magpie environment"
 	$(MAKE) -C pml
-	$(MKDIR) sqlite3
-	$(MKDIR) resources
+	$(INST) -d sqlite3
+	$(INST) -d resources
 	cp -n ./dataload/magpie.db ./sqlite3/
 	cp -r ./dataload/media/ ./resources/
 	chmod $(DIR_MODE) ./resources/media
 	chmod $(FILE_MODE) ./sqlite3/magpie.db ./resources/*
-	python2 ./django_magpie/manage.py collectstatic --noinput
+	python ./django_magpie/manage.py collectstatic --noinput
 	touch build
 	@echo "Done!"z
 
