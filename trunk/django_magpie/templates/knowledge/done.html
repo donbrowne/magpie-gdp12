@@ -44,6 +44,9 @@
         <img src={{pmlReq|safe}} />
     {% endwith %}
     {% endif %}
+    {% if rec.pmlDesc != None %}
+        {{pmlDesc|safe}}
+    {% endif %}
     {% if rec.vidLink != None %}
         <a class="vidPlayer"
              href={{rec.vidLink|safe}}

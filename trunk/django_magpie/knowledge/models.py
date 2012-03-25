@@ -45,26 +45,33 @@ class RecsSummary(object):
         self.text = text
         self.links = details
         self.pmlPath = pmlPath
-        self.vidLink = vidLink
-        
+        self.pmlDesc = pmlDesc
+        self.vidLink = vidLink       
+     
 #Pack together the recommendation data in a nice way.        
 def recSummaryClosure(user):
     restrictedAccess = user.is_staff or user.is_superuser or user.has_perm('knowledge.restricted_access')
     def getRecSummary(rec):
         recsList = []
         pmlPath = None
+        pmlDesc = None
         vidLink = None
         if rec.videoLink != None and (not rec.videoLink.restricted or restrictedAccess or user in rec.videoLink.restricted_to.all()):
             vidLink = rec.videoLink.file.url
         if rec.pmlLink != None and (not rec.pmlLink.restricted or restrictedAccess  or user in rec.pmlLink.restricted_to.all()):
             recsList.append(("PML Link", rec.pmlLink.file.url))
             pmlPath = rec.pmlLink.file.name
+            pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
+            style = libxslt.parseStylesheetDoc(pmlStyleDoc)
+            doc = libxml2.parseFile(pmlPath)
+            result = style.applyStylesheet(doc, None)
+            pmlDesc = style.saveResultToString(result)
         for others in rec.otherLinks.all():
             if (not others.restricted or restrictedAccess  or user in others.restricted_to.all()):
                 recsList.append((others.description,others.file.url))
         for link in ExternalLink.objects.filter(rec=rec.id):
             recsList.append((link.description,link.link))
-        return RecsSummary(rec.text,recsList,pmlPath,vidLink)
+        return RecsSummary(rec.text,recsList,pmlPath,pmlDesc,vidLink)
     return getRecSummary
 
 
