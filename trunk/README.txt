@@ -32,6 +32,8 @@ Graphviz
 Pydot (a Python module)
 flex
 bison
+libxml2 (a Python module)
+libxslt (a Python module)
 
 ---Video---
 
