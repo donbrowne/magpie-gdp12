@@ -123,8 +123,14 @@ video streaming, will be lost.
 
 UNINSTALLATION
 
-Run the following (where DESTDIR should be the same path that was 
-specified during installation) -
+If you set the DESTDIR variable in the makefile during installation, run 
+the following -
+
+  make distclean
+  
+If you specified the DESTDIR as a command line argument, run the 
+following (where DESTDIR should be the same path that was specified 
+during installation) -
 
   make distclean DESTDIR=/home/magpie/public_html/
 
