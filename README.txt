@@ -34,6 +34,8 @@ flex
 bison
 libxml2 (a Python module)
 libxslt (a Python module)
+Tcldot (provided by the libgv-tcl package in Ubuntu)
+Tcl 8.5 (will be installed automatically if installing libgv-tcl)
 
 ---Video---
 
