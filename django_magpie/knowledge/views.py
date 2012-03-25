@@ -52,14 +52,14 @@ def generatePmlGraph(request):
         doc = libxml2.parseFile(fullPath)
         result = style.applyStylesheet(doc, None)
         output = style.saveResultToString(result)
-        (f,path) = tempfile.mkstemp()
+        (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media/')
         os.write(f, output)
         os.close(f)
         traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
-        os.remove(path)
         dotDesc = traverse.communicate()[0]
         graph = pydot.graph_from_dot_data(dotDesc)
         png = graph.create_png()
+        os.remove(path)
         return HttpResponse(png, mimetype="image/png")
     else:
         print ("[ERROR] File does not exist")
