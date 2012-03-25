@@ -1,13 +1,15 @@
 from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response,redirect
-#from knowledge.models import FactState, start_state, get_answers, recSummaryClosure
 from knowledge.models import Engine,start_state,state_encode,state_decode,recSummaryClosure
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 import subprocess 
 import os
 import pydot
+import libxml2
+import libxslt
+import tempfile
 
 # note sesson is a gui state so
 # should not pass to business logic layer
@@ -45,7 +47,16 @@ def generatePmlGraph(request):
         return None
     fullPath = settings.MEDIA_ROOT + pmlPath
     if os.path.isfile(fullPath):
-        traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',fullPath],stdout=subprocess.PIPE)
+        pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/xpml.xsl")
+        style = libxslt.parseStylesheetDoc(pmlStyleDoc)
+        doc = libxml2.parseFile(fullPath)
+        result = style.applyStylesheet(doc, None)
+        output = style.saveResultToString(result)
+        (f,path) = tempfile.mkstemp()
+        os.write(f, output)
+        os.close(f)
+        traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
+        os.remove(path)
         dotDesc = traverse.communicate()[0]
         graph = pydot.graph_from_dot_data(dotDesc)
         png = graph.create_png()
