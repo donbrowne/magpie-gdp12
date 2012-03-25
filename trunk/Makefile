@@ -25,9 +25,9 @@ pml/graph/traverse:
 
 resources: 
 	@echo "Collecting media content"
-	$(INSTDIR) -d resources
-	cp -r ./dataload/media/ ./resources/
-	chmod $(FILE_MODE) ./resources/*
+	$(INSTDIR) -d resources ./resources/media
+	$(INST) ./dataload/media/* ./resources/media/
+	$(INST) ./dataload/media/.htaccess ./resources/media/
 	@echo "Done!"
 	
 resources/static:
