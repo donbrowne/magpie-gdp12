@@ -149,3 +149,7 @@ Clicking on an account in the list allows you to edit its associated parameters.
 == 4.4 Sites ==
 
 <to be added later>
+
+== 5.0 PML Support ==
+
+PML should be uploaded in the XML PML format. If a recommendation with an associated PML file is recommended, the program will graph the PML file, and display the recommendation roadmap.
