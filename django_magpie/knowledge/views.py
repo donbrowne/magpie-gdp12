@@ -52,7 +52,7 @@ def generatePmlGraph(request):
         doc = libxml2.parseFile(fullPath)
         result = style.applyStylesheet(doc, None)
         output = style.saveResultToString(result)
-        (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media/')
+        (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
         os.write(f, output)
         os.close(f)
         traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
@@ -64,7 +64,6 @@ def generatePmlGraph(request):
     else:
         print ("[ERROR] File does not exist")
         return None
-
 
 # TODO move this to questions url
 def index(request):
