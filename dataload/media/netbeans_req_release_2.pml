@@ -1,314 +1,582 @@
-process RequirementsAndRelease {
-  sequence Requirements {
-    sequence SetProjectTimeline {
-      action ReviewNetBeans {
-	requires { NetBeansRoadmap }
-	provides { NetBeansStatus} /* former black hole */
-	tool { "WebBrowser " }
-	agent { "Previous release manager, Sun ONE Studio development team (e.g. Forte'), Sun ONE Studio Marketing Manager " }
-	script {
-	  "available at <a href=http://www.netbeans.org/devhome/docs/roadmap.html>http://www.netbeans.org/devhome/docs/roadmap.html</a>"
-	}
-      }
-      action SetReleaseDate {
-	requires { NetBeansRoadmap && NetBeansStatus}
-	provides { ReleaseDate }
-	tool { "Pen, paper " }
-	agent { "Previous release manager, Sun ONE Studio Development team, Sun ONE Studio Marketing Manager " }
-	script { "" }
-      }
-      sequence DetermineProject {
-	branch SunONEStudioDevelopmentMeeting {
-	  action ReviewNetBeansVisionStatmenet {
-	    requires { NetBeansVisionStatement }
-	    provides { ProspectiveFeaturesForUpcomingRelease }/*former black hole XXX This task seems like it should precede branch.  */
-	    tool { "Web browser " }
-	    agent { "Previous release manager, Sun ONE Studio Development team, Sun ONE Studio Marketing Manager " }
-	    script { 
-	      "available at <a href=http://www.netbeans.org/about/os/vision.html>http://www.netbeans.org/about/os/vision.html</a>"
-	    }
-	  }
-	  action ReviewUncompletedMilestonesFromPreviousRelease {
-	    requires { PreviousVersionReleaseDocuments }
-	    provides { ProspectiveFeaturesFromPreviousReleases }
-	    tool { "Web browser " }
-	    agent { "Previous release manager, Sun ONE Studio Development team, Sun ONE Studio Marketing Manager " }
-	    script { 
-	      "Available at <a href=http://www.netbeans.org/devhome/docs/releases/33/features/nb33-features-overview.html>http://www.netbeans.org/devhome/docs/releases/33/features/nb33-features-overview.html</a>"
-	    }
+
+<!-- $Id: web_test.xml,v 1.2 2004/03/10 08:41:19 jnoll Exp $ -->
+<!-- 286 Extra Credit assignment specification, winter '04 -->
+<document name="web_test">
+<head>
+  <title>Web Test Exercise</title>
+  <author>John Noll</author>
+</head>
+<body>
+<process>
+  <action name="overview">
+    <script>
+
+    <p>In this exercise, you will create a set of tests for the Web
+    interface to the PML virtual machine, using JUnit and HTTPUnit.
+    The procedure is an abbreviated version of Tamres incremental
+    approach; the baseline is provided for you, you just need to do
+    the inventory.</p>
+
+    <p>JUNit is a Java framework for creating and running unit and
+    functional tests.  HTTPUnit is a set of java classes that one
+    uses in conjunction with JUnit for testing web sites.</p>
+
+    </script>
+  </action>
+
+  <sequence name="setup_environment">
+    <action name="create_working_directory">
+      <provides>working_directory</provides>
+      <script>
+
+      <p>Create a working directory to contain the java files that
+      implement your tests.  You <b>must</b> set permissions on the
+      path to your working directory so that the PEOS web interface
+      can traverse the path and read your test files.</p>
+      <pre>
+      % cd
+      % chmod a+X .
+      % mkdir coen286
+      % chmod a+X coen286
+      % cd coen286
+      % mkdir web_test
+      % chmod a+Xr web_test
+      </pre>
+      <p>Please pay particular attention to the last <i>chmod</i>; you
+      must make your working directory both <i>executable</i> (`+X')
+      and <i>readable</i> (`+r'), 
+      so that the PML Web interface can read and display your files
+      when requested.  The other directories need only be
+      <i>executable.</i></p> 
+
+      <p>Note: this only grants read access to your working directory;
+      and only allows others to traverse, but not read, the
+      directories in the path leading to your working directory. This
+      enables the PEOS web interface to find your test files and other
+      resources in your working directory, but does not allow anyone to
+      actually list any of your directories except for your working
+      directory.</p> 
+
+      </script>
+    </action>
+
+    <action name="create_test_file">
+      <requires>working_directory</requires>
+      <provides>junit_test_file</provides>
+      <script>
+
+      HTTPUnit and JUnit are written in Java, and require tests to be
+      written in Java as well. Create a Java file to contain your test
+      code (called a Test Case in JUnit terminology).  You must also
+      set permissions on the test file so that the PEOS web interface
+      can traverse the path and read your test files.
+      <pre>
+      % cd ~/coen286/web_test
+      % touch WebUITest.java
+      % chmod a+r WebUITest.java
+      </pre>
+      Note: the last step is necessary to grant access to the PEOS web
+      ui.
+
+      Put the following skeleton in your java test file, then modify
+      the values of the <i>login</i> and <i>password</i> variables.
+      Set the <i>login</i> variable to the <i>test</i> id you received
+      via email; the password is the same for both IDs.
+      <pre>
+      import java.lang.*;
+      import com.meterware.httpunit.*;
+
+      import java.io.IOException;
+      import java.net.MalformedURLException;
+
+      import org.xml.sax.*;
+      import org.w3c.dom.*;
+
+      import junit.framework.*;
+
+
+      /**
+       * An example of testing web2 using httpunit and JUnit.
+       **/
+      public class WebUITest extends TestCase {
+
+	  String site = &amp;quot;http://linux.students.engr.scu.edu/~jnoll/PEOS/cgi-bin/&amp;quot;;
+	  String login = &amp;quot;(your test login)&amp;quot;;
+	  String passwd = &amp;quot;(your password)&amp;quot;;
+	  // Static, so initialization in Baseline persists.
+	  static String proc_table; 
+
+
+	  public static void main(String args[]) {
+	      junit.textui.TestRunner.run( suite() );
 	  }
 
-	  action ReviewIssuzillaFeatureRequests {
-	    requires { IssuezillaIssueRepository } /* was IssuezillaIssueRepository (misspelled) */
-	    provides { ProspectiveFeaturesGatheredFromIssuezilla }
-	    tool { "Web browser, Issuezilla " }
-	    agent { "Previous release manager, Sun ONE Studio Development team, Sun ONE Studio Marketing Manager " }
-	    script { 
-	      "Go to <a href=http://www.netbeans.org/devhome/issues.html>Issuezilla</a>
-	      Search for feature requests/enhancements from current release"
-	    }
+	  public static Test suite() {
+	      return new TestSuite( WebUITest.class );
 	  }
-	}
-	iteration EstablishFeatureSet {
-	  action CompileListOfPossibleFeaturesToInclude {
-	    requires { ProspectiveFeaturesForUpcomingRelease && ProspectiveFeaturesGatheredFromIssuezilla && ProspectiveFeaturesFromPreviousReleases }
-	    provides { FeatureSetForUpcomingRelease }
-	    tool { "Pen, paper " }
-	    agent { "Previous release manager, Sun ONE Studio Development team, Sun ONE Studio Marketing Manager " }
-	    script { "" }
-	  }
-	  action CategorizeFeaturesProposedFeatureSet /*into"Must Have," "Should Have," and "Nice to Have"*/ {
-	    requires { FeatureSetForUpcomingRelease }
-	    provides { WeightedListOfFeaturesToImplement /* (signifying relative importance) */ }
-	    tool { "Pen, paper " }
-	    agent { "Previous release manager, Sun ONE Studio Development team, Sun ONE Studio Marketing Manager " }
-	    script { "" }
-	  }
-	  action SendMessageToCommunityForFeedback /* {nbdev, nbusers, qa, nbdiscuss }*/ {
-	    requires { WeightedListOfFeaturesToImplement }
-	    provides { FeedbackRequest } /* former black hole */
-	    tool { "Email client " }
-	    agent { "Previous release manager, Sun ONE Studio Development team, Sun ONE Studio Marketing Manager " }
-	    script { "" }
-	  }
-	  action ReviewFeedbackFromCommunity /* r.e. proposed feature set*/ {
-	    requires { FeebackMessagesOnMail }
-	    provides { PotentialRevisionsToDevelopmentProposal }
-	    tool { "Web browser " }
-	    agent { "Previous release manager, Sun ONE Studio Development team, Sun ONE Studio Marketing Manager " }
-	    script { "" }
-	  }
-	  action ReviseProposalBasedOnFeedback {
-	    requires { PotentialRevisionsToDevelopmentProposal }
-	    provides { RevisedDevelopmentProposal }
-	    tool { "Pen, paper " }
-	    agent { "Previous release manager, Sun ONE Studio Development team, Sun ONE Studio Marketing Manager " }
-	    script { "" }
-	  }
-	}
-	action PostFinalDevelopmentProposalToNetBeansWebsite {
-	  requires { RevisedDevelopmentProposal }
-	  provides { FinalDevelopmentProposal }
-	  tool { "Web editor " }
-	  agent { "NetBeans web team, Sun ONE Studio Development team, Sun ONE Studio Marketing Manager " }
-	  script { "" }
-	}
-	action AssignDevelopersToCompleteProjectMilestones {
-	  requires { RevisedDevelopmentProposal } 
-	  provides { DeveloperAssignments }/* former black hole*/
-	  tool { "Email client " }
-	  agent { "NetBeans developers (Sun ONE Studio developers, module developers) " }
-	  script { "" }
-	}	
-      }
-      sequence SetReleaseStageCompletionDates {
-	action SetFeatureFreezeDate {
-	  requires { ReleaseDate }
-	  provides { FeatureFreezeDate }
-	  tool { "" }
-	  agent { "Previous release manager, Sun ONE Studio Development team " }
-	  script { "" }
-	}
-	action SetMilestoneCompletionDates {
-	  requires { FeatureFreezeDate && ReleaseDate }
-	  provides { MilestoneCompletionDates }
-	  tool { "" }
-	  agent { "Developer(s) responsible for feature completion " }
-	  script { "" }
-	}
-      }
-    }
-    sequence EstablishReleaseManager {
-      action EmailSolicitationForReleaseManager {
-	requires { MilestoneCompletionDates }/*former miracle*/
-	provides { ReleaseManagerRequest }
-	tool { "Email client " }
-	agent { "PreviousReleaseManager " }
-	script { "" }
-      }
 
-      action WaitForVolunteer {
-	requires { ReleaseManagerRequest } /* former empty task */
-	provides { Volunteer }
-	tool { "" }
-	agent { "" }
-	script { "Wait for community members to volunteer to be the release manager " }
-      }
+	  public WebUITest( String name ) {
+	      super( name );
+	  }
 
-      iteration CollectCandidacyNominations {
-	action SendCandidacyAnnouncement {
-	  requires { Volunteer }
-	  provides { ReleaseManagerCandidacyAnnouncement }
-	  tool { "Email client " }
-	  agent { "Release manager candidate " }
-	  script { "" }
-	}
-      }
-      action EstablishReleaseManagerConsensus {
-	requires { ReleaseManagerCandidacyAnnouncement }
-	provides { ReleaseManagerDecision }
-	tool { "Email client " }
-	agent { "NetBeans community (nbdev mailing list) " }
-	script { "" }
-      }
-      action AnnounceNewReleaseManager {
-	requires { ReleaseManagerDecision }
-	provides { ReleaseManagerAnnoucementToNbdevMailingList }
-	tool { "Email client " }
-	agent { "Previous release manager " }
-	script { "" }
-      }
-    }
-    action SolicitModuleMaintainersForInclusionInUpcomingRelease {
-      requires { FeatureFreezeDate }
-      provides { ModuleInclusionNoticeToNbdevMailingList}
-      tool { "Email client " }
-      agent { "Release manager " }
-      script { "" }
-    }
-  }
-  sequence Release {
-    iteration Stabilization {
-      sequence Build {
-	action ChangeBuildBranchName {
-	  requires { CvsCodeRepository }
-	  provides { NewBranchForCurrentBuild }
-	  tool { "CVS code repository " }
-	  agent { "Release manager, module maintainers " }
-	  script { "" }
-	}
-	iteration MakeInstallTar {
-	  action ExtractPlatformSpecificDevelopmentSource {/* fix for unprovided resource */
-	    requires { NewBranchForCurrentBuild }
-	    provides { DevelopmentSourceForEachPlatform }
-	    script { "export source code for each platform from CVS repository" }
+	  public void testBaseline () throws Exception {
+	      assertTrue(0 == 0);
 	  }
-	  action MakeInstallTarForEachPlatform {
-	    requires { DevelopmentSourceForEachPlatform }
-	    provides { InstallExecutableTar }
-	    tool { "Ant, Build tools, Install tools, Tar, Zip tools " }
-	    agent { "Release manager, build automation script"  }
-	    script { "" }
-	  }
-	}
       }
-      sequence Deploy {
-	action UploadInstallTarFilesToWebRepository {
-	  requires { InstallExecutableTar && WebRepository } /* was BinaryReleaseDownloads */
-	  provides { WebRepository} /* former blackhole */
-	  tool { "FTP client " }
-	  agent { "Release manager " }
-	  script { "" }
-	}
-	action UpdateWebPage {
-	  requires { WebRepository  } /* was ProjectWeb */
-	  provides { UpdatedWeb }
-	  tool { "Web editor " }
-	  agent { "Web team " }
-	  script { "" }
-	}
-	action MakeReadmeInstallationNotesAndChangelog {
-	  requires { ChangesFromIndividualModules}
-	  provides { README && InstallationNotes && Changelog }
-	  tool { "Text editor " }
-	  agent { "Release manager " }
-	  script { "" }
-	}
-	action SendReleaseNotificationToCommunityInvitingTheCommunityToDownloadAndTestIt { 
-	  requires { README && InstallationNotes && Changelog }/*former miracle*/
-	  provides { ReleaseNotice }
-	  tool { "Email client" }
-	  agent { "Release manager" }
-	  script { "" }
-	}
-      }
-      sequence Test {
-	action ExecuteAutomaticTestScripts {
-	  requires { TestScripts && InstallExecutableTar }
-	  provides { TestResults}
-	  tool { "Automated test suite (xtest, others) " }
-	  agent { "Sun ONE Studio QA team " }
-	  script { "" }
-	}
-	action ExecuteManualTestScripts {
-	  requires { InstallExecutableTar }
-	  provides { TestResults }
-	  tool { "NetBeans IDE " }
-	  agent { "users, developers, Sun ONE Studio QA team, Sun ONE Studio developers " }
-	  script { "" }
-	}
-	iteration UpdateIssuezilla {
-	  action ReportIssuesToIssuezilla{
-	    requires { TestResults }
-	    provides { IssuezillaEntry } /* sb UpdatedIssuezillaIssueRepository? */
-	    tool { "Web browser " }
-	    agent { "users, developers, Sun ONE Studio QA team, Sun ONE Studio developers " }
-	    script {
-	      "Navigate to <a href='http://www.netbeans.org/issues'>Issuezilla</a>.
-	      Select issue number/component to update	."
-	    }
-	  }
-	  action UpdateStandingIssueStatus {
-	    requires { IssuezillaIssueRepository && TestResults} /* was StandingIssueFromIssuezilla */
-	    provides { UpdatedIssuezillaIssueRepository }
-	    tool { "Web browser " }
-	    agent { "users, developers, Sun ONE Studio QA team, Sun ONE Studio developers " }
-	    script { "" }
-	  }
-	}
-	action PostBugStats{
-	  requires { TestResults}
-	  provides { BugStatusReport && TestResultReport}
-	  tool { "Web editor, JFreeChart " }
-	  agent { "Release manager " }
-	  script { "" }
-	}
-      }
-      sequence Debug {
-	action ExamineTestReport {
-	  requires { TestResultReport && BugStatusReport }
-	  provides { ErroneousSource } /* former black hole */
-	  tool { "Web browser" }
-	  agent { "developers, Sun ONE development team, module maintainers, module contributors, release manager " }
-	  script { "" }
-	}
-	action WriteBugFix {
-	  requires { ErroneousSource }
-	  provides { PotentialBugFix }
-	  tool { "Source editor " }
-	  agent { "developers, Sun ONE development team, module maintainers, module contributors, release manager " }
-	  script { "" }
-	}
-	action VerifyBugFix {
-	  requires { PotentialBugFix }
-	  provides { WorkingBugFix }
-	  tool { "Source editor, source compiler, test tools " }
-	  agent { "developers, Sun ONE development team, module maintainers, module contributors, release manager " }
-	  script { 
-	    "Compile source locally.
-	    Execute module locally.
-	    Perform automatic, manual unit testing.
-	    Perform automatic, manual integration testing."
-	  }
-	}
-	action CommitCodeToCvsCodeRepository {
-	  requires { WorkingBugFix && CvsCodeRepository} /* was CVSCodeRepository */
-	  provides { CvsCodeRepository } /* was UpdatedSource */
-	  tool { "CVS client " }
-	  agent { "developers, Sun ONE development team, module maintainers, module contributors, release manager " }
-	  script { 
-	    "Upload revised source to the CVS code repository in respective branch."
-	  }
-	}
-	action UpdateIssuezillaToReflectChanges{
-	  requires { IssuezillaIssueRepository}
-	  provides { UpdatedIssuezillaIssueRepository} /* was UpdateIssueStatus */
-	  tool { "Web browser " }
-	  agent { "developers, Sun ONE development team, module maintainers, module contributors, release manager " }
-	  script { "" }
-	}
-      }
-    }
-  }
-}
+      </pre>
+      <p>Be sure to include the <i>main()</i>and <i>suite()</i>methods in
+      addition to the constructor; JUnit uses these to run your tests.</p>
 
+      <p>Note: The JUnit <i>TestCase</i> class corresponds to our notion
+      of test procedures.  The methods of this class are close to our
+      concept of test case.</p>
+
+      <p>To verify that everything is set up correctly, this skeleton
+      includes a simple test method to your class that will be run by
+      JUnit when the test is run:</p>
+      <pre>
+      assertTrue(0 == 0);
+      </pre>
+      will result in a `.' appearing in the output, indicating a test
+      was run and passed.
+
+      </script>
+    </action>
+
+    <action name="create_makefile">
+      <requires>working_directory</requires>
+      <provides>Makefile</provides>    
+      <script>
+
+      Create a Makefile to automate the build and run cycle: 
+      <pre>
+      % touch Makefile
+      % chmod a+r Makefile
+      </pre>
+      Put the following macros and rules in the makefile (please be
+      sure to include the 'test' rule, so I can easily run your tests by
+      typing 'make test'). 
+      <pre>
+      HTTPUNIT = /home/jnoll/lib/httpunit-1.5.4
+      CLASSPATH = .:..:$(HTTPUNIT)/lib/httpunit.jar:$(HTTPUNIT)/jars/junit.jar:$(HTTPUNIT)/jars/nekohtml.jar:$(HTTPUNIT)/jars/Tidy.jar:$(HTTPUNIT)/jars/xmlParserAPIs.jar:$(HTTPUNIT)/jars/xercesImpl.jar:$(HTTPUNIT)/jars/js.jar
+      
+      JAVAC = javac
+      JAVA = java
+      
+      test: WebUITest.class
+      	       $(JAVA) -classpath $(CLASSPATH) WebUITest
+      
+      %.class: %.java
+	       $(JAVAC) -classpath $(CLASSPATH) $&lt;
+      </pre>
+      <p>Note: be sure the lines containing JAVA and JAVAC above are
+      preceded by a <i>tab</i> character; make will be confused otherwise.
+      </p>
+
+      </script>
+    </action>
+
+    <action name="verify_setup">
+      <requires>working_directory</requires>
+      <script>
+
+      Verify that your environment has been set up correctly by
+      compiling and running the test.  To do this, you need to add
+      <i>javac</i> and <i>java</i> to your path, which is easily done
+      using the <i>setup</i> command:
+      <pre>
+      % setup jdk
+      % setup gcc
+      </pre>
+      This will automatically add the appropriate environment
+      variables for the current version of JDK, as well as
+      <i>gmake</i>, to your environment.
+
+      <p>Now, test your implementation:</p>
+      <pre>
+      % gmake test
+      </pre>
+      You should see something like the following: 
+      <pre>
+[jnoll@linux101] ~/src/webtest :make
+javac -classpath .:..:/home/jnoll/lib/httpunit-1.5.4/lib/httpunit.jar:/home/jnoll/lib/httpunit-1.5.4/jars/junit.jar:/home/jnoll/lib/httpunit-1.5.4/jars/nekohtml.jar:/home/jnoll/lib/httpunit-1.5.4/jars/Tidy.jar:/home/jnoll/lib/httpunit-1.5.4/jars/xmlParserAPIs.jar:/home/jnoll/lib/httpunit-1.5.4/jars/xercesImpl.jar:/home/jnoll/lib/httpunit-1.5.4/jars/js.jar WebUITest.java
+java -classpath .:..:/home/jnoll/lib/httpunit-1.5.4/lib/httpunit.jar:/home/jnoll/lib/httpunit-1.5.4/jars/junit.jar:/home/jnoll/lib/httpunit-1.5.4/jars/nekohtml.jar:/home/jnoll/lib/httpunit-1.5.4/jars/Tidy.jar:/home/jnoll/lib/httpunit-1.5.4/jars/xmlParserAPIs.jar:/home/jnoll/lib/httpunit-1.5.4/jars/xercesImpl.jar:/home/jnoll/lib/httpunit-1.5.4/jars/js.jar WebUITest
+.
+Time: 0.003
+
+OK (1 test)
+
+[jnoll@linux101] ~/src/webtest :
+      </pre>
+      Notice the lone '.' before the ``Time: 0.026''.  This indicates
+      a test was run and passed.
+
+      </script>
+    </action>
+  </sequence>
+
+  <action name="create_baseline">
+    <requires>junit_test_file</requires>
+    <script>
+
+    Once you have a working test setup, augment it to interact with
+    the PEOS system. HTTPUnit provides several methods for
+    simulating interactions with a web site. You must first create a
+    ``conversation'' object to encapsulate the interactions with the
+    web site. First, set the <i>login</i> and <i>passwd</i>
+    variables to your <i>test</i> login id and passwd:
+    <pre>
+       String login = &amp;quot;(your test login)&amp;quot;;
+       String passwd = &amp;quot;(your password)&amp;quot;;
+    </pre>
+    Then, replace the body of your <i>testBaseline()</i> with the
+    following:
+    <pre>
+    public void testBaseline() throws Exception {
+    	  WebConversation conversation = new WebConversation();
+    	  conversation.setAuthorization(login, passwd);
+    	  WebRequest request = 
+	      new GetMethodWebRequest(site + &amp;quot;action_list.cgi&amp;quot;);
+    	  WebResponse response = conversation.getResponse(request);
+    
+    	  // Verify title and heading of response page.
+    	  String title = response.getTitle();
+    	  assertNotNull(title);
+    	  assertEquals(&amp;quot;Action List&amp;quot;, title);
+    	  assertTrue(-1 != response.getText().indexOf(&amp;quot;Action List&amp;quot;));
+    
+    	  // Save the name of the process table; required for future
+    	  // tests that have to send process table name in the url.
+    	  WebForm form = response.getForms()[0];
+    	  proc_table = form.getParameterValue(&amp;quot;process_filename&amp;quot;);
+    	  assertNotNull(proc_table);
+    }
+    </pre>
+    <p>First, note the <i>WebConversation</i> object in the above method
+    definition.  This object manages the sending and receiving of
+    requests and responses to and from the server. The conversation
+    also manages authentication, which is necessary for interacting
+    with the PEOS web site.  Therefore, you must include your test
+    login id and password in the code.</p>
+
+    <p>Next, observe how we sent a request to the web server.  This is
+    done using a <i>request</i> object that is returned by the
+    <i>GetMethodWebRequest()</i> method, which takes a URL as
+    argument.  We pass this object to the <i>WebConversation</i> to
+    send to the web server.  We get the reply contents by asking the
+    <i>WebConversation</i> for the <i>response</i> object.</p>
+
+    <p>The <i>response</i>object represents the reply from the web
+    server. This object can be queried for various constructs that
+    are part of the web page returned, including forms in the page,
+    and parameters in the forms. An important parameter you will
+    want to retrieve is the <i>process_filename</i>, which is the
+    name of the file that stores the process table for your
+    processes. (Each user gets a separate process table, with name
+    derived from the encrypted user name. This is to provide a
+    measure of privacy, so others can't easily obtain your process
+    state, or identify who belongs to a given process table.)
+    Declare an instance variable (say, <i>proc_table</i>) to hold
+    this name (you will need it later), and retrieve it from the
+    response:</p>
+    <pre>
+        WebForm form = response.getForms()[0];
+    	  proc_table = form.getParameterValue(&amp;quot;process_filename&amp;quot;);
+    	  assertNotNull(proc_table);
+    </pre>
+    Note the use of <i>assertNotNull()</i>. This is a JUnit
+    assertion to assert that its argument is not Null.
+
+    <p>Finally, we employ several HTTPUnit methods to examine the
+    response.  In particular, <i>getTitle()</i> returns the pages
+    title (obviously), and <i>getText()</i> returns the text (not the
+    header) of the page, as html if it is an html page.  For a
+    complete list of HTTPUnit operations, see the <a
+    href='http://httpunit.sourceforge.net/doc/api/index.html'>HTTPUnit
+    API documentation</a>.</p>
+
+    </script>
+  </action>
+
+
+  <iteration name="create_inventory_tests">
+    <action name="select_inventory_item">
+      <script>
+
+      <p>As mentioned previously, the test procedure is an abbreviated
+      form of Tamres incremental approach.  In this phase, you create
+      a test for each ``inventory'' item in the product's input.</p>
+
+      <p>The following cgi pages represent the inventory items to
+      test:</p>
+      <ul>
+      <li>action_list.cgi</li>
+      <li>create_process.cgi</li>
+      <li>action_page.cgi</li>
+      <li>bind_resources.cgi</li>
+      <li>delete_proc_table.cgi</li>
+      </ul>
+
+      <p>Select an item to test, then create a test method named after
+      the item.  For example, if you choose to test
+      <i>action_list.cgi</i>, name your method <i>testActionList</i>.
+      Note: it is necessary to create a name that begins with the
+      string ``test''; JUnit uses reflection to find the test methods
+      to call, by looking for this prefix string.  It won't run
+      methods that don't begin with this string.</p>
+
+      <p>Then, select one or more of the following tests to add to
+      your test method, depending on the page under test.
+      </p>
+      <p>Note: if you're clever about the order in which you implement
+      your tests, you can leverage one test to set up the next.  For
+      example, don't test <i>delete_proc_table.cgi</i> until the end;
+      then, you can use successful results of
+      <i>create_process.cgi</i> tests to set up the environment for
+      the others.</p>
+
+      </script>
+    </action>
+
+    <iteration name="create_tests">
+      <selection name="choose_test_type">
+        <action name="retrieve_page"> 
+	  <requires>junit_test_file</requires>
+	  <script>
+
+	  The baseline test is an example of how to test simple
+	  retrieval of a web page: create a <i>request</i> bound to a
+	  specific url, use the <i>WebConversation</i> to submit the
+	  request, then examine the <i>response</i> object representing
+	  the reply.
+
+	  </script>
+	</action>
+
+	<action name="create_process">
+	  <requires>junit_test_file</requires>
+	  <script>
+
+	  You will need to create a process instance to test some
+	  operations, such as the <i>action_page.cgi</i>.  This is
+	  easy: just submit a request for <i>create_process.cgi</i>
+	  with the name of the process:
+	  <pre>
+	  WebConversation conversation = new WebConversation();
+	  conversation.setAuthorization(login, passwd);
+	  WebRequest request = 
+	  	  new GetMethodWebRequest(site 
+	  				  + &amp;quot;create_process.cgi?&amp;quot;
+	  				  + &amp;quot;model=test_action.pml&amp;quot;
+	  				  + &amp;quot;&amp;process_filename=&amp;quot; + proc_table);
+	  
+	  // Submit request and get reply.
+	  WebResponse response = conversation.getResponse(request);
+	  
+	  // Verify title and heading of response page.
+	  // The response to create_process is the Action List page.
+	  String title = response.getTitle();
+	  assertNotNull(title);
+	  assertEquals(&amp;quot;Action List&amp;quot;, title);
+	  assertTrue(-1 != response.getText().indexOf(&amp;quot;&amp;lt;h1&amp;gt;Action List&amp;lt;/h1&amp;gt;&amp;quot;));
+	  </pre>
+
+	  </script>
+	</action>
+
+	<action name="reset_process_table">
+	  <requires>junit_test_file</requires>
+	  <script>
+
+	  Some tests will require a ``clean'' environment, in which no
+	  processes have been created.  Use
+	  <i>delete_proc_table.cgi</i> to delete the process table and
+	  thus reset the environment:
+	  <pre>
+	  WebConversation conversation = new WebConversation();
+	  conversation.setAuthorization(login, passwd);
+	  assertNotNull(proc_table);
+	  WebRequest request = 
+	      new GetMethodWebRequest(site 
+				      + &amp;quot;delete_proc_table.cgi?&amp;quot;
+				      + &amp;quot;process_filename=&amp;quot; + proc_table);
+
+	  // Submit request and get reply.
+	  WebResponse response = conversation.getResponse(request);
+
+	  // Verify title and heading of response page.
+	  // The response to delete_proc_table.cgi is a message confirming
+	  // delete.  
+	  String title = response.getTitle();
+	  assertNotNull(title);
+	  assertEquals(&amp;quot;Delete Process Table&amp;quot;, title);
+	  assertTrue(-1 != response.getText().indexOf(&amp;quot;&amp;lt;h1;&amp;gt;Delete Process Table&amp;lt;/h1&amp;gt;&amp;quot;));
+	  </pre>
+
+	  </script>
+	</action>
+
+	<action name="verify_links">
+	  <requires>junit_test_file</requires>
+	  <script>
+
+	  A page containing links can be verified by examining the text
+	  between the anchor tags, or the link url.  
+
+	  <p>Use the <i>WebResponse</i> object's <i>getLinkWith()</i>
+	  method to find a link with specific text within anchor tags.
+	  For example, to find the ``overview'' link in a page, do </p>
+	  <pre>
+	  // Get 'overview' link from form.
+	  WebLink link = response.getLinkWith(&amp;quot;overview&amp;quot;);
+	  assertNotNull(link);
+	  </pre>
+
+	  <p>Then, you can verify the the link's url with
+	  <i>getURLString()</i>:</p>
+	  <pre>
+	  assertEquals(&amp;quot;action_page.cgi?pid=0&amp;act_name=overview&amp;quot; + 
+		       &amp;quot;&amp;process_filename=&amp;quot; + proc_table,
+		       link.getURLString());
+	  </pre>
+
+	  <p>Another way to look at links is to retrieve all of the
+	  links in a page, then look at their attributes one at a
+	  time:</p>
+
+	  <pre>
+	  // Verify links.  This process only has two links: ``test_script''
+	  // and ``Create Process''.
+	  WebLink links[] = response.getLinks();
+	  int i = 0;
+	  assertEquals(&amp;quot;test_script&amp;quot;, links[i].asText());
+	  assertEquals(&amp;quot;action_page.cgi?pid=0&amp;act_name=test_script&amp;quot; + 
+		       &amp;quot;&amp;process_filename=&amp;quot; + proc_table,
+		       links[i].getURLString());
+	  i++;
+	  // Next link is ``Create Process'' link at bottom of page.
+	  assertEquals(&amp;quot;Create Process&amp;quot;, links[i].asText());
+	  assertEquals(&amp;quot;process_listing.cgi?&amp;quot; + 
+		       &amp;quot;process_filename=&amp;quot; + proc_table,
+		       links[i].getURLString());
+	  </pre>
+
+	  </script>
+	</action>
+
+	<action name="follow_link">
+	  <requires>junit_test_file</requires>
+	  <script>
+
+	  <p>Links aren't much use if they can't be followed.  HTTPUnit
+	  provides a facility for following links, simulating a mouse
+	  click on the anchor text.  This is achieved through the
+	  <i>WebLink</i> object's <i>click()</i>method:</p>
+	  <pre>
+	  // See if there's anything on the other end.
+	  WebResponse linkEnd = links[i].click();
+	  assertNotNull(linkEnd.getTitle());
+	  assertEquals(&amp;quot;test_script&amp;quot;, linkEnd.getTitle());
+	  assertTrue(-1 != linkEnd.getText().indexOf(&amp;quot;&amp;lt;h1&amp;gt;test_script&amp;lt;/h1&amp;gt;&amp;quot;));
+	  </pre>
+
+	  </script>
+	</action>
+
+	<action name="verify_parameters">
+	  <requires>junit_test_file</requires>
+	  <script>
+
+	  <p>Most of the web pages we will test are actually forms.
+	  HTTPUnit provides many facilities for examining and
+	  manipulating forms.</p>
+
+	  <p>For example, you might want to examine a form's
+	  parameters; we used this in the baseline test to obtain the
+	  process table name, which is a ``hidden'' parameter in most
+	  of our forms:</p>
+	  <pre>
+	   &lt;input type=&amp;quot;hidden&amp;quot; name=&amp;quot;process_filename&amp;quot; value=&amp;quot;dfTqHEvIkEM2.dat&amp;quot;&gt;
+	  </pre>
+	  <p>We retrieved this parameter using the <i>WebForm</i>
+	  object's <i>getParameterValue()</i> method, which takes the
+	  parameter name as argument and returns the parameter's value
+	  attribute:</p> 
+	  <pre>
+	   WebForm form = response.getForms()[0];
+	   proc_table = form.getParameterValue(&amp;quot;process_filename&amp;quot;);
+	  </pre>
+
+	  </script>
+	</action>
+
+	<action name="submit_form">
+	  <requires>junit_test_file</requires>
+	  <script>
+
+	  You can also submit a form, once you have obtained it using
+	  the <i>WebResponse</i> objects <i>getForms()</i> method.
+
+	  <p><i>WebForm</i> provides a <i>setParameter()</i> method to set
+	  the values of a forms parameters, and a <i>submit()</i>
+	  method that simulates form submission.</p>
+	  <pre>
+
+	  WebConversation conversation = new WebConversation();
+	  conversation.setAuthorization(login, passwd);
+	  WebRequest  request = 
+	      new GetMethodWebRequest(site + &amp;quot;handle_run.cgi?&amp;quot;
+				      + &amp;quot;resource_type=requires&amp;quot; 
+				      + &amp;quot;&amp;process_filename=&amp;quot; + proc_table
+				      + &amp;quot;&amp;pid=0&amp;quot;
+				      + &amp;quot;&amp;act_name=test_script&amp;quot;);
+
+	  WebResponse response = conversation.getResponse( request );
+	  WebForm bindingForm = response.getForms()[0];
+	  bindingForm.setParameter(&amp;quot;test_resource&amp;quot;, &amp;quot;/home/jnoll/lib/httpunit&amp;quot;);
+	  bindingForm.submit();
+
+	  // The response is now the conversation's current page.
+	  response = conversation.getCurrentPage();
+	  assertEquals(&amp;quot;test_script&amp;quot;, response.getTitle());
+
+	  </pre>
+
+	  </script>
+	</action>
+
+	<action name="examine_table">
+	  <requires>junit_test_file</requires>
+	</action>
+      </selection>
+    </iteration>
+
+    <action name="verify_test_method">
+      <requires>junit_test_file</requires>
+      <script>
+
+      Verify that your test compiles and runs before proceeding to the
+      next test:
+      <pre>
+      % make test
+      </pre>
+
+      </script>
+    </action>
+
+  </iteration>
+
+  <action name="submit_results">
+    <script>
+
+    Once you are satisfied with your test suite (and only after you
+    have verified that ALL tests compile and run), submit a tar file
+    via email, according to the <a href="submit-tar.pml">submit
+    procedure</a>.
+
+    </script>
+  </action>
+
+</process>
+</body>
+</document>
