@@ -94,7 +94,7 @@ STATIC_URL = URL_ROOT + '/static/'
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 #ADMIN_MEDIA_PREFIX = '/static/admin/'
-ADMIN_MEDIA_PREFIX = URL_ROOT + '/static/grappelli/'
+ADMIN_MEDIA_PREFIX = URL_ROOT + '/static/admin/'
 
 
 # Additional locations of static files
