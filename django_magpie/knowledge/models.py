@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from register.models import Profile
+import libxml2
+import libxslt
 
 
 def userPath(instance, filename):
@@ -41,7 +43,7 @@ class ExternalLink(models.Model):
 #BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
         
 class RecsSummary(object): 
-    def __init__(self, text, details, pmlPath, vidLink):
+    def __init__(self, text, details, pmlPath, pmlDesc, vidLink):
         self.text = text
         self.links = details
         self.pmlPath = pmlPath
@@ -63,7 +65,7 @@ def recSummaryClosure(user):
             pmlPath = rec.pmlLink.file.name
             pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
             style = libxslt.parseStylesheetDoc(pmlStyleDoc)
-            doc = libxml2.parseFile(pmlPath)
+            doc = libxml2.parseFile(rec.pmlLink.file.path)
             result = style.applyStylesheet(doc, None)
             pmlDesc = style.saveResultToString(result)
         for others in rec.otherLinks.all():
