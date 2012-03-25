@@ -1,3 +1,5 @@
+#Change DESTDIR to the target directory for your installation.
+#Alternatively, specify DESTDIR as an argument to the makefile.
 DESTDIR=$(PWD)
 SHELL='/bin/bash'
 MAGDIR=$(PWD)
@@ -7,17 +9,30 @@ INST=install --mode=$(DIR_MODE)
 
 all: install
 
-build:
-	@echo "Building Magpie environment"
-	$(MAKE) -C pml
+build: sqlite3/magpie.db pml/graph/traverse resources resources/static
+
+sqlite3/magpie.db:
+	@echo "Setting up sample database"
 	$(INST) -d sqlite3
-	$(INST) -d resources
 	cp -n ./dataload/magpie.db ./sqlite3/
+	chmod $(FILE_MODE) ./sqlite3/magpie.db
+	@echo "Done!"
+	
+pml/graph/traverse:
+	@echo "Building PML tools"
+	$(MAKE) -C pml
+	@echo "Done!"
+
+resources: 
+	@echo "Collecting media content"
+	$(INST) -d resources
 	cp -r ./dataload/media/ ./resources/
-	chmod $(DIR_MODE) ./resources/media
-	chmod $(FILE_MODE) ./sqlite3/magpie.db ./resources/*
+	chmod $(FILE_MODE) ./resources/*
+	@echo "Done!"
+	
+resources/static:
+	@echo "Collecting static content"
 	python ./django_magpie/manage.py collectstatic --noinput
-	touch build
 	@echo "Done!"
 
 clean: 
@@ -38,4 +53,3 @@ distclean: clean
 	rm ./pml/graph/traverse
 	rm ./pml/graph/print_io
 	if [ ! -z $(DESTDIR) ]; then echo "Destroying symlinks"; cd $(DESTDIR); rm magpie.wsgi; rm media; rm static; cd $(MAGDIR); fi;
-	rm build

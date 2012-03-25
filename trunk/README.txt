@@ -77,6 +77,10 @@ The installation process will set permissions so that the user and group
 of the file have full access, but they are otherwise inaccessible by
 other users. The user must make sure that the Apache user (called 
 'www-data' in Ubuntu) is either the owner or in the group of the file.
+One posible solution is to run -
+
+  sudo chgrp -R www-data resources/
+  sudo chgrp -R www-data static/
   
 The install stage of the script will symlink the wsgi script, as well
 as the media and static files folders to the DESTDIR folder. The page 
