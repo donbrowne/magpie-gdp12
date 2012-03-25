@@ -59,9 +59,10 @@ The folder in which this readme is contained should not be located in
 the document root of Apache, but can otherwise be located where the user
 wishes.
 
-Run the following (where DESTDIR should be the file system path to the 
-folder that serves as the Apache document root, or a subdirectory of
-that folder) -
+Make sure the directory containing the Makefile is your current working
+directory. Run the following (where DESTDIR should be the file system 
+path to the folder that serves as the Apache document root, or a 
+subdirectory of that folder) -
 
   make install DESTDIR=/home/magpie/public_html/
   
@@ -104,19 +105,21 @@ The admin interface can be found at -
 
  THE_URL_TO_SERVE_FOLDER/magpie.wsgi/admin
  
----Note about Django runserver---
+---Note about alternative configurations---
 
-If you wish to run with the local Django runserver, run -
+If you wish to run with the local Django runserver, or you are setting
+up an Apache virtual hosts, run -
   
   make build
   
-'make install' is not necessary as it only creates symlinks for Apache.
+'make install' is not necessary as it only creates symlinks so that
+the scripts can appear in a document root.
 
-Functionality relating to media upload will not function as Django 
-requires an external web server to serve files. You can simulate this
-behavior by using python's SimpleHTTPServer, and configuring settings.py
-appropriately, but some functionality, such as video streaming, will be
-lost.
+Functionality relating to media upload will not function in the 
+runserver as Django requires an external web server to serve files. 
+You can simulate this behavior by using python's SimpleHTTPServer, and 
+configuring settings.py appropriately, but some functionality, such as 
+video streaming, will be lost.
 
 UNINSTALLATION
 

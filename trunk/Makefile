@@ -5,7 +5,8 @@ SHELL='/bin/bash'
 MAGDIR=$(PWD)
 FILE_MODE=ug+rw,o-rw
 DIR_MODE=ug+rwX,o-rwX
-INST=install --mode=$(DIR_MODE)
+INST=install --mode=$(FILE_MODE)
+INSTDIR=install --mode=$(DIR_MODE)
 
 all: install
 
@@ -13,9 +14,8 @@ build: sqlite3/magpie.db pml/graph/traverse resources resources/static
 
 sqlite3/magpie.db:
 	@echo "Setting up sample database"
-	$(INST) -d sqlite3
-	cp -n ./dataload/magpie.db ./sqlite3/
-	chmod $(FILE_MODE) ./sqlite3/magpie.db
+	$(INSTDIR) -d sqlite3
+	$(INST) ./dataload/magpie.db ./sqlite3/
 	@echo "Done!"
 	
 pml/graph/traverse:
@@ -25,7 +25,7 @@ pml/graph/traverse:
 
 resources: 
 	@echo "Collecting media content"
-	$(INST) -d resources
+	$(INSTDIR) -d resources
 	cp -r ./dataload/media/ ./resources/
 	chmod $(FILE_MODE) ./resources/*
 	@echo "Done!"
@@ -48,8 +48,7 @@ test: build
 	
 distclean: clean 
 	rm -rf ./sqlite3
-	rm -rf ./resources/static/*
-	rm -rf ./resources/media/*
+	rm -rf ./resources/
 	rm ./pml/graph/traverse
 	rm ./pml/graph/print_io
 	if [ ! -z $(DESTDIR) ]; then echo "Destroying symlinks"; cd $(DESTDIR); rm magpie.wsgi; rm media; rm static; cd $(MAGDIR); fi;
