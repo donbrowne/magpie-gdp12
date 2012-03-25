@@ -18,7 +18,7 @@ build:
 	chmod $(FILE_MODE) ./sqlite3/magpie.db ./resources/*
 	python ./django_magpie/manage.py collectstatic --noinput
 	touch build
-	@echo "Done!"z
+	@echo "Done!"
 
 clean: 
 	$(MAKE) clean -C pml
