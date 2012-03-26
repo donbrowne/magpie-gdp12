@@ -1,6 +1,6 @@
 #Change DESTDIR to the target directory for your installation.
 #Alternatively, specify DESTDIR as an argument to the makefile.
-DESTDIR=$(PWD)
+DESTDIR=/home/magpie/public_html/
 MAGDIR=$(PWD)
 SHELL='/bin/bash'
 FILE_MODE=ug+rw,o-rw
