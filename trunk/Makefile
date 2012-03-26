@@ -40,15 +40,22 @@ clean:
 	find $(MAGDIR)/django_magpie/ -type f -name "*.pyc" -exec rm -f {} \;
 
 install: build
-	@if [ ! -z $(DESTDIR) ]; then echo "Creating symlinks"; cd $(DESTDIR); ln -s $(MAGDIR)/django_magpie/magpie.wsgi magpie.wsgi; ln -s $(MAGDIR)/resources/media media; ln -s $(MAGDIR)/resources/static static; fi
-	@echo "Done!"
+	@if [ -d $(DESTDIR) ]; then echo "Creating symlinks"; cd $(DESTDIR); ln -s $(MAGDIR)/django_magpie/magpie.wsgi magpie.wsgi; ln -s $(MAGDIR)/resources/media media; ln -s $(MAGDIR)/resources/static static; echo "Done!"; else echo "ERROR: DESTDIR does not exist"; fi
 	
 test: build
 	python2 $(MAGDIR)/django_magpie/manage.py test
+	
+reset: build
+	@echo "Resetting database and deleting media files"
+	rm -f $(MAGDIR)/resources/media/*
+	rm -f $(MAGDIR)/sqlite3/magpie.db
+	python $(MAGDIR)/django_magpie/manage.py syncdb
+	chmod $(FILE_MODE) $(MAGDIR)/sqlite3/magpie.db 
+	@echo "Done!"
 	
 distclean: clean 
 	rm -rf $(MAGDIR)/sqlite3
 	rm -rf $(MAGDIR)/resources/
 	rm $(MAGDIR)/pml/graph/traverse
 	rm $(MAGDIR)/pml/graph/print_io
-	if [ ! -z $(DESTDIR) ]; then echo "Destroying symlinks"; cd $(DESTDIR); rm magpie.wsgi; rm media; rm static; cd $(MAGDIR); fi;
+	if [ -d $(DESTDIR) ]; then echo "Destroying symlinks"; cd $(DESTDIR); rm magpie.wsgi; rm media; rm static; cd $(MAGDIR); echo "Done!"; else echo "ERROR: DESTDIR does not exist"; fi;

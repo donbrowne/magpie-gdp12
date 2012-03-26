@@ -64,7 +64,8 @@ wishes.
 Make sure the directory containing the Makefile is your current working
 directory. Run the following (where DESTDIR should be the file system 
 path to the folder that serves as the Apache document root, or a 
-subdirectory of that folder) -
+subdirectory of that folder. DESTDIR must exist, the makefile will check
+if the folder exists, and terminate if it does not) -
 
   make install DESTDIR=/home/magpie/public_html/
   
@@ -74,7 +75,11 @@ variable as desired. It defaults to the current working directory.
 This will copy the default database and puts it in the application 
 database folder, builds the PML tools, and create the symlinks to  
 django_magpie/magpie.wsgi and the resources/static and resources/media 
-folders to the folder specified by DESTDIR. 
+folders to the folder specified by DESTDIR. If the user wants to start
+with a blank database, or they wish to reset the database at any time, 
+and get rid of all the uploaded media files, they should run -
+
+  make reset
 
 The installation process will set permissions so that the user and group
 of the file have full access, but they are otherwise inaccessible by
@@ -137,7 +142,8 @@ during installation) -
   make distclean DESTDIR=/home/magpie/public_html/
 
 This deletes the symlinks in DESTDIR, as well as cleaning up the static
-and media folders.
+and media folders. As with the installation process, if the DESTDIR does
+not exist, an error will be thrown.
 
 If the user wishes to serve the application from a different folder, 
 they should cd to the DESTDIR directory specified during installation 
