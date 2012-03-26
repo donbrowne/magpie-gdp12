@@ -1,7 +1,7 @@
 #labels Featured
 -MAGPIE README-
 
-DESCRIPTION -
+==DESCRIPTION==
 
 Magpie -  Model Advice Guidance Process Intergration Explorer
 A software system specifically designed for knowledge management of 
@@ -13,7 +13,7 @@ Recommendations that provide the process modeling information can
 contain a mix of various multimedia formats such as images, video, 
 rendered PML models, hyperlinks etc.
 
-DEPENDENCIES -
+==DEPENDENCIES==
 
 The following packages need to be installed for this application to work
 
@@ -21,24 +21,24 @@ For the installation of Python modules, it is recommended that the user
 uses a Python module installer such as python-pip to install the Python
 modules. This ensures that the modules are up to date.
 
----Main Application---
+===Main Application===
 
-Python 2.6 (note orderdicts no longer required)
-Django 1.3 (a Python module)
-mod_wsgi
+ * Python 2.6 (note orderdicts no longer required)
+ * Django 1.3 (a Python module)
+ * mod_wsgi
 
----Graphing---
+===Graphing===
 
-Graphviz
-Pydot (a Python module)
-flex
-bison
-libxml2 (a Python module)
-libxslt (a Python module)
-Tcldot (provided by the libgv-tcl package in Ubuntu)
-Tcl 8.5 (will be installed automatically if installing libgv-tcl)
+  * Graphviz
+  * Pydot (a Python module)
+  * flex
+  * bison
+  * libxml2 (a Python module)
+  * libxslt (a Python module)
+  * Tcldot (provided by the libgv-tcl package in Ubuntu)
+  * Tcl 8.5 (will be installed automatically if installing libgv-tcl)
 
----Video---
+===Video===
 
 A module named mod_flvx is used to stream videos from Apache. To install
 this module, first run -
@@ -56,7 +56,7 @@ Run as root -
 (apxs2 may be named differently under different distributions)
 And then restart Apache.
 
-INSTALLATION -
+==INSTALLATION==
 
 The folder in which this readme is contained should not be located in 
 the document root of Apache, but can otherwise be located where the user
@@ -124,7 +124,7 @@ You can simulate this behavior by using python's SimpleHTTPServer, and
 configuring settings.py appropriately, but some functionality, such as 
 video streaming, will be lost.
 
-UNINSTALLATION
+==UNINSTALLATION==
 
 If you set the DESTDIR variable in the makefile during installation, run 
 the following -
