@@ -23,7 +23,7 @@ modules. This ensures that the modules are up to date.
 
 ---Main Application---
 
-Python 2.7 (or Python 2.6 with the ordereddicts module)
+Python 2.6 (note orderdicts no longer required)
 Django 1.3 (a Python module)
 mod_wsgi
 
