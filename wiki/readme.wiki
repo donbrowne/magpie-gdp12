@@ -1,10 +1,8 @@
 #labels Featured
--MAGPIE README-
+==MAGPIE README==
 
-==DESCRIPTION==
-
-Magpie -  Model Advice Guidance Process Intergration Explorer
-A software system specifically designed for knowledge management of 
+Magpie stands for Model Advice Guidance Process Intergration Explorer.
+Its bascially a software system specifically designed for knowledge management of 
 information relating to software processes. Magpie is hosted on a server 
 and can be accessed and administered from a web browser. When 
 configured, Magpie will ask users a series of yes/no questions and based 
