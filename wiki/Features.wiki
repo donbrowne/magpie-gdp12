@@ -1,4 +1,5 @@
 #summary A description of Magpie features
+#labels Featured
 
 = 1.0 Introduction =
 
