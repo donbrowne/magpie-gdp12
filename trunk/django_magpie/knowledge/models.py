@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from register.models import Profile
+from utils import OrderedDict
 import libxml2
 import libxslt
 
@@ -169,6 +170,8 @@ class Reason(object):
         self.rank = rank
         self.qa_list = qa_list
 
+
+
 NODE_UNTESTED = 0
 NODE_TESTED = 1
 NODE_PASSED = 2
@@ -177,6 +180,7 @@ class FactGroup(object):
 
     def __init__(self):
         self.nodes = []
+        self.children = []
 
     def add_node(self, node):
         if node not in self.nodes:
@@ -202,6 +206,19 @@ class FactGroup(object):
             tree.del_root(node)
             if node.check_state(NODE_UNTESTED):
                 node.set_state(NODE_TESTED)
+
+    def add_children(self, child_list):
+        for child in child_list:
+            self.children.append(child)
+
+    def get_children(self):
+        return self.children
+
+    def __str__(self):
+        alist = []
+        for node in self.nodes:
+            alist.append(str(node))
+        return '[' +  ','.join(alist) + ']'
         
 VAR_NODE = 0
 REC_NODE = 1
@@ -217,8 +234,11 @@ class FactNode(object):
         self.node_id = nid
         self.value = value
         self.parent_groups = []
-        self.children = []
         self.state = state
+        self.level = 0
+
+    def get_type(self):
+        return self.node_type
 
     def check_state(self, state):
         return self.state == state
@@ -226,26 +246,33 @@ class FactNode(object):
     def set_state(self, state):
         self.state = state
 
+    def get_level(self):
+        return self.level
+
     def add_premise(self, group):
         self.parent_groups.append(group)
 
     def get_premises(self):
         return self.parent_groups
 
-    def add_children(self, child_list):
-        for child in child_list:
-            self.children.append(child)
+    def set_premises(self, premises):
+        self.parent_groups = premises
 
-    def get_children(self):
-        return self.children
+
+    def gen_fact_key(self):
+        return '%d:%s' %( self.node_id, self.node_value)
 
     def get_key(self):
         return FactNode.gen_key(self.node_type, self.node_id, self.value)
 
+    def __str__(self):
+        return self.get_key()
+
 class FactTree(object):
 
     def __init__(self):
-        self.root_nodes = []
+        self.groups = []
+        self.goals = []
         self.node_dict = {}
 
     def get_node(self, node_type, fact_id, value):
@@ -258,68 +285,90 @@ class FactTree(object):
     def get_rec(self, rec_id, value):
         return self.get_node(REC_NODE, rec_id, value)
 
+    def get_level(self, level):
+        item_list = []
+        if len(self.levels) >= level:
+            item_set = self.levels[level-1]
+            for item in item_set:
+                item_list.append(item)
+        return item_list
+
+    def get_maxlevel(self):
+        return len(self.levels)
+
     def get_roots(self):
-        return self.root_nodes
+        return self.get_level(1)
 
     def add_node(self, node):
         key = node.get_key()
-        if key not in self.node_dict:
-            self.node_dict[key] = node
+        self.node_dict[key] = node
 
-    def add_root(self, node):
-        if node not in self.root_nodes:
-            self.root_nodes.append(node)
+    def add_fact(self, node):
         self.add_node(node)
 
-    def del_root(self, node):
-        if node in self.root_nodes:
-            self.root_nodes.remove(node)
+    def add_rec(self, node):
+        self.add_node(node)
+        self.goals.append(node)
 
+    def add_root(self, node):
+        self.add_node(node)
+        self.level_node(node, 1)
+
+    def del_root(self, node):
+        if node.level == 1:
+            self.unlevel_node(node)
+
+    def add_group(self, group):
+        self.groups.append(group)
+    
+    def get_groups(self):
+        return self.groups
+
+    def get_goals(self):
+        return self.goals
+
+
+# FACT STATE (where it came from)
 FACT_ASSERTED = 0
-FACT_INFERRED = 1
-FACT_ANSWERED = 2
+FACT_ANSWERED = 1
+FACT_INFERRED = 2
 
 # rules that fired
 # facts that have been tested/established
 # recommends given
 class Engine(object):
 
-    def __init__(self, ruleset_ids=None, var_list=None, test_ids=None, answers=None):
+    def __init__(self, ruleset_ids=None, var_list=None, test_ids=None):
         self.ruleset_ids = []
-        self.fired_ids = []
-        self.var_list = []
         self.test_ids = []
-        self.answers = []
-        self.true_facts = set()
-        self.vars_tested = set()
-        self.rec_trees = []
-        self.debug = False
-        self.rec_hacks = []
+        self.fact_state =  OrderedDict()
+        self.rec_nodes = []
+        self.debug = True
         # restore state
         if ruleset_ids:
             for rsid in ruleset_ids:
                 self.ruleset_ids.append(rsid)
         if var_list:
-            self.add_vars(var_list)
+            self.add_vars(var_list, FACT_ASSERTED)
         if test_ids:
             for var_id in test_ids:
                 self.test_ids.append(var_id)
-        if answers:
-            self.add_answers(answers)
-            
 
     # list of ruleset to use
     def get_rulesets(self):
         return self.ruleset_ids
 
-    # list of rule ids that have fired
-    def get_fired(self):
-        return self.fired_ids
-
     # return list of variables which has been
     # tested/established/need to be tested
-    def get_vars(self):
-        return self.var_list
+    def get_vars(self, need_state=False):
+        var_list = []
+        for key, state in self.fact_state.items():
+            vid,value = self.decode_fact_key(key)
+            if need_state:
+                var_list.append((vid,value,state))
+            else:
+                var_list.append((vid,value))
+        return var_list
 
     def get_tests(self):
         return self.test_ids
@@ -327,15 +376,33 @@ class Engine(object):
     def gen_fact_key(self, var_id, value):
         return '%d:%s' % (var_id, value)
 
+    def decode_fact_key(self, key):
+        idstr,value = key.split(':',1)
+        var_id = int(idstr)
+        return var_id,value
+
     def create_vnode(self, var_id, value):
         key = self.gen_fact_key(var_id, value)
-        if key in self.true_facts:
+        if key in self.fact_state:
             state = NODE_PASSED
-        elif var_id in self.vars_tested:
+        elif self.gen_fact_key(var_id,'') in self.fact_state:
             state = NODE_TESTED
         else:
             state = NODE_UNTESTED
         return FactNode(VAR_NODE, var_id, value, state)
+
+    def get_unique_rnodes(self):
+        # first get unique list of recommends nodes
+        rdict = {}
+        for rnode in self.rec_nodes:
+            if rnode.node_id in rdict:
+                # replace only if node has higher rank
+                onode = rdict[rnode.node_id]
+                if rnode.value > onode.value:
+                    rdict[rnode.node_id] = rnode
+            else:
+                rdict[rnode.node_id] = rnode
+        return rdict.values()
 
     def get_questions(self):
         questions = []
@@ -345,68 +412,51 @@ class Engine(object):
         return questions
 
     # return list of recommendation for rules that have fired
+    # TODO fix views to use only get_reasons call
     def get_recommends(self):
+        rnodes = self.get_unique_rnodes()
         recommends = []
-        recommend_ids = []
-        # first get unique list of recommend nodes
-        rdict = {}
-        for rid,rank in self.rec_hacks:
-            if rid in rdict:
-                # replace only if node has higher rank
-                if rank > rdict[rid]:
-                    rdict[rid] = rank
-            else:
-                rdict[rid] = rank
-
-        # TODO fix views to use only get_reasons call
-        recommends = []
-        for rid,rank in rdict.items():
-            recommend = Recommend.objects.get(pk=rid)
+        for rnode in rnodes:
+            recommend = Recommend.objects.get(pk=rnode.node_id)
             # FIXME - this is a hack
-            recommend.rank = rank
+            recommend.rank = rnode.value
             recommends.append(recommend)
 
         return sorted(recommends, key=lambda recommend: recommend.rank, reverse=True)
 
-    # TODO replace this hack
-    def add_answers(self, answers):
-        for vid,value in answers:
-            self.answers.append((vid,value))
-
     def get_answers(self):
-        return self.answers
+        answers = []
+        for key, state in self.fact_state.items():
+            if state == FACT_ANSWERED:
+                vid,value = self.decode_fact_key(key)
+                # TODO should we include questions not answered
+                if value:
+                    answers.append((vid,value))
+        return answers
 
+    # reverse climb the tree to the top node (we use node_set to prevent loops)
     def next_premises(self, search_premises, qa_list, node_set):
         if len(search_premises) == 0:
             return
         tnode_list = []
-        for tnode in search_premises[0].get_nodes():
-            if tnode.node_id not in node_set:
+        for tnode in reversed(search_premises[0].get_nodes()):
+            if tnode not in node_set:
                 var = Variable.objects.get(pk=tnode.node_id)
                 # FIXME this really should be the fact name
                 text = var.prompt if len(var.prompt) > 0 else var.name
                 qa = (text, tnode.value)
                 qa_list.append(qa)
                 tnode_list.append(tnode)
-                node_set.add(tnode.node_id)
+                node_set.add(tnode)
         for tnode in tnode_list:
             self.next_premises(tnode.get_premises(), qa_list, node_set)
 
     def get_reasons(self):
         # first get unique list of recommends nodes
-        rdict = {}
-        for rec_tree in self.rec_trees:
-            for rnode in rec_tree.get_roots():
-                if rnode.node_id in rdict:
-                    # replace only if node has higher rank
-                    onode = rdict[rnode.node_id]
-                    if rnode.value > onode.value:
-                        rdict[rnode.node_id] = rnode
-                else:
-                    rdict[rnode.node_id] = rnode
-    
+        rnode_list = self.get_unique_rnodes()
+        # now build a list of the reasons that go with them
         reasons = []
-        for rnode in rdict.values():
+        for rnode in rnode_list:
             qa_list = []
             node_set = set()
             self.next_premises(rnode.get_premises(), qa_list, node_set)
@@ -421,180 +471,144 @@ class Engine(object):
         return sorted(reasons, key=lambda reason: reason.rank, reverse=True)
 
     # asserted fact = variable that has been assinged a value
-    def add_var(self, var_id, value):
+    def add_var(self, var_id, value, state):
         # record that we've seen this variable
-        if var_id not in self.vars_tested:
-            self.vars_tested.add(var_id)
-        if value is None:
-            # we have an unanswered fact
-            if self.debug: print 'have unanswerd', var_id
-            self.var_list.append((var_id, value))
+        key = self.gen_fact_key(var_id, value)
+        if key not in self.fact_state:
+            self.fact_state[key] = state
         else:
-            # we have a fact
-            key = self.gen_fact_key(var_id, value)
-            if self.debug: print 'have fact', var_id, value, key
-            if key not in self.true_facts:
-                self.true_facts.add(key)
-                self.var_list.append((var_id, value))
+            # ASSERTED < ANSWERED < INFERRED
+            curr_state = self.fact_state[key]
+            if state < curr_state:
+                self.fact_state[key] = state
 
-    def add_vars(self, facts):
+    def add_vars(self, facts, default_state):
         for item in facts:
-            self.add_var(item[0], item[1])
+            state = item[2] if len(item) > 2 else default_state
+            self.add_var(item[0], item[1], state)
 
-    def add_consequent(self, rule):
-        if self.debug: print 'adding consequent rule=', rule
-        for conclusion in rule.ruleconclusion_set.all():
-            if self.debug: print 'conclusion=', conclusion
-            self.add_var(conclusion.variable_id, conclusion.value)
-        for rrecommend in rule.rulerecommend_set.all():
-            if self.debug: print 'recommend=', rrecommend
-            self.rec_hacks.append((rrecommend.recommend_id, rrecommend.rank))
-
-    # TODO fix this for loop detection
-    def add_recommends(self, rule, tree):
-        premise_group = FactGroup()
-        for premise in rule.rulepremise_set.all():
-            node = tree.get_fact(premise.variable_id, premise.value)
-            if not node:
-                node = self.create_vnode(premise.variable_id, premise.value)
-                tree.add_node(node)
-            premise_group.add_node(node)
-
-        for conclusion in rule.ruleconclusion_set.all():
-            node = tree.get_fact(conclusion.variable_id, conclusion.value)
-            if not node:
-                node = self.create_vnode(conclusion.variable_id, conclusion.value)
-                tree.add_node(node)
-            node.add_premise(premise_group)
-
-        for rrecommend in rule.rulerecommend_set.all():
-            node = tree.get_rec(rrecommend.recommend_id, rrecommend.rank)
-            if not node:
-                node = FactNode(REC_NODE, 
-                    rrecommend.recommend_id, 
-                    rrecommend.rank, 
-                    NODE_PASSED)
-                tree.add_root(node)
-                node.add_premise(premise_group)
-
-    def premise_fired(self, rule):
-        for premise in rule.rulepremise_set.all():
-            key = self.gen_fact_key(premise.variable_id, premise.value)
-            if key not in self.true_facts:
-                return False
-        return True
-
-    def find_tests(self, tree, ruleset):
-        # now find next set of variables to test
-        loop_check = set()
-        test_ids = []
-        search_nodes = tree.get_roots()
-        if len(search_nodes) == 0:
-            # blast theres a loop in the rules 
-            # find the the first applicable node in the rules
-            if self.debug: print 'possible loop'
-            for rule in ruleset.rule_set.exclude(id__in=self.fired_ids):
-                for premise in rule.rulepremise_set.all():
-                    node = tree.get_fact(premise.variable_id, premise.value)
-                    if node and node.state == NODE_UNTESTED:
-                        self.test_ids.append(node.node_id)
-                        return
-        while len(search_nodes) > 0:
-            next_search = []
-            for node in search_nodes:
-                if node.state == NODE_UNTESTED:
-                    test_ids.append(node.node_id)
-                elif node.state == NODE_PASSED:
-                    for child in node.get_children():
-                        # only one of the child premise groups has to be true (OR logic)
-                        for group in child.get_premises():
-                            if group.all_passed() and child.node_id not in loop_check:
-                                next_search.append(child)
-                                loop_check.add(child.node_id)
-                                break
-            if len(test_ids) == 0:
-                search_nodes = next_search
-            else:
-                search_nodes = []
-
-        # remember for later
-        if test_ids:
-            self.test_ids.append(test_ids[0])
-    
-    # upside down truth tree (roots are the recommends)
-    def build_ttree(self, ruleset):
+    def build_tree(self, ruleset):
         tree = FactTree()
         for rule in ruleset.rule_set.all():
-            if self.premise_fired(rule):
-                premise_group = FactGroup()
-                for premise in rule.rulepremise_set.all():
-                    node = tree.get_fact(premise.variable_id, premise.value)
-                    if not node:
-                        node = self.create_vnode(premise.variable_id, premise.value)
-                        tree.add_node(node)
-                for conclusion in rule.ruleconclusion_set.all():
-                    node = tree.get_fact(conclusion.variable_id, conclusion.value)
-                    if not node:
-                        node = self.create_vnode(conclusion.variable_id, conclusion.value)
-                        tree.add_node(node)
-                    node.add_premise(premise_group)
-                for rrecommend in rule.rulerecommend_set.all():
-                    node = tree.get_rec(rrecommend.recommend_id, 0)
-                    if not node:
-                        node = FactNode(NODE_REC, 
-                                    rrecommend.recommend_id, 
-                                    rrecommend.rank, 
-                                    NODE_PASSED)
-                        tree.add_root(node)
-                    node.add_premise(premise_group)
-        return tree
-
-    # build and-or tree (roots are the facts)
-    def build_aotree(self, ruleset):
-        tree = FactTree()
-        for rule in ruleset.rule_set.exclude(id__in=self.fired_ids):
             premise_group = FactGroup()
             for premise in rule.rulepremise_set.all():
                 node = tree.get_fact(premise.variable_id, premise.value)
                 if not node:
                     node = self.create_vnode(premise.variable_id, premise.value)
-                    tree.add_root(node)
+                    tree.add_fact(node)
                 premise_group.add_node(node)
-            # all the nodes must be one of untested or passed
-            if premise_group.check_fail():
-                if self.debug: print 'rule fail', rule
-                premise_group.del_root(tree)
-                continue
-            if self.debug: print 'rule pass', rule
             conclusion_nodes = []
             for conclusion in rule.ruleconclusion_set.all():
                 node = tree.get_fact(conclusion.variable_id, conclusion.value)
                 if not node:
                     node = self.create_vnode(conclusion.variable_id, conclusion.value)
-                    tree.add_node(node)
+                    tree.add_fact(node)
                 node.add_premise(premise_group)
-                tree.del_root(node)
                 conclusion_nodes.append(node)
-            for node in premise_group.get_nodes():
-                node.add_children(conclusion_nodes)
+            recommend_nodes = [] 
+            for rrecommend in rule.rulerecommend_set.all():
+                node = tree.get_rec(rrecommend.recommend_id, rrecommend.rank)
+                if not node:
+                    node = FactNode(REC_NODE, 
+                        rrecommend.recommend_id, 
+                        rrecommend.rank, 
+                        NODE_UNTESTED)
+                    tree.add_rec(node)
+                node.add_premise(premise_group)
+                recommend_nodes.append(node)
+            premise_group.add_children(conclusion_nodes)
+            premise_group.add_children(recommend_nodes)
+            tree.add_group(premise_group)
         return tree
 
-    def forward_chain(self, ruleset):
-        new_facts = True 
-        fired_ids = []
-        tree = FactTree()
+    def forward_chain(self, tree):
         # now look for rules that have fired
+        test_groups = tree.get_groups()
+        new_facts = True
         while new_facts:
             new_facts = False
-            for rule in ruleset.rule_set.exclude(id__in=fired_ids):
-                if self.premise_fired(rule):
-                    self.add_consequent(rule)
-                    self.add_recommends(rule, tree)
-                    fired_ids.append(rule.id)
+            next_test = []
+            for group in test_groups:
+                if group.all_passed():
+                    for child in group.get_children():
+                        child.set_state(NODE_PASSED)
+                        if child.get_type() == VAR_NODE:
+                            self.add_var(child.node_id, 
+                                child.value, 
+                                FACT_INFERRED)
                     new_facts = True
-        self.fired_ids.extend(fired_ids)
-        self.rec_trees.append(tree)
+                else:
+                    next_test.append(group)
+            test_groups = next_test
+        return test_groups
 
+    def get_first(self, premise_list, node_set):
+        print 'get_first premise', [ str(x) for x in premise_list]
+        for premise in premise_list:
+            num_loop = 0
+            for node in premise.get_nodes():
+                print 'node', node
+                if node in node_set:
+                    print '+++++++LOOP++++++++'
+                    num_loop += 1
+                    continue
+                node_set.add(node)
+                if node.check_state(NODE_UNTESTED):
+                    leafp = self.get_first(node.get_premises(), node_set)
+                    if leafp:
+                        return leafp
+            if num_loop == 0:
+                return premise
+        return None
+
+    def find_backchains(self, node, node_set):
+        print 'find_backchains', node
+        backchains = []
+        if node in node_set:
+            print '+++++++LOOP++++++++'
+            print 'Node', node, 'premises', [ str(x) for x in node_set ]
+            return True
+        node_set.add(node)
+        print 'Node', node, 'premises', [ str(x) for x in node.get_premises() ]
+        for premise in node.get_premises():
+            print 'premise', premise
+            untested = []
+            num_tested = 0
+            for pnode in premise.get_nodes():
+                if pnode.check_state(NODE_UNTESTED):
+                    untested.append(pnode)
+                elif pnode.check_state(NODE_TESTED):
+                    num_tested = num_tested + 1
+            if num_tested == 0 and len(untested) > 0:
+                num_backchain = 0
+                for pnode in untested:
+                    if self.find_backchains(pnode, node_set):
+                        num_backchain += 1
+                print 'num_backchain', num_backchain, len(untested)
+                if num_backchain == len(untested):
+                    print 'backchain', premise
+                    backchains.append(premise)
+        print 'Node', node, 'backchains', [ str(x) for x in backchains ]
+        premsies = node.get_premises()
+        node.set_premises(backchains)
+        return len(premsies) == 0 or len(backchains) > 0
+    
+    def find_goals(self, tree, unfired):
+        test_premises = []
+        for rec_node in tree.get_goals():
+            if rec_node.check_state(NODE_PASSED):
+                print 'Found goal!', rec_node
+                self.rec_nodes.append(rec_node)
+            else:
+                if self.find_backchains(rec_node, set()):
+                    premises = rec_node.get_premises()
+                    test_premises.append(self.get_first(premises, set()))
+        if len(test_premises) > 0:
+            premise = test_premises[0]
+            for node in premise.get_nodes():
+                if node.state == NODE_UNTESTED:
+                    self.test_ids.append(node.node_id)
+                
     # given some answers update facts base and check if rules have fired
     # we use forward chaining here
     # answers = list of (var_id,value) tuples
@@ -602,40 +616,35 @@ class Engine(object):
         # first add asserted facts
         if answers:
             if self.debug: print 'Got answers', answers
-            self.add_vars(answers)
-            self.add_answers(answers)
+            self.add_vars(answers, FACT_ANSWERED)
         # now add variables for which we did not get answers
         for var_id in self.test_ids:
-            if var_id not in self.vars_tested:
-                self.add_var(var_id, None)
+            self.add_var(var_id, '', FACT_ANSWERED)
         # and reset testable node list
         self.test_ids = []
         # reset rule list
         self.fire_ids = []
         # this really needs to be fixed
-        self.rec_trees = []
-        self.rec_hacks = []
+        self.rec_nodes = []
 
         for ruleset in RuleSet.objects.filter(id__in=self.ruleset_ids):
-            self.forward_chain(ruleset)
-            tree = self.build_aotree(ruleset)
-            self.find_tests(tree, ruleset)
+            tree = self.build_tree(ruleset)
+            unfired = self.forward_chain(tree)
+            self.find_goals(tree, unfired)
+
 
 def state_encode(state):
     sdict = {}
     sdict['rulesets'] = state.get_rulesets()
     sdict['vars'] = state.get_vars()
     sdict['tests'] = state.get_tests()
-    sdict['answers'] = state.get_answers()
     return sdict.items()
-
 def state_decode(slist):
     sdict = dict(slist)
     ruleset_ids = sdict.get('rulesets', None)
     var_list = sdict.get('vars', None)
     test_ids = sdict.get('tests', None)
-    answers = sdict.get('answers',None)
-    return Engine(ruleset_ids, var_list, test_ids, answers)
+    return Engine(ruleset_ids, var_list, test_ids)
 
 class FactStart(object):
 
