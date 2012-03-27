@@ -566,7 +566,7 @@ class Engine(object):
         backchains = []
         if node in node_set:
             #print '+++++++LOOP++++++++'
-            print 'Node', node, 'premises', [ str(x) for x in node_set ]
+            #print 'Node', node, 'premises', [ str(x) for x in node_set ]
             return True
         node_set.add(node)
         #print 'Node', node, 'premises', [ str(x) for x in node.get_premises() ]
