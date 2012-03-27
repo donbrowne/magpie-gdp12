@@ -18,7 +18,7 @@
         {%if link.1|contains:"http://www.youtube.com/watch?v="%}
             {% with sliced=link.1|lslice:"31" %}
                 {% with yTubeEmbed="\"http://www.youtube.com/embed/"|add:sliced|add:"\"" %}
-                    <iframe width="640" height="480" src={{yTubeEmbed|safe}} frameborder="0" allowfullscreen></iframe> 
+                    <iframe width="470" height="360" src={{yTubeEmbed|safe}} frameborder="0" allowfullscreen></iframe> 
                 {% endwith %}
             {% endwith %}
         {% endif %}
