@@ -38,7 +38,7 @@
         {%if link.1|contains:"http://www.youtube.com/watch?v="%}
             {% with sliced=link.1|lslice:"31" %}
                 {% with yTubeEmbed="\"http://www.youtube.com/embed/"|add:sliced|add:"\"" %}
-                <iframe width="470" height="360" src={{yTubeEmbed|safe}} frameborder="0" allowfullscreen></iframe> 
+                <iframe width="400" height="300" src={{yTubeEmbed|safe}} frameborder="0" allowfullscreen></iframe> 
                 {% endwith %}
             {% endwith %}
         {%endif%}
@@ -58,7 +58,7 @@
     {% if rec.vidLink != None %}
         <a class="vidPlayer"
              href={{rec.vidLink}}
-			 style="display:block;width:470px;height:360px"> 
+			 style="display:block;width:400px;height:300px"> 
 		</a> 
         <script>
 			flowplayer("a.vidPlayer", "{% load adminmedia %}{% admin_media_prefix %}flowplayer-3.2.7.swf");
