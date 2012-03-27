@@ -543,13 +543,13 @@ class Engine(object):
         return test_groups
 
     def get_first(self, premise_list, node_set):
-        print 'get_first premise', [ str(x) for x in premise_list]
+        #print 'get_first premise', [ str(x) for x in premise_list]
         for premise in premise_list:
             num_loop = 0
             for node in premise.get_nodes():
-                print 'node', node
+                #print 'node', node
                 if node in node_set:
-                    print '+++++++LOOP++++++++'
+                    #print '+++++++LOOP++++++++'
                     num_loop += 1
                     continue
                 node_set.add(node)
@@ -562,16 +562,16 @@ class Engine(object):
         return None
 
     def find_backchains(self, node, node_set):
-        print 'find_backchains', node
+        #print 'find_backchains', node
         backchains = []
         if node in node_set:
-            print '+++++++LOOP++++++++'
+            #print '+++++++LOOP++++++++'
             print 'Node', node, 'premises', [ str(x) for x in node_set ]
             return True
         node_set.add(node)
-        print 'Node', node, 'premises', [ str(x) for x in node.get_premises() ]
+        #print 'Node', node, 'premises', [ str(x) for x in node.get_premises() ]
         for premise in node.get_premises():
-            print 'premise', premise
+            #print 'premise', premise
             untested = []
             num_tested = 0
             for pnode in premise.get_nodes():
@@ -584,11 +584,11 @@ class Engine(object):
                 for pnode in untested:
                     if self.find_backchains(pnode, node_set):
                         num_backchain += 1
-                print 'num_backchain', num_backchain, len(untested)
+                #print 'num_backchain', num_backchain, len(untested)
                 if num_backchain == len(untested):
-                    print 'backchain', premise
+                    #print 'backchain', premise
                     backchains.append(premise)
-        print 'Node', node, 'backchains', [ str(x) for x in backchains ]
+        #print 'Node', node, 'backchains', [ str(x) for x in backchains ]
         premsies = node.get_premises()
         node.set_premises(backchains)
         return len(premsies) == 0 or len(backchains) > 0
@@ -597,7 +597,7 @@ class Engine(object):
         test_premises = []
         for rec_node in tree.get_goals():
             if rec_node.check_state(NODE_PASSED):
-                print 'Found goal!', rec_node
+                #print 'Found goal!', rec_node
                 self.rec_nodes.append(rec_node)
             else:
                 if self.find_backchains(rec_node, set()):
@@ -615,7 +615,7 @@ class Engine(object):
     def next_state(self, answers=None):
         # first add asserted facts
         if answers:
-            if self.debug: print 'Got answers', answers
+            #if self.debug: print 'Got answers', answers
             self.add_vars(answers, FACT_ANSWERED)
         # now add variables for which we did not get answers
         for var_id in self.test_ids:
