@@ -425,7 +425,7 @@ int main(argc, argv)
 	    }
 	    if (graph_type != XML) {
 		printf("digraph %s {\n", name);
-        printf("  node [href=\"javascript:void(click_node('\\H'))\"]\n");
+        printf("  node [href=\"javascript:void(click_node('\\L'))\"]\n");
 		printf("  rankdir = TB;\n");
 		printf("  ordering = out;\n");
 /*
