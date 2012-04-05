@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE|default:"en-us" }}" xml:lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
 <script type="text/javascript" src="{% load adminmedia %}{% admin_media_prefix %}flowplayer-3.2.6.min.js"></script>
+<script type="text/javascript" src="{% load adminmedia %}{% admin_media_prefix %}scripts_common.js"></script>
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% load adminmedia %}{{ STATIC_URL }}/css/base.css{% endblock %}" />
 {% block extrastyle %}{% endblock %}
