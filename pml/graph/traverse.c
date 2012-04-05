@@ -235,7 +235,7 @@ void name_node(Node n)
     if (graph_type != XML) {
 	printf("%s_%ld [shape=%s, ", n->name, (long)n, node_shape(n->type));
 	if (n->type == PROCESS) {
-	    printf("label=\"%s\"]\n", n->name);
+	    printf("label=\"%s\"z]\n", n->name);
 	} else 	if (!(graph_type & (ANON)) && (n->type == ACTION)) {
 	    if (!(graph_type & NO_RESOURCE)) {
 		printf("label=");
@@ -425,6 +425,7 @@ int main(argc, argv)
 	    }
 	    if (graph_type != XML) {
 		printf("digraph %s {\n", name);
+        printf("  node [href=\"javascript:void(click_node('\\H'))\"]\n");
 		printf("  rankdir = TB;\n");
 		printf("  ordering = out;\n");
 /*
