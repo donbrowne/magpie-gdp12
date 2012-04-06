@@ -49,7 +49,10 @@ def generatePmlGraph(request):
     if os.path.isfile(fullPath):
         pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/xpml.xsl")
         style = libxslt.parseStylesheetDoc(pmlStyleDoc)
-        doc = libxml2.parseFile(fullPath)
+        try:
+            doc = libxml2.parseFile(fullPath)
+        except (libxml2.parserError, TypeError):
+            return None
         result = style.applyStylesheet(doc, None)
         output = style.saveResultToString(result)
         (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
