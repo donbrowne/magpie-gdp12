@@ -740,7 +740,7 @@ table#change-history tbody th {
 
 #header {
     background: #262626;
-    color: #ffc;
+    color: #FF7F27;
     overflow: hidden;
 }
 
@@ -773,7 +773,7 @@ table#change-history tbody th {
     top: 0;
     right: 0;
     padding: 1.2em 10px;
-    font-size: 11px;
+    font-size: 14px;
     text-align: right;
 }
 
