@@ -42,12 +42,12 @@
         {%if link.1|contains:"http://www.youtube.com/watch?v="%}
             {% with sliced=link.1|lslice:"31" %}
                 {% with yTubeEmbed="\"http://www.youtube.com/embed/"|add:sliced|add:"\"" %}
-                <iframe width="400" height="300" src={{yTubeEmbed|safe}} frameborder="0" allowfullscreen></iframe> 
+                <iframe width="90%" height="480" src={{yTubeEmbed|safe}} frameborder="0" allowfullscreen></iframe> 
                 {% endwith %}
             {% endwith %}
         {%endif%}
         {%if link.1|isImg %}
-            <img src={{link.1}} width="400" height="300"/>
+            <img src={{link.1}} width="90%"/>
         {% endif %}
     {% endfor %}
     </ol>
@@ -60,7 +60,7 @@
     {% if rec.vidLink != None %}
         <a class="vidPlayer"
              href={{rec.vidLink}}
-			 style="display:block;width:400px;height:300px"> 
+            style="display:block;width:90%;height:400px"> 
 		</a> 
         <script>
 			flowplayer("a.vidPlayer", "{% load adminmedia %}{% admin_media_prefix %}flowplayer-3.2.7.swf");
