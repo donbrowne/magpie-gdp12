@@ -71,7 +71,7 @@ def generatePmlGraphHtml(pmlPath):
     graph = pydot.graph_from_dot_data(dotDesc)
     mapHtml = graph.create_cmapx()
     mapHtml += "\n\n"
-    mapHtml += '<img src="pmlGraph?path='+ os.path.basename(path) +'" usemap="#' + pmlPath + '"/>'
+    mapHtml += '<img src="pmlGraph?path='+ pmlPath +'" usemap="#' + os.path.basename(path) + '"/>\n\n'
     os.remove(path)
     return mapHtml
      
@@ -87,7 +87,7 @@ def recSummaryClosure(user):
             vidLink = rec.videoLink.file.url
         if rec.pmlLink != None and (not rec.pmlLink.restricted or restrictedAccess  or user in rec.pmlLink.restricted_to.all()):
             recsList.append(("PML Link", rec.pmlLink.file.url))
-            pmlPath = rec.pmlLink.file.name
+            pmlPath = generatePmlGraphHtml(rec.pmlLink.file.name)
             pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
             style = libxslt.parseStylesheetDoc(pmlStyleDoc)
             doc = libxml2.parseFile(rec.pmlLink.file.path)

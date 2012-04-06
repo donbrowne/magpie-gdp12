@@ -28,9 +28,7 @@
     {% endfor %}
     </ol>
     {% if rec.pmlPath != None %}
-    {% with pmlReq="\"pmlGraph?path="|add:rec.pmlPath|add:"\"" %}
-        <img src={{pmlReq|safe}} />
-    {% endwith %}
+        {{rec.pmlPath|safe}}
     {% endif %}
     {% if rec.pmlDesc != None %}
         {{rec.pmlDesc|safe}}
