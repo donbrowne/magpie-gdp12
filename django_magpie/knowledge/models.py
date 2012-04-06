@@ -5,6 +5,10 @@ from register.models import Profile
 from utils import OrderedDict
 import libxml2
 import libxslt
+import subprocess 
+import os
+import pydot
+import tempfile
 
 
 def userPath(instance, filename):
@@ -49,7 +53,27 @@ class RecsSummary(object):
         self.links = details
         self.pmlPath = pmlPath
         self.pmlDesc = pmlDesc
-        self.vidLink = vidLink       
+        self.vidLink = vidLink    
+        
+#Create graph/map HTML code for inclusion on the templates
+def generatePmlGraphHtml(pmlPath):
+    fullPath = settings.MEDIA_ROOT + pmlPath
+    pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/xpml.xsl")
+    style = libxslt.parseStylesheetDoc(pmlStyleDoc)
+    doc = libxml2.parseFile(fullPath)
+    result = style.applyStylesheet(doc, None)
+    output = style.saveResultToString(result)
+    (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
+    os.write(f, output)
+    os.close(f)
+    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
+    dotDesc = traverse.communicate()[0]
+    graph = pydot.graph_from_dot_data(dotDesc)
+    mapHtml = graph.create_cmapx()
+    mapHtml += "\n\n"
+    mapHtml += '<img src="pmlGraph?path='+ os.path.basename(path) +'" usemap="#' + pmlPath + '"/>'
+    os.remove(path)
+    return mapHtml
      
 #Pack together the recommendation data in a nice way.        
 def recSummaryClosure(user):
@@ -76,7 +100,6 @@ def recSummaryClosure(user):
             recsList.append((link.description,link.link))
         return RecsSummary(rec.text,recsList,pmlPath,pmlDesc,vidLink)
     return getRecSummary
-
 
 class Variable(models.Model):
     name = models.SlugField(max_length=30, unique=True)
