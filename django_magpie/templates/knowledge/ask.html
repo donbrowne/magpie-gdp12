@@ -33,7 +33,6 @@
 
 
 {% for rec in recommend_list %}
-    <br>
 <input type="button" class="button" onclick="return toggleMe('{{rec.text}}')" value="{{ rec.text }} ">
 <br>
 <div id="{{rec.text}}" style="display:none">

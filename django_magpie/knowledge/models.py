@@ -60,7 +60,10 @@ def generatePmlGraphHtml(pmlPath):
     fullPath = settings.MEDIA_ROOT + pmlPath
     pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/xpml.xsl")
     style = libxslt.parseStylesheetDoc(pmlStyleDoc)
-    doc = libxml2.parseFile(fullPath)
+    try:
+        doc = libxml2.parseFile(fullPath)
+    except (libxml2.parserError, TypeError):
+        return None
     result = style.applyStylesheet(doc, None)
     output = style.saveResultToString(result)
     (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
@@ -90,9 +93,12 @@ def recSummaryClosure(user):
             pmlPath = generatePmlGraphHtml(rec.pmlLink.file.name)
             pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
             style = libxslt.parseStylesheetDoc(pmlStyleDoc)
-            doc = libxml2.parseFile(rec.pmlLink.file.path)
-            result = style.applyStylesheet(doc, None)
-            pmlDesc = style.saveResultToString(result)
+            try:
+                doc = libxml2.parseFile(rec.pmlLink.file.path)
+                result = style.applyStylesheet(doc, None)
+                pmlDesc = style.saveResultToString(result)
+            except (libxml2.parserError, TypeError):
+                pass
         for others in rec.otherLinks.all():
             if (not others.restricted or restrictedAccess  or user in others.restricted_to.all()):
                 recsList.append((others.description,others.file.url))
