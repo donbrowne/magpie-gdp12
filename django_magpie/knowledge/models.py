@@ -62,10 +62,10 @@ def generatePmlGraphHtml(pmlPath):
     style = libxslt.parseStylesheetDoc(pmlStyleDoc)
     try:
         doc = libxml2.parseFile(fullPath)
+        result = style.applyStylesheet(doc, None)
+        output = style.saveResultToString(result)
     except (libxml2.parserError, TypeError):
         return None
-    result = style.applyStylesheet(doc, None)
-    output = style.saveResultToString(result)
     (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
     os.write(f, output)
     os.close(f)
