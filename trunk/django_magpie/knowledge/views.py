@@ -58,9 +58,9 @@ def generatePmlGraph(request):
         traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
         dotDesc = traverse.communicate()[0]
         graph = pydot.graph_from_dot_data(dotDesc)
-        png = graph.create_png()
+        jpg = graph.create_jpg()
         os.remove(path)
-        return HttpResponse(png, mimetype="image/png")
+        return HttpResponse(jpg, mimetype="image/jpg")
     else:
         print ("[ERROR] File does not exist")
         return None
