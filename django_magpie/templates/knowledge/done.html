@@ -23,7 +23,10 @@
 <h2>Recommmendations</h2>
 <ol>
 {% for rec in recommend_list %}
-    <li>{{ rec.text }}
+    <br>
+<input type="button" class="button" onclick="return toggleMe('{{rec.text}}')" value="{{ rec.text }} ">
+<br>
+<div id="{{rec.text}}" style="display:none">
     <ol>
     {% for link in rec.links %}
         <li><a href={{link.1}}>{{link.0}}</a> </li>
@@ -54,7 +57,7 @@
 			flowplayer("a.vidPlayer", "{% load adminmedia %}{% admin_media_prefix %}flowplayer-3.2.7.swf");
 		</script>
     {% endif %}
-    </li>
+    </div>
 {% endfor %}
 </ol>
 		<!-- this will install flowplayer inside previous A- tag. -->
