@@ -12,7 +12,7 @@
 {% csrf_token %}
 <ol>
 {% for question in question_list %}
-    <li>{{ question.prompt}}
+    <li>{{ question.prompt}}<br />
     <input type="radio" name='answer_{{question.id}}' value="y">Yes
     <input type="radio" name='answer_{{question.id}}' value="n">No
     </li>
