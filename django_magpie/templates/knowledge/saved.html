@@ -10,8 +10,8 @@
 <div id="content">
 {% if recommend_list %}
 <ol>
+Tip: Click on the recommendations to see if they have additional resources.<br>
 {% for rec in recommend_list %}
-    <br>
 <input type="button" class="button" onclick="return toggleMe('{{rec.text}}')" value="{{ rec.text }} ">
 <br>
 <div id="{{rec.text}}" style="display:none">
