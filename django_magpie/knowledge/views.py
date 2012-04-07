@@ -38,36 +38,64 @@ def get_state(session):
         slist = session['engine']
     else:
         slist = []
-    return state_decode(slist) 
+    return state_decode(slist)
+    
+def xmlToDot(filePath):
+    pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/xpml.xsl")
+    style = libxslt.parseStylesheetDoc(pmlStyleDoc)
+    try:
+        doc = libxml2.parseFile(filePath)
+        result = style.applyStylesheet(doc, None)
+        output = style.saveResultToString(result)
+    except (libxml2.parserError, TypeError):
+        return None
+    (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
+    os.write(f, output)
+    os.close(f)
+    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
+    dotDesc = traverse.communicate()[0]  
+    os.remove(path)
+    return (dotDesc,path)
 
 def generatePmlGraph(request):
     pmlPath = request.GET.items()[0][1]
     if pmlPath.find("../") != -1:
-        print ("[ERROR] '../' contained in specified file name, relative paths unallowed for security reasons")
+        #print ("[ERROR] '../' contained in specified file name, relative paths unallowed for security reasons")
         return None
     fullPath = settings.MEDIA_ROOT + pmlPath
     if os.path.isfile(fullPath):
-        pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/xpml.xsl")
-        style = libxslt.parseStylesheetDoc(pmlStyleDoc)
-        try:
-            doc = libxml2.parseFile(fullPath)
-            result = style.applyStylesheet(doc, None)
-            output = style.saveResultToString(result)
-        except (libxml2.parserError, TypeError):
+        dotDesc = xmlToDot(fullPath)[0]
+        if dotDesc is None:
             return None
-        (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
-        os.write(f, output)
-        os.close(f)
-        traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
-        dotDesc = traverse.communicate()[0]
         graph = pydot.graph_from_dot_data(dotDesc)
         jpg = graph.create_jpg()
-        os.remove(path)
         return HttpResponse(jpg, mimetype="image/jpg")
     else:
-        print ("[ERROR] File does not exist")
+        #print ("[ERROR] File does not exist")
         return None
-
+        
+#Create graph/map HTML code for inclusion on the templates
+def generatePmlGraphHtml(request):
+    pmlPath = request.GET.items()[0][1]
+    if pmlPath.find("../") != -1:
+        #print ("[ERROR] '../' contained in specified file name, relative paths unallowed for security reasons")
+        return None
+    fullPath = settings.MEDIA_ROOT + pmlPath
+    if os.path.isfile(fullPath):
+        dotDescInfo = xmlToDot(fullPath)
+        if dotDescInfo is None:
+            return None
+        graph = pydot.graph_from_dot_data(dotDescInfo[0])
+        mapHtml = '<html>\n<body>\n\n'
+        mapHtml += graph.create_cmapx()
+        mapHtml += "\n\n"
+        mapHtml += '<img src="../pmlGraph?path='+ pmlPath +'" usemap="#' + os.path.basename(dotDescInfo[1]) + '"/>\n\n'
+        mapHtml += '</body>\n</html>\n\n'
+        return HttpResponse(mapHtml, mimetype="text/html")
+    else:
+        #print ("[ERROR] File does not exist")
+        return None
+        
 # TODO move this to questions url
 def index(request):
     context = RequestContext(request)
