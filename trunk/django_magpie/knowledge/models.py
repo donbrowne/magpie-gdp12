@@ -69,7 +69,6 @@ def recSummaryClosure(user):
                 doc = libxml2.parseFile(rec.pmlLink.file.path)
                 result = style.applyStylesheet(doc, None)
                 pmlDesc = style.saveResultToString(result)
-                print pmlDesc
             except (libxml2.parserError, TypeError):
                 pass
         for others in rec.otherLinks.all():
