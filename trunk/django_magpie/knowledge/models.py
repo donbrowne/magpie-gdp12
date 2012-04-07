@@ -54,29 +54,6 @@ class RecsSummary(object):
         self.pmlPath = pmlPath
         self.pmlDesc = pmlDesc
         self.vidLink = vidLink    
-        
-#Create graph/map HTML code for inclusion on the templates
-def generatePmlGraphHtml(pmlPath):
-    fullPath = settings.MEDIA_ROOT + pmlPath
-    pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/xpml.xsl")
-    style = libxslt.parseStylesheetDoc(pmlStyleDoc)
-    try:
-        doc = libxml2.parseFile(fullPath)
-        result = style.applyStylesheet(doc, None)
-        output = style.saveResultToString(result)
-    except (libxml2.parserError, TypeError):
-        return None
-    (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
-    os.write(f, output)
-    os.close(f)
-    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
-    dotDesc = traverse.communicate()[0]
-    graph = pydot.graph_from_dot_data(dotDesc)
-    mapHtml = graph.create_cmapx()
-    mapHtml += "\n\n"
-    mapHtml += '<img src="pmlGraph?path='+ pmlPath +'" usemap="#' + os.path.basename(path) + '"/>\n\n'
-    os.remove(path)
-    return mapHtml
      
 #Pack together the recommendation data in a nice way.        
 def recSummaryClosure(user):
@@ -90,11 +67,11 @@ def recSummaryClosure(user):
             vidLink = rec.videoLink.file.url
         if rec.pmlLink != None and (not rec.pmlLink.restricted or restrictedAccess  or user in rec.pmlLink.restricted_to.all()):
             recsList.append(("PML Link", rec.pmlLink.file.url))
-            pmlPath = generatePmlGraphHtml(rec.pmlLink.file.name)
+            pmlPath = rec.pmlLink.file.url
             pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
             style = libxslt.parseStylesheetDoc(pmlStyleDoc)
             try:
-                doc = libxml2.parseFile(rec.pmlLink.file.path)
+                doc = libxml2.parseFile(pmlPath)
                 result = style.applyStylesheet(doc, None)
                 pmlDesc = style.saveResultToString(result)
             except (libxml2.parserError, TypeError):

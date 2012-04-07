@@ -52,7 +52,9 @@
     {% endfor %}
     </ol>
     {% if rec.pmlPath != None %}
-        {{rec.pmlPath|safe}}
+        {% with pmlReq="\"pmlView?path="|add:rec.pmlPath|add:"\"" %}
+	        <a href={{pmlReq|safe}} />Click here to view the interactive PML Graph</a>	
+	    {% endwith %}
     {% endif %}
     {% if rec.pmlDesc != None %}
         {{rec.pmlDesc|safe}}
