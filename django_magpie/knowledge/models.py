@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from register.models import Profile
 from utils import OrderedDict
-import libxml2
-import libxslt
 
 def userPath(instance, filename):
     return filename
@@ -43,11 +41,10 @@ class ExternalLink(models.Model):
 #BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
         
 class RecsSummary(object): 
-    def __init__(self, text, details, pmlPath, pmlDesc, vidLink):
+    def __init__(self, text, details, pmlPath, vidLink):
         self.text = text
         self.links = details
         self.pmlPath = pmlPath
-        self.pmlDesc = pmlDesc
         self.vidLink = vidLink    
      
 #Pack together the recommendation data in a nice way.        
@@ -56,27 +53,18 @@ def recSummaryClosure(user):
     def getRecSummary(rec):
         recsList = []
         pmlPath = None
-        pmlDesc = None
         vidLink = None
         if rec.videoLink != None and (not rec.videoLink.restricted or restrictedAccess or user in rec.videoLink.restricted_to.all()):
             vidLink = rec.videoLink.file.url
         if rec.pmlLink != None and (not rec.pmlLink.restricted or restrictedAccess  or user in rec.pmlLink.restricted_to.all()):
-            recsList.append(("PML Link", rec.pmlLink.file.url))
+            recsList.append(("PML XML Link", rec.pmlLink.file.url))
             pmlPath = rec.pmlLink.file.name
-            pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
-            style = libxslt.parseStylesheetDoc(pmlStyleDoc)
-            try:
-                doc = libxml2.parseFile(rec.pmlLink.file.path)
-                result = style.applyStylesheet(doc, None)
-                pmlDesc = style.saveResultToString(result)
-            except (libxml2.parserError, TypeError):
-                pass
         for others in rec.otherLinks.all():
             if (not others.restricted or restrictedAccess  or user in others.restricted_to.all()):
                 recsList.append((others.description,others.file.url))
         for link in ExternalLink.objects.filter(rec=rec.id):
             recsList.append((link.description,link.link))
-        return RecsSummary(rec.text,recsList,pmlPath,pmlDesc,vidLink)
+        return RecsSummary(rec.text,recsList,pmlPath,vidLink)
     return getRecSummary
 
 class Variable(models.Model):
