@@ -5,11 +5,6 @@ from register.models import Profile
 from utils import OrderedDict
 import libxml2
 import libxslt
-import subprocess 
-import os
-import pydot
-import tempfile
-
 
 def userPath(instance, filename):
     return filename
@@ -71,9 +66,10 @@ def recSummaryClosure(user):
             pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
             style = libxslt.parseStylesheetDoc(pmlStyleDoc)
             try:
-                doc = libxml2.parseFile(pmlPath)
+                doc = libxml2.parseFile(rec.pmlLink.file.path)
                 result = style.applyStylesheet(doc, None)
                 pmlDesc = style.saveResultToString(result)
+                print pmlDesc
             except (libxml2.parserError, TypeError):
                 pass
         for others in rec.otherLinks.all():
