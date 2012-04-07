@@ -43,12 +43,11 @@ Tip: Click on the recommendations to see if they have additional resources.<br>
     {% endfor %}
     </ol>
     {% if rec.pmlPath != None %}
-        {% with pmlReq="\"pmlView?path="|add:rec.pmlPath|add:"&type=viewer"|add:"\"" %}
-	        <a href={{pmlReq|safe}} />Click here to view the interactive PML Graph</a>	
+        {% with pmlReq="\"pmlView?path="|add:rec.pmlPath %}
+            <a href={{pmlReq|add:"&type=viewer"|add:"\""|safe}} />Click here to view the interactive PML Graph.</a><br>	
+            <a href={{pmlReq|add:"&type=pml"|add:"\""|safe}} />Click here to view the PML specification.</a><br>	
+            <a href={{pmlReq|add:"&type=roadmap"|add:"\""|safe}} />Click here to view the PML roadmap.</a><br>	
 	    {% endwith %}
-    {% endif %}
-    {% if rec.pmlDesc != None %}
-        {{rec.pmlDesc|safe}}
     {% endif %}
     {% if rec.vidLink != None %}
         <a class="vidPlayer"

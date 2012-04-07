@@ -85,7 +85,12 @@ def pmlView(request):
     fullPath = settings.MEDIA_ROOT + pmlPath
     if os.path.isfile(fullPath):
         if reqType == "roadmap":
-            return HttpResponse(xmlToRoadmap(fullPath),mimetype='text/html')
+            roadmap = '<html>\n<head>\n'
+            roadmap += '<link rel="stylesheet" type="text/css" href="' + settings.STATIC_URL + '/css/base.css" />\n'
+            roadmap += '</head>\n'
+            roadmap += xmlToRoadmap(fullPath)
+            roadmap += '\n</html>\n'
+            return HttpResponse(roadmap,mimetype='text/html')
         pmlDesc = xmlToPml(fullPath)
         if reqType == "pml":
             return HttpResponse(pmlDesc, mimetype="text/plain")
@@ -97,7 +102,7 @@ def pmlView(request):
             jpg = graph.create_jpg()
             return HttpResponse(jpg, mimetype="image/jpg")
         elif reqType == "viewer":
-            mapHtml = '<html>\n<body>\n\n'
+            mapHtml = '<html>\n<body>\n'
             mapHtml += graph.create_cmapx()
             mapHtml += "\n\n"
             mapHtml += '<img src="../pmlView?path='+ pmlPath +'&type=graph" usemap="#' + os.path.basename(dotDescInfo[1]) + '"/>\n\n'
