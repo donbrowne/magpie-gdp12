@@ -67,7 +67,7 @@ def recSummaryClosure(user):
             vidLink = rec.videoLink.file.url
         if rec.pmlLink != None and (not rec.pmlLink.restricted or restrictedAccess  or user in rec.pmlLink.restricted_to.all()):
             recsList.append(("PML Link", rec.pmlLink.file.url))
-            pmlPath = rec.pmlLink.file.url
+            pmlPath = rec.pmlLink.file.name
             pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
             style = libxslt.parseStylesheetDoc(pmlStyleDoc)
             try:
