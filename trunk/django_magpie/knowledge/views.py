@@ -39,62 +39,73 @@ def get_state(session):
     else:
         slist = []
     return state_decode(slist)
-    
-def xmlToDot(filePath):
+      
+def xmlToPml(filePath):
     pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/xpml.xsl")
     style = libxslt.parseStylesheetDoc(pmlStyleDoc)
     try:
         doc = libxml2.parseFile(filePath)
         result = style.applyStylesheet(doc, None)
-        output = style.saveResultToString(result)
+        return style.saveResultToString(result)
     except (libxml2.parserError, TypeError):
         return None
+        
+def xmlToRoadmap(filePath):
+    pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
+    style = libxslt.parseStylesheetDoc(pmlStyleDoc)
+    try:
+        doc = libxml2.parseFile(filePath)
+        result = style.applyStylesheet(doc, None)
+        return style.saveResultToString(result)
+    except (libxml2.parserError, TypeError):
+        return None
+    
+def pmlToDot(pml):
+    if pml is None:
+        return None
     (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
-    os.write(f, output)
+    os.write(f, pml)
     os.close(f)
     traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
     dotDesc = traverse.communicate()[0]  
     os.remove(path)
     return (dotDesc,path)
-
-def generatePmlGraph(request):
-    pmlPath = request.GET.items()[0][1]
-    if pmlPath.find("../") != -1:
-        #print ("[ERROR] '../' contained in specified file name, relative paths unallowed for security reasons")
-        return None
-    fullPath = settings.MEDIA_ROOT + pmlPath
-    if os.path.isfile(fullPath):
-        dotDesc = xmlToDot(fullPath)[0]
-        if dotDesc is None:
-            return None
-        graph = pydot.graph_from_dot_data(dotDesc)
-        jpg = graph.create_jpg()
-        return HttpResponse(jpg, mimetype="image/jpg")
-    else:
-        #print ("[ERROR] File does not exist")
-        return None
         
-#Create graph/map HTML code for inclusion on the templates
-def generatePmlGraphHtml(request):
-    pmlPath = request.GET.items()[0][1]
+def pmlView(request):
+    try:
+        pmlPath = request.GET.items()[0][1]
+        reqType = request.GET.items()[1][1]
+    except:
+        return None
+    if reqType not in ["graph","viewer","pml","roadmap"]:
+        return None
     if pmlPath.find("../") != -1:
         #print ("[ERROR] '../' contained in specified file name, relative paths unallowed for security reasons")
         return None
     fullPath = settings.MEDIA_ROOT + pmlPath
     if os.path.isfile(fullPath):
-        dotDescInfo = xmlToDot(fullPath)
-        if dotDescInfo is None:
+        if reqType == "roadmap":
+            return HttpResponse(xmlToRoadmap(fullPath),mimetype='text/html')
+        pmlDesc = xmlToPml(fullPath)
+        if reqType == "pml":
+            return HttpResponse(pmlDesc, mimetype="text/plain")
+        dotDescInfo = pmlToDot(pmlDesc)
+        if dotDescInfo[0] is None:
             return None
         graph = pydot.graph_from_dot_data(dotDescInfo[0])
-        mapHtml = '<html>\n<body>\n\n'
-        mapHtml += graph.create_cmapx()
-        mapHtml += "\n\n"
-        mapHtml += '<img src="../pmlGraph?path='+ pmlPath +'" usemap="#' + os.path.basename(dotDescInfo[1]) + '"/>\n\n'
-        mapHtml += '</body>\n</html>\n\n'
-        return HttpResponse(mapHtml, mimetype="text/html")
+        if reqType == "graph":
+            jpg = graph.create_jpg()
+            return HttpResponse(jpg, mimetype="image/jpg")
+        elif reqType == "viewer":
+            mapHtml = '<html>\n<body>\n\n'
+            mapHtml += graph.create_cmapx()
+            mapHtml += "\n\n"
+            mapHtml += '<img src="../pmlView?path='+ pmlPath +'&type=graph" usemap="#' + os.path.basename(dotDescInfo[1]) + '"/>\n\n'
+            mapHtml += '</body>\n</html>\n\n'
+            return HttpResponse(mapHtml, mimetype="text/html")            
     else:
         #print ("[ERROR] File does not exist")
-        return None
+        return None        
         
 # TODO move this to questions url
 def index(request):

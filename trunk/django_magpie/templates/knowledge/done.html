@@ -43,7 +43,7 @@ Tip: Click on the recommendations to see if they have additional resources.<br>
     {% endfor %}
     </ol>
     {% if rec.pmlPath != None %}
-        {% with pmlReq="\"pmlView?path="|add:rec.pmlPath|add:"\"" %}
+        {% with pmlReq="\"pmlView?path="|add:rec.pmlPath|add:"&type=viewer"|add:"\"" %}
 	        <a href={{pmlReq|safe}} />Click here to view the interactive PML Graph</a>	
 	    {% endwith %}
     {% endif %}
