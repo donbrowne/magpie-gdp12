@@ -76,27 +76,26 @@ def pmlView(request):
         pmlPath = request.GET.items()[0][1]
         reqType = request.GET.items()[1][1]
     except:
-        return None
+        return HttpResponse("[ERROR] Expecting two arguments.",mimetype='text/html')
     if reqType not in ["graph","viewer","pml","roadmap"]:
-        return None
+        return HttpResponse("[ERROR] Invalid action. Must be graph, viewer, pml, roadmap.",mimetype='text/html')
     if pmlPath.find("../") != -1:
-        #print ("[ERROR] '../' contained in specified file name, relative paths unallowed for security reasons")
-        return None
+        return HttpResponse("[ERROR] '../' contained in specified file name, relative paths unallowed for security reasons.",mimetype='text/html')
     fullPath = settings.MEDIA_ROOT + pmlPath
     if os.path.isfile(fullPath):
         if reqType == "roadmap":
-            roadmap = '<html>\n<head>\n'
-            roadmap += '<link rel="stylesheet" type="text/css" href="' + settings.STATIC_URL + '/css/base.css" />\n'
-            roadmap += '</head>\n'
+            roadmap = '<html>\n\n'
             roadmap += xmlToRoadmap(fullPath)
             roadmap += '\n</html>\n'
             return HttpResponse(roadmap,mimetype='text/html')
         pmlDesc = xmlToPml(fullPath)
+        if pmlDesc is None:
+            return HttpResponse("[ERROR] Could not convert XML to PML.",mimetype='text/html')
         if reqType == "pml":
             return HttpResponse(pmlDesc, mimetype="text/plain")
         dotDescInfo = pmlToDot(pmlDesc)
         if dotDescInfo[0] is None:
-            return None
+            return HttpResponse("[ERROR] Could not convert PML to DOT.",mimetype='text/html')
         graph = pydot.graph_from_dot_data(dotDescInfo[0])
         if reqType == "graph":
             jpg = graph.create_jpg()
@@ -109,8 +108,7 @@ def pmlView(request):
             mapHtml += '</body>\n</html>\n\n'
             return HttpResponse(mapHtml, mimetype="text/html")            
     else:
-        #print ("[ERROR] File does not exist")
-        return None        
+        return HttpResponse("[ERROR] File not found.",mimetype='text/html')        
         
 # TODO move this to questions url
 def index(request):
