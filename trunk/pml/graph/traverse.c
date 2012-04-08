@@ -2,9 +2,10 @@
  * File: Traverse.c
  * Traverse graph built by parser, printing nodes visited.
  * $Id: traverse.c,v 1.2 2008/07/25 22:06:53 jnoll Exp $
- * Author: John Noll & Jigar Shah
+ * Author: John Noll & Jigar Shah 
+ * Javascript calls inserted by Don Browne
  * Date Written: Aug 10 2003
- * Date Last Modified: Aug 11 2003
+ * Date Last Modified: 08-APR-2012
  *
  */
 
@@ -235,7 +236,30 @@ void name_node(Node n)
     if (graph_type != XML) {
 	printf("%s_%ld [shape=%s, ", n->name, (long)n, node_shape(n->type));
 	if (n->type == PROCESS) {
-	    printf("label=\"%s\"]\n", n->name);
+	    printf("label=\"%s\", href=\"javascript:alert('Name: %s\\n", n->name, n->name);
+        if (n->tool != NULL) 
+        {
+            printf("Tool:%s\\n",n->tool);
+        }
+        if (n->agent) 
+        {
+            printf("Agent: ");
+            print_resources(n->agent);
+            printf("\\n");
+        }
+        if (n->requires) 
+        {
+            printf("Requires: ");
+            print_resources(n->requires);
+            printf("\\n");
+        }
+        if (n->provides) 
+        {
+            printf("Provides: ");
+            print_resources(n->provides);
+            printf("\\n");
+        }
+        printf("')\"];\n");
 	} else 	if (!(graph_type & (ANON)) && (n->type == ACTION)) {
 	    if (!(graph_type & NO_RESOURCE)) {
 		printf("label=");
@@ -244,8 +268,33 @@ void name_node(Node n)
 		printf("|%s|", n->name);
 		print_resources(n->provides);
 		printf("}\"];\n");
-	    } else {
-		printf("label=\"%s\"];\n", n->name);
+	    } 
+        else 
+        {
+            printf("label=\"%s\", href=\"javascript:alert('Name: %s\\n", n->name, n->name);
+        if (n->tool != NULL) 
+        {
+            printf("Tool:%s\\n",n->tool);
+        }
+        if (n->agent) 
+        {
+            printf("Agent: ");
+            print_resources(n->agent);
+            printf("\\n");
+        }
+        if (n->requires) 
+        {
+            printf("Requires: ");
+            print_resources(n->requires);
+            printf("\\n");
+        }
+        if (n->provides) 
+        {
+            printf("Provides: ");
+            print_resources(n->provides);
+            printf("\\n");
+        }
+        printf("')\"];\n");
 	    }
 	} else {
 	    printf("label=\"\"];\n");
@@ -425,7 +474,6 @@ int main(argc, argv)
 	    }
 	    if (graph_type != XML) {
 		printf("digraph %s {\n", name);
-        printf("  node [href=\"javascript:alert('\\N')\"]\n");
 		printf("  rankdir = TB;\n");
 		printf("  ordering = out;\n");
 /*
