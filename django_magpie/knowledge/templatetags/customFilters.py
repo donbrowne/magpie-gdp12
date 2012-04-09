@@ -14,6 +14,13 @@ def isImg(string):
     extension = stringArray[0].lower()
     return extension in types
 
+def escapeForJS(string):
+    chars = [' ','"','\'','(',')','<','>','[',']']
+    for c in chars:
+        string = string.replace(c,'')
+    return string
+
 register.filter('lslice', lslice)
 register.filter('contains', contains)
 register.filter('isImg', isImg)
+register.filter('escapeForJS', escapeForJS)
