@@ -110,6 +110,12 @@ The admin interface can be found at -
 
  THE_URL_TO_SERVE_FOLDER/magpie.wsgi/admin
  
+When using either the sample database, or the when the database has been
+reset using make reset, the admin user is -
+  
+  Username: admin
+  Password: admin
+ 
 ---Note about alternative configurations---
 
 If you wish to run with the local Django runserver, or you are setting
