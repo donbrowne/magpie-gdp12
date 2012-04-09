@@ -625,7 +625,7 @@ class Engine(object):
 def state_encode(state):
     sdict = {}
     sdict['rulesets'] = state.get_rulesets()
-    sdict['vars'] = state.get_vars()
+    sdict['vars'] = state.get_vars(True)
     sdict['tests'] = state.get_tests()
     return sdict.items()
 def state_decode(slist):
