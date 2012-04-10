@@ -161,6 +161,9 @@ def ask(request):
     if request.method == 'POST':
         # user answered some questions
         answers =  get_answers(request.POST.items())
+        if request.user.is_authenticated():
+            profile = request.user.get_profile()
+            profile.save_answers(profile.get_answers() + answers)
         state = get_state(request.session)
         state.next_state(answers)
         rsp = ask_or_done(request, state)
@@ -168,20 +171,16 @@ def ask(request):
         # first time
         state = start_state(request.user)
         state.next_state()
+        #This is a hack until we figure out a better way to save 
+        #progress
+        if request.user.is_authenticated():
+            profile = request.user.get_profile()
+            profile.save_answers([])
         rsp = ask_or_done(request, state)
     return rsp
 
 # save state here if logged in (else keep in cookie)
 def done(request):
-    if request.user.is_authenticated():
-        # save answers for authenticated users.
-        state = get_state(request.session)
-        profile = request.user.get_profile()
-        profile.save_answers(state.get_answers())
-    else:
-        # Do something for anonymous users.
-        pass
     context = RequestContext(request)
     #Force redirect to index, instead of redirecting to '/'
-    context = RequestContext(request)
     return redirect(index)
