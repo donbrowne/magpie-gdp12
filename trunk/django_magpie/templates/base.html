@@ -5,9 +5,24 @@
 <script type="text/javascript" src="{% load adminmedia %}{% admin_media_prefix %}flowplayer-3.2.6.min.js"></script>
 <script type="text/javascript" src="{% load adminmedia %}{% admin_media_prefix %}expand.js"></script>
 <title>{% block title %}{% endblock %}</title>
+<script type="text/javascript">
+ function confirmReset()
+ {
+ if (confirm("Are you sure you want to delete your saved progress?"))
+   {
+   window.location = "{% url 'reset' %}"
+   }
+ }
+ function confirmLogout()
+ {
+ if (confirm("Are you sure you want to log out?"))
+   {
+   window.location = "{% url 'logout' %}?next={{request.path}}"
+   }
+ }
+ </script>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% load adminmedia %}{{ STATIC_URL }}/css/base.css{% endblock %}" />
 {% block extrastyle %}{% endblock %}
-<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% load adminmedia %}{% admin_media_prefix %}css/ie.css{% endblock %}" /><![endif]-->
 {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% admin_media_prefix %}css/rtl.css{% endblock %}" />{% endif %}
 <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% admin_media_prefix %}{% endfilter %}";</script>
 {% block extrahead %}{% endblock %}
@@ -30,9 +45,9 @@
         <div id="user-tools">
         {% if user.is_authenticated %}
             <a href="{% url 'account' %}?next={{request.path}}">Account</a> |
-            <a href="{% url 'logout' %}?next={{request.path}}">Log out</a> |
             <a href="{% url 'saved' %}">Saved</a> |
-            <a href="{% url 'reset' %}">Reset</a>
+            <a href="javascript:confirmReset()">Reset</a> |
+            <a href="javascript:confirmLogout()">Log out</a>
             <br>{% trans 'You are logged in as ' %}
             <strong>{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</strong>
         {% else %}
