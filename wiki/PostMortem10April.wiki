@@ -1,4 +1,4 @@
-#Post Mortem report for Release 2 Iteration 3
+#summary Post Mortem report for Release 2 Iteration 3
 
 = Introduction =
 
@@ -55,4 +55,3 @@ Objectives
 
  Feature: #Process fragments
  Investigate the feasibility of this idea given the time left in the project - Don
-
