@@ -403,7 +403,7 @@ class Engine(object):
         for var in Variable.objects.filter(id__in=questionIDs):
             if var.ask:
                 questions.append(var)
-        return (questions,questionAns)
+        return zip(questions,questionAns)
 
     def get_questions(self):
         questions = []
