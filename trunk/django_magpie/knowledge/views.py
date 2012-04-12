@@ -120,15 +120,23 @@ def index(request):
 
 @login_required
 def saved(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated():
+            answers =  get_answers(request.POST.items())
+            profile = request.user.get_profile()
+            profile.save_answers(answers)
+        return redirect(index)
     context = RequestContext(request)
     state = start_state(request.user)
     profile = request.user.get_profile()
     state.next_state(profile.get_answers())
+    questions = state.getPriorQuestions(profile.get_answers())[0]
     summaryClosure = recSummaryClosure(request.user)
     recommends = map(summaryClosure,state.get_recommends())
     return render_to_response('knowledge/saved.html', {
                 'recommend_list': recommends,
-                'reason_list' : state.get_reasons()
+                'reason_list' : state.get_reasons(),
+                'priorQuestions' : questions
                 }, context)
 
 def ask_or_done(request, state):
@@ -159,7 +167,7 @@ def ask_or_done(request, state):
 def ask(request):
     context = RequestContext(request)
     if request.method == 'POST':
-        # user answered some questions
+        # user answered some quest  ions
         answers =  get_answers(request.POST.items())
         if request.user.is_authenticated():
             profile = request.user.get_profile()
@@ -170,17 +178,26 @@ def ask(request):
     else:
         # first time
         priorAnswers = None
+        #If logged in, grab prior progress and use it to resume.
         if request.user.is_authenticated():
             profile = request.user.get_profile()
             priorAnswers = profile.get_answers()
         state = start_state(request.user)
         state.next_state(priorAnswers)
-        #This is a hack until we figure out a better way to save 
-        #progress
+        #This is a horrible, horrible hack until I can determine the 
+        #best way to change the inference engine without breaking it.
+        hacks = {}
+        for key, value in priorAnswers:
+            if key in hacks:
+                hacks[key].append(value)
+            else:
+                hacks[key] = [value]
+        for i in state.test_ids:
+            if i in hacks.keys():
+                state.test_ids.remove(i)
         rsp = ask_or_done(request, state)
     return rsp
 
-# save state here if logged in (else keep in cookie)
 def done(request):
     context = RequestContext(request)
     #Force redirect to index, instead of redirecting to '/'

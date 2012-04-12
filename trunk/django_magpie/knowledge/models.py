@@ -392,6 +392,18 @@ class Engine(object):
             else:
                 rdict[rnode.node_id] = rnode
         return rdict.values()
+        
+    def getPriorQuestions(self, answers):
+        questionIDs = []
+        questionAns = []
+        for a in answers:
+            questionIDs.append(a[0])
+            questionAns.append(a[1])
+        questions = []
+        for var in Variable.objects.filter(id__in=questionIDs):
+            if var.ask:
+                questions.append(var)
+        return (questions,questionAns)
 
     def get_questions(self):
         questions = []
@@ -615,7 +627,6 @@ class Engine(object):
         self.fire_ids = []
         # this really needs to be fixed
         self.rec_nodes = []
-
         for ruleset in RuleSet.objects.filter(id__in=self.ruleset_ids):
             tree = self.build_tree(ruleset)
             unfired = self.forward_chain(tree)

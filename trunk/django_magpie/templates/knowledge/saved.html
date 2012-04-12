@@ -3,6 +3,27 @@
 
 {% block title %}{{ title }} | {% trans 'Magpie Site' %}{% endblock %}
 
+{% block content %}
+
+<div class="box">
+<h2>Questions</h2>
+<form action={% url knowledge.views.saved %} method="post">
+<div id="content">
+{% csrf_token %}
+<ol>
+{% for question in priorQuestions %}
+    <li>{{ question.prompt}}<br />
+    <input type="radio" name='answer_{{question.id}}' value="y">Yes
+    <input type="radio" name='answer_{{question.id}}' value="n">No
+    </li>
+{% endfor %}
+</ol>
+<input type="submit" value="Next" />
+</div>
+</form>
+</div>
+{% endblock %}
+
 {% block sidebar %}
 {% load customFilters %}
 <div class="box">
