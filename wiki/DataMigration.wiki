@@ -25,8 +25,6 @@ the second command drops the knowlege sql tables
 the third recreates them with the new fields.
 the fourth reloads the data.
 
-The fourth works because the  xml file only contains data about existing fields so these are loaded as  normal. Because lchoice and rchoice are defined with a default value of 0 the new rows when recreated by django will have 0 values assigned to them meaning the existing rules will
-be used as they where previously.
+The fourth works because the  xml file only contains data about existing fields so these are loaded as  normal. Because lchoice and rchoice are defined with a default value of 0 the new rows when recreated by django will have 0 values assigned to them meaning the existing rules will be used as they where previously.
 
-We  can add exclude = ('lchoice','rchoice'). to the RulePremiseInline admin that
- will hide these 2 new fields from the admin view until such time as the rest of the code need to support them has been added
+We  can add exclude = ('lchoice','rchoice'). to the RulePremiseInline admin that will hide these 2 new fields from the admin view until such time as the rest of the code need to support them has been added
