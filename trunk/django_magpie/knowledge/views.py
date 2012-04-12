@@ -169,13 +169,14 @@ def ask(request):
         rsp = ask_or_done(request, state)
     else:
         # first time
-        state = start_state(request.user)
-        state.next_state()
-        #This is a hack until we figure out a better way to save 
-        #progress
+        priorAnswers = None
         if request.user.is_authenticated():
             profile = request.user.get_profile()
-            profile.save_answers([])
+            priorAnswers = profile.get_answers()
+        state = start_state(request.user)
+        state.next_state(priorAnswers)
+        #This is a hack until we figure out a better way to save 
+        #progress
         rsp = ask_or_done(request, state)
     return rsp
 
@@ -183,4 +184,11 @@ def ask(request):
 def done(request):
     context = RequestContext(request)
     #Force redirect to index, instead of redirecting to '/'
+    return redirect(index)
+    
+#Reset saved answers
+def reset(request):
+    if request.user.is_authenticated():
+        profile = request.user.get_profile()
+        profile.save_answers([])
     return redirect(index)
