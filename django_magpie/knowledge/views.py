@@ -66,7 +66,7 @@ def pmlToDot(pml):
     (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
     os.write(f, pml)
     os.close(f)
-    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
+    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L','-j',path],stdout=subprocess.PIPE)
     dotDesc = traverse.communicate()[0]  
     os.remove(path)
     return (dotDesc,path)
