@@ -20,7 +20,7 @@
 # include <pml/tokens.h>
 
 typedef enum { FLOW = 0x1, XML=0x2, ANON=0x4, NO_RESOURCE=0x8, 
-	       NO_LINK_LABELS=0x10} output_t;
+	       NO_LINK_LABELS=0x10, JS_ANNOTATIONS=0x20} output_t;
 output_t graph_type = 0;
 
 typedef enum { GRAY, BLACK, WHITE } node_color_t;
@@ -236,7 +236,10 @@ void name_node(Node n)
     if (graph_type != XML) {
 	printf("%s_%ld [shape=%s, ", n->name, (long)n, node_shape(n->type));
 	if (n->type == PROCESS) {
-	    printf("label=\"%s\", href=\"javascript:alert('Name: %s\\n", n->name, n->name);
+    printf("label=\"%s",n->name);
+    if (graph_type & JS_ANNOTATIONS) 
+    {
+        printf(", href=\"javascript:alert('Name: %s\\n", n->name, n->name);
         if (n->tool != NULL) 
         {
             printf("Tool:%s\\n",n->tool);
@@ -259,7 +262,9 @@ void name_node(Node n)
             print_resources(n->provides);
             printf("\\n");
         }
-        printf("')\"];\n");
+        printf("')\"");
+    }
+    printf("];\n");
 	} else 	if (!(graph_type & (ANON)) && (n->type == ACTION)) {
 	    if (!(graph_type & NO_RESOURCE)) {
 		printf("label=");
@@ -271,30 +276,36 @@ void name_node(Node n)
 	    } 
         else 
         {
-            printf("label=\"%s\", href=\"javascript:alert('Name: %s\\n", n->name, n->name);
-        if (n->tool != NULL) 
+   printf("label=\"%s",n->name);
+        if (graph_type & JS_ANNOTATIONS) 
         {
-            printf("Tool:%s\\n",n->tool);
+            printf(", href=\"javascript:alert('Name: %s\\n", n->name, n->name);
+            if (n->tool != NULL) 
+            {
+                printf("Tool:%s\\n",n->tool);
+            }
+            if (n->agent) 
+            {
+                printf("Agent: ");
+                print_resources(n->agent);
+                printf("\\n");
+            }
+            if (n->requires) 
+            {
+                printf("Requires: ");
+                print_resources(n->requires);
+                printf("\\n");
+            }
+            if (n->provides) 
+            {
+                printf("Provides: ");
+                print_resources(n->provides);
+                printf("\\n");
+            }
+            printf("')\"");
         }
-        if (n->agent) 
-        {
-            printf("Agent: ");
-            print_resources(n->agent);
-            printf("\\n");
-        }
-        if (n->requires) 
-        {
-            printf("Requires: ");
-            print_resources(n->requires);
-            printf("\\n");
-        }
-        if (n->provides) 
-        {
-            printf("Provides: ");
-            print_resources(n->provides);
-            printf("\\n");
-        }
-        printf("')\"];\n");
+        printf("];\n");
+   
 	    }
 	} else {
 	    printf("label=\"\"];\n");
@@ -383,6 +394,7 @@ usage: %s [options] [file ...]\n\
     -a  don't print any labels (anonymous)\n\
     -c  new column after this node\n\
     -f  include control flow edges (default)\n\
+    -j  include Javascript annotations for web graphing\n\
     -R  don't print resource names\n\
     -L  don't label edges with resources\n\
     -x  emit XML (not working)\n\
@@ -398,7 +410,7 @@ int main(argc, argv)
     filename = "-";
     status = EXIT_SUCCESS;
 
-    while ((c = getopt (argc, argv, "ac:dfLmxhR?")) != EOF) {
+    while ((c = getopt (argc, argv, "ac:dfjLmxhR?")) != EOF) {
 	switch (c) {
 	case 'a':
 	    graph_type |= ANON;
@@ -410,6 +422,10 @@ int main(argc, argv)
 
 	case 'f':
 	    graph_type |= FLOW;
+	    break;
+
+    case 'j':
+	    graph_type |= JS_ANNOTATIONS;
 	    break;
 
 	case 'R':
