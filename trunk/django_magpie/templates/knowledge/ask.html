@@ -22,6 +22,34 @@
 </div>
 </form>
 </div>
+
+<div class="box">
+<h2>Previously Answered</h2>
+{%if priorQuestions%}
+<form action={% url knowledge.views.saved %} method="post">
+<div id="content">
+{% csrf_token %}
+<ol>
+{% for question in priorQuestions %}
+    <li>{{ question.0.prompt}}<br />
+    <input type="radio" name='answer_{{question.0.id}}' value="y" {%if question.1 == 'Y' %}checked="checked"{%endif%}>Yes
+    <input type="radio" name='answer_{{question.0.id}}' value="n" {%if question.1 == 'N' %}checked="checked"{%endif%}>No
+    </li>
+{% endfor %}
+</ol>
+<input type="submit" value="Change Answers" />
+</div>
+</form>
+{%else%}
+<div id="content">
+{%if user.is_authenticated%}
+<p>Nothing so far!</p>
+{%else%}
+<p>You must be logged in to change answers to previous questions!</p>
+{%endif%}
+</div>
+{%endif%}
+</div>
 {% endblock %}
 
 {% block sidebar %}

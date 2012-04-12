@@ -119,27 +119,30 @@ def index(request):
     return render_to_response('knowledge/index.html', context)
 
 @login_required
-def saved(request):
-    if request.method == 'POST':
-        if request.user.is_authenticated():
-            answers =  get_answers(request.POST.items())
-            profile = request.user.get_profile()
-            profile.save_answers(answers)
-        return redirect(index)
-    context = RequestContext(request)
-    state = start_state(request.user)
+def saved (request):
+    answers =  get_answers(request.POST.items())
     profile = request.user.get_profile()
-    state.next_state(profile.get_answers())
-    questions = state.getPriorQuestions(profile.get_answers())
-    summaryClosure = recSummaryClosure(request.user)
-    recommends = map(summaryClosure,state.get_recommends())
-    return render_to_response('knowledge/saved.html', {
-                'recommend_list': recommends,
-                'reason_list' : state.get_reasons(),
-                'priorQuestions' : questions
-                }, context)
+    profile.save_answers(answers)
+    state = get_state(request.session)
+    priorQuestions = state.getPriorQuestions(profile.get_answers())
+    #Force a clear of the recommendation nodes so that changing the 
+    #answers generates the correct set of recommendations.
+    state = start_state(request.user)
+    state.next_state(answers)
+    #This is a horrible, horrible hack until I can determine the 
+    #best way to change the inference engine without breaking it.
+    hacks = {}
+    for key, value in answers:
+        if key in hacks:
+            hacks[key].append(value)
+        else:
+            hacks[key] = [value]
+        for i in hacks.keys():
+            if i in state.test_ids:
+                state.test_ids.remove(i)
+    return ask_or_done(request, state, priorQuestions)
 
-def ask_or_done(request, state):
+def ask_or_done(request, state, priorQuestions):
     context = RequestContext(request)
     questions = state.get_questions()
     summaryClosure = recSummaryClosure(request.user)
@@ -151,7 +154,8 @@ def ask_or_done(request, state):
         return render_to_response(
             'knowledge/done.html', {
                 'recommend_list': recommends,
-                'reason_list' : reasons
+                'reason_list' : reasons,
+                'priorQuestions' : priorQuestions
             },
             context)
     # keep going
@@ -159,7 +163,8 @@ def ask_or_done(request, state):
         'knowledge/ask.html', {
         'question_list': questions,
         'recommend_list': recommends,
-        'reason_list': reasons
+        'reason_list': reasons,
+        'priorQuestions' : priorQuestions
         },
         context)
 
@@ -169,33 +174,38 @@ def ask(request):
     if request.method == 'POST':
         # user answered some quest  ions
         answers =  get_answers(request.POST.items())
+        state = get_state(request.session)
+        priorQuestions = None
         if request.user.is_authenticated():
             profile = request.user.get_profile()
             profile.save_answers(profile.get_answers() + answers)
-        state = get_state(request.session)
+            priorQuestions = state.getPriorQuestions(profile.get_answers())
         state.next_state(answers)
-        rsp = ask_or_done(request, state)
+        rsp = ask_or_done(request, state, priorQuestions)
     else:
         # first time
-        priorAnswers = None
+        priorQuestions = None
+        state = start_state(request.user)
         #If logged in, grab prior progress and use it to resume.
         if request.user.is_authenticated():
             profile = request.user.get_profile()
             priorAnswers = profile.get_answers()
-        state = start_state(request.user)
-        state.next_state(priorAnswers)
-        #This is a horrible, horrible hack until I can determine the 
-        #best way to change the inference engine without breaking it.
-        hacks = {}
-        for key, value in priorAnswers:
-            if key in hacks:
-                hacks[key].append(value)
-            else:
-                hacks[key] = [value]
-        for i in state.test_ids:
-            if i in hacks.keys():
-                state.test_ids.remove(i)
-        rsp = ask_or_done(request, state)
+            state.next_state(priorAnswers)
+            priorQuestions = state.getPriorQuestions(profile.get_answers())
+            #This is a horrible, horrible hack until I can determine the 
+            #best way to change the inference engine without breaking it.
+            hacks = {}
+            for key, value in priorAnswers:
+                if key in hacks:
+                    hacks[key].append(value)
+                else:
+                    hacks[key] = [value]
+            for i in hacks.keys():
+                if i in state.test_ids:
+                    state.test_ids.remove(i)
+        else: 
+            state.next_state()
+        rsp = ask_or_done(request, state, priorQuestions)
     return rsp
 
 def done(request):
