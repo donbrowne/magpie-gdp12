@@ -236,7 +236,7 @@ void name_node(Node n)
     if (graph_type != XML) {
 	printf("%s_%ld [shape=%s, ", n->name, (long)n, node_shape(n->type));
 	if (n->type == PROCESS) {
-    printf("label=\"%s",n->name);
+    printf("label=\"%s\"",n->name);
     if (graph_type & JS_ANNOTATIONS) 
     {
         printf(", href=\"javascript:alert('Name: %s\\n", n->name, n->name);
@@ -276,7 +276,7 @@ void name_node(Node n)
 	    } 
         else 
         {
-   printf("label=\"%s",n->name);
+   printf("label=\"%s\"",n->name);
         if (graph_type & JS_ANNOTATIONS) 
         {
             printf(", href=\"javascript:alert('Name: %s\\n", n->name, n->name);
