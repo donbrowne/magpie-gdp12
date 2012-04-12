@@ -31,7 +31,8 @@
         {% if user.is_authenticated %}
             <a href="{% url 'account' %}?next={{request.path}}">Account</a> |
             <a href="{% url 'logout' %}?next={{request.path}}">Log out</a> |
-            <a href="{% url 'saved' %}">Saved</a>
+            <a href="{% url 'saved' %}">Saved</a> |
+            <a href="{% url 'reset' %}">Reset</a>
             <br>{% trans 'You are logged in as ' %}
             <strong>{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</strong>
         {% else %}
