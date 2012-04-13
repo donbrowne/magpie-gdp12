@@ -332,7 +332,7 @@ class Engine(object):
         self.test_ids = []
         self.fact_state =  OrderedDict()
         self.rec_nodes = []
-        self.debug = True
+        self.debug = False
         # restore state
         if ruleset_ids:
             for rsid in ruleset_ids:
@@ -544,13 +544,14 @@ class Engine(object):
         return test_groups
 
     def get_first(self, premise_list, node_set):
-        #print 'get_first premise', [ str(x) for x in premise_list]
+        if self.debug:
+            print 'get_first premise', [ str(x) for x in premise_list]
         for premise in premise_list:
             num_loop = 0
             for node in premise.get_nodes():
-                #print 'node', node
+                if self.debug: print 'node', node
                 if node in node_set:
-                    #print '+++++++LOOP++++++++'
+                    if self.debug: print '+++++++LOOP++++++++'
                     num_loop += 1
                     continue
                 node_set.add(node)
@@ -563,16 +564,16 @@ class Engine(object):
         return None
 
     def find_backchains(self, node, node_set):
-        #print 'find_backchains', node
+        if self.debug: print 'find_backchains', node
         backchains = []
         if node in node_set:
-            #print '+++++++LOOP++++++++'
+            if self.debug: print '+++++++LOOP++++++++'
             #print 'Node', node, 'premises', [ str(x) for x in node_set ]
             return True
         node_set.add(node)
         #print 'Node', node, 'premises', [ str(x) for x in node.get_premises() ]
         for premise in node.get_premises():
-            #print 'premise', premise
+            if self.debug: print 'premise', premise
             untested = []
             num_tested = 0
             for pnode in premise.get_nodes():
@@ -585,11 +586,12 @@ class Engine(object):
                 for pnode in untested:
                     if self.find_backchains(pnode, node_set):
                         num_backchain += 1
-                #print 'num_backchain', num_backchain, len(untested)
+                if self.debug: print 'num_backchain', num_backchain, len(untested)
                 if num_backchain == len(untested):
-                    #print 'backchain', premise
+                    if self.debug: print 'backchain', premise
                     backchains.append(premise)
-        #print 'Node', node, 'backchains', [ str(x) for x in backchains ]
+        if self.debug: 
+            print 'Node', node, 'backchains', [ str(x) for x in backchains ]
         premsies = node.get_premises()
         node.set_premises(backchains)
         return len(premsies) == 0 or len(backchains) > 0
@@ -598,17 +600,18 @@ class Engine(object):
         test_premises = []
         for rec_node in tree.get_goals():
             if rec_node.check_state(NODE_PASSED):
-                #print 'Found goal!', rec_node
+                if self.debug print 'Found goal!', rec_node
                 self.rec_nodes.append(rec_node)
             else:
                 if self.find_backchains(rec_node, set()):
                     premises = rec_node.get_premises()
                     test_premises.append(self.get_first(premises, set()))
-        if len(test_premises) > 0:
-            premise = test_premises[0]
+        for premise in test_premises: 
             for node in premise.get_nodes():
                 if node.state == NODE_UNTESTED:
-                    self.test_ids.append(node.node_id)
+                    variable = Variable.objects.get(pk=node.node_id)
+                    if variable.ask:
+                        self.test_ids.append(node.node_id)
                 
     # given some answers update facts base and check if rules have fired
     # we use forward chaining here
@@ -616,17 +619,19 @@ class Engine(object):
     def next_state(self, answers=None):
         # first add asserted facts
         if answers:
-            #if self.debug: print 'Got answers', answers
+            if self.debug: print 'Got answers', answers
             self.add_vars(answers, FACT_ANSWERED)
         # now add variables for which we did not get answers
         for var_id in self.test_ids:
             self.add_var(var_id, '', FACT_ANSWERED)
+
         # and reset testable node list
         self.test_ids = []
         # reset rule list
         self.fire_ids = []
         # this really needs to be fixed
         self.rec_nodes = []
+
         for ruleset in RuleSet.objects.filter(id__in=self.ruleset_ids):
             tree = self.build_tree(ruleset)
             unfired = self.forward_chain(tree)
