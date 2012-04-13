@@ -10,6 +10,7 @@ import pydot
 import libxml2
 import libxslt
 import tempfile
+from utils import OrderedDict
 
 # note sesson is a gui state so
 # should not pass to business logic layer
@@ -118,18 +119,16 @@ def index(request):
         return redirect('knowledge/ask')
     return render_to_response('knowledge/index.html', context)
 
-@login_required
-def saved(request):
-    context = RequestContext(request)
+def saved (request):
+    answers =  get_answers(request.POST.items())
     state = start_state(request.user)
-    profile = request.user.get_profile()
-    state.next_state(profile.get_answers())
-    summaryClosure = recSummaryClosure(request.user)
-    recommends = map(summaryClosure,state.get_recommends())
-    return render_to_response('knowledge/saved.html', {
-                'recommend_list': recommends,
-                'reason_list' : state.get_reasons()
-                }, context)
+    state.add_vars(answers,1)
+    state.next_state()
+    priorQuestions = state.getPriorQuestions(state.get_answers())
+    if request.user.is_authenticated():
+        profile = request.user.get_profile()
+        profile.save_answers(answers)
+    return ask_or_done(request, state, priorQuestions)
 
 def ask_or_done(request, state, priorQuestions):
     context = RequestContext(request)
@@ -176,9 +175,6 @@ def ask(request):
         state.next_state()
         #This is a hack until we figure out a better way to save 
         #progress
-        if request.user.is_authenticated():
-            profile = request.user.get_profile()
-            profile.save_answers([])
         rsp = ask_or_done(request, state,None)
     return rsp
 
