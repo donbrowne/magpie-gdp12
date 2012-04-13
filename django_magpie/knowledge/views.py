@@ -119,12 +119,15 @@ def index(request):
         return redirect('knowledge/ask')
     return render_to_response('knowledge/index.html', context)
 
+#Used when user changes their answers.
 def saved (request):
     answers =  get_answers(request.POST.items())
+    #Make blank state, add the backlog of answers, get next state
     state = start_state(request.user)
     state.add_vars(answers,1)
     state.next_state()
     priorQuestions = state.getPriorQuestions(state.get_answers())
+    #If logged in, save progress to profile
     if request.user.is_authenticated():
         profile = request.user.get_profile()
         profile.save_answers(answers)
@@ -170,12 +173,17 @@ def ask(request):
             profile.save_answers(state.get_answers())
         rsp = ask_or_done(request, state,priorQuestions)
     else:
-        # first time
+        # User clicks Start on Index...
         state = start_state(request.user)
+        priorQuestions = None
+        #If logged in, grab prior progress and use it to resume.
+        if request.user.is_authenticated():
+            profile = request.user.get_profile()
+            priorAnswers = profile.get_answers()
+            state.add_vars(priorAnswers,1)
+            priorQuestions = state.getPriorQuestions(profile.get_answers())
         state.next_state()
-        #This is a hack until we figure out a better way to save 
-        #progress
-        rsp = ask_or_done(request, state,None)
+        rsp = ask_or_done(request, state, priorQuestions)
     return rsp
 
 # save state here if logged in (else keep in cookie)
