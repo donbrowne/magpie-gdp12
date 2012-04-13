@@ -66,7 +66,7 @@ def pmlToDot(pml):
     (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
     os.write(f, pml)
     os.close(f)
-    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
+    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-j','-R','-L',path],stdout=subprocess.PIPE)
     dotDesc = traverse.communicate()[0]  
     os.remove(path)
     return (dotDesc,path)
@@ -131,7 +131,7 @@ def saved(request):
                 'reason_list' : state.get_reasons()
                 }, context)
 
-def ask_or_done(request, state):
+def ask_or_done(request, state, priorQuestions):
     context = RequestContext(request)
     questions = state.get_questions()
     summaryClosure = recSummaryClosure(request.user)
@@ -143,7 +143,8 @@ def ask_or_done(request, state):
         return render_to_response(
             'knowledge/done.html', {
                 'recommend_list': recommends,
-                'reason_list' : reasons
+                'reason_list' : reasons,
+                'priorQuestions' : priorQuestions
             },
             context)
     # keep going
@@ -151,7 +152,8 @@ def ask_or_done(request, state):
         'knowledge/ask.html', {
         'question_list': questions,
         'recommend_list': recommends,
-        'reason_list': reasons
+        'reason_list': reasons,
+        'priorQuestions': priorQuestions
         },
         context)
 
@@ -161,12 +163,13 @@ def ask(request):
     if request.method == 'POST':
         # user answered some questions
         answers =  get_answers(request.POST.items())
-        if request.user.is_authenticated():
-            profile = request.user.get_profile()
-            profile.save_answers(profile.get_answers() + answers)
         state = get_state(request.session)
         state.next_state(answers)
-        rsp = ask_or_done(request, state)
+        priorQuestions = state.getPriorQuestions(state.get_answers())
+        if request.user.is_authenticated():
+            profile = request.user.get_profile()
+            profile.save_answers(state.get_answers())
+        rsp = ask_or_done(request, state,priorQuestions)
     else:
         # first time
         state = start_state(request.user)
@@ -176,7 +179,7 @@ def ask(request):
         if request.user.is_authenticated():
             profile = request.user.get_profile()
             profile.save_answers([])
-        rsp = ask_or_done(request, state)
+        rsp = ask_or_done(request, state,None)
     return rsp
 
 # save state here if logged in (else keep in cookie)
