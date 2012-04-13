@@ -118,17 +118,16 @@ def index(request):
         return redirect('knowledge/ask')
     return render_to_response('knowledge/index.html', context)
 
-@login_required
 def saved (request):
     answers =  get_answers(request.POST.items())
-    profile = request.user.get_profile()
-    profile.save_answers(answers)
-    state = get_state(request.session)
-    priorQuestions = state.getPriorQuestions(profile.get_answers())
+    if request.user.is_authenticated():
+        profile = request.user.get_profile()
+        profile.save_answers(answers)
     #Force a clear of the recommendation nodes so that changing the 
     #answers generates the correct set of recommendations.
     state = start_state(request.user)
     state.next_state(answers)
+    priorQuestions = state.getPriorQuestions(state.get_answers())
     #This is a horrible, horrible hack until I can determine the 
     #best way to change the inference engine without breaking it.
     hacks = {}
@@ -179,8 +178,8 @@ def ask(request):
         if request.user.is_authenticated():
             profile = request.user.get_profile()
             profile.save_answers(profile.get_answers() + answers)
-            priorQuestions = state.getPriorQuestions(profile.get_answers())
         state.next_state(answers)
+        priorQuestions = state.getPriorQuestions(state.get_answers())
         rsp = ask_or_done(request, state, priorQuestions)
     else:
         # first time
