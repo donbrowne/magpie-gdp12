@@ -600,7 +600,7 @@ class Engine(object):
         test_premises = []
         for rec_node in tree.get_goals():
             if rec_node.check_state(NODE_PASSED):
-                if self.debug print 'Found goal!', rec_node
+                if self.debug: print 'Found goal!', rec_node
                 self.rec_nodes.append(rec_node)
             else:
                 if self.find_backchains(rec_node, set()):
