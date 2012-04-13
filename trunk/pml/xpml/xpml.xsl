@@ -74,6 +74,17 @@
 </xsl:text>
 </xsl:template>
 
+<xsl:template match="tool|agent">
+
+  <xsl:value-of select="name()"/>
+  <xsl:text> { </xsl:text>
+
+  <xsl:value-of select="text()"/>
+
+  <xsl:text> }
+</xsl:text>
+</xsl:template>
+
 
 <xsl:template match="script">
   <xsl:text>script { "</xsl:text>

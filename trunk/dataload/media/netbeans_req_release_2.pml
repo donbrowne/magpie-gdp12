@@ -27,6 +27,8 @@
   <sequence name="setup_environment">
     <action name="create_working_directory">
       <provides>working_directory</provides>
+      <tool>"tool"</tool>
+      <agent>"agent"</agent>
       <script>
 
       <p>Create a working directory to contain the java files that
