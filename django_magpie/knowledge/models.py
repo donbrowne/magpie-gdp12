@@ -618,12 +618,16 @@ class Engine(object):
     # answers = list of (var_id,value) tuples
     def next_state(self, answers=None):
         # first add asserted facts
+        answer_ids = set()
         if answers:
             if self.debug: print 'Got answers', answers
             self.add_vars(answers, FACT_ANSWERED)
+            for item in answers:
+                answer_ids.add(item[0])
         # now add variables for which we did not get answers
         for var_id in self.test_ids:
-            self.add_var(var_id, '', FACT_ANSWERED)
+            if var_id not in answer_ids:
+                self.add_var(var_id, '', FACT_ANSWERED)
 
         # and reset testable node list
         self.test_ids = []
