@@ -3,9 +3,9 @@
  * Traverse graph built by parser, printing nodes visited.
  * $Id: traverse.c,v 1.2 2008/07/25 22:06:53 jnoll Exp $
  * Author: John Noll & Jigar Shah 
- * Javascript calls inserted by Don Browne
+ * Javascript annotations inserted by Don Browne
  * Date Written: Aug 10 2003
- * Date Last Modified: 08-APR-2012
+ * Date Last Modified: 13-APR-2012 (A Friday the 13th...)
  *
  */
 
@@ -239,10 +239,15 @@ void name_node(Node n)
     printf("label=\"%s\"",n->name);
     if (graph_type & JS_ANNOTATIONS) 
     {
-        printf(", href=\"javascript:alert('Name: %s\\n", n->name, n->name);
+        printf(", href=\"javascript:alert('Name: %s\\n", n->name);
         if (n->tool != NULL) 
         {
-            printf("Tool:%s\\n",n->tool);
+            char * escapedString = malloc(sizeof(char) * strlen(n->tool));
+            escapedString = strcpy(escapedString,n->tool);
+            escapedString[0] = ' ';
+            escapedString[strlen(n->tool)-1] = ' ';
+            printf("Tool:%s\\n",escapedString);
+            free(escapedString);
         }
         if (n->agent) 
         {
@@ -279,10 +284,15 @@ void name_node(Node n)
    printf("label=\"%s\"",n->name);
         if (graph_type & JS_ANNOTATIONS) 
         {
-            printf(", href=\"javascript:alert('Name: %s\\n", n->name, n->name);
+            printf(", href=\"javascript:alert('Name: %s\\n", n->name);
             if (n->tool != NULL) 
             {
-                printf("Tool:%s\\n",n->tool);
+                char * escapedString = malloc(sizeof(char) * strlen(n->tool));
+                escapedString = strcpy(escapedString,n->tool);
+                escapedString[0] = ' ';
+                escapedString[strlen(n->tool)-1] = ' ';
+                printf("Tool:%s\\n",escapedString);
+                free(escapedString);
             }
             if (n->agent) 
             {
