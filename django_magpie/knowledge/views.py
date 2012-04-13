@@ -66,7 +66,7 @@ def pmlToDot(pml):
     (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
     os.write(f, pml)
     os.close(f)
-    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L','-j',path],stdout=subprocess.PIPE)
+    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-R','-L',path],stdout=subprocess.PIPE)
     dotDesc = traverse.communicate()[0]  
     os.remove(path)
     return (dotDesc,path)
@@ -118,30 +118,20 @@ def index(request):
         return redirect('knowledge/ask')
     return render_to_response('knowledge/index.html', context)
 
-def saved (request):
-    answers =  get_answers(request.POST.items())
-    if request.user.is_authenticated():
-        profile = request.user.get_profile()
-        profile.save_answers(answers)
-    #Force a clear of the recommendation nodes so that changing the 
-    #answers generates the correct set of recommendations.
+@login_required
+def saved(request):
+    context = RequestContext(request)
     state = start_state(request.user)
-    state.next_state(answers)
-    priorQuestions = state.getPriorQuestions(state.get_answers())
-    #This is a horrible, horrible hack until I can determine the 
-    #best way to change the inference engine without breaking it.
-    hacks = {}
-    for key, value in answers:
-        if key in hacks:
-            hacks[key].append(value)
-        else:
-            hacks[key] = [value]
-        for i in hacks.keys():
-            if i in state.test_ids:
-                state.test_ids.remove(i)
-    return ask_or_done(request, state, priorQuestions)
+    profile = request.user.get_profile()
+    state.next_state(profile.get_answers())
+    summaryClosure = recSummaryClosure(request.user)
+    recommends = map(summaryClosure,state.get_recommends())
+    return render_to_response('knowledge/saved.html', {
+                'recommend_list': recommends,
+                'reason_list' : state.get_reasons()
+                }, context)
 
-def ask_or_done(request, state, priorQuestions):
+def ask_or_done(request, state):
     context = RequestContext(request)
     questions = state.get_questions()
     summaryClosure = recSummaryClosure(request.user)
@@ -153,8 +143,7 @@ def ask_or_done(request, state, priorQuestions):
         return render_to_response(
             'knowledge/done.html', {
                 'recommend_list': recommends,
-                'reason_list' : reasons,
-                'priorQuestions' : priorQuestions
+                'reason_list' : reasons
             },
             context)
     # keep going
@@ -162,8 +151,7 @@ def ask_or_done(request, state, priorQuestions):
         'knowledge/ask.html', {
         'question_list': questions,
         'recommend_list': recommends,
-        'reason_list': reasons,
-        'priorQuestions' : priorQuestions
+        'reason_list': reasons
         },
         context)
 
@@ -171,46 +159,32 @@ def ask_or_done(request, state, priorQuestions):
 def ask(request):
     context = RequestContext(request)
     if request.method == 'POST':
-        # user answered some quest  ions
+        # user answered some questions
         answers =  get_answers(request.POST.items())
-        state = get_state(request.session)
-        priorQuestions = None
         if request.user.is_authenticated():
             profile = request.user.get_profile()
             profile.save_answers(profile.get_answers() + answers)
+        state = get_state(request.session)
         state.next_state(answers)
-        priorQuestions = state.getPriorQuestions(state.get_answers())
-        rsp = ask_or_done(request, state, priorQuestions)
+        rsp = ask_or_done(request, state)
     else:
         # first time
-        priorQuestions = None
         state = start_state(request.user)
-        #If logged in, grab prior progress and use it to resume.
+        state.next_state()
+        #This is a hack until we figure out a better way to save 
+        #progress
         if request.user.is_authenticated():
             profile = request.user.get_profile()
-            priorAnswers = profile.get_answers()
-            state.next_state(priorAnswers)
-            priorQuestions = state.getPriorQuestions(profile.get_answers())
-            #This is a horrible, horrible hack until I can determine the 
-            #best way to change the inference engine without breaking it.
-            hacks = {}
-            for key, value in priorAnswers:
-                if key in hacks:
-                    hacks[key].append(value)
-                else:
-                    hacks[key] = [value]
-            for i in hacks.keys():
-                if i in state.test_ids:
-                    state.test_ids.remove(i)
-        else: 
-            state.next_state()
-        rsp = ask_or_done(request, state, priorQuestions)
+            profile.save_answers([])
+        rsp = ask_or_done(request, state)
     return rsp
 
+# save state here if logged in (else keep in cookie)
 def done(request):
     context = RequestContext(request)
     #Force redirect to index, instead of redirecting to '/'
     return redirect(index)
+
     
 #Reset saved answers
 def reset(request):
