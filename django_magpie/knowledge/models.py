@@ -333,6 +333,7 @@ class Engine(object):
         self.fact_state =  OrderedDict()
         self.rec_nodes = []
         self.debug = False
+        self.vars_tested = set()
         # restore state
         if ruleset_ids:
             for rsid in ruleset_ids:
@@ -374,7 +375,7 @@ class Engine(object):
         key = self.gen_fact_key(var_id, value)
         if key in self.fact_state:
             state = NODE_PASSED
-        elif self.gen_fact_key(var_id,'') in self.fact_state:
+        elif var_id in self.vars_tested:
             state = NODE_TESTED
         else:
             state = NODE_UNTESTED
@@ -471,6 +472,8 @@ class Engine(object):
     # asserted fact = variable that has been assinged a value
     def add_var(self, var_id, value, state):
         # record that we've seen this variable
+        self.vars_tested.add(var_id)
+        # update fact state
         key = self.gen_fact_key(var_id, value)
         if key not in self.fact_state:
             self.fact_state[key] = state
@@ -603,6 +606,7 @@ class Engine(object):
                 if self.find_backchains(rec_node, set()):
                     premises = rec_node.get_premises()
                     test_premises.append(self.get_first(premises, set()))
+
         test_ids = []
         for premise in test_premises: 
             for node in premise.get_nodes():
@@ -618,15 +622,12 @@ class Engine(object):
     # answers = list of (var_id,value) tuples
     def next_state(self, answers=None):
         # first add asserted facts
-        answer_ids = set()
         if answers:
             if self.debug: print 'Got answers', answers
             self.add_vars(answers, FACT_ANSWERED)
-            for item in answers:
-                answer_ids.add(item[0])
         # now add variables for which we did not get answers
         for var_id in self.test_ids:
-            if var_id not in answer_ids:
+            if var_id not in self.vars_tested:
                 self.add_var(var_id, '', FACT_ANSWERED)
 
         # and reset testable node list
