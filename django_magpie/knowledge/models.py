@@ -606,12 +606,15 @@ class Engine(object):
                 if self.find_backchains(rec_node, set()):
                     premises = rec_node.get_premises()
                     test_premises.append(self.get_first(premises, set()))
+        test_ids = []
         for premise in test_premises: 
             for node in premise.get_nodes():
                 if node.state == NODE_UNTESTED:
                     variable = Variable.objects.get(pk=node.node_id)
                     if variable.ask:
-                        self.test_ids.append(node.node_id)
+                        test_ids.append(node.node_id)
+        if len(test_ids) > 0:
+            self.test_ids.append(test_ids[0])
                 
     # given some answers update facts base and check if rules have fired
     # we use forward chaining here
