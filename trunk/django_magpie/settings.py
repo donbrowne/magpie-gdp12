@@ -67,6 +67,7 @@ MEDIA_ROOT = MAGPIE_DIR + '/../resources/media/'
 MEDIA_URL = URL_ROOT + '/media/'
 #Path to the PML tools
 PML_PATH = MAGPIE_DIR + '/../pml'
+TEST_DATA_PATH = MAGPIE_DIR + '/../dataload/testData/'
 
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
