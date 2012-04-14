@@ -186,9 +186,7 @@ def ask(request):
         rsp = ask_or_done(request, state, priorQuestions)
     return rsp
 
-# save state here if logged in (else keep in cookie)
 def done(request):
-    context = RequestContext(request)
     #Force redirect to index, instead of redirecting to '/'
     return redirect(index)
     

@@ -106,15 +106,14 @@ Details of features can be found at -
 
 http://code.google.com/p/magpie-gdp12/wiki/Features
 
-The admin interface can be found at -
-
- THE_URL_TO_SERVE_FOLDER/magpie.wsgi/admin
- 
 When using either the sample database, or the when the database has been
 reset using make reset, the admin user is -
   
   Username: admin
   Password: admin
+  
+When logged in as an admin or maintainer user, a link to the admin 
+interface is presented on the top right hand corner of the screen.
  
 ---Note about alternative configurations---
 
