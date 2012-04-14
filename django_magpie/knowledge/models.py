@@ -706,15 +706,12 @@ class Engine(object):
         return rdict.values()
 
     def getPriorQuestions(self, answers):
-        questionIDs = []
-        questionAns = []
-        for a in answers:
-            questionIDs.append(a[0])
-            questionAns.append(a[1])
         questions = []
-        for var in Variable.objects.filter(id__in=questionIDs):
-            if var.ask:
-                questions.append(var)
+        questionAns = []
+        for ans in answers:
+            if Variable.objects.filter(id=ans[0])[0].ask:
+                questions.append(Variable.objects.filter(id=ans[0])[0])
+                questionAns.append(ans[1])
         return zip(questions,questionAns)
 
     def get_questions(self):
