@@ -26,7 +26,7 @@ def get_answers(items):
             answers.append((qid, value))
     return answers
 
-#Trivial function
+#Unit tested   
 def del_state(session):
     try:
       del session['engine']
@@ -101,6 +101,7 @@ def pmlToDot(pml):
 #One big view that takes a filename, and view type, and gives back 
 #either a graph, a viewer for an interactive graph, a roadmap page or a 
 #plaintext PML spec. Most of the code is error handling...        
+#Unit tested
 def pmlView(request):
     try:
         pmlPath = request.GET.items()[0][1]
@@ -149,7 +150,7 @@ def index(request):
     context = RequestContext(request)
     if request.method == 'POST':
         del_state(request.session)
-        return redirect('knowledge/ask')
+        return redirect(ask)
     return render_to_response('knowledge/index.html', context)
 
 #Used when user changes their answers.
@@ -218,11 +219,6 @@ def ask(request):
         state.next_state()
         rsp = ask_or_done(request, state, priorQuestions)
     return rsp
-    
-#Trivial function
-def done(request):
-    #Force redirect to index, instead of redirecting to '/'
-    return redirect(index)
     
 #Trivial function
 #Reset saved answers
