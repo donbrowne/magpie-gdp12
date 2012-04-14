@@ -191,7 +191,6 @@ def done(request):
     context = RequestContext(request)
     #Force redirect to index, instead of redirecting to '/'
     return redirect(index)
-
     
 #Reset saved answers
 def reset(request):
