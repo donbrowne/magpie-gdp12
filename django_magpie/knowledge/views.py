@@ -45,7 +45,16 @@ def get_state(session):
         slist = []
     return state_decode(slist)
       
+#Redirect XML errors away from stdout so it doesnt cause a mod_wsgi
+#exception. Taken from the libxml2 docs.      
+#Trivial function
+def noerr(ctx, str):
+    pass
+
+#Unit tested
 def xmlToPml(filePath):
+    libxml2.registerErrorHandler(noerr, None)
+    libxslt.registerErrorHandler(noerr, None)
     pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/xpml.xsl")
     style = libxslt.parseStylesheetDoc(pmlStyleDoc)
     try:
@@ -56,6 +65,8 @@ def xmlToPml(filePath):
         return None
         
 def xmlToRoadmap(filePath):
+    libxml2.registerErrorHandler(noerr, None)
+    libxslt.registerErrorHandler(noerr, None)
     pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
     style = libxslt.parseStylesheetDoc(pmlStyleDoc)
     try:

@@ -1,6 +1,7 @@
 from django.test import TestCase
+from django.conf import settings
 from models import *
-from views import get_answers
+from views import *
 from django.contrib.auth.models import User
 from register.models import Profile,Account
 from templatetags.customFilters import *
@@ -701,6 +702,10 @@ class ViewTests(TestCase):
         account = self.user1.get_profile()
         account.profile = self.profile1
         account.save()
+        
+        f = open(settings.TEST_DATA_PATH + "pmlOutput","r")
+        self.pml = f.read()
+        f.close()
 
     def test_get_ids(self):
         slist = [ id for id in xrange(10) ]
@@ -728,6 +733,15 @@ class ViewTests(TestCase):
                   (self.v2.id, 'Y')]
         state.next_state(answers)
         self.assertEquals(state.get_vars(), nvars)
+        
+    def test_xmlToPml(self):
+        xmlPath = settings.MEDIA_ROOT + 'netbeans_req_release_2.pml'
+        nonXmlPath = settings.MEDIA_ROOT + 'hungry.bmp'
+        brokenPath = '/home/DrFoobariusJunior/lolhax.xml'
+        self.assertEquals(xmlToPml(xmlPath),self.pml)
+        self.assertEquals(xmlToPml(nonXmlPath),None)
+        self.assertEquals(xmlToPml(brokenPath),None)
+        
         
     #Custom filter tests
 class TemplateTests(TestCase):
