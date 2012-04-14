@@ -8,7 +8,7 @@
 <h2>All Done</h2>
 <p>You have reached the end of the questioning process.</p>
 <p>If you wish to start over, select Reset from the top right corner.</p>
-<form action={% url knowledge.views.done %} method="post">
+<form action={% url knowledge.views.index %} method="get">
 <div id="content">
 {% csrf_token %}
 <input type="submit" value="Done" />

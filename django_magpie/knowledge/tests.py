@@ -789,6 +789,15 @@ class ViewTests(TestCase):
         self.assertEquals(pmlView(req).content,'<html>\n\n' + self.roadmap + '\n</html>\n')
         #Can't test for the viewer and produced graph for the same reason
         #as the pmlToDot function...
+     
+    def test_delState(self):
+        test = {"engine":1}
+        del_state(test)
+        self.assertEquals("engine" not in test,True)
+        test = {"foo":1}
+        copy = {"foo":1}
+        del_state(test)
+        self.assertEquals(test.items(),copy.items())
 
     #Custom filter tests
 class TemplateTests(TestCase):
