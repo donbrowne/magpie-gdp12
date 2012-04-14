@@ -1,10 +1,3 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
 from models import *
 from views import get_answers
@@ -212,6 +205,10 @@ class ViewTests(TestCase):
         self.assertEquals(state.get_vars(), nvars)
         
     #Custom filter tests
+class TemplateTests(TestCase):
+
+    def setUp(self):
+        self.testString = "A quick brown fox jumps over the lazy dog"
         
     def test_isImg(self):
         imgLink1 = "www.foo.com/test1.JPG"
@@ -228,18 +225,11 @@ class ViewTests(TestCase):
         self.assertEquals(isImg(nonImgLink),False)
         
     def test_contains(self):
-        superString = "A quick brown fox jumps over the lazy dog"
         subString = "quick brown"
         nonSubString = "slow red"
-        self.assertEquals(contains(superString,subString),True)
-        self.assertEquals(contains(superString,nonSubString),False)
+        self.assertEquals(contains(self.testString,subString),True)
+        self.assertEquals(contains(self.testString,nonSubString),False)
     
     def test_lslice(self):
-        string = "A quick brown fox jumps over the lazy dog"
-        test = lslice(string,"5")
-        self.assertEquals(test,string[5:])
-
-    def test_recSummaryClosure(self):
-        user11 = User.objects.create(username='user11')
-        user21 = User.objects.create(username='user21')
-        user31 = User.objects.create(username='user31')
+        test = lslice(self.testString,"5")
+        self.assertEquals(test,self.testString[5:])
