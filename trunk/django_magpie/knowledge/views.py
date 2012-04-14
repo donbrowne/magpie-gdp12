@@ -14,6 +14,7 @@ from utils import OrderedDict
 
 # note sesson is a gui state so
 # should not pass to business logic layer
+#Unit tested
 def get_answers(items):
     answers = []
     for name,value in items:
@@ -25,15 +26,18 @@ def get_answers(items):
             answers.append((qid, value))
     return answers
 
+#Trivial function
 def del_state(session):
     try:
       del session['engine']
     except KeyError:
       pass
 
+#Trivial function
 def put_state(session, state):
     session['engine'] = state_encode(state) 
 
+#Trivial function
 def get_state(session):
     if 'engine' in session:
         slist = session['engine']
@@ -185,11 +189,13 @@ def ask(request):
         state.next_state()
         rsp = ask_or_done(request, state, priorQuestions)
     return rsp
-
+    
+#Trivial function
 def done(request):
     #Force redirect to index, instead of redirecting to '/'
     return redirect(index)
     
+#Trivial function
 #Reset saved answers
 def reset(request):
     if request.user.is_authenticated():
