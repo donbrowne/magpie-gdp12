@@ -39,7 +39,7 @@ clean:
 	$(MAKE) clean -C pml
 	find $(MAGDIR)/django_magpie/ -type f -name "*.pyc" -exec rm -f {} \;
 
-install: build
+install: test
 	@if [ -d $(DESTDIR) ]; then echo "Creating symlinks"; cd $(DESTDIR); ln -s $(MAGDIR)/django_magpie/magpie.wsgi magpie.wsgi; ln -s $(MAGDIR)/resources/media media; ln -s $(MAGDIR)/resources/static static; echo "Install Done!"; else echo "ERROR: DESTDIR does not exist. Install not finished."; fi
 	
 test: build
