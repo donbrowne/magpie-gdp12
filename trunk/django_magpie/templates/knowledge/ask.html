@@ -23,9 +23,9 @@
 </form>
 </div>
 
+{%if priorQuestions%}
 <div class="box">
 <h2>Previously Answered</h2>
-{%if priorQuestions%}
 <form action={% url knowledge.views.saved %} method="post">
 <div id="content">
 {% csrf_token %}
@@ -40,19 +40,15 @@
 <input type="submit" value="Change Answers" />
 </div>
 </form>
-{%else%}
-<div id="content">
-<p>Nothing so far!</p>
 </div>
 {%endif%}
-</div>
 {% endblock %}
 
 {% block sidebar %}
 {% if recommend_list %}
 {% load customFilters %}
 <div class="box">
-<h2>Recommmendations</h2>
+<h2>Recommendations</h2>
 <ol>
 Tip: Click on the recommendations to see if they have additional resources.<br>
 {% for rec in recommend_list %}
