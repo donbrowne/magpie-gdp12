@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django import forms
-from django.db import models
-from models import Variable,Recommend,RuleSet,Rule,RulePremise,RuleConclusion,RuleRecommend
-from models import ExternalLink,ResourceFile
+#from django.db import models
+
 from django.utils.safestring import mark_safe
 from django.http import HttpResponseRedirect,HttpResponse
 from django.conf.urls.defaults import patterns
@@ -11,7 +10,12 @@ from django.contrib.admin.util import unquote
 from django.utils import html
 from django.utils.html import escape, escapejs
 from django.shortcuts import render_to_response, get_object_or_404
+from django.forms.models import BaseInlineFormSet
 
+from models import Variable,Recommend
+from models import RuleSet,Rule,RulePremise,RuleConclusion,RuleRecommend
+from models import ExternalLink,ResourceFile
+from models import PremiseParser,PremiseException
 
 class ExtLinkInline(admin.TabularInline):
     model = ExternalLink
@@ -40,85 +44,77 @@ class ResourceFileAdmin(admin.ModelAdmin):
         self.exclude = None
         return super(ResourceFileAdmin, self).change_view(request, form_url, extra_context)
 
+class RulePremiseFormSet(BaseInlineFormSet):
 
-# django snippet 2673
-class ButtonAdmin(admin.ModelAdmin):
-    change_buttons=[]
-    list_buttons=[]
+     def clean(self): 
+        super(RulePremiseFormSet, self).clean()
+        if any(self.errors):
+            return
+        # first rip data from post data
+        premise_list = []
+        for i in range(0, self.total_form_count()):
+            form = self.forms[i]
+            # ignore an extra form and hasn't changed
+            if i >= self.initial_form_count() and not form.has_changed():
+                continue
+            variable = form.cleaned_data.get('variable', None)
+            value = form.cleaned_data.get('value', '')
+            lchoice = form.cleaned_data.get('lchoice', '')
+            rchoice = form.cleaned_data.get('rchoice', '')
+            premise = RulePremise()
+            if variable:
+                premise.variable = variable
+            premise.value = value
+            premise.lchoice = lchoice
+            premise.rchoice = rchoice
+            premise_list.append(premise)
+        # no premises -> no check
+        if len(premise_list) == 0:
+            return
+        # now check if sane
+        parser = PremiseParser()
+        try:
+            parser.parse(premise_list)
+        except PremiseException as e:
+            pos = e.pos + 1
+            reason = e.reason
+            if e.pos < len(self._errors):
+                # set the error message for the form that caused it
+                form_errors = self._errors[e.pos]
+                form_errors[e.field_name] = self.error_class([reason])
+            raise forms.ValidationError("At line %d: %s" %(pos,reason))
 
-    def button_view_dispatcher(self, request, url):
-        # Dispatch the url to a function call
-        if url is not None:
-            import re
-            res = re.match('(.*/)?(?P<id>\d+)/(?P<command>.*)', url)
-            if res:
-                if res.group('command') in [b.func_name for b in self.change_buttons]:
-                    obj = self.model._default_manager.get(pk=res.group('id'))
-                    response = getattr(self, res.group('command'))(request, obj)
-                    if response is None:
-                        from django.http import HttpResponseRedirect
-                        return HttpResponseRedirect(request.META['HTTP_REFERER'])
-                    return response
-            else:
-                res = re.match('(.*/)?(?P<command>.*)', url)
-                if res:
-                    if res.group('command') in [b.func_name for b in self.list_buttons]:
-                        response = getattr(self, res.group('command'))(request)
-                        if response is None:
-                            from django.http import HttpResponseRedirect
-                            return HttpResponseRedirect(request.META['HTTP_REFERER'])
-                        return response
-        # Delegate to the appropriate method, based on the URL.
-        from django.contrib.admin.util import unquote
-        if url is None:
-            return self.changelist_view(request)
-        elif url == "add":
-            return self.add_view(request)
-        elif url.endswith('/history'):
-            return self.history_view(request, unquote(url[:-8]))
-        elif url.endswith('/delete'):
-            return self.delete_view(request, unquote(url[:-7]))
-        else:
-            return self.change_view(request, unquote(url))
+class RulePremiseInline(admin.TabularInline):
+    model = RulePremise
+    formset = RulePremiseFormSet
+    extra = 0
+    verbose_name_plural = "PREMISES"
+    fields = ('lchoice', 'variable','value', 'rchoice')
+    #exclude = ('lchoice','rchoice')
+    #form = PremiseForm
+    #template = 'admin/knowledge/edit_inline/tabular.html'
 
-    def get_urls(self):
-        from django.conf.urls.defaults import url, patterns
-        from django.utils.functional import update_wrapper
-        # Define a wrapper view
-        def wrap(view):
-            def wrapper(*args, **kwargs):
-                return self.admin_site.admin_view(view)(*args, **kwargs)
-            return update_wrapper(wrapper, view)
-        #  Add the custom button url
-        urlpatterns = patterns('',
-            url(r'^(.+)/$', wrap(self.button_view_dispatcher),)
-        )
-        return urlpatterns + super(ButtonAdmin, self).get_urls()
+    """
+    def formfield_for_choice_field(self, db_field, request=None, **kwargs):
+        # hack to remove BLANK_CHOICE_DASH ------
+        print db_field.name
+        if db_field.name in ['lchoice','rchoice']:
+            db_field.blank = False
+        print kwargs.keys()
+        form_field = super(RulePremiseInline,self).formfield_for_choice_field(db_field, **kwargs)
+        if db_field.name in ['lchoice','rchoice']:
+            db_field.blank = True
+            form_field.required = False
+        return form_field 
 
-    def change_view(self, request, object_id, extra_context=None):
-        if not extra_context: extra_context = {}
-        if hasattr(self, 'change_buttons'):
-            extra_context['buttons'] = self._convert_buttons(self.change_buttons)
-        if '/' in object_id:
-            object_id = object_id[:object_id.find('/')]
-        return super(ButtonAdmin, self).change_view(request, object_id, extra_context)
+    """
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        form_field = super(RulePremiseInline,self).formfield_for_dbfield(
+            db_field, **kwargs)
+        if db_field.name in [ 'lchoice', 'rchoice' ]:
+            form_field.widget.attrs = { 'size' : 10 }
+        return form_field
 
-    def changelist_view(self, request, extra_context=None):
-        if not extra_context: extra_context = {}
-        if hasattr(self, 'list_buttons'):
-            extra_context['buttons'] = self._convert_buttons(self.list_buttons)
-        return super(ButtonAdmin, self).changelist_view(request, extra_context)
-
-    def _convert_buttons(self, orig_buttons):
-        buttons = []
-        for b in orig_buttons:
-            buttons.append({ 'func_name': b.func_name, 'short_description': b.short_description })
-        return buttons
-
-YN_CHOICES = (
-    (True, "Yes"),
-    (False, "No")
-)
 
 class RuleRecommendInline(admin.TabularInline):
     model = RuleRecommend
@@ -130,13 +126,6 @@ class RuleConclusionInline(admin.TabularInline):
     model = RuleConclusion
     extra = 0
     verbose_name_plural = "CONCLUSIONS"
-    #template = 'admin/knowledge/edit_inline/tabular.html'
-
-    
-class RulePremiseInline(admin.TabularInline):
-    model = RulePremise
-    extra = 0
-    verbose_name_plural = "PREMISES"
     #template = 'admin/knowledge/edit_inline/tabular.html'
 
 class RuleAdmin(admin.ModelAdmin):
@@ -159,6 +148,19 @@ class RuleAdmin(admin.ModelAdmin):
                 (escape(pk_value), escapejs(obj)))
         return super(RuleAdmin, self).response_change(request, obj, *args, **kwargs)
 
+   
+    """ 
+    def save_formset(self, request, form, formset, change):
+        if formset.model != RulePremise:
+            return super(RuleAdmin, self).save_formset(request, form, formset, change)
+        raise forms.ValidationError('Aha')
+        instances = formset.save(commit=False)
+        for instance in instances:
+            print type(instance)
+            print instance
+        instance.save()
+        formset.save_m2m()
+    """
 
     def save_model(self, request, obj, form, change):
         if not change:

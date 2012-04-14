@@ -81,14 +81,10 @@ class VariableChoice(models.Model):
         return self.value
 
 YN_CHOICES = (
+    ('', ''),
     ('Y', 'Yes'),
     ('N', 'No')
 )
-
-def val2str(val):
-    if type(val) is bool:
-        return 'Yes' if val else 'No'
-    return str(val)
 
 class RuleSet(models.Model):
     name = models.SlugField(max_length=30, unique=True)
@@ -96,10 +92,12 @@ class RuleSet(models.Model):
         return self.name
 
 class Rule(models.Model):
+
     parent = models.ForeignKey(RuleSet, editable=False)
     order = models.PositiveIntegerField(default=0)
+
     def get_dets(self):
-        tostr = lambda names: ' AND '.join(names)
+        #tostr = lambda names: ' AND '.join(names)
         pnames = []
         for premise in self.rulepremise_set.all():
             pnames.append(str(premise))
@@ -108,7 +106,7 @@ class Rule(models.Model):
             cnames.append(str(conclusion))
         for recommend in self.rulerecommend_set.all():
             cnames.append(str(recommend))
-        return "IF %s THEN %s" % (tostr(pnames), ','.join(cnames))
+        return "IF %s THEN %s" % (''.join(pnames), ','.join(cnames))
 
     def save(self, *args, **kwargs):
         # ensure the order is set and unique
@@ -126,20 +124,35 @@ class Rule(models.Model):
     class Meta:
         ordering = ('order',)
 
+PCHOICES = (
+    ( '', ' '),
+    ( '(', '('),
+    ( ')', ')'),
+    ( '&', '&' ),
+    ( '|', '|' )
+)
 
+#choices=YN_CHOICES
 class RulePremise(models.Model):
     parent = models.ForeignKey(Rule)
     variable = models.ForeignKey(Variable)
     value = models.CharField(max_length=1,choices=YN_CHOICES, default='N')
+    lchoice = models.CharField(max_length=10, blank=True ,default='')
+    rchoice = models.CharField(max_length=10, blank=True, default='')
     def __unicode__(self):
-        return self.variable.name + '=' + val2str(self.value)
+        makespace = lambda astr: ' ' + astr + ' ' if astr else ''
+        return '%s%s=%s%s' % (
+            makespace(self.lchoice), 
+            self.variable.name, 
+            self.value, 
+            makespace(self.rchoice))
 
 class RuleConclusion(models.Model):
     parent = models.ForeignKey(Rule)
     variable = models.ForeignKey(Variable)
     value = models.CharField(max_length=1,choices=YN_CHOICES, default='N')
     def __unicode__(self):
-        return self.variable.name + '=' + val2str(self.value)
+        return self.variable.name + '=' + self.value
 
 class RuleRecommend(models.Model):
     parent = models.ForeignKey(Rule)
@@ -160,6 +173,304 @@ class Reason(object):
         self.qa_list = qa_list
 
 
+# this lot should be in engine.py
+PFIELD_LEFT = 0
+PFIELD_VAR = 1
+PFIELD_RIGHT = 2
+
+def field2name(field):
+    if field == PFIELD_LEFT:
+        return 'lchoice'
+    if field == PFIELD_VAR:
+        return 'variable'
+    if field == PFIELD_RIGHT:
+        return 'rchoice'
+    return '???'
+
+class PremiseException(Exception):
+
+    def __init__(self, pos, field, reason):
+        self.pos = pos
+        self.field = field
+        self.field_name = field2name(field)
+        self.reason = reason
+
+    def __str__(self):
+        return 'Row %d: %s %s' %(self.pos, self.field, self.reason)
+
+# this is a LL(1) syntax directed grammar
+PTYPE_VAR = 0
+PTYPE_AND = 1
+PTYPE_OR = 2
+
+class PremiseNode(object):
+
+    def __init__(self, ptype, left, right):
+        self.ptype = ptype
+        self.left = left
+        self.right = right
+
+    def swap(self):
+        tmp = self.left
+        self.left = self.right
+        self.right = tmp
+
+    def __str__(self):
+        if self.ptype == PTYPE_VAR:
+            if hasattr(self, 'name'):
+                name = self.name
+            else:
+                name = str(self.left)
+            return '%s:%s' %( name, self.right)
+        if self.ptype == PTYPE_OR:
+            return '(%s | %s)' %( str(self.left), str(self.right))
+        if self.ptype == PTYPE_AND:
+            return '(%s & %s)' %( str(self.left), str(self.right))
+        return '???'
+        if self.ptype == PTYPE_VAR:
+            if hasattr(self, 'name'):
+                name = self.name
+            else:
+                name = str(self.left)
+            return '%s:%s' %( name, self.right)
+        if self.ptype == PTYPE_AND:
+            slist = []
+            if self.left.ptype == PTYPE_OR:
+                slist.append('(')
+            slist.append(str(self.left))
+            if self.left.ptype == PTYPE_OR:
+                slist.append(')')
+            slist.append(' & ')
+            if self.right.ptype == PTYPE_OR:
+                slist.append('(')
+            slist.append(str(self.right))
+            if self.right.ptype == PTYPE_OR:
+                slist.append(')')
+            return ''.join(slist)
+        if self.ptype == PTYPE_OR:
+            return '%s | %s' %( str(self.left), str(self.right))
+        return '???'
+
+class PremiseParser(object):
+
+    def __init__(self):
+        self.init_state([])
+
+    def init_state(self, premises):
+        self.premises = premises
+        self.idx = 0
+        self.next_field(PFIELD_LEFT)
+
+    def pos2str(self):
+        premise = self.premises[self.idx]
+        if self.field == PFIELD_LEFT:
+            return premise.lchoice[self.fpos:]
+        if self.field == PFIELD_VAR:
+            return premise.variable.name
+        if self.field == PFIELD_RIGHT:
+            return premise.rchoice[self.fpos:]
+        return '???'
+
+    def scan_field(self, fstr):
+        while self.fpos < len(fstr) and fstr[self.fpos] == ' ':
+            self.fpos += 1
+
+    def next_field(self, field):
+        self.field = field
+        self.fpos = 0
+
+    def skip_token(self, token):
+        self.fpos += len(token)
+
+    def next_token(self, token):
+        while self.idx < len(self.premises):
+            premise = self.premises[self.idx]
+            # simulate skip whitespace
+            have_fields = True
+            while have_fields:
+                if self.field == PFIELD_LEFT:
+                    self.scan_field(premise.lchoice)
+                    if self.fpos < len(premise.lchoice):
+                        return premise.lchoice[self.fpos:].startswith(token)
+                    self.next_field(PFIELD_VAR)
+                elif self.field == PFIELD_VAR:
+                    # conside only no (var and value) as white space
+                    if premise.variable_id is not None or premise.value:
+                        return False
+                    self.next_field(PFIELD_RIGHT)
+                elif self.field == PFIELD_RIGHT:
+                    self.scan_field(premise.rchoice)
+                    if self.fpos < len(premise.rchoice):
+                        return premise.rchoice[self.fpos:].startswith(token)
+                    # no more states
+                    have_fields = False
+                else:
+                    raise PremiseException(self.idx, self.field,
+                            'Unknown field %d' % self.field)
+            # next premsise
+            self.idx += 1
+            self.next_field(PFIELD_LEFT)
+
+        return False
+
+    def parse(self, premises):
+        self.init_state(premises)
+        root = self.parse_expr()
+        self.next_token('')
+        if self.idx < len(self.premises):
+            raise PremiseException(self.idx, self.field,
+                'Expected expr end found %s' % self.pos2str())
+        return root
+
+    def parse_expr(self):
+        node = self.parse_term()
+        return self.parse_elist(node)
+
+    def parse_elist(self, lnode):
+        if self.next_token('|'):
+            self.skip_token('|')
+            rnode = self.parse_term()
+            node = PremiseNode(PTYPE_OR, lnode, rnode)
+            return self.parse_elist(node)
+        return lnode
+
+    def parse_term(self):
+        node = self.parse_primary()
+        return self.parse_tlist(node)
+
+    def parse_tlist(self, lnode):
+        if self.next_token('&'):
+            self.skip_token('&')
+            rnode = self.parse_primary()
+            node = PremiseNode(PTYPE_AND, lnode, rnode)
+            return self.parse_tlist(node)
+        return lnode
+
+    def parse_primary(self):
+        if self.next_token('('):
+            idx = self.idx
+            field = self.field
+            self.skip_token('(')
+            node = self.parse_expr()
+            if not self.next_token(')'):
+                raise PremiseException(idx, field, 'Unmatched )')
+            self.skip_token(')')
+            return node
+        return self.parse_var()
+
+    def parse_var(self):
+        lprem = len(self.premises)
+        if self.idx >= lprem:
+            idx = self.idx
+            field = self.field
+            if field == PFIELD_LEFT and (idx - 1) >=0 and (idx-1) < lprem:
+                field = PFIELD_RIGHT
+                idx = idx - 1
+                print field, idx
+            raise PremiseException(idx, field, 'Missing Variable')
+        if self.field != PFIELD_VAR:
+            raise PremiseException(self.idx, self.field,
+                'Expected Variable, got %s' % self.pos2str())
+        premise = self.premises[self.idx]
+        node = PremiseNode(PTYPE_VAR, premise.variable_id, premise.value)
+        # hack for debug
+        if premise.variable:
+            node.name = premise.variable.name
+        self.next_field(PFIELD_RIGHT)
+        return node
+
+def treecmp(root1, root2):
+    if root1 and root2:
+        res = root1.ptype == root2.ptype
+        if res:
+            if root1.ptype == PTYPE_VAR:
+                res = root1.left == root2.left and root1.right == root2.right
+            else:
+                res = treecmp(root1.left, root2.left) and treecmp(root1.right, root2.right)
+    else:
+        res = root1 == root2
+    return res
+
+
+# TODO if we have nots the we must add negation (de-morgan)
+def todnf(node):
+    if not node or node.ptype == PTYPE_VAR:
+        # leaf/primitive - stop
+        return
+    # must be and/or
+    while 1: 
+        # first do distributes (replace equivlants)
+        equiv_search = True
+        while equiv_search:
+            # x & (y | z) == (x&y) | (x&z)
+            if node.ptype == PTYPE_AND and node.right.ptype == PTYPE_OR:
+                x = node.left
+                y = node.right.left
+                z = node.right.right
+                node.ptype = PTYPE_OR
+                node.left = PremiseNode(PTYPE_AND, x, y)
+                node.right= PremiseNode(PTYPE_AND, x, z)
+                continue
+            # x & (y & z) == (x & y) & z
+            if node.ptype == PTYPE_AND and node.right.ptype == PTYPE_AND:
+                x = node.left
+                y = node.right.left
+                z = node.right.right
+                node.ptype = PTYPE_AND
+                node.left = PremiseNode(PTYPE_AND, x, y)
+                node.right= z
+                continue
+            # (x | y) & z == (x & z) | (y & z)
+            if node.ptype == PTYPE_AND and node.left.ptype == PTYPE_OR:
+                x = node.left.left
+                y = node.left.right
+                z = node.right
+                node.ptype = PTYPE_OR
+                node.left = PremiseNode(PTYPE_AND, x, z)
+                node.right= PremiseNode(PTYPE_AND, y, z)
+                continue
+            equiv_search = False
+        # traverse left-hand side
+        todnf(node.left)
+        if node.ptype == PTYPE_OR or (
+            node.right.ptype == PTYPE_VAR and
+            node.left.ptype != PTYPE_OR):
+            break
+    todnf(node.right)
+
+def grab_or_nodes(node, or_list):
+    if not node:
+        return
+    if node.ptype == PTYPE_OR:
+        grab_or_nodes(node.left, or_list)
+        grab_or_nodes(node.right, or_list)
+    else:
+        or_list.append(node)
+
+def flatten_node(node, alist):
+    if not node: return
+    if node.ptype == PTYPE_VAR:
+        alist.append(node)
+    elif node.ptype == PTYPE_AND:
+        flatten_node(node.left, alist)
+        flatten_node(node.right, alist)
+    elif node.ptype == PTYPE_OR:
+        flatten_node(node.left, alist)
+        flatten_node(node.right, alist)
+
+def wff_dnf(root):
+    todnf(root)
+    alist = []
+    grab_or_nodes(root, alist)
+    i = 0
+    cur_node = alist[i]
+    i = i + 1
+    while i < len(alist):
+        rnode = alist[i]
+        node = PremiseNode(PTYPE_OR, cur_node, rnode)
+        cur_node = node
+        i = i + 1
+    return cur_node
 
 NODE_UNTESTED = 0
 NODE_TESTED = 1
@@ -393,14 +704,17 @@ class Engine(object):
             else:
                 rdict[rnode.node_id] = rnode
         return rdict.values()
-        
+
     def getPriorQuestions(self, answers):
-        questions = []
+        questionIDs = []
         questionAns = []
-        for ans in answers:
-            if Variable.objects.filter(id=ans[0])[0].ask:
-                questions.append(Variable.objects.filter(id=ans[0])[0])
-                questionAns.append(ans[1])
+        for a in answers:
+            questionIDs.append(a[0])
+            questionAns.append(a[1])
+        questions = []
+        for var in Variable.objects.filter(id__in=questionIDs):
+            if var.ask:
+                questions.append(var)
         return zip(questions,questionAns)
 
     def get_questions(self):
@@ -488,9 +802,46 @@ class Engine(object):
             state = item[2] if len(item) > 2 else default_state
             self.add_var(item[0], item[1], state)
 
+    def get_groups(self, tree, rule):
+        group_list = []
+        parser = PremiseParser()
+        # parse ast
+        plist = []
+        for premise in rule.rulepremise_set.all():
+            plist.append(premise)
+        try:
+            root = parser.parse(plist)
+            root = wff_dnf(root)
+        except PremiseException as e:
+            if self.debug: print e, plist
+            return group_list
+        # now get each or group
+        or_list = []
+        grab_or_nodes(root, or_list)
+        for or_group in or_list:
+            premise_group = FactGroup()
+            pnode_list = []
+            flatten_node(or_group, pnode_list)
+            for pnode in pnode_list:
+                if pnode.ptype != PTYPE_VAR:
+                    if self.debug:
+                        print '!!PremiseNode not a var', pnode
+                        continue
+                variable_id = pnode.left
+                value = pnode.right
+                tnode = tree.get_fact(variable_id, value)
+                if not tnode:
+                    tnode = self.create_vnode(variable_id, value)
+                    tree.add_fact(tnode)
+                premise_group.add_node(tnode)
+            group_list.append(premise_group)
+        return group_list
+
     def build_tree(self, ruleset):
         tree = FactTree()
         for rule in ruleset.rule_set.all():
+            group_list = self.get_groups(tree, rule)
+            """
             premise_group = FactGroup()
             for premise in rule.rulepremise_set.all():
                 node = tree.get_fact(premise.variable_id, premise.value)
@@ -498,28 +849,30 @@ class Engine(object):
                     node = self.create_vnode(premise.variable_id, premise.value)
                     tree.add_fact(node)
                 premise_group.add_node(node)
-            conclusion_nodes = []
-            for conclusion in rule.ruleconclusion_set.all():
-                node = tree.get_fact(conclusion.variable_id, conclusion.value)
-                if not node:
-                    node = self.create_vnode(conclusion.variable_id, conclusion.value)
-                    tree.add_fact(node)
-                node.add_premise(premise_group)
-                conclusion_nodes.append(node)
-            recommend_nodes = [] 
-            for rrecommend in rule.rulerecommend_set.all():
-                node = tree.get_rec(rrecommend.recommend_id, rrecommend.rank)
-                if not node:
-                    node = FactNode(REC_NODE, 
-                        rrecommend.recommend_id, 
-                        rrecommend.rank, 
-                        NODE_UNTESTED)
-                    tree.add_rec(node)
-                node.add_premise(premise_group)
-                recommend_nodes.append(node)
-            premise_group.add_children(conclusion_nodes)
-            premise_group.add_children(recommend_nodes)
-            tree.add_group(premise_group)
+            """
+            for premise_group in group_list:
+                conclusion_nodes = []
+                for conclusion in rule.ruleconclusion_set.all():
+                    node = tree.get_fact(conclusion.variable_id, conclusion.value)
+                    if not node:
+                        node = self.create_vnode(conclusion.variable_id, conclusion.value)
+                        tree.add_fact(node)
+                    node.add_premise(premise_group)
+                    conclusion_nodes.append(node)
+                recommend_nodes = [] 
+                for rrecommend in rule.rulerecommend_set.all():
+                    node = tree.get_rec(rrecommend.recommend_id, rrecommend.rank)
+                    if not node:
+                        node = FactNode(REC_NODE, 
+                            rrecommend.recommend_id, 
+                            rrecommend.rank, 
+                            NODE_UNTESTED)
+                        tree.add_rec(node)
+                    node.add_premise(premise_group)
+                    recommend_nodes.append(node)
+                premise_group.add_children(conclusion_nodes)
+                premise_group.add_children(recommend_nodes)
+                tree.add_group(premise_group)
         return tree
 
     def forward_chain(self, tree):
@@ -672,7 +1025,6 @@ class FactStart(object):
     def get_guest_profile(self):
         if not settings.GUEST_PROFILE:
             return None
-
         try:
             profile = Profile.objects.get(name=settings.GUEST_PROFILE)
         except Profile.DoesNotExist:

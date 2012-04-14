@@ -10,6 +10,531 @@ class TestModel:
     def __init__(self, id):
         self.id = id
 
+class ParserTests(TestCase):
+
+    def setUp(self):
+        self.parser = PremiseParser()
+
+    def testEmpty(self):
+        pos = -1
+        got_except = False
+        try:
+            self.parser.parse([])
+        except PremiseException as e:
+            got_except = True
+            pos = e.pos
+        self.assertTrue(got_except and pos == 0)
+
+    def testSimple(self):
+        premise = RulePremise(
+                lchoice='', 
+                variable=Variable(id=100,name='x'),
+                value='Y',
+                rchoice='')
+        root = self.parser.parse([premise])
+        self.assertTrue(root.ptype==PTYPE_VAR and 
+              root.left == 100 and
+              root.right == 'Y')
+
+    def testSimple1Compound(self):
+        premise = RulePremise(
+                lchoice='(', 
+                variable=Variable(id=100,name='x'),
+                value='Y',
+                rchoice=')')
+        root = self.parser.parse([premise])
+        self.assertTrue(root.ptype==PTYPE_VAR and 
+              root.left == 100 and
+              root.right == 'Y')
+
+    def testSimple2Compound(self):
+        premise = RulePremise(
+                lchoice='((', 
+                variable=Variable(id=100,name='x'),
+                value='Y',
+                rchoice='))')
+        root = self.parser.parse([premise])
+        self.assertTrue(root.ptype==PTYPE_VAR and 
+              root.left == 100 and
+              root.right == 'Y')
+
+    def testAnd1(self):
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='x')
+        plist = [
+            RulePremise(variable=x, value='Y', rchoice='&'),
+            RulePremise(variable=y, value='Y', rchoice='')
+        ]
+        root = self.parser.parse(plist)
+        self.assertEquals(root.ptype, PTYPE_AND)
+        left = root.left
+        self.assertTrue(left.ptype ==PTYPE_VAR and 
+              left.left == x.id and
+              left.right == 'Y')
+        right = root.right
+        self.assertTrue(left.ptype ==PTYPE_VAR and 
+              left.left == x.id and
+              left.right == 'Y')
+
+    def testAnd1CompoundAll(self):
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='x')
+        plist = [
+            RulePremise(lchoice='(',variable=x, value='Y', rchoice='&'),
+            RulePremise(variable=y, value='Y', rchoice=')')
+        ]
+        root = self.parser.parse(plist)
+        self.assertEquals(root.ptype, PTYPE_AND)
+        left = root.left
+        self.assertTrue(left.ptype ==PTYPE_VAR and 
+              left.left == x.id and
+              left.right == 'Y')
+        right = root.right
+        self.assertTrue(left.ptype ==PTYPE_VAR and 
+              left.left == x.id and
+              left.right == 'Y')
+
+    def testAnd1CompoundEach(self):
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='x')
+        plist = [
+            RulePremise(lchoice='(',variable=x, value='Y', rchoice=') &'),
+            RulePremise(lchoice='(', variable=y, value='Y', rchoice=')')
+        ]
+        root = self.parser.parse(plist)
+        self.assertEquals(root.ptype, PTYPE_AND)
+        left = root.left
+        self.assertTrue(left.ptype ==PTYPE_VAR and 
+              left.left == x.id and
+              left.right == 'Y')
+        right = root.right
+        self.assertTrue(left.ptype ==PTYPE_VAR and 
+              left.left == x.id and
+              left.right == 'Y')
+
+    def testAnd2(self):
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='x')
+        z = Variable(id=102,name='z')
+        plist = [
+            RulePremise(variable=x, value='Y', rchoice='&'),
+            RulePremise(variable=y, value='Y', rchoice='&'),
+            RulePremise(variable=z, value='Y', rchoice='')
+        ]
+        # should be (x&y) & z
+        root = self.parser.parse(plist)
+        self.assertEquals(root.ptype, PTYPE_AND)
+        # check right (z)
+        node = root.right
+        self.assertTrue(node.ptype ==PTYPE_VAR and 
+              node.left == z.id and
+              node.right == 'Y')
+        # check left (x&y)
+        node = root.left
+        self.assertEquals(node.ptype, PTYPE_AND)
+        self.assertTrue(node.left.ptype ==PTYPE_VAR and 
+              node.left.left == x.id and
+              node.left.right == 'Y')
+        self.assertTrue(node.left.ptype ==PTYPE_VAR and 
+              node.right.left == y.id and
+              node.right.right == 'Y')
+
+    def testAnd2CompoundAll(self):
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='x')
+        z = Variable(id=102,name='z')
+        plist = [
+            RulePremise(lchoice='(',variable=x, value='Y', rchoice='&'),
+            RulePremise(variable=y, value='Y', rchoice='&'),
+            RulePremise(variable=z, value='Y', rchoice=')')
+        ]
+        # should be (x&y) & z
+        root = self.parser.parse(plist)
+        self.assertEquals(root.ptype, PTYPE_AND)
+        # check right (z)
+        node = root.right
+        self.assertTrue(node.ptype ==PTYPE_VAR and 
+              node.left == z.id and
+              node.right == 'Y')
+        # check left (x&y)
+        node = root.left
+        self.assertEquals(node.ptype, PTYPE_AND)
+        self.assertTrue(node.left.ptype ==PTYPE_VAR and 
+              node.left.left == x.id and
+              node.left.right == 'Y')
+        self.assertTrue(node.left.ptype ==PTYPE_VAR and 
+              node.right.left == y.id and
+              node.right.right == 'Y')
+
+    def testAnd2CompoundeEach(self):
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='x')
+        z = Variable(id=102,name='z')
+        plist = [
+            RulePremise(lchoice='(',variable=x, value='Y', rchoice=') & ('),
+            RulePremise(variable=y, value='Y', rchoice=') & ('),
+            RulePremise(variable=z, value='Y', rchoice=')')
+        ]
+        # should be (x&y) & z
+        root = self.parser.parse(plist)
+        self.assertEquals(root.ptype, PTYPE_AND)
+        # check right (z)
+        node = root.right
+        self.assertTrue(node.ptype ==PTYPE_VAR and 
+              node.left == z.id and
+              node.right == 'Y')
+        # check left (x&y)
+        node = root.left
+        self.assertEquals(node.ptype, PTYPE_AND)
+        self.assertTrue(node.left.ptype ==PTYPE_VAR and 
+              node.left.left == x.id and
+              node.left.right == 'Y')
+        self.assertTrue(node.left.ptype ==PTYPE_VAR and 
+              node.right.left == y.id and
+              node.right.right == 'Y')
+
+    def test1Or(self):
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='x')
+        plist = [
+            RulePremise(variable=x, value='Y', rchoice='|'),
+            RulePremise(variable=y, value='Y', rchoice='')
+        ]
+        root = self.parser.parse(plist)
+        self.assertEquals(root.ptype, PTYPE_OR)
+        left = root.left
+        self.assertTrue(left.ptype ==PTYPE_VAR and 
+              left.left == x.id and
+              left.right == 'Y')
+        right = root.right
+        self.assertTrue(left.ptype ==PTYPE_VAR and 
+              left.left == x.id and
+              left.right == 'Y')
+
+    def test2Or(self):
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='x')
+        z = Variable(id=102,name='z')
+        plist = [
+            RulePremise(variable=x, value='Y', rchoice='|'),
+            RulePremise(variable=y, value='Y', rchoice='|'),
+            RulePremise(variable=z, value='Y', rchoice='')
+        ]
+        # should be (x|y) | z
+        root = self.parser.parse(plist)
+        self.assertEquals(root.ptype, PTYPE_OR)
+        # check right (z)
+        node = root.right
+        self.assertTrue(node.ptype ==PTYPE_VAR and 
+              node.left == z.id and
+              node.right == 'Y')
+        # check left (x&y)
+        node = root.left
+        self.assertEquals(node.ptype, PTYPE_OR)
+        self.assertTrue(node.left.ptype ==PTYPE_VAR and 
+              node.left.left == x.id and
+              node.left.right == 'Y')
+        self.assertTrue(node.left.ptype ==PTYPE_VAR and 
+              node.right.left == y.id and
+              node.right.right == 'Y')
+
+class DNFTests(TestCase):
+    
+    def setUp(self):
+        self.parser = PremiseParser()
+
+    def test_grab_or_nodes(self):
+        # none
+        or_list = []
+        grab_or_nodes(None, or_list)
+        self.assertTrue(len(or_list) == 0)
+        # 1 var
+        node = PremiseNode(PTYPE_VAR, 100, 'Y')
+        grab_or_nodes(node, or_list)
+        self.assertTrue(len(or_list) == 1 and or_list[0] == node)
+        # 1 and
+        or_list = []
+        lnode = PremiseNode(PTYPE_VAR, 100, 'Y')
+        rnode = PremiseNode(PTYPE_VAR, 101, 'Y')
+        node = PremiseNode(PTYPE_AND, lnode, rnode)
+        grab_or_nodes(node, or_list)
+        self.assertTrue(len(or_list) == 1)
+        self.assertTrue(or_list[0] == node)
+        # 1 or
+        or_list = []
+        lnode = PremiseNode(PTYPE_AND, 100, 'Y')
+        rnode = PremiseNode(PTYPE_AND, 101, 'Y')
+        node = PremiseNode(PTYPE_OR, lnode, rnode)
+        grab_or_nodes(node, or_list)
+        self.assertTrue(len(or_list) == 2)
+        self.assertTrue(or_list[0] == lnode)
+        self.assertTrue(or_list[1] == rnode)
+
+    def test_treecmp(self):
+        node1 = PremiseNode(PTYPE_VAR, 100, 'Y')
+        node1_copy =  PremiseNode(PTYPE_VAR, 100, 'Y')
+        node2 = PremiseNode(PTYPE_VAR, 101, 'Y')
+        self.assertTrue(treecmp(None, None))
+        self.assertTrue(treecmp(node1, node1))
+        self.assertTrue(treecmp(node1, node1_copy))
+
+
+    def test_simple(self):
+        x = Variable(id=100,name='x')
+        plist = [RulePremise(variable=x, value='Y')]
+        # create root
+        root = self.parser.parse(plist)
+        root = wff_dnf(root)
+        self.assertTrue(root.ptype==PTYPE_VAR and 
+              root.left == 100 and
+              root.right == 'Y')
+
+    def test_case1(self):
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='y')
+        z = Variable(id=102,name='z')
+
+        plist1 = [
+            RulePremise(variable=x, value='Y', rchoice='&'),
+            RulePremise(lchoice='(', variable=y, value='Y', rchoice='|'),
+            RulePremise(variable=z, value='Y', rchoice=')')
+        ]
+        root1 = self.parser.parse(plist1)
+        root1 = wff_dnf(root1)
+        
+        plist2 = [
+            RulePremise(lchoice='(', variable=x, value='Y', rchoice='&'),
+            RulePremise(variable=y, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=x, value='Y', rchoice='&'),
+            RulePremise(variable=z, value='Y', rchoice=')')
+        ]
+        root2 = self.parser.parse(plist2)
+
+        self.assertTrue(treecmp(root1, root2))
+
+    def test_case2(self):
+
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='y')
+        z = Variable(id=102,name='z')
+
+        plist1 = [
+            RulePremise(variable=x, value='Y', rchoice='&'),
+            RulePremise(lchoice='(', variable=y, value='Y', rchoice='&'),
+            RulePremise(variable=z, value='Y', rchoice=')')
+        ]
+        root1 = self.parser.parse(plist1)
+        wff_dnf(root1)
+        
+        plist2 = [
+            RulePremise(lchoice='(', variable=x, value='Y', rchoice='&'),
+            RulePremise(variable=y, value='Y', rchoice=') &'),
+            RulePremise(variable=z, value='Y')
+        ]
+        root2 = self.parser.parse(plist2)
+
+        self.assertTrue(treecmp(root1, root2))
+
+    def test_case3(self):
+
+        x = Variable(id=100,name='x')
+        y = Variable(id=101,name='y')
+        z = Variable(id=102,name='z')
+
+        plist1 = [
+            RulePremise(lchoice='(', variable=x, value='Y', rchoice='|'),
+            RulePremise(variable=y, value='Y', rchoice=') &'),
+            RulePremise(variable=z, value='Y')
+        ]
+        root1 = self.parser.parse(plist1)
+        wff_dnf(root1)
+        
+        plist2 = [
+            RulePremise(lchoice='(', variable=x, value='Y', rchoice='&'),
+            RulePremise(variable=z, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=y, value='Y', rchoice='&'),
+            RulePremise(variable=z, value='Y', rchoice=')')
+        ]
+        root2 = self.parser.parse(plist2)
+
+        self.assertTrue(treecmp(root1, root2))
+
+    def test_bigone(self):
+
+        # (a|b)&(c|d)&(e|f)
+        a = Variable(id=100,name='a')
+        b = Variable(id=101,name='b')
+        c = Variable(id=102,name='c')
+        d = Variable(id=103,name='d')
+        e = Variable(id=104,name='e')
+        f = Variable(id=105,name='f')
+
+        plist1 = [
+            RulePremise(lchoice='(', variable=a, value='Y', rchoice='|'),
+            RulePremise(variable=b, value='Y', rchoice=') &'),
+            RulePremise(lchoice='(', variable=c, value='Y', rchoice='|'),
+            RulePremise(variable=d, value='Y', rchoice=') &'),
+            RulePremise(lchoice='(', variable=e, value='Y', rchoice='|'),
+            RulePremise(variable=f, value='Y', rchoice=')')
+        ]
+        root1 = self.parser.parse(plist1)
+        root1 = wff_dnf(root1)
+
+        # a&c&e|b&c&e|a&d&e|b&d&e|a&c&f|b&c&f|a&d&f|b&d&f
+        plist2 = [
+            RulePremise(lchoice='(', variable=a, value='Y', rchoice='&'),
+            RulePremise(variable=c, value='Y', rchoice=' &'),
+            RulePremise(variable=e, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=b, value='Y', rchoice='&'),
+            RulePremise(variable=c, value='Y', rchoice=' &'),
+            RulePremise(variable=e, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=a, value='Y', rchoice='&'),
+            RulePremise(variable=d, value='Y', rchoice=' &'),
+            RulePremise(variable=e, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=b, value='Y', rchoice='&'),
+            RulePremise(variable=d, value='Y', rchoice=' &'),
+            RulePremise(variable=e, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=a, value='Y', rchoice='&'),
+            RulePremise(variable=c, value='Y', rchoice=' &'),
+            RulePremise(variable=f, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=b, value='Y', rchoice='&'),
+            RulePremise(variable=c, value='Y', rchoice=' &'),
+            RulePremise(variable=f, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=a, value='Y', rchoice='&'),
+            RulePremise(variable=d, value='Y', rchoice=' &'),
+            RulePremise(variable=f, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=b, value='Y', rchoice='&'),
+            RulePremise(variable=d, value='Y', rchoice=' &'),
+            RulePremise(variable=f, value='Y', rchoice=')')
+        ] 
+        root2 = self.parser.parse(plist2)
+
+        self.assertTrue(treecmp(root1, root2))
+
+    def test_bigtwo(self):
+        #"A & (B & (C | D) | E) => (A & B & C) | (A & B & D) | (A & E)"
+        a = Variable(id=100,name='a')
+        b = Variable(id=101,name='b')
+        c = Variable(id=102,name='c')
+        d = Variable(id=103,name='d')
+        e = Variable(id=104,name='e')
+
+        plist1 = [
+            RulePremise(variable=a, value='Y', rchoice=' & ('),
+            RulePremise(variable=b, value='Y', rchoice=' & ('),
+            RulePremise(variable=c, value='Y', rchoice='|'),
+            RulePremise(variable=d, value='Y', rchoice=') |'),
+            RulePremise(variable=e, value='Y', rchoice=')'),
+        ]
+        root1 = self.parser.parse(plist1)
+        root1 = wff_dnf(root1)
+
+        plist2 = [
+            RulePremise(lchoice='(', variable=a, value='Y', rchoice='&'),
+            RulePremise(variable=b, value='Y', rchoice=' &'),
+            RulePremise(variable=c, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=a, value='Y', rchoice='&'),
+            RulePremise(variable=b, value='Y', rchoice=' &'),
+            RulePremise(variable=d, value='Y', rchoice=') |'),
+            RulePremise(lchoice='(', variable=a, value='Y', rchoice='&'),
+            RulePremise(variable=e, value='Y', rchoice=')')
+        ]
+        root2 = self.parser.parse(plist2)
+        self.assertTrue(treecmp(root1, root2))
+
+isvar = lambda node,nid,value:True if node.ptype == PTYPE_VAR and node.left == nid and node.right == value else False
+
+class FlattenNodeTests(TestCase):
+
+    def setUp(self):
+        self.parser = PremiseParser()
+
+    def test_empty(self):
+        # none
+        node_list = []
+        flatten_node(None, node_list)
+        self.assertTrue(len(node_list) == 0)
+
+    def test_var_simple(self):
+        # none
+        node_list = []
+        node = PremiseNode(PTYPE_VAR, 100, 'Y')
+        flatten_node(node, node_list)
+        self.assertTrue(len(node_list) == 1)
+        self.assertTrue(node_list[0] == node)
+
+    def test_and_simple(self):
+        # none
+        node_list = []
+        lnode = PremiseNode(PTYPE_VAR, 100, 'Y')
+        rnode = PremiseNode(PTYPE_VAR, 101, 'Y')
+        node = PremiseNode(PTYPE_AND, lnode, rnode)
+        flatten_node(node, node_list)
+        self.assertTrue(len(node_list) == 2)
+        self.assertTrue(node_list[0] == lnode)
+        self.assertTrue(node_list[1] == rnode)
+
+    def test_or_simple(self):
+        node_list = []
+        lnode = PremiseNode(PTYPE_VAR, 100, 'Y')
+        rnode = PremiseNode(PTYPE_VAR, 101, 'Y')
+        node = PremiseNode(PTYPE_OR, lnode, rnode)
+        flatten_node(node, node_list)
+        self.assertTrue(len(node_list) == 2)
+        self.assertTrue(node_list[0] == lnode)
+        self.assertTrue(node_list[1] == rnode)
+
+    def test_and_chain(self):
+        a = Variable(id=100,name='a')
+        b = Variable(id=101,name='b')
+        c = Variable(id=102,name='c')
+        d = Variable(id=103,name='d')
+        e = Variable(id=104,name='e')
+        f = Variable(id=105,name='f')
+        plist = [
+            RulePremise(variable=a, value='Y', rchoice='&'),
+            RulePremise(variable=b, value='N', rchoice='&'),
+            RulePremise(variable=c, value='Y', rchoice='&'),
+            RulePremise(variable=d, value='N', rchoice='&'),
+            RulePremise(variable=e, value='Y', rchoice='&'),
+            RulePremise(variable=f, value='N')
+        ]
+        root = self.parser.parse(plist)
+        node_list = []
+        flatten_node(root, node_list)
+        self.assertTrue(len(node_list) == 6)
+        self.assertTrue(isvar(node_list[0], a.id, 'Y'))
+        self.assertTrue(isvar(node_list[1], b.id, 'N'))
+        self.assertTrue(isvar(node_list[2], c.id, 'Y'))
+        self.assertTrue(isvar(node_list[3], d.id, 'N'))
+        self.assertTrue(isvar(node_list[4], e.id, 'Y'))
+        self.assertTrue(isvar(node_list[5], f.id, 'N'))
+
+    def test_or_chain(self):
+        a = Variable(id=100,name='a')
+        b = Variable(id=101,name='b')
+        c = Variable(id=102,name='c')
+        d = Variable(id=103,name='d')
+        e = Variable(id=104,name='e')
+        f = Variable(id=105,name='f')
+        plist = [
+            RulePremise(variable=a, value='Y', rchoice='|'),
+            RulePremise(variable=b, value='N', rchoice='|'),
+            RulePremise(variable=c, value='Y', rchoice='|'),
+            RulePremise(variable=d, value='N', rchoice='|'),
+            RulePremise(variable=e, value='Y', rchoice='|'),
+            RulePremise(variable=f, value='N')
+        ]
+        root = self.parser.parse(plist)
+        node_list = []
+        flatten_node(root, node_list)
+        self.assertTrue(len(node_list) == 6)
+        self.assertTrue(isvar(node_list[0], a.id, 'Y'))
+        self.assertTrue(isvar(node_list[1], b.id, 'N'))
+        self.assertTrue(isvar(node_list[2], c.id, 'Y'))
+        self.assertTrue(isvar(node_list[3], d.id, 'N'))
+        self.assertTrue(isvar(node_list[4], e.id, 'Y'))
+        self.assertTrue(isvar(node_list[5], f.id, 'N'))
 
 class EngineTests(TestCase):
 
@@ -27,7 +552,7 @@ class EngineTests(TestCase):
 
         self.rs_and = RuleSet.objects.create(name='rs-and')
         rule1 = self.rs_and.rule_set.create()
-        rule1.rulepremise_set.create(variable=self.v1, value='Y')
+        rule1.rulepremise_set.create(variable=self.v1, value='Y',rchoice='&')
         rule1.rulepremise_set.create(variable=self.v2, value='Y')
         rule1.ruleconclusion_set.create(variable=self.v3, value='Y')
 
