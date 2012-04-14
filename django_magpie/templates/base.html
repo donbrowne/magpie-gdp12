@@ -44,6 +44,9 @@
 
         <div id="user-tools">
         {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <a href="{% url 'admin:index' %}">Admin</a> |
+            {% endif %}
             <a href="{% url 'account' %}?next={{request.path}}">Account</a> |
             <a href="javascript:confirmReset()">Reset</a> |
             <a href="javascript:confirmLogout()">Log out</a>
