@@ -260,7 +260,7 @@ tfoot td {
     color: #666;
     padding: 2px 5px;
     font-size: 11px;
-    background: #e1e1e1 url(../img/admin/nav-bg.gif) top left repeat-x;
+    background: #e1e1e1 top left repeat-x;
     border-left: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
 }
@@ -303,48 +303,6 @@ tr.alt {
 .row2 {
     background: white;
 }
-
-
-
-/* SORTABLE TABLES */
-
-thead th a:link, thead th a:visited {
-    color: #666;
-    display: block;
-}
-
-table thead th.sorted {
-    background-position: bottom left !important;
-}
-
-table thead th.sorted a {
-    padding-right: 13px;
-}
-
-table thead th.ascending a {
-    background: url(../img/admin/arrow-up.gif) right .4em no-repeat;
-}
-
-table thead th.descending a {
-    background: url(../img/admin/arrow-down.gif) right .4em no-repeat;
-}
-
-/* ORDERABLE TABLES */
-
-table.orderable tbody tr td:hover {
-    cursor: move;
-}
-
-table.orderable tbody tr td:first-child {
-    padding-left: 14px;
-    background-image: url(../img/admin/nav-bg-grabber.gif);
-    background-repeat: repeat-y;
-}
-
-table.orderable-initalized .order-cell, body>tr>td.order-cell {
-    display: none;
-}
-
 
 /* FORM DEFAULTS */
 
@@ -425,7 +383,7 @@ input[type=submit].default {
     font-size: 11px;
     text-align: left;
     font-weight: bold;
-    background: #7CA0C7 url(../img/admin/default-bg.gif) top left repeat-x;
+    background: #7CA0C7 top left repeat-x;
     color: white;
 }
 
@@ -447,15 +405,7 @@ ul.messagelist li {
     margin: 0 0 3px 0;
     border-bottom: 1px solid #ddd;
     color: #666;
-    background: #ffc url(../img/admin/icon_success.gif) 5px .3em no-repeat;
-}
-
-ul.messagelist li.warning{
-    background-image: url(../img/admin/icon_alert.gif);
-}
-
-ul.messagelist li.error{
-    background-image: url(../img/admin/icon_error.gif);
+    background: #ffc 5px .3em no-repeat;
 }
 
 .errornote {
@@ -465,7 +415,7 @@ ul.messagelist li.error{
     margin: 0 0 3px 0;
     border: 1px solid red;
     color: red;
-    background: #ffc url(../img/admin/icon_error.gif) 5px .3em no-repeat;
+    background: #ffc 5px .3em no-repeat;
 }
 
 ul.errorlist {
@@ -480,7 +430,7 @@ ul.errorlist {
     margin: 0 0 3px 0;
     border: 1px solid red;
     color: white;
-    background: red url(../img/admin/icon_alert.gif) 5px .3em no-repeat;
+    background: red 5px .3em no-repeat;
 }
 
 .errorlist li a {
@@ -516,7 +466,7 @@ div.system-message p.system-message-title {
     padding: 4px 5px 4px 25px;
     margin: 0;
     color: red;
-    background: #ffc url(../img/admin/icon_error.gif) 5px .3em no-repeat;
+    background: #ffc 5px .3em no-repeat;
 }
 
 .description {
@@ -527,113 +477,13 @@ div.system-message p.system-message-title {
 /* BREADCRUMBS */
 
 div.breadcrumbs {
-    background: white url(../img/admin/nav-bg-reverse.gif) 0 -10px repeat-x;
+    background: white 0 -10px repeat-x;
     padding: 2px 8px 3px 8px;
     font-size: 11px;
     color: #999;
     border-top: 1px solid white;
     border-bottom: 1px solid #ccc;
     text-align: left;
-}
-
-/* ACTION ICONS */
-
-.addlink {
-    padding-left: 12px;
-    background: url(../img/admin/icon_addlink.gif) 0 .2em no-repeat;
-}
-
-.changelink {
-    padding-left: 12px;
-    background: url(../img/admin/icon_changelink.gif) 0 .2em no-repeat;
-}
-
-.deletelink {
-    padding-left: 12px;
-    background: url(../img/admin/icon_deletelink.gif) 0 .25em no-repeat;
-}
-
-a.deletelink:link, a.deletelink:visited {
-    color: #CC3434;
-}
-
-a.deletelink:hover {
-    color: #993333;
-}
-
-/* OBJECT TOOLS */
-
-.object-tools {
-    font-size: 10px;
-    font-weight: bold;
-    font-family: Arial,Helvetica,sans-serif;
-    padding-left: 0;
-    float: right;
-    position: relative;
-    margin-top: -2.4em;
-    margin-bottom: -2em;
-}
-
-.form-row .object-tools {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    float: none;
-    height: 2em;
-    padding-left: 3.5em;
-}
-
-.object-tools li {
-    display: block;
-    float: left;
-    background: url(../img/admin/tool-left.gif) 0 0 no-repeat;
-    padding: 0 0 0 8px;
-    margin-left: 2px;
-    height: 16px;
-}
-
-.object-tools li:hover {
-    background: url(../img/admin/tool-left_over.gif) 0 0 no-repeat;
-}
-
-.object-tools a:link, .object-tools a:visited {
-    display: block;
-    float: left;
-    color: white;
-    padding: .1em 14px .1em 8px;
-    height: 14px;
-    background: #999 url(../img/admin/tool-right.gif) 100% 0 no-repeat;
-}
-
-.object-tools a:hover, .object-tools li:hover a {
-    background: #5b80b2 url(../img/admin/tool-right_over.gif) 100% 0 no-repeat;
-}
-
-.object-tools a.viewsitelink, .object-tools a.golink {
-    background: #999 url(../img/admin/tooltag-arrowright.gif) top right no-repeat;
-    padding-right: 28px;
-}
-
-.object-tools a.viewsitelink:hover, .object-tools a.golink:hover {
-    background: #5b80b2 url(../img/admin/tooltag-arrowright_over.gif) top right no-repeat;
-}
-
-.object-tools a.addlink {
-    background: #999 url(../img/admin/tooltag-add.gif) top right no-repeat;
-    padding-right: 28px;
-}
-
-.object-tools a.addlink:hover {
-    background: #5b80b2 url(../img/admin/tooltag-add_over.gif) top right no-repeat;
-}
-
-/* OBJECT HISTORY */
-
-table#change-history {
-    width: 100%;
-}
-
-table#change-history tbody th {
-    width: 16em;
 }
 
 /* PAGE STRUCTURE */
@@ -774,7 +624,7 @@ table#change-history tbody th {
 }
 
 #content-related .module h2 {
-    background: #eee url(../img/admin/nav-bg.gif) bottom left repeat-x;
+    background: #eee bottom left repeat-x;
     color: #666;
 }
 
@@ -809,7 +659,7 @@ table#change-history tbody th {
     font-size: 11px;
     text-align: left;
     font-weight: bold;
-    background: #7CA0C7 url(../img/admin/default-bg.gif) top left repeat-x;
+    background: #7CA0C7 top left repeat-x;
     color: white;
 }
 
@@ -831,15 +681,7 @@ ul.messagelist li {
     margin: 0 0 3px 0;
     border-bottom: 1px solid #ddd;
     color: #666;
-    background: #ffc url(../img/admin/icon_success.gif) 5px .3em no-repeat;
-}
-
-ul.messagelist li.warning{
-    background-image: url(../img/admin/icon_alert.gif);
-}
-
-ul.messagelist li.error{
-    background-image: url(../img/admin/icon_error.gif);
+    background: #ffc 5px .3em no-repeat;
 }
 
 .errornote {
@@ -849,7 +691,7 @@ ul.messagelist li.error{
     margin: 0 0 3px 0;
     border: 1px solid red;
     color: red;
-    background: #ffc url(../img/admin/icon_error.gif) 5px .3em no-repeat;
+    background: #ffc 5px .3em no-repeat;
 }
 
 ul.errorlist {
@@ -864,7 +706,7 @@ ul.errorlist {
     margin: 0 0 3px 0;
     border: 1px solid red;
     color: white;
-    background: red url(../img/admin/icon_alert.gif) 5px .3em no-repeat;
+    background: red 5px .3em no-repeat;
 }
 
 .errorlist li a {
@@ -900,7 +742,7 @@ div.system-message p.system-message-title {
     padding: 4px 5px 4px 25px;
     margin: 0;
     color: red;
-    background: #ffc url(../img/admin/icon_error.gif) 5px .3em no-repeat;
+    background: #ffc 5px .3em no-repeat;
 }
 
 .description {
@@ -911,7 +753,7 @@ div.system-message p.system-message-title {
 /* BREADCRUMBS */
 
 div.breadcrumbs {
-    background: white url(../img/admin/nav-bg-reverse.gif) 0 -10px repeat-x;
+    background: white 0 -10px repeat-x;
     padding: 2px 8px 3px 8px;
     font-size: 11px;
     color: #999;
@@ -924,17 +766,17 @@ div.breadcrumbs {
 
 .addlink {
     padding-left: 12px;
-    background: url(../img/admin/icon_addlink.gif) 0 .2em no-repeat;
+    background: 0 .2em no-repeat;
 }
 
 .changelink {
     padding-left: 12px;
-    background: url(../img/admin/icon_changelink.gif) 0 .2em no-repeat;
+    background: 0 .2em no-repeat;
 }
 
 .deletelink {
     padding-left: 12px;
-    background: url(../img/admin/icon_deletelink.gif) 0 .25em no-repeat;
+    background: 0 .25em no-repeat;
 }
 
 a.deletelink:link, a.deletelink:visited {
@@ -943,81 +785,6 @@ a.deletelink:link, a.deletelink:visited {
 
 a.deletelink:hover {
     color: #993333;
-}
-
-/* OBJECT TOOLS */
-
-.object-tools {
-    font-size: 10px;
-    font-weight: bold;
-    font-family: Arial,Helvetica,sans-serif;
-    padding-left: 0;
-    float: right;
-    position: relative;
-    margin-top: -2.4em;
-    margin-bottom: -2em;
-}
-
-.form-row .object-tools {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    float: none;
-    height: 2em;
-    padding-left: 3.5em;
-}
-
-.object-tools li {
-    display: block;
-    float: left;
-    background: url(../img/admin/tool-left.gif) 0 0 no-repeat;
-    padding: 0 0 0 8px;
-    margin-left: 2px;
-    height: 16px;
-}
-
-.object-tools li:hover {
-    background: url(../img/admin/tool-left_over.gif) 0 0 no-repeat;
-}
-
-.object-tools a:link, .object-tools a:visited {
-    display: block;
-    float: left;
-    color: white;
-    padding: .1em 14px .1em 8px;
-    height: 14px;
-    background: #999 url(../img/admin/tool-right.gif) 100% 0 no-repeat;
-}
-
-.object-tools a:hover, .object-tools li:hover a {
-    background: #5b80b2 url(../img/admin/tool-right_over.gif) 100% 0 no-repeat;
-}
-
-.object-tools a.viewsitelink, .object-tools a.golink {
-    background: #999 url(../img/admin/tooltag-arrowright.gif) top right no-repeat;
-    padding-right: 28px;
-}
-
-.object-tools a.viewsitelink:hover, .object-tools a.golink:hover {
-    background: #5b80b2 url(../img/admin/tooltag-arrowright_over.gif) top right no-repeat;
-}
-
-.object-tools a.addlink {
-    background: #999 url(../img/admin/tooltag-add.gif) top right no-repeat;
-    padding-right: 28px;
-}
-
-.object-tools a.addlink:hover {
-    background: #5b80b2 url(../img/admin/tooltag-add_over.gif) top right no-repeat;
-}
-
-/* OBJECT HISTORY */
-
-table#change-history {
-    width: 100%;
-}
-
-table#change-history tbody th {
-    width: 16em;
 }
 
 /* PAGE STRUCTURE */
@@ -1158,6 +925,6 @@ table#change-history tbody th {
 }
 
 #content-related .module h2 {
-    background: #eee url(../img/admin/nav-bg.gif) bottom left repeat-x;
+    background: #eee bottom left repeat-x;
     color: #666;
 }
