@@ -758,3 +758,7 @@ class TemplateTests(TestCase):
     def test_lslice(self):
         test = lslice(self.testString,"5")
         self.assertEquals(test,self.testString[5:])
+        
+    def test_escapeJS(self):
+        test = "f o\"o'b(a)r<i>u[s]"
+        self.assertEquals(escapeForJS(test),"foobarius")
