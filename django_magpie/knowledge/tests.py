@@ -5,6 +5,7 @@ from views import *
 from django.contrib.auth.models import User
 from register.models import Profile,Account
 from templatetags.customFilters import *
+from django.http import HttpRequest, QueryDict, HttpResponse
 
 # dummy class used for tests
 class TestModel:
@@ -764,6 +765,31 @@ class ViewTests(TestCase):
         self.assertEquals(pmlToDot(self.xmlSpec),None)
         self.assertEquals(pmlToDot(None),None)
         
+    def test_pmlView(self):
+        req = HttpRequest()
+        req.GET = QueryDict('path=netbeans_req_release_2.pml')
+        self.assertEquals(pmlView(req).content,HttpResponse("[ERROR] Expecting two arguments.",mimetype='text/html').content)
+        req.GET = QueryDict('path=netbeans_req_release_2.pml&type=derpadopalous')
+        self.assertEquals(pmlView(req).content,HttpResponse("[ERROR] Invalid action. Must be graph, viewer, pml, roadmap.",mimetype='text/html').content)
+        req.GET = QueryDict('path=netbeans_req_release_2.pml&foo=pml')
+        self.assertEquals(pmlView(req).content,HttpResponse("[ERROR] Invalid GET request.",mimetype='text/html').content)
+        req.GET = QueryDict('foo=netbeans_req_release_2.pml&type=pml')
+        self.assertEquals(pmlView(req).content,HttpResponse("[ERROR] Invalid GET request.",mimetype='text/html').content)
+        req.GET = QueryDict('path=/../netbeans_req_release_2.pml&type=pml')
+        self.assertEquals(pmlView(req).content,HttpResponse("[ERROR] '../' contained in specified file name, relative paths unallowed for security reasons.",mimetype='text/html').content)
+        req.GET = QueryDict('path=water.png&type=roadmap')
+        self.assertEquals(pmlView(req).content,HttpResponse("[ERROR] Unable to create roadmap description - file not found, or parse error.",mimetype='text/html').content)
+        req.GET = QueryDict('path=water.png&type=pml')
+        self.assertEquals(pmlView(req).content,HttpResponse("[ERROR] Unable to create PML description - file not found, or parse error.",mimetype='text/html').content)
+        #Not testing for the case where a PML desc cannot be converted to DOT... A) it would involve a lot of setup work.
+        #B) The pmlToDot test shows that it will handle this case and C) the code returning the response is trivial.
+        req.GET = QueryDict('path=netbeans_req_release_2.pml&type=pml')
+        self.assertEquals(pmlView(req).content,self.pml)
+        req.GET = QueryDict('path=netbeans_req_release_2.pml&type=roadmap')
+        self.assertEquals(pmlView(req).content,'<html>\n\n' + self.roadmap + '\n</html>\n')
+        #Can't test for the viewer and produced graph for the same reason
+        #as the pmlToDot function...
+
     #Custom filter tests
 class TemplateTests(TestCase):
 
