@@ -703,8 +703,21 @@ class ViewTests(TestCase):
         account.profile = self.profile1
         account.save()
         
+        self.xmlPath = settings.MEDIA_ROOT + 'netbeans_req_release_2.pml'
+        self.nonXmlPath = settings.MEDIA_ROOT + 'hungry.bmp'
+        self.brokenPath = '/home/DrFoobariusJunior/lolhax.xml'
+        
         f = open(settings.TEST_DATA_PATH + "pmlOutput","r")
         self.pml = f.read()
+        f.close()
+        f = open(settings.TEST_DATA_PATH + "roadmapOutput","r")
+        self.roadmap = f.read()
+        f.close()
+        f = open(self.xmlPath)
+        self.xmlSpec = f.read()
+        f.close()
+        f = open(settings.TEST_DATA_PATH + "dotOutput","r")
+        self.dot = f.read()
         f.close()
 
     def test_get_ids(self):
@@ -735,13 +748,21 @@ class ViewTests(TestCase):
         self.assertEquals(state.get_vars(), nvars)
         
     def test_xmlToPml(self):
-        xmlPath = settings.MEDIA_ROOT + 'netbeans_req_release_2.pml'
-        nonXmlPath = settings.MEDIA_ROOT + 'hungry.bmp'
-        brokenPath = '/home/DrFoobariusJunior/lolhax.xml'
-        self.assertEquals(xmlToPml(xmlPath),self.pml)
-        self.assertEquals(xmlToPml(nonXmlPath),None)
-        self.assertEquals(xmlToPml(brokenPath),None)
+        self.assertEquals(xmlToPml(self.xmlPath),self.pml)
+        self.assertEquals(xmlToPml(self.nonXmlPath),None)
+        self.assertEquals(xmlToPml(self.brokenPath),None)
+        self.assertEquals(xmlToPml(None),None)
         
+    def test_xmlToRoadmap(self):
+        self.assertEquals(xmlToRoadmap(self.xmlPath),self.roadmap)
+        self.assertEquals(xmlToRoadmap(self.nonXmlPath),None)
+        self.assertEquals(xmlToRoadmap(self.brokenPath),None)
+        self.assertEquals(xmlToRoadmap(None),None)
+        
+    def test_pmlToDot(self):
+        #Seems for now that we can only verify that it doesn't blow up in our faces when it's given bad input...
+        self.assertEquals(pmlToDot(self.xmlSpec),None)
+        self.assertEquals(pmlToDot(None),None)
         
     #Custom filter tests
 class TemplateTests(TestCase):

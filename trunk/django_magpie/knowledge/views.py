@@ -51,6 +51,7 @@ def get_state(session):
 def noerr(ctx, str):
     pass
 
+#Given an XML file path, turn it into a PML spec
 #Unit tested
 def xmlToPml(filePath):
     libxml2.registerErrorHandler(noerr, None)
@@ -63,7 +64,9 @@ def xmlToPml(filePath):
         return style.saveResultToString(result)
     except (libxml2.parserError, TypeError):
         return None
-        
+
+#Given an XML file path, turn it into a Roadmap document
+#Unit tested        
 def xmlToRoadmap(filePath):
     libxml2.registerErrorHandler(noerr, None)
     libxslt.registerErrorHandler(noerr, None)
@@ -76,15 +79,23 @@ def xmlToRoadmap(filePath):
     except (libxml2.parserError, TypeError):
         return None
     
+#Take PML description, turn it into a DOT graph description.
+#Unit tested - but only to verify that it handles errors properly. The 
+#changeable nature of Traverse output means we can't verify that it works
+#(except by going on to the website and seeing that it works...)
 def pmlToDot(pml):
     if pml is None:
-        return None
+        return None  
     (f,path) = tempfile.mkstemp(dir=settings.MAGPIE_DIR + '/../resources/media')
     os.write(f, pml)
     os.close(f)
-    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-j','-R','-L',path],stdout=subprocess.PIPE)
-    dotDesc = traverse.communicate()[0]  
-    os.remove(path)
+    traverse = subprocess.Popen([settings.PML_PATH + "/graph/traverse",'-j','-R','-L',path],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    output = traverse.communicate()   
+    dotDesc = output[0]
+    #Capture stderr... if there's something here, something has probably gone wrong...
+    if output[1]:
+        return None
+    os.remove(path) 
     return (dotDesc,path)
         
 def pmlView(request):
