@@ -93,15 +93,20 @@ def pmlToDot(pml):
     output = traverse.communicate()   
     dotDesc = output[0]
     #Capture stderr... if there's something here, something has probably gone wrong...
+    os.remove(path) 
     if output[1]:
         return None
-    os.remove(path) 
     return (dotDesc,path)
-        
+
+#One big view that takes a filename, and view type, and gives back 
+#either a graph, a viewer for an interactive graph, a roadmap page or a 
+#plaintext PML spec. Most of the code is error handling...        
 def pmlView(request):
     try:
         pmlPath = request.GET.items()[0][1]
         reqType = request.GET.items()[1][1]
+        if (request.GET.items()[0][0] != "path") or (request.GET.items()[1][0] != "type"):
+            return HttpResponse("[ERROR] Invalid GET request.",mimetype='text/html')
     except:
         return HttpResponse("[ERROR] Expecting two arguments.",mimetype='text/html')
     if reqType not in ["graph","viewer","pml","roadmap"]:
@@ -111,13 +116,16 @@ def pmlView(request):
     fullPath = settings.MEDIA_ROOT + pmlPath
     if os.path.isfile(fullPath):
         if reqType == "roadmap":
+            roadmapDesc = xmlToRoadmap(fullPath)
+            if roadmapDesc is None:
+                return HttpResponse("[ERROR] Unable to create roadmap description - file not found, or parse error.",mimetype='text/html')
             roadmap = '<html>\n\n'
-            roadmap += xmlToRoadmap(fullPath)
+            roadmap += roadmapDesc
             roadmap += '\n</html>\n'
             return HttpResponse(roadmap,mimetype='text/html')
         pmlDesc = xmlToPml(fullPath)
         if pmlDesc is None:
-            return HttpResponse("[ERROR] Could not convert XML to PML.",mimetype='text/html')
+            return HttpResponse("[ERROR] Unable to create PML description - file not found, or parse error.",mimetype='text/html')
         if reqType == "pml":
             return HttpResponse(pmlDesc, mimetype="text/plain")
         dotDescInfo = pmlToDot(pmlDesc)
@@ -137,7 +145,6 @@ def pmlView(request):
     else:
         return HttpResponse("[ERROR] File not found.",mimetype='text/html')        
         
-# TODO move this to questions url
 def index(request):
     context = RequestContext(request)
     if request.method == 'POST':
