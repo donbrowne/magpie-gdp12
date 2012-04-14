@@ -314,44 +314,6 @@ input[type=text], input[type=password], textarea, select, .vTextField {
     border: 1px solid #ccc;
 }
 
-/* FORM BUTTONS */
-
-input[type=submit], input[type=reset], input[type=button], button {
-    margin-top: 0;
-    margin-bottom: 5;
-    padding: 4px 5px 5px;
-    width: auto;
-    height: 25px;
-    box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
-    cursor: pointer;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    input[type=submit], input[type=reset], input[type=button], button {
-        height: 22px;
-        padding: 2px 8px 4px;
-    }
-}
-
-input[type=submit], input[type=button],
-#bookmark-add-cancel, 
-.submit-row a.delete-link:link, .submit-row a.delete-link:visited, 
-.submit-row a.cancel-link:link, .submit-row a.cancel-link:visited, 
-.submit-row input[type=button] {
-    opacity: .6;
-}
-
-input[type=submit]:hover, input[type=button]:hover,
-#bookmark-add-cancel:hover, 
-.submit-row a.delete-link:hover, .submit-row a.delete-link:active, 
-.submit-row a.cancel-link:hover, .submit-row a.cancel-link:active, 
-.submit-row input[type=button]:hover {
-    opacity: 1;
-}
-
-input[type=submit].default {
-    opacity: 1;
-}
-
 /* MODULES */
 
 .module {
