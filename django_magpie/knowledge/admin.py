@@ -94,20 +94,6 @@ class RulePremiseInline(admin.TabularInline):
     #form = PremiseForm
     #template = 'admin/knowledge/edit_inline/tabular.html'
 
-    """
-    def formfield_for_choice_field(self, db_field, request=None, **kwargs):
-        # hack to remove BLANK_CHOICE_DASH ------
-        print db_field.name
-        if db_field.name in ['lchoice','rchoice']:
-            db_field.blank = False
-        print kwargs.keys()
-        form_field = super(RulePremiseInline,self).formfield_for_choice_field(db_field, **kwargs)
-        if db_field.name in ['lchoice','rchoice']:
-            db_field.blank = True
-            form_field.required = False
-        return form_field 
-
-    """
     def formfield_for_dbfield(self, db_field, **kwargs):
         form_field = super(RulePremiseInline,self).formfield_for_dbfield(
             db_field, **kwargs)
@@ -120,13 +106,11 @@ class RuleRecommendInline(admin.TabularInline):
     model = RuleRecommend
     extra = 0
     verbose_name_plural = "RECOMMENDATIONS"
-    #template = 'admin/knowledge/edit_inline/tabular.html'
 
 class RuleConclusionInline(admin.TabularInline):
     model = RuleConclusion
     extra = 0
     verbose_name_plural = "CONCLUSIONS"
-    #template = 'admin/knowledge/edit_inline/tabular.html'
 
 class RuleAdmin(admin.ModelAdmin):
 
@@ -148,19 +132,6 @@ class RuleAdmin(admin.ModelAdmin):
                 (escape(pk_value), escapejs(obj)))
         return super(RuleAdmin, self).response_change(request, obj, *args, **kwargs)
 
-   
-    """ 
-    def save_formset(self, request, form, formset, change):
-        if formset.model != RulePremise:
-            return super(RuleAdmin, self).save_formset(request, form, formset, change)
-        raise forms.ValidationError('Aha')
-        instances = formset.save(commit=False)
-        for instance in instances:
-            print type(instance)
-            print instance
-        instance.save()
-        formset.save_m2m()
-    """
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -178,14 +149,6 @@ class RuleInline(admin.TabularInline):
     #template = 'admin/knowledge/edit_inline/tabular.html'
     readonly_fields = ('details',)
     sortable_field_name = "order"
-
-    """
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        form_field = super(RuleInline,self).formfield_for_dbfield(db_field, **kwargs)
-        if db_field.name == 'order':
-            form_field.widget.attrs.update({'readonly':  'readonly'} )
-        return form_field
-    """
 
     class Media: 
          js = (
