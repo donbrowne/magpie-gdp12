@@ -6,6 +6,7 @@ from django.contrib.auth.models import User,AnonymousUser
 from register.models import Profile,Account
 from templatetags.customFilters import *
 from django.http import HttpRequest, QueryDict, HttpResponse
+from django.core.urlresolvers import reverse
 
 # dummy class used for tests
 class TestModel:
@@ -781,14 +782,16 @@ class ViewTests(TestCase):
         self.assertEquals(pmlView(req).content,HttpResponse("[ERROR] Unable to create roadmap description - file not found, or parse error.",mimetype='text/html').content)
         req.GET = QueryDict('path=water.png&type=pml')
         self.assertEquals(pmlView(req).content,HttpResponse("[ERROR] Unable to create PML description - file not found, or parse error.",mimetype='text/html').content)
-        #Not testing for the case where a PML desc cannot be converted to DOT... A) it would involve a lot of setup work.
-        #B) The pmlToDot test shows that it will handle this case and C) the code returning the response is trivial.
+        #Not testing for the case where a PML desc cannot be converted to DOT...
+        #A) The pmlToDot test shows that it will handle this case and B) the code returning the response is trivial.
         req.GET = QueryDict('path=netbeans_req_release_2.pml&type=pml')
         self.assertEquals(pmlView(req).content,self.pml)
         req.GET = QueryDict('path=netbeans_req_release_2.pml&type=roadmap')
         self.assertEquals(pmlView(req).content,'<html>\n\n' + self.roadmap + '\n</html>\n')
-        #Can't test for the viewer and produced graph for the same reason
-        #as the pmlToDot function...
+        req.GET = QueryDict('path=netbeans_req_release_2.pml&type=graph')
+        self.assertEquals(pmlView(req)['Content-Type'],'image/jpg')
+        req.GET = QueryDict('path=netbeans_req_release_2.pml&type=viewer')
+        self.assertEquals(pmlView(req)['Content-Type'],'text/html')
      
     def test_delState(self):
         test = {"engine":1}
@@ -810,10 +813,12 @@ class ViewTests(TestCase):
         req.user = user2
         redirect = reset(req)
         self.assertEquals(user2.get_profile().get_answers(),[])
-        #Comparing redirects wont accomplish much here as they are going
-        #to be function pointers, and not objects whose attributes can 
-        #be inspected. Not sure if it's possible to create an anonymous
-        #user, or indeed whether testing  with one would prove anything.
+        self.assertEquals(self.client.get(reverse('reset')).status_code,302)
+        
+    def test_index(self):
+        self.assertEquals(self.client.get(reverse('index')).status_code,200)
+        assert 'engine' not in self.client.post(reverse('index'), { 'engine':123 })
+           
 
     #Custom filter tests
 class TemplateTests(TestCase):
