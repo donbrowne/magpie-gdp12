@@ -46,43 +46,43 @@ class ResourceFileAdmin(admin.ModelAdmin):
 
 class RulePremiseFormSet(BaseInlineFormSet):
 
-     def clean(self): 
-        super(RulePremiseFormSet, self).clean()
-        if any(self.errors):
-            return
-        # first rip data from post data
-        premise_list = []
-        for i in range(0, self.total_form_count()):
-            form = self.forms[i]
-            # ignore an extra form and hasn't changed
-            if i >= self.initial_form_count() and not form.has_changed():
-                continue
-            variable = form.cleaned_data.get('variable', None)
-            value = form.cleaned_data.get('value', '')
-            lchoice = form.cleaned_data.get('lchoice', '')
-            rchoice = form.cleaned_data.get('rchoice', '')
-            premise = RulePremise()
-            if variable:
-                premise.variable = variable
-            premise.value = value
-            premise.lchoice = lchoice
-            premise.rchoice = rchoice
-            premise_list.append(premise)
-        # no premises -> no check
-        if len(premise_list) == 0:
-            return
-        # now check if sane
-        parser = PremiseParser()
-        try:
-            parser.parse(premise_list)
-        except PremiseException as e:
-            pos = e.pos + 1
-            reason = e.reason
-            if e.pos < len(self._errors):
-                # set the error message for the form that caused it
-                form_errors = self._errors[e.pos]
-                form_errors[e.field_name] = self.error_class([reason])
-            raise forms.ValidationError("At line %d: %s" %(pos,reason))
+   def clean(self): 
+      super(RulePremiseFormSet, self).clean()
+      if any(self.errors):
+          return
+      # first rip data from post data
+      premise_list = []
+      for i in range(0, self.total_form_count()):
+          form = self.forms[i]
+          # ignore an extra form and hasn't changed
+          if i >= self.initial_form_count() and not form.has_changed():
+              continue
+          variable = form.cleaned_data.get('variable', None)
+          value = form.cleaned_data.get('value', '')
+          lchoice = form.cleaned_data.get('lchoice', '')
+          rchoice = form.cleaned_data.get('rchoice', '')
+          premise = RulePremise()
+          if variable:
+              premise.variable = variable
+          premise.value = value
+          premise.lchoice = lchoice
+          premise.rchoice = rchoice
+          premise_list.append(premise)
+      # no premises -> no check
+      if len(premise_list) == 0:
+          return
+      # now check if sane
+      parser = PremiseParser()
+      try:
+          parser.parse(premise_list)
+      except PremiseException as e:
+          pos = e.pos + 1
+          reason = e.reason
+          if e.pos < len(self._errors):
+              # set the error message for the form that caused it
+              form_errors = self._errors[e.pos]
+              form_errors[e.field_name] = self.error_class([reason])
+          raise forms.ValidationError("At line %d: %s" %(pos,reason))
 
 class RulePremiseInline(admin.TabularInline):
     model = RulePremise
