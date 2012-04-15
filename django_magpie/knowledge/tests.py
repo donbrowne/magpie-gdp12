@@ -1060,7 +1060,6 @@ class RuleSetTests(TestCase):
         rsp = self.client.get(edit_url)
         self.assertEqual(rsp.status_code, 200)
 
-
 class MiscTests(TestCase):
 
     def test_state_encode(self):
@@ -1143,3 +1142,76 @@ class MiscTests(TestCase):
         self.assertEquals(reason.text, 'text') 
         self.assertEquals(reason.qa_list, [])
 
+class FactStateTests(TestCase):
+
+    def test_empty(self):
+        start = FactStart()
+        ruleset_ids = start.get_ruleset_ids()
+        facts = start.get_facts()
+        self.assertEquals(ruleset_ids, [])
+        self.assertEquals(facts, [])
+
+    def test_guest_profile_none(self):
+        settings.GUEST_PROFILE=''
+        user = AnonymousUser()
+        start = FactStart()
+        start.load_profile(user)
+        ruleset_ids = start.get_ruleset_ids()
+        facts = start.get_facts()
+        self.assertEquals(ruleset_ids, [])
+        self.assertEquals(facts, [])
+
+    def test_guest_profile_empty(self):
+        profile = Profile.objects.create(name='guest')
+        settings.GUEST_PROFILE=profile.name
+        user = AnonymousUser()
+        start = FactStart()
+        start.load_profile(user)
+        ruleset_ids = start.get_ruleset_ids()
+        facts = start.get_facts()
+        self.assertEquals(ruleset_ids, [])
+        self.assertEquals(facts, [])
+
+    def test_guest_profile_notempty(self):
+        v1 = Variable.objects.create(name='v1', ask=False)
+        v2 = Variable.objects.create(name='v2', ask=False)
+        ruleset = RuleSet.objects.create(name='test')
+        profile = Profile.objects.create(name='guest',ruleset=ruleset)
+        profile.profileanswer_set.create(variable=v1, value='Y')
+        profile.profileanswer_set.create(variable=v2, value='Y')
+        settings.GUEST_PROFILE=profile.name
+        user = AnonymousUser()
+        start = FactStart()
+        start.load_profile(user)
+        ruleset_ids = start.get_ruleset_ids()
+        facts = start.get_facts()
+        self.assertEquals(ruleset_ids, [ruleset.id])
+        self.assertEquals(facts, [(v1.id,'Y'), (v2.id,'Y')])
+        
+    def test_user_profile_empty(self):
+        profile = Profile.objects.create(name='test')
+        user = User.objects.create_user('test','','test')
+        start = FactStart()
+        start.load_profile(user)
+        ruleset_ids = start.get_ruleset_ids()
+        facts = start.get_facts()
+        self.assertEquals(ruleset_ids, [])
+        self.assertEquals(facts, [])
+
+    def test_user_profile_notempty(self):
+        v1 = Variable.objects.create(name='v1', ask=False)
+        v2 = Variable.objects.create(name='v2', ask=False)
+        ruleset = RuleSet.objects.create(name='test')
+        profile = Profile.objects.create(name='test',ruleset=ruleset)
+        profile.profileanswer_set.create(variable=v1, value='N')
+        profile.profileanswer_set.create(variable=v2, value='N')
+        user = User.objects.create_user('test','','test')
+        account = user.get_profile()
+        account.profile = profile
+        account.save()
+        start = FactStart()
+        start.load_profile(user)
+        ruleset_ids = start.get_ruleset_ids()
+        facts = start.get_facts()
+        self.assertEquals(ruleset_ids, [ruleset.id])
+        self.assertEquals(facts, [(v1.id,'N'), (v2.id,'N')])
