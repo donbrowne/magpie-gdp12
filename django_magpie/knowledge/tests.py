@@ -954,7 +954,7 @@ class TemplateTests(TestCase):
         self.assertEquals(escapeForJS(test),"foobarius")
 
 
-class RuleAdminTests(TestCase):
+class RuleSetTests(TestCase):
     
     def setUp(self):
         self.ruleset_url = reverse('admin:knowledge_ruleset_changelist')
