@@ -190,7 +190,7 @@ class PremiseException(Exception):
         self.reason = reason
 
     def __str__(self):
-        return 'Row %d: %s %s' %(self.pos, self.field, self.reason)
+        return 'Row %d: %s %s' %(self.pos, self.field_name, self.reason)
 
 # this is a LL(1) syntax directed grammar
 PTYPE_VAR = 0

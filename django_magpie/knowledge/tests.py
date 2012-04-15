@@ -1130,11 +1130,18 @@ class MiscTests(TestCase):
     def test_PremiseException(self):
         got_except = False
         pos = -1
+        astr = ''
         try:
             raise PremiseException(1, PFIELD_LEFT, 'test')
         except PremiseException as e:
             got_except = True
+            astr = str(e)
             pos = e.pos
-        self.assertTrue(got_except and pos == 1)
+        self.assertTrue(got_except and astr=='Row 1: lchoice test')
+
+    def test_PremiseNode(self):
+        node = PremiseNode(PTYPE_VAR, 1, 'Y')
+        self.assertEqual(str(node), '1:Y')
+
         
 
