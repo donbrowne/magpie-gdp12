@@ -8,8 +8,8 @@
 ==INDEX==
 
 1.0 DEFAULT ACCESS
- 1.1 Administration Account
- 1.2 Test Account
+       1.1  Administration Account
+       1.2  Test Account
 
 2.0 FEATURES WALKTHROUGH (RELEASE 1 FEATURE SET)
 	2.1 KNOWLEDGE REPRESENTATION, WITH FAN-IN AND FAN-OUT
