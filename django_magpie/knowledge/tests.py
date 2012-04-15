@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.conf import settings
 from models import *
 from views import *
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,AnonymousUser
 from register.models import Profile,Account
 from templatetags.customFilters import *
 from django.http import HttpRequest, QueryDict, HttpResponse
@@ -798,6 +798,22 @@ class ViewTests(TestCase):
         copy = {"foo":1}
         del_state(test)
         self.assertEquals(test.items(),copy.items())
+        
+    def test_reset(self):
+        profile2 = Profile.objects.create(name='profile2', ruleset=self.rs_view)
+        user2 = User.objects.create_user('user2','user2@aha.com','user2')
+        account = user2.get_profile()
+        account.profile = profile2
+        account.save_answers([(1, u'Y'), (2, u'Y')])
+        account.save()
+        req = HttpRequest()
+        req.user = user2
+        redirect = reset(req)
+        self.assertEquals(user2.get_profile().get_answers(),[])
+        #Comparing redirects wont accomplish much here as they are going
+        #to be function pointers, and not objects whose attributes can 
+        #be inspected. Not sure if it's possible to create an anonymous
+        #user, or indeed whether testing  with one would prove anything.
 
     #Custom filter tests
 class TemplateTests(TestCase):

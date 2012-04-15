@@ -33,7 +33,7 @@ def del_state(session):
     except KeyError:
       pass
 
-#Trivial function
+#Unit tested
 def put_state(session, state):
     session['engine'] = state_encode(state) 
 
@@ -220,8 +220,8 @@ def ask(request):
         rsp = ask_or_done(request, state, priorQuestions)
     return rsp
     
-#Trivial function
 #Reset saved answers
+#Unit tested
 def reset(request):
     if request.user.is_authenticated():
         profile = request.user.get_profile()
