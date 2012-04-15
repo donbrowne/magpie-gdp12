@@ -1044,4 +1044,97 @@ class RuleSetTests(TestCase):
         rsp = self.client.get(edit_url)
         self.assertEqual(rsp.status_code, 200)
 
+
+class MiscTests(TestCase):
+
+    def test_state_encode(self):
+        engine = Engine()
+        slist = state_encode(engine)
+        sdict = dict(slist)
+        self.assertEqual(sdict['rulesets'], []) 
+        self.assertEqual(sdict['vars'], []) 
+        self.assertEqual(sdict['tests'], []) 
+
+    def test_state_decode(self):
+        slist = ('tests', []), ('rulesets', []), ('vars', [])
+        engine = state_decode(slist)
+        self.assertEquals(engine.get_rulesets(),[])
+        self.assertEquals(engine.get_vars(True),[])
+        self.assertEquals(engine.get_tests(),[])
+
+    def test_field2name(self):
+        self.assertEquals(field2name(PFIELD_LEFT),'lchoice')
+        self.assertEquals(field2name(PFIELD_VAR),'variable')
+        self.assertEquals(field2name(PFIELD_RIGHT),'rchoice')
+
+    def test_userPath(self):
+        self.assertEquals(userPath(None, 'aha'),'aha')
+
+    def test_ResourceFile(self):
+        rf = ResourceFile(description='aha')
+        self.assertEquals(str(rf), rf.description)
+
+    def test_Recommend(self):
+        rec = Recommend(name='rec', text='aha')
+        self.assertEquals(str(rec), rec.text)
+
+    def test_ExternalLink(self):
+        rec = Recommend(name='rec', text='aha')
+        link = ExternalLink(rec=rec, description='desc', link='')
+        self.assertEquals(str(link), link.description)
+
+    def test_Variable(self):
+        var = Variable(name='var1',ask=False,prompt='aha')
+        self.assertEquals(str(var), var.name)
+
+    def test_RuleSet(self):
+        ruleset = RuleSet(name='ruleset')
+        self.assertEquals(str(ruleset), ruleset.name)
+
+    def test_Rule(self):
+        ruleset = RuleSet(name='ruleset')
+        rule = Rule(parent=ruleset)
+        self.assertEquals(rule.get_dets(), 'IF  THEN ')
+        self.assertEquals(str(rule), rule.get_dets())
+
+    def test_RulePremise(self):
+        var = Variable(name='var1',ask=False,prompt='aha')
+        ruleset = RuleSet(name='ruleset')
+        rule = Rule(parent=ruleset)
+        premise = RulePremise(parent=rule, variable=var,value='Y')
+        self.assertEquals(str(premise), 
+            premise.variable.name+'='+premise.value)
+    
+    def test_RuleConclusion(self):
+        var = Variable(name='var1',ask=False,prompt='aha')
+        ruleset = RuleSet(name='ruleset')
+        rule = Rule(parent=ruleset)
+        conclusion = RuleConclusion(parent=rule, variable=var,value='Y')
+        self.assertEquals(str(conclusion), 
+            conclusion.variable.name+'='+conclusion.value)
         
+    def test_RuleRecommend(self):
+        rec = Recommend(name='rec', text='aha')
+        ruleset = RuleSet(name='ruleset')
+        rule = Rule(parent=ruleset)
+        conclusion = RuleRecommend(parent=rule, recommend=rec,rank=4)
+        self.assertEquals(str(rec), rec.text)
+
+    def test_Reason(self):
+        reason = Reason(10,'name','text',4,[])
+        self.assertEquals(reason.rid, 10)
+        self.assertEquals(reason.name, 'name')
+        self.assertEquals(reason.text, 'text') 
+        self.assertEquals(reason.qa_list, [])
+
+    def test_PremiseException(self):
+        got_except = False
+        pos = -1
+        try:
+            raise PremiseException(1, PFIELD_LEFT, 'test')
+        except PremiseException as e:
+            got_except = True
+            pos = e.pos
+        self.assertTrue(got_except and pos == 1)
+        
+
