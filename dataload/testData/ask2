@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" >
+<head>
+<link REL="SHORTCUT ICON" HREF="/static/img/favicon.ico">  
+<script type="text/javascript" src="/static/admin/flowplayer-3.2.6.min.js"></script>
+<script type="text/javascript" src="/static/admin/expand.js"></script>
+<title> | Magpie Site</title>
+<script type="text/javascript">
+ function confirmReset()
+ {
+ if (confirm("Are you sure you want to delete your saved progress?"))
+   {
+   window.location = "/knowledge/reset"
+   }
+ }
+ function confirmLogout()
+ {
+ if (confirm("Are you sure you want to log out?"))
+   {
+   window.location = "/register/logout/?next="
+   }
+ }
+ </script>
+<link rel="stylesheet" type="text/css" href="/static//css/base.css" />
+
+
+<script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
+
+<meta name="robots" content="NONE,NOARCHIVE" />
+</head>
+
+
+<body class="">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        <h1 id="site-name"><a href="/"><img src="/static/img/header1.png"></a></h1>
+        </div>
+
+        <div id="user-tools">
+        
+            
+            <a href="/register/account/?next=">Account</a> |
+            <a href="javascript:confirmReset()">Reset</a> |
+            <a href="javascript:confirmLogout()">Log out</a>
+            <br>You are logged in as 
+            <strong>user3</strong>
+        
+        </div>
+        
+    </div>
+    <!-- END Header -->
+    
+
+        
+
+    <!-- Content -->
+    <div id="content">
+    <div id="content-main" class="colM">
+        
+<div class="box">
+<h2>All Done</h2>
+<p>You have reached the end of the questioning process.</p>
+<p>If you wish to start over, select Reset from the top right corner.</p>
+<form action=/knowledge/ method="get">
+<div id="content">
+
+<input type="submit" value="Done" />
+</div>
+</form>
+</div>
+
+
+
+        <br class="clear" />
+    </div>
+    <div id="content-related">
+    
+
+
+<div class="box">
+<h2>Recommendations</h2>
+<ol>
+Tip: Click on the recommendations to see if they have additional resources.<br>
+
+<input type="button" class="button" onclick="return toggleMe('text')" value="text ">
+<br>
+<div id="text" style="display:none">
+    <ol>
+    
+    </ol>
+    
+    
+    </div>
+
+</ol>
+		<!-- this will install flowplayer inside previous A- tag. -->
+</div>
+
+
+<div class="box">
+<h2>Reasons</h2>
+<ol class="treeview">
+
+    <li>text</li>
+    <ol>
+    
+        <li>Q1? You answered -  Yes </li>
+    
+    </ol>
+
+</ol>
+</div>
+
+
+    </div>
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>
