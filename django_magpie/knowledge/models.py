@@ -671,15 +671,6 @@ class Engine(object):
                 rdict[rnode.node_id] = rnode
         return rdict.values()
 
-    def getPriorQuestions(self, answers):
-        questions = []
-        questionAns = []
-        for ans in answers:
-            if Variable.objects.filter(id=ans[0])[0].ask:
-                questions.append(Variable.objects.filter(id=ans[0])[0])
-                questionAns.append(ans[1])
-        return zip(questions,questionAns)
-
     def get_questions(self):
         questions = []
         for variable in Variable.objects.filter(id__in=self.test_ids):
@@ -958,6 +949,15 @@ class Engine(object):
             unfired = self.forward_chain(tree)
             self.find_goals(tree, unfired)
 
+#Unit tested
+def getPriorQuestions(answers):
+    questions = []
+    questionAns = []
+    for ans in answers:
+        if Variable.objects.filter(id=ans[0])[0].ask:
+            questions.append(Variable.objects.filter(id=ans[0])[0])
+            questionAns.append(ans[1])
+    return zip(questions,questionAns)
 
 def state_encode(state):
     sdict = {}

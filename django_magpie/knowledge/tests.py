@@ -723,6 +723,7 @@ class ViewTests(TestCase):
 
     def setUp(self):
         self.var1 = Variable.objects.create(name='var1', ask=True, prompt='Q1?')
+        self.var2 = Variable.objects.create(name='var2', ask=True, prompt='Q2?')
         self.rec = Recommend.objects.create(name='rec', text='text')
 
         self.rs_view2 = RuleSet.objects.create(name='rs_test')
@@ -879,7 +880,7 @@ class ViewTests(TestCase):
         req.user = user3
         req.session = {}
         
-        state = state = start_state(req.user)
+        state = start_state(req.user)
         state.next_state()
         response = ask_or_done(req, state, None)
         self.assertEquals(self.ask1,response.content)
@@ -938,6 +939,22 @@ class ViewTests(TestCase):
         assert not state.rec_nodes
         assert not state.debug 
         self.assertEquals(state.vars_tested,set())
+        
+    def test_getPriorQuestions(self):
+        priorQuestions = getPriorQuestions([(1, 'Y'),(2, 'Y')])
+        self.assertEquals(priorQuestions,[(self.var1,'Y'),(self.var2,'Y')])
+"""
+
+    def getPriorQuestions(self, answers):
+        questions = []
+        questionAns = []
+        for ans in answers:
+            if Variable.objects.filter(id=ans[0])[0].ask:
+                questions.append(Variable.objects.filter(id=ans[0])[0])
+                questionAns.append(ans[1])
+        return zip(questions,questionAns)
+        
+"""
 
     #Custom filter tests
 class TemplateTests(TestCase):
