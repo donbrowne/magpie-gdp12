@@ -101,6 +101,40 @@
     
 
 
+<div class="box">
+<h2>Recommendations</h2>
+<ol>
+Tip: Click on the recommendations to see if they have additional resources.<br>
+
+<input type="button" class="button" onclick="return toggleMe('text')" value="text ">
+<br>
+<div id="text" style="display:none">
+    <ol>
+    
+    </ol>
+    
+    
+    </div>
+
+</ol>
+		<!-- this will install flowplayer inside previous A- tag. -->
+</div>
+
+
+<div class="box">
+<h2>Reasons</h2>
+<ol class="treeview">
+
+    <li>text</li>
+    <ol>
+    
+        <li>Q1? You answered -  Yes </li>
+    
+    </ol>
+
+</ol>
+</div>
+
 
     </div>
     </div>

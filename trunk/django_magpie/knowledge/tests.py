@@ -692,7 +692,6 @@ class ViewTests(TestCase):
 
     def setUp(self):
         self.var1 = Variable.objects.create(name='var1', ask=True, prompt='Q1?')
-        self.var2 = Variable.objects.create(name='var2', ask=True, prompt='Q2?')
         self.rec = Recommend.objects.create(name='rec', text='text')
 
         self.rs_view2 = RuleSet.objects.create(name='rs_test')
@@ -737,6 +736,9 @@ class ViewTests(TestCase):
         f.close()
         f = open(settings.TEST_DATA_PATH + "ask2","r")
         self.ask2 = f.read()
+        f.close()
+        f = open(settings.TEST_DATA_PATH + "ask3","r")
+        self.ask3 = f.read()
         f.close()
 
     def test_get_ids(self):
@@ -851,13 +853,60 @@ class ViewTests(TestCase):
         response = ask_or_done(req, state, None)
         self.assertEquals(self.ask1,response.content)
         state = state = start_state(req.user)
-        state.add_vars([(1, u'Y'),(2,u'Y')],1)
+        state.add_vars([(1, u'Y')],1)
         state.next_state()
-        response = ask_or_done(req, state, None)
-        self.assertEquals(self.ask2,response.content)
+        response = ask_or_done(req, state, [(self.var1, 'Y')])
+        self.assertEquals(self.ask3,response.content)
 
     def test_ask(self):
-        pass
+        user4 = User.objects.create_user('user3','user3@aha.com','user3')
+        profile4 = Profile.objects.create(name='profile4', ruleset=self.rs_view2)
+        account = user4.get_profile()
+        account.profile = profile4
+        account.save()
+        req = HttpRequest()
+        req.user = user4
+        req.session = {}
+        req.method = 'GET'
+        self.assertEquals(ask(req).content,self.ask1)
+        
+        req = HttpRequest()
+        req.user = user4
+        req.session = {}
+        req.method = 'POST'
+        req.POST= {u'csrfmiddlewaretoken':None,u'answer_1': u'y'}
+        self.assertEquals(self.ask2,ask(req).content)
+        
+    def test_saved(self):
+        user4 = User.objects.create_user('user3','user3@aha.com','user3')
+        profile4 = Profile.objects.create(name='profile4', ruleset=self.rs_view2)
+        account = user4.get_profile()
+        account.profile = profile4
+        account.save()
+        
+        req = HttpRequest()
+        req.user = user4
+        req.session = {}
+        req.method = 'POST'
+        req.POST= {u'csrfmiddlewaretoken':None,u'answer_1': u'y'}
+        self.assertEquals(self.ask3,saved(req).content)
+
+    def test_get_state(self):      
+        blankState = get_state({})
+        assert not blankState.ruleset_ids
+        assert not blankState.test_ids 
+        self.assertEquals(blankState.fact_state,OrderedDict())
+        assert not blankState.rec_nodes
+        assert not blankState.debug 
+        self.assertEquals(blankState.vars_tested,set())
+        testInfo = dict([('tests', [1]), ('rulesets', [1]), ('vars', [])])       
+        state = get_state({'engine':testInfo})
+        self.assertEquals(state.ruleset_ids,[1])
+        self.assertEquals(state.test_ids,[1])
+        self.assertEquals(state.fact_state,OrderedDict())
+        assert not state.rec_nodes
+        assert not state.debug 
+        self.assertEquals(state.vars_tested,set())
 
     #Custom filter tests
 class TemplateTests(TestCase):

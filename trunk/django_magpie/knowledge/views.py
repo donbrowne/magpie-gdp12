@@ -37,7 +37,7 @@ def del_state(session):
 def put_state(session, state):
     session['engine'] = state_encode(state) 
 
-#Trivial function
+#Unit tested
 def get_state(session):
     if 'engine' in session:
         slist = session['engine']
@@ -149,6 +149,7 @@ def index(request):
     return render_to_response('knowledge/index.html', context)
 
 #Used when user changes their answers.
+#Unit tested
 def saved (request):
     answers =  get_answers(request.POST.items())
     #Make blank state, add the backlog of answers, get next state
@@ -189,6 +190,7 @@ def ask_or_done(request, state, priorQuestions):
         },
         context)
 
+#Unit tested
 def ask(request):
     context = RequestContext(request)
     if request.method == 'POST':
