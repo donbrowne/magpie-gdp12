@@ -216,29 +216,6 @@ class PremiseNode(object):
         if self.ptype == PTYPE_AND:
             return '(%s & %s)' %( str(self.left), str(self.right))
         return '???'
-        if self.ptype == PTYPE_VAR:
-            if hasattr(self, 'name'):
-                name = self.name
-            else:
-                name = str(self.left)
-            return '%s:%s' %( name, self.right)
-        if self.ptype == PTYPE_AND:
-            slist = []
-            if self.left.ptype == PTYPE_OR:
-                slist.append('(')
-            slist.append(str(self.left))
-            if self.left.ptype == PTYPE_OR:
-                slist.append(')')
-            slist.append(' & ')
-            if self.right.ptype == PTYPE_OR:
-                slist.append('(')
-            slist.append(str(self.right))
-            if self.right.ptype == PTYPE_OR:
-                slist.append(')')
-            return ''.join(slist)
-        if self.ptype == PTYPE_OR:
-            return '%s | %s' %( str(self.left), str(self.right))
-        return '???'
 
 class PremiseParser(object):
 
