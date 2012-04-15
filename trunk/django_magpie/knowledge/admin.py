@@ -183,8 +183,22 @@ class ExtLinkInline(admin.TabularInline):
 class RecsAdmin(admin.ModelAdmin):
     inlines = [ExtLinkInline]
 
+class VariableAdminForm(forms.ModelForm):
+
+    class Meta:
+        model = Variable
+
+    def clean(self):
+        cleaned_data = super(VariableAdminForm, self).clean()
+        ask = cleaned_data.get('ask')
+        prompt = cleaned_data.get('prompt')
+        if ask and not prompt:
+             self._errors['prompt'] = self.error_class([u"Prompt must be set"])
+        return cleaned_data
+
 class VariableAdmin(admin.ModelAdmin):
     list_display = ['name', 'ask','prompt']
+    form = VariableAdminForm
 
 
 admin.site.register(ResourceFile, ResourceFileAdmin)

@@ -70,7 +70,7 @@ def recSummaryClosure(user):
 class Variable(models.Model):
     name = models.SlugField(max_length=30, unique=True)
     ask = models.BooleanField(default=True)
-    prompt = models.CharField(max_length=100,default='')
+    prompt = models.CharField(max_length=100,blank=True, default='')
     def __unicode__(self):
         return self.name
 
