@@ -691,13 +691,24 @@ class EngineTests(TestCase):
 class ViewTests(TestCase):
 
     def setUp(self):
+        self.var1 = Variable.objects.create(name='var1', ask=True, prompt='Q1?')
+        self.var2 = Variable.objects.create(name='var2', ask=True, prompt='Q2?')
+        self.rec = Recommend.objects.create(name='rec', text='text')
+
+        self.rs_view2 = RuleSet.objects.create(name='rs_test')
+        self.rule2 = self.rs_view2.rule_set.create()
+        self.rule2.rulepremise_set.create(variable=self.var1, value='Y')
+        self.rule = Rule.objects.create(parent=self.rs_view2)
+        self.rrec = RuleRecommend.objects.create(parent=self.rule, recommend=self.rec)
+        self.rule2.rulerecommend_set.add(self.rrec)
+        
         self.v1 = Variable.objects.create(name='v1', ask=False)
         self.v2 = Variable.objects.create(name='v2', ask=False)
 
         self.rs_view = RuleSet.objects.create(name='rs_view')
-        rule1 = self.rs_view.rule_set.create()
-        rule1.rulepremise_set.create(variable=self.v1, value='Y')
-        rule1.ruleconclusion_set.create(variable=self.v2, value='Y')
+        self.rule1 = self.rs_view.rule_set.create()
+        self.rule1.rulepremise_set.create(variable=self.v1, value='Y')
+        self.rule1.ruleconclusion_set.create(variable=self.v2, value='Y')
 
         self.profile1 = Profile.objects.create(name='profile1', ruleset=self.rs_view)
         self.user1 = User.objects.create_user('user1','user1@aha.com','user1')
@@ -720,6 +731,12 @@ class ViewTests(TestCase):
         f.close()
         f = open(settings.TEST_DATA_PATH + "dotOutput","r")
         self.dot = f.read()
+        f.close()
+        f = open(settings.TEST_DATA_PATH + "ask1","r")
+        self.ask1 = f.read()
+        f.close()
+        f = open(settings.TEST_DATA_PATH + "ask2","r")
+        self.ask2 = f.read()
         f.close()
 
     def test_get_ids(self):
@@ -762,7 +779,7 @@ class ViewTests(TestCase):
         self.assertEquals(xmlToRoadmap(None),None)
         
     def test_pmlToDot(self):
-        #Seems for now that we can only verify that it doesn't blow up in our faces when it's given bad input...
+        #Showing that it actually works is shown in test_pmlView. This test is for error handling.
         self.assertEquals(pmlToDot(self.xmlSpec),None)
         self.assertEquals(pmlToDot(None),None)
         
@@ -819,6 +836,28 @@ class ViewTests(TestCase):
         self.assertEquals(self.client.get(reverse('index')).status_code,200)
         assert 'engine' not in self.client.post(reverse('index'), { 'engine':123 })
            
+    def test_ask_or_done(self):
+        user3 = User.objects.create_user('user3','user3@aha.com','user3')
+        profile3 = Profile.objects.create(name='profile3', ruleset=self.rs_view2)
+        account = user3.get_profile()
+        account.profile = profile3
+        account.save()
+        req = HttpRequest()
+        req.user = user3
+        req.session = {}
+        
+        state = state = start_state(req.user)
+        state.next_state()
+        response = ask_or_done(req, state, None)
+        self.assertEquals(self.ask1,response.content)
+        state = state = start_state(req.user)
+        state.add_vars([(1, u'Y'),(2,u'Y')],1)
+        state.next_state()
+        response = ask_or_done(req, state, None)
+        self.assertEquals(self.ask2,response.content)
+
+    def test_ask(self):
+        pass
 
     #Custom filter tests
 class TemplateTests(TestCase):
