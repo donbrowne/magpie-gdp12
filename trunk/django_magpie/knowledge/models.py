@@ -210,11 +210,6 @@ class PremiseNode(object):
         self.left = left
         self.right = right
 
-    def swap(self):
-        tmp = self.left
-        self.left = self.right
-        self.right = tmp
-
     def __str__(self):
         if self.ptype == PTYPE_VAR:
             if hasattr(self, 'name'):
