@@ -594,18 +594,6 @@ class EngineTests(TestCase):
         rule2.rulepremise_set.create(variable=self.v2, value='Y')
         rule2.ruleconclusion_set.create(variable=self.v3, value='Y')
 
-        self.rs_infer = RuleSet.objects.create(name='rs-infer')
-        rule1 = self.rs_infer.rule_set.create()
-        rule1.rulepremise_set.create(variable=self.v1, value='Y')
-        rule1.ruleconclusion_set.create(variable=self.v2, value='Y')
-
-        rule2 = self.rs_infer.rule_set.create()
-        rule2.rulepremise_set.create(variable=self.v2, value='Y')
-        rule2.ruleconclusion_set.create(variable=self.v3, value='Y')
-
-        rule3 = self.rs_infer.rule_set.create()
-        rule3.rulepremise_set.create(variable=self.v3, value='Y')
-        rule3.ruleconclusion_set.create(variable=self.v4, value='Y')
 
     def test_empty(self):
         empty_list = []
@@ -703,7 +691,20 @@ class EngineTests(TestCase):
         self.assertEquals(state.get_tests(), [])
 
     def test_inference(self):
-        rulesets = [ self.rs_infer.id ]
+        rs_infer = RuleSet.objects.create(name='rs-infer')
+        rule1 = rs_infer.rule_set.create()
+        rule1.rulepremise_set.create(variable=self.v1, value='Y')
+        rule1.ruleconclusion_set.create(variable=self.v2, value='Y')
+
+        rule2 = rs_infer.rule_set.create()
+        rule2.rulepremise_set.create(variable=self.v2, value='Y')
+        rule2.ruleconclusion_set.create(variable=self.v3, value='Y')
+
+        rule3 = rs_infer.rule_set.create()
+        rule3.rulepremise_set.create(variable=self.v3, value='Y')
+        rule3.ruleconclusion_set.create(variable=self.v4, value='Y')
+
+        rulesets = [ rs_infer.id ]
         answers = [ (self.v1.id, 'Y') ]
         nvars = [ (self.v1.id, 'Y'), 
                   (self.v2.id, 'Y'),
@@ -713,6 +714,9 @@ class EngineTests(TestCase):
         state = Engine(rulesets)
         state.next_state(answers)
         self.assertEquals(state.get_vars(), nvars)
+
+    def test_backchain(self):
+        pass
 
 
 class ViewTests(TestCase):
