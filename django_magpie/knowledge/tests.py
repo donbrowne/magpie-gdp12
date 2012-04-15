@@ -7,7 +7,7 @@ from register.models import Profile,Account
 from templatetags.customFilters import *
 from django.http import HttpRequest, QueryDict, HttpResponse
 from django.core.urlresolvers import reverse
-from knowledge.admin import RulePremiseInline, RulePremiseFormSet
+from knowledge.admin import RulePremiseInline, RulePremiseFormSet, ResourceFileAdmin
 from django.forms import formsets
 
 import random
@@ -1063,6 +1063,59 @@ class RuleSetTests(TestCase):
 
         rsp = self.client.get(edit_url)
         self.assertEqual(rsp.status_code, 200)
+
+class ResourceFileAdminTests(TestCase):
+    def setUp(self):
+        self.RFadmin = ResourceFileAdmin(ResourceFile, "")
+        self.joe = User.objects.create_user('Joe','user@lol.com','Joe')
+        self.bob = User.objects.create_user('Bob','user@lol.com','Bob')
+        self.jack = User.objects.create_user('Jack','user@lol.com','Jack')
+        self.anto = User.objects.create_user('Anto','user@lol.com','Anto')
+        self.admin = User.objects.create_user('Admin','user@lol.com','Admin')
+        self.admin.is_superuser = True
+        self.joeFile = ResourceFile.objects.create(description='joeFile', file=None, owner=self.joe)
+        self.bobFile = ResourceFile.objects.create(description='bobFile', file=None, owner=self.bob)
+        self.unownedFile = ResourceFile.objects.create(description='unownedFile', file=None, owner=None)
+    
+    def test_querySet(self):
+        req = HttpRequest()
+        req.user = self.admin
+        req.method = 'POST'
+        view = self.RFadmin.queryset(req)
+        assert (self.joeFile in view) and (self.bobFile in view)
+        req.user = self.bob
+        req.method = 'POST'
+        view = self.RFadmin.queryset(req)
+        assert (self.joeFile not in view) and (self.bobFile in view)
+        req.user = self.joe
+        req.method = 'POST'
+        view = self.RFadmin.queryset(req)
+        assert (self.joeFile in view) and (self.bobFile not in view)
+        
+    def test_addView(self):
+        req = HttpRequest()
+        req.user = self.admin
+        req.method = 'POST'
+        self.RFadmin.add_view(req)
+        self.assertEquals(self.RFadmin.exclude, ('owner',))
+        
+    def test_changeView(self):
+        req = HttpRequest()
+        req.user = self.admin
+        req.method = 'POST'
+        self.RFadmin.change_view(req)
+        self.assertEquals(self.RFadmin.exclude, None)
+        
+    def test_saveModel(self):
+        req = HttpRequest()
+        req.user = self.admin
+        req.method = 'POST'
+        self.RFadmin.save_model(req,self.unownedFile,None,None)
+        self.assertEquals(getattr(self.unownedFile, 'owner', None),self.admin)        
+        self.assertEquals(getattr(self.unownedFile, 'last_modified_by', None),self.admin)
+        self.RFadmin.save_model(req,self.bobFile,None,None)
+        self.assertEquals(getattr(self.bobFile, 'owner', None),self.bob)        
+        self.assertEquals(getattr(self.bobFile, 'last_modified_by', None),self.admin)
 
 class MiscTests(TestCase):
 
