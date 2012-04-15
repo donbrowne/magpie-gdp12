@@ -2,7 +2,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from models import Account,Profile
+from django.db.models import signals
+from models import Account,Profile,create_testuser
 from knowledge.models import Variable
 from forms import RegistrationForm, AccountForm
 
@@ -30,13 +31,13 @@ class RegisterTests(TestCase):
 
     def test_register_new_user(self):
         username = random_string(10)
-        password1 =  User.objects.make_random_password(10)
+        password =  User.objects.make_random_password(10)
         email = '%s@test.com' % random_string(10)
 
         rsp = self.client.post(self.reg_url, {
                 'username': username,
-                'password1': 'regtest',
-                'password2': 'regtest',
+                'password1': password,
+                'password2': password,
                 'email' : email
                 })
 
@@ -46,6 +47,7 @@ class RegisterTests(TestCase):
         user = User.objects.get(username=username)
         self.assertEqual(user.username,username)
         self.assertEqual(user.email, email)
+        self.assertTrue(user.check_password(password))
         self.assertTrue(user.is_authenticated())
         self.assertTrue(isinstance(user.get_profile(),Account))
 
@@ -179,4 +181,17 @@ class ProfileTests(TestCase):
         get_list = profile.get_answers()
         self.assertEqual(save_list, get_list)
 
+class SignalTests(TestCase):
 
+    def test_create_testuser(self):
+        from django.conf import settings
+        settings.DEBUG = True
+        username = 'admin_test'
+        password =  User.objects.make_random_password(10)
+        dbconfig = settings.DATABASES['default']
+        dbconfig['USER'] = username
+        dbconfig['PASSWORD'] = password
+        create_testuser(None,None,0)
+        user = User.objects.get(username=username)
+        self.assertEqual(user.username, username)
+        self.assertTrue(user.check_password(password))
