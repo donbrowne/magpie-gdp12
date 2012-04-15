@@ -8,9 +8,8 @@
 <h2>Welcome</h2>
 <form action={% url index %} method="post">
 <div id="content">
-<p> Welcome to Magpie - the Model Advice Guidance Process Integration Explorer.</p>
-<p>Take some time to answer some questions by pressing the Start button below.</p>
-<p>If you are logged in, pressing Start will resume the questioning from where you finished last, and pressing. Reset in the top right corner to reset your progress. If not, you can log in or register from the links on the top right of the screen.</p>
+<p> Welcome to Magpie - the Model Advice Guidance Process Integration Explorer. Take some time to answer some questions by pressing the Start button below.</p>
+<p>If you are logged in, pressing Start will resume the questioning from where you finished last, and pressing Reset in the top right corner will reset your progress. If not, you can log in or register from the links on the top right corner of the screen.</p>
 {% csrf_token %}
 <input type="submit" value="Start" />
 </div>

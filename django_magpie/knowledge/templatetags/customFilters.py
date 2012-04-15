@@ -19,7 +19,7 @@ def isImg(string):
 
 #Unit tested
 def escapeForJS(string):
-    chars = [' ','"','\'','(',')','<','>','[',']']
+    chars = [' ','"','\'','(',')','<','>','[',']','\\']
     for c in chars:
         string = string.replace(c,'')
     return string
