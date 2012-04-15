@@ -9,6 +9,8 @@ from django.http import HttpRequest, QueryDict, HttpResponse
 from django.core.urlresolvers import reverse
 from knowledge.admin import RulePremiseInline, RulePremiseFormSet, ResourceFileAdmin
 from django.forms import formsets
+from django.core.files import File
+import shutil
 
 import random
 import string
@@ -1014,18 +1016,47 @@ class ViewTests(TestCase):
     def test_getPriorQuestions(self):
         priorQuestions = getPriorQuestions([(1, 'Y'),(2, 'Y')])
         self.assertEquals(priorQuestions,[(self.var1,'Y'),(self.var2,'Y')])
-"""
-
-    def getPriorQuestions(self, answers):
-        questions = []
-        questionAns = []
-        for ans in answers:
-            if Variable.objects.filter(id=ans[0])[0].ask:
-                questions.append(Variable.objects.filter(id=ans[0])[0])
-                questionAns.append(ans[1])
-        return zip(questions,questionAns)
         
-"""
+    def test_recSummaryClosure(self):
+        joe = User.objects.create_user('Joe','user@lol.com','Joe')
+        admin = User.objects.create_user('Admin','user@lol.com','Admin')
+        admin.is_superuser = True
+        staff = User.objects.create_user('Staff','user@lol.com','Staff')
+        staff.is_staff = True
+        shutil.copyfile(settings.MEDIA_ROOT + "biscuits.bmp", settings.MEDIA_ROOT + "test1")
+        upload_file = open(settings.MEDIA_ROOT + "test1","r")
+        pmlFile = ResourceFile.objects.create(description='pmlFile', file=File(upload_file), owner=joe, restricted=True)
+        upload_file.close()
+        shutil.copyfile(settings.MEDIA_ROOT + "chocolate.bmp", settings.MEDIA_ROOT + "test2")
+        upload_file = open(settings.MEDIA_ROOT + "test2","r")
+        vidFile = ResourceFile.objects.create(description='vidFile', file=File(upload_file), owner=joe)
+        upload_file.close()
+        rec1 = Recommend.objects.create(name='testrec', text='testrec', pmlLink=pmlFile, videoLink=vidFile)
+        ext1 = ExternalLink.objects.create(rec=rec1, description="Test Link", link="www.lolhax.com")
+        closure = recSummaryClosure(admin)
+        summary = closure(rec1)
+        expected = [('PML XML Link', settings.MEDIA_ROOT + 'test1_1'), (u'Test Link', u'www.lolhax.com')]
+        self.assertEquals(summary.links,expected)
+        self.assertEquals(summary.text,"testrec")
+        self.assertEquals(summary.vidLink,settings.MEDIA_ROOT + 'test2_1')
+        self.assertEquals(summary.pmlPath,settings.MEDIA_ROOT + 'test1_1')
+        closure = recSummaryClosure(staff)
+        summary1 = closure(rec1)
+        self.assertEquals(summary1.links,expected)
+        self.assertEquals(summary1.text,"testrec")
+        self.assertEquals(summary1.vidLink,settings.MEDIA_ROOT + 'test2_1')
+        self.assertEquals(summary1.pmlPath,settings.MEDIA_ROOT + 'test1_1')
+        closure = recSummaryClosure(joe)
+        summary2 = closure(rec1)
+        expected = [(u'Test Link', u'www.lolhax.com')]
+        self.assertEquals(summary2.links,expected)
+        self.assertEquals(summary2.text,"testrec")
+        self.assertEquals(summary2.vidLink,settings.MEDIA_ROOT + 'test2_1')
+        self.assertEquals(summary2.pmlPath,None)
+        os.remove(settings.MEDIA_ROOT + 'test1')
+        os.remove(settings.MEDIA_ROOT + 'test1_1')
+        os.remove(settings.MEDIA_ROOT + 'test2')
+        os.remove(settings.MEDIA_ROOT + 'test2_1')
 
     #Custom filter tests
 class TemplateTests(TestCase):
@@ -1058,8 +1089,8 @@ class TemplateTests(TestCase):
         self.assertEquals(test,self.testString[5:])
         
     def test_escapeJS(self):
-        test = "f o\"o'b(a)r<i>u[s]"
-        self.assertEquals(escapeForJS(test),"foobarius")
+        test = "f o\"o'b(a)r<i>u[s]\\!"
+        self.assertEquals(escapeForJS(test),"foobarius!")
 
 
 class RuleSetTests(TestCase):
@@ -1084,10 +1115,6 @@ class RuleSetTests(TestCase):
         add_url = '%s%d/add_rule/' %( self.ruleset_url, self.ruleset.id)
         rsp = self.client.get(add_url)
         self.assertEqual(rsp.status_code, 200)
-        #print rsp
-        #print rsp.context['inline_admin_formsets'][0]
-        #print rsp.context['inline_admin_formsets'][1]
-        #print rsp.context['inline_admin_formsets'][2]
 
     def test_add_rule(self):
         add_url = '%s%d/add_rule/' %( self.ruleset_url, self.ruleset.id)
