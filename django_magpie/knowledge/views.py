@@ -44,18 +44,14 @@ def get_state(session):
     else:
         slist = []
     return state_decode(slist)
-      
-#Redirect XML errors away from stdout so it doesnt cause a mod_wsgi
-#exception. Taken from the libxml2 docs.      
-#Trivial function
-def noerr(ctx, str):
-    pass
 
 #Given an XML file path, turn it into a PML spec
 #Unit tested
 def xmlToPml(filePath):
-    libxml2.registerErrorHandler(noerr, None)
-    libxslt.registerErrorHandler(noerr, None)
+    #Redirect XML errors away from stdout so that it doesn't cause a
+    #mod_wsgi exception.
+    libxml2.registerErrorHandler(lambda ctx,str: None, None)
+    libxslt.registerErrorHandler(lambda ctx,str: None, None)
     pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/xpml.xsl")
     style = libxslt.parseStylesheetDoc(pmlStyleDoc)
     try:
@@ -68,8 +64,8 @@ def xmlToPml(filePath):
 #Given an XML file path, turn it into a Roadmap document
 #Unit tested        
 def xmlToRoadmap(filePath):
-    libxml2.registerErrorHandler(noerr, None)
-    libxslt.registerErrorHandler(noerr, None)
+    libxml2.registerErrorHandler(lambda ctx,str: None, None)
+    libxslt.registerErrorHandler(lambda ctx,str: None, None)
     pmlStyleDoc=libxml2.parseFile(settings.PML_PATH + "/xpml/pmldoc.xsl")
     style = libxslt.parseStylesheetDoc(pmlStyleDoc)
     try:
@@ -80,9 +76,7 @@ def xmlToRoadmap(filePath):
         return None
     
 #Take PML description, turn it into a DOT graph description.
-#Unit tested - but only to verify that it handles errors properly. The 
-#changeable nature of Traverse output means we can't verify that it works
-#(except by going on to the website and seeing that it works...)
+#Unit tested
 def pmlToDot(pml):
     if pml is None:
         return None  
@@ -145,7 +139,8 @@ def pmlView(request):
             return HttpResponse(mapHtml, mimetype="text/html")            
     else:
         return HttpResponse("[ERROR] File not found.",mimetype='text/html')        
-        
+
+#Unit tested
 def index(request):
     context = RequestContext(request)
     if request.method == 'POST':
@@ -167,6 +162,7 @@ def saved (request):
         profile.save_answers(answers)
     return ask_or_done(request, state, priorQuestions)
 
+#Unit tested
 def ask_or_done(request, state, priorQuestions):
     context = RequestContext(request)
     questions = state.get_questions()
@@ -193,7 +189,6 @@ def ask_or_done(request, state, priorQuestions):
         },
         context)
 
-
 def ask(request):
     context = RequestContext(request)
     if request.method == 'POST':
@@ -205,7 +200,7 @@ def ask(request):
         if request.user.is_authenticated():
             profile = request.user.get_profile()
             profile.save_answers(state.get_answers())
-        rsp = ask_or_done(request, state,priorQuestions)
+        return ask_or_done(request, state, priorQuestions)
     else:
         # User clicks Start on Index...
         state = start_state(request.user)
@@ -217,8 +212,7 @@ def ask(request):
             state.add_vars(priorAnswers,1)
             priorQuestions = state.getPriorQuestions(profile.get_answers())
         state.next_state()
-        rsp = ask_or_done(request, state, priorQuestions)
-    return rsp
+        return ask_or_done(request, state, priorQuestions)
     
 #Reset saved answers
 #Unit tested
