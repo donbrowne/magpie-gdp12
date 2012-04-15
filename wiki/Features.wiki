@@ -1,11 +1,11 @@
 #summary Feature Discovery Guide for MAGPIE
 #labels Featured
 
-===========================================
-Feature Discovery Guide for MAGPIE
-===========================================
 
-INDEX
+=Feature Discovery Guide for MAGPIE=
+
+
+==INDEX==
 
 1.0 DEFAULT ACCESS
  1.1 Administration Account
