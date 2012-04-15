@@ -125,6 +125,10 @@ up an Apache virtual hosts, run -
 'make install' is not necessary as it only creates symlinks so that
 the scripts can appear in a document root.
 
+If you wish to unit test the program, you can run 'make test', if you 
+need to unit test using manage.py, make sure you run 'make build' first,
+as the unit tests depend on certain files being in place.
+
 Functionality relating to media upload will not function in the 
 runserver as Django requires an external web server to serve files. 
 You can simulate this behavior by using python's SimpleHTTPServer, and 
