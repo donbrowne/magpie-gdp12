@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import signals
-from models import Account,Profile,create_testuser
+from models import Account,Profile,create_testuser,create_account
 from knowledge.models import Variable
 from forms import RegistrationForm, AccountForm
 
@@ -181,7 +181,27 @@ class ProfileTests(TestCase):
         get_list = profile.get_answers()
         self.assertEqual(save_list, get_list)
 
-class SignalTests(TestCase):
+class SignalCreateAccount(TestCase):
+
+    def setUp(self):
+        signals.post_save.disconnect(create_account, sender=User)
+
+    def tearDown(self):
+        signals.post_save.connect(create_account, sender=User)
+
+    def test_create_account(self):
+        print 'test_create_account'
+        username = random_string(10)
+        email = '%s@test.com' % random_string(10)
+        password =  User.objects.make_random_password(10)
+        user = User.objects.create_user(username,email,password)
+        self.assertRaises(Account.DoesNotExist, lambda: user.get_profile())
+        create_account(None, user, False)
+        self.assertRaises(Account.DoesNotExist, lambda: user.get_profile())
+        create_account(None, user, True)
+        self.assertTrue(isinstance(user.get_profile(),Account))
+
+class SignalCreateTestUser(TestCase):
 
     def test_create_testuser(self):
         from django.conf import settings
