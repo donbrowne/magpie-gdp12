@@ -81,12 +81,11 @@ Password:	admin
 Administration account has full root level administration rights.
 
 
-1.2 Test Accounts
+1.2 Test Account
 ------------------------
-Username:	testuser[number]
+Username:	testuser01
 Password:	test
 
-e.g. username: testuser01 has the password: test
 Test accounts represent a default user account.
 
 
@@ -698,4 +697,3 @@ These conclusions as asserted facts may in turn fire other conclusions or recomm
 -------------------------------------------------------------------------------------
 
 For 3.7 - 3.10 - Implemented in user interface - Please see 2.2 USER INTERFACE for details.
-
