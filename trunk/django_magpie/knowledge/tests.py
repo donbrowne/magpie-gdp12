@@ -706,7 +706,7 @@ class EngineTests(TestCase):
 
         rulesets = [ rs_infer.id ]
         answers = [ (self.v1.id, 'Y') ]
-        nvars = [ (self.v1.id, 'Y'), 
+        nvars = [ (self.v1.id, 'Y'),
                   (self.v2.id, 'Y'),
                   (self.v3.id, 'Y'), 
                   (self.v4.id, 'Y') 
@@ -716,8 +716,79 @@ class EngineTests(TestCase):
         self.assertEquals(state.get_vars(), nvars)
 
     def test_backchain(self):
-        pass
+        # If X croaks and eats flies - Then X is a frog
+        # If X chirps and sings - Then X is a canary
+        # If X is a frog - Then X is green
+        # If X is a canary - Then X is yellow
+        croaks = Variable.objects.create(name='croaks', ask=True)
+        eats_flies = Variable.objects.create(name='eat_flies', ask=True)
+        frog = Variable.objects.create(name='frog', ask=True)
 
+        chirps = Variable.objects.create(name='chirps', ask=True)
+        sings = Variable.objects.create(name='sings', ask=True)
+        canary = Variable.objects.create(name='canary', ask=True)
+
+        green = Recommend.objects.create(name='green', text='x is green')
+        yellow = Recommend.objects.create(name='yellow', text='x is yellow')
+
+        ruleset = RuleSet.objects.create(name='backchain')
+
+        # If X croaks and eats flies  Then X is a frog
+        rule = ruleset.rule_set.create()
+        rule.rulepremise_set.create(variable=croaks, value='Y',rchoice='&')
+        rule.rulepremise_set.create(variable=eats_flies, value='Y')
+        rule.ruleconclusion_set.create(variable=frog, value='Y')
+
+        # If X chirps and sings  Then X is a canary
+        rule = ruleset.rule_set.create()
+        rule.rulepremise_set.create(variable=chirps, value='Y',rchoice='&')
+        rule.rulepremise_set.create(variable=sings, value='Y')
+        rule.ruleconclusion_set.create(variable=canary, value='Y')
+
+        # If X is a frog  Then X is green
+        rule = ruleset.rule_set.create()
+        rule.rulepremise_set.create(variable=frog, value='Y')
+        rule.rulerecommend_set.create(recommend=green)
+
+        # If X is a canary  Then X is yellow
+        rule = ruleset.rule_set.create()
+        rule.rulepremise_set.create(variable=canary, value='Y')
+        rule.rulerecommend_set.create(recommend=yellow)
+
+        rulesets = [ ruleset.id ]
+        engine = Engine(rulesets)
+        engine.next_state()
+        questions = engine.get_questions()
+        self.assertTrue(len(questions)==1 and questions[0]==croaks)
+
+        answers = [(croaks.id,'Y')]
+        engine.next_state(answers)
+        questions = engine.get_questions()
+        self.assertTrue(len(questions)==1 and questions[0]==eats_flies)
+
+        answers = [(eats_flies.id,'Y')]
+        engine.next_state(answers)
+        recommends = engine.get_recommends()
+        questions = engine.get_questions()
+        self.assertTrue(len(recommends)==1 and recommends[0]==green)
+        self.assertTrue(len(questions)==1 and questions[0]==chirps)
+
+        answers = [(chirps.id,'Y')]
+        engine.next_state(answers)
+        recommends = engine.get_recommends()
+        questions = engine.get_questions()
+        self.assertTrue(len(recommends)==1 and recommends[0]==green)
+        self.assertTrue(len(questions)==1 and questions[0]==sings)
+
+        answers = [(sings.id,'Y')]
+        engine.next_state(answers)
+        recommends = engine.get_recommends()
+        questions = engine.get_questions()
+        self.assertTrue(len(recommends)==2 and 
+              recommends[0]==green and 
+              recommends[1]==yellow)
+        self.assertTrue(len(questions)==0)
+        
 
 class ViewTests(TestCase):
 
