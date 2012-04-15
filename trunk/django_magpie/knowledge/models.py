@@ -70,15 +70,9 @@ def recSummaryClosure(user):
 class Variable(models.Model):
     name = models.SlugField(max_length=30, unique=True)
     ask = models.BooleanField(default=True)
-    prompt = models.CharField(max_length=100)
+    prompt = models.CharField(max_length=100,default='')
     def __unicode__(self):
         return self.name
-
-class VariableChoice(models.Model):
-    parent = models.ForeignKey(Variable)
-    value = models.CharField(max_length=100)
-    def __unicode__(self):
-        return self.value
 
 YN_CHOICES = (
     ('', ''),
