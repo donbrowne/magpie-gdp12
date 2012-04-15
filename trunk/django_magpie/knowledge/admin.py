@@ -22,7 +22,8 @@ class ExtLinkInline(admin.TabularInline):
 
 class RecsAdmin(admin.ModelAdmin):
     inlines = [ExtLinkInline]
-    
+
+#Instance methods unit tested.
 class ResourceFileAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'owner', None) is None:
