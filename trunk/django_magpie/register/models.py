@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+from django.db.models import signals
 #from knowledge.models import RuleSet,Variable
 
 YN_CHOICES = (
@@ -78,13 +78,12 @@ def create_account(sender, instance, created, **kwargs):
         Account.objects.create(user=instance)
 
 # tell us if a new auth user created
-post_save.connect(create_account, sender=User)
+signals.post_save.connect(create_account, sender=User)
 
 # django snippet 1875
 from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.management import create_superuser
-from django.db.models import signals
 
 signals.post_syncdb.disconnect(
     create_superuser,
