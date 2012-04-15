@@ -2,7 +2,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from models import Account
+from models import Account,Profile
+from knowledge.models import Variable
 from forms import RegistrationForm, AccountForm
 
 import string 
@@ -71,6 +72,11 @@ class AccountTests(TestCase):
     def setUp(self):
         self.redirect = '/' + random_string(10)
         self.account_url = makeurl('account',self.redirect)
+        self.user = User.objects.create_user('test','test@test.com','test')
+    
+    def test_unicode(self):
+        account = self.user.get_profile()
+        self.assertEquals(self.user.username,str(account))
 
     def test_account_url(self):
         rsp = self.client.get(self.account_url)
@@ -102,5 +108,75 @@ class AccountTests(TestCase):
         self.assertEqual(user.last_name, last_name)
         self.assertEqual(user.email, email)
 
+    def test_save_answers_add(self):
+        v1 = Variable.objects.create(name='v1', ask=False)
+        v2 = Variable.objects.create(name='v2', ask=False)
+        v3 = Variable.objects.create(name='v3', ask=False)
+        v4 = Variable.objects.create(name='v4', ask=False)
+        save_list = [ (v1.id,'Y'), (v2.id,'N'),(v3.id,'Y'),(v4.id,'N')]
+        account = self.user.get_profile()
+        account.save_answers(save_list)
+        get_list = account.get_answers()
+        self.assertEqual(save_list, get_list)
+
+    def test_save_answers_update(self):
+        v1 = Variable.objects.create(name='v1', ask=False)
+        v2 = Variable.objects.create(name='v2', ask=False)
+        v3 = Variable.objects.create(name='v3', ask=False)
+        v4 = Variable.objects.create(name='v4', ask=False)
+        save_list1 = [ (v1.id,'Y'), (v2.id,'Y'),(v3.id,'Y'),(v4.id,'Y')]
+        account = self.user.get_profile()
+        account.save_answers(save_list1)
+        save2_list = [ (v1.id,'N'), (v2.id,'N'),(v3.id,'N'),(v4.id,'N')]
+        account.save_answers(save2_list)
+        get_list = account.get_answers()
+        self.assertEqual(save2_list, get_list)
+    
+    def test_save_answers_del(self):
+        v1 = Variable.objects.create(name='v1', ask=False)
+        v2 = Variable.objects.create(name='v2', ask=False)
+        v3 = Variable.objects.create(name='v3', ask=False)
+        v4 = Variable.objects.create(name='v4', ask=False)
+        save1_list = [ (v1.id,'Y'), (v2.id,'Y'),(v3.id,'Y'),(v4.id,'Y')]
+        account = self.user.get_profile()
+        account.save_answers(save1_list)
+        save2_list = [ (v2.id,'N'),(v3.id,'N')]
+        account.save_answers(save2_list)
+        get_list = account.get_answers()
+        self.assertEqual(save2_list, get_list)
+
+    def test_save_answers_add_update_del(self):
+        v1 = Variable.objects.create(name='v1', ask=False)
+        v2 = Variable.objects.create(name='v2', ask=False)
+        v3 = Variable.objects.create(name='v3', ask=False)
+        v4 = Variable.objects.create(name='v4', ask=False)
+        v5 = Variable.objects.create(name='v5', ask=False)
+        v6 = Variable.objects.create(name='v6', ask=False)
+        save1_list = [ (v1.id,'Y'), (v2.id,'Y'),(v3.id,'Y'),(v4.id,'Y')]
+        account = self.user.get_profile()
+        account.save_answers(save1_list)
+        save2_list = [ (v2.id,'N'),(v3.id,'N'),(v5.id,'Y'),(v6.id,'Y')]
+        account.save_answers(save2_list)
+        get_list = account.get_answers()
+        self.assertEqual(save2_list, get_list)
+        
+        
+class ProfileTests(TestCase):
+
+    def test_unicode(self):
+        profile = Profile.objects.create(name='test')
+        self.assertEquals(profile.name,str(profile))
+
     def test_get_answers(self):
-        pass
+        v1 = Variable.objects.create(name='v1', ask=False)
+        v2 = Variable.objects.create(name='v2', ask=False)
+        v3 = Variable.objects.create(name='v3', ask=False)
+        v4 = Variable.objects.create(name='v4', ask=False)
+        profile = Profile.objects.create(name='test')
+        save_list = [ (v1.id,'Y'), (v2.id,'Y'),(v3.id,'Y'),(v4.id,'Y')]
+        for key,value in save_list:
+            profile.profileanswer_set.create(variable_id=key, value=value)
+        get_list = profile.get_answers()
+        self.assertEqual(save_list, get_list)
+
+
