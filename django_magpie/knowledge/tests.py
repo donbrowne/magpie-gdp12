@@ -7,6 +7,17 @@ from register.models import Profile,Account
 from templatetags.customFilters import *
 from django.http import HttpRequest, QueryDict, HttpResponse
 from django.core.urlresolvers import reverse
+from knowledge.admin import RulePremiseInline, RulePremiseFormSet
+from django.forms import formsets
+
+import random
+import string
+
+def random_string(length):
+    return "".join([random.choice(string.lowercase+string.digits) for x in range(1, length)])
+
+def makeurl(url,redirect):
+    return '%s?next=%s' %(reverse(url),redirect)
 
 # dummy class used for tests
 class TestModel:
@@ -941,3 +952,96 @@ class TemplateTests(TestCase):
     def test_escapeJS(self):
         test = "f o\"o'b(a)r<i>u[s]"
         self.assertEquals(escapeForJS(test),"foobarius")
+
+
+class RuleAdminTests(TestCase):
+    
+    def setUp(self):
+        self.ruleset_url = reverse('admin:knowledge_ruleset_changelist')
+        self.username = 'test'
+        self.password = 'test'
+        User.objects.create_superuser(self.username, 
+                'test@test.com', 
+                self.password)
+        success = self.client.login(username=self.username,password=self.password)
+        self.assertTrue(success)
+        # create test db
+        self.ruleset = RuleSet.objects.create(name='rs-test')
+        self.var1 = Variable.objects.create(name='var1', ask=False)
+        self.var2 = Variable.objects.create(name='var2', ask=False)
+        self.rec1 = Recommend.objects.create(name='rec1', text='rec1 text')
+        self.rec2 = Recommend.objects.create(name='rec2', text='rec2 text')
+
+    def test_add_rule_url(self):
+        add_url = '%s%d/add_rule/' %( self.ruleset_url, self.ruleset.id)
+        rsp = self.client.get(add_url)
+        self.assertEqual(rsp.status_code, 200)
+        #print rsp
+        #print rsp.context['inline_admin_formsets'][0]
+        #print rsp.context['inline_admin_formsets'][1]
+        #print rsp.context['inline_admin_formsets'][2]
+
+    def test_add_rule(self):
+        add_url = '%s%d/add_rule/' %( self.ruleset_url, self.ruleset.id)
+
+        data = {
+            'rulepremise_set-TOTAL_FORMS': '1',
+            'rulepremise_set-INITIAL_FORMS': '0',
+            'rulepremise_set-MAX_NUM_FORMS': '',
+            'ruleconclusion_set-TOTAL_FORMS': '1',
+            'ruleconclusion_set-INITIAL_FORMS': '0',
+            'ruleconclusion_set-MAX_NUM_FORMS': '',
+            'rulerecommend_set-TOTAL_FORMS': '1',
+            'rulerecommend_set-INITIAL_FORMS': '0',
+            'rulerecommend_set-MAX_NUM_FORMS': '',
+            '_save': u'Save',
+            'ruleset': str(self.ruleset.id),
+            'rulepremise_set-0-lchoice': '',
+            'rulepremise_set-0-variable': self.var1.id,
+            'rulepremise_set-0-value': 'Y',
+            'rulepremise_set-0-rchoice': '',
+            'ruleconclusion_set-0-variable': self.var2.id ,
+            'ruleconclusion_set-0-value': 'Y',
+            'rulerecommend_set-0-recommend': self.rec1.id,
+            'rulerecommend_set-0-rank': '1'
+        }
+        rsp = self.client.post(add_url, data)
+        self.assertEqual(rsp.status_code, 302)
+        rule_list = []
+        for rule in self.ruleset.rule_set.all():
+            rule_list.append(rule)
+        self.assertEqual(len(rule_list),1)
+        rule = rule_list[0]
+        # check rule-premise
+        self.assertEqual(rule.rulepremise_set.count(),1)
+        premise = rule.rulepremise_set.all()[0]
+        self.assertEqual(premise.lchoice,'')
+        self.assertEqual(premise.variable_id, self.var1.id)
+        self.assertEqual(premise.value, 'Y')
+        self.assertEqual(premise.rchoice,'')
+        # check rule-conclusion 
+        self.assertEqual(rule.ruleconclusion_set.count(),1)
+        conclusion = rule.ruleconclusion_set.all()[0]
+        self.assertEqual(conclusion.variable_id, self.var2.id)
+        self.assertEqual(conclusion.value,'Y')
+        # check rule-recommend
+        self.assertEqual(rule.rulerecommend_set.count(),1)
+        recommend = rule.rulerecommend_set.all()[0]
+        self.assertEqual(recommend.recommend_id, self.rec1.id)
+        self.assertEqual(recommend.rank,1)
+
+    def test_edit_rule_url(self):
+        rule = self.ruleset.rule_set.create()
+        rule.rulepremise_set.create(variable=self.var1, value='Y')
+        rule.ruleconclusion_set.create(variable=self.var2, value='Y')
+        rule.rulerecommend_set.create(recommend=self.rec1, rank=1)
+
+        edit_url = '%s%d/edit_rule/%d/' %(
+            self.ruleset_url, 
+            self.ruleset.id,
+            rule.id)
+
+        rsp = self.client.get(edit_url)
+        self.assertEqual(rsp.status_code, 200)
+
+        
