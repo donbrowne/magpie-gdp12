@@ -29,6 +29,22 @@ class ParserTests(TestCase):
     def setUp(self):
         self.parser = PremiseParser()
 
+    def test_PremiseException(self):
+        got_except = False
+        pos = -1
+        astr = ''
+        try:
+            raise PremiseException(1, PFIELD_LEFT, 'test')
+        except PremiseException as e:
+            got_except = True
+            astr = str(e)
+            pos = e.pos
+        self.assertTrue(got_except and astr=='Row 1: lchoice test')
+
+    def test_PremiseNode(self):
+        node = PremiseNode(PTYPE_VAR, 1, 'Y')
+        self.assertEqual(str(node), '1:Y')
+
     def testEmpty(self):
         pos = -1
         got_except = False
@@ -1126,22 +1142,4 @@ class MiscTests(TestCase):
         self.assertEquals(reason.name, 'name')
         self.assertEquals(reason.text, 'text') 
         self.assertEquals(reason.qa_list, [])
-
-    def test_PremiseException(self):
-        got_except = False
-        pos = -1
-        astr = ''
-        try:
-            raise PremiseException(1, PFIELD_LEFT, 'test')
-        except PremiseException as e:
-            got_except = True
-            astr = str(e)
-            pos = e.pos
-        self.assertTrue(got_except and astr=='Row 1: lchoice test')
-
-    def test_PremiseNode(self):
-        node = PremiseNode(PTYPE_VAR, 1, 'Y')
-        self.assertEqual(str(node), '1:Y')
-
-        
 
