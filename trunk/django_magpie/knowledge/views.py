@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader,RequestContext
 from django.shortcuts import render_to_response,redirect
-from knowledge.models import Engine,start_state,state_encode,state_decode,recSummaryClosure
+from knowledge.models import Engine,start_state,state_encode,state_decode,recSummaryClosure, getPriorQuestions
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 import subprocess 
@@ -156,7 +156,7 @@ def saved (request):
     state = start_state(request.user)
     state.add_vars(answers,1)
     state.next_state()
-    priorQuestions = state.getPriorQuestions(state.get_answers())
+    priorQuestions = getPriorQuestions(state.get_answers())
     #If logged in, save progress to profile
     if request.user.is_authenticated():
         profile = request.user.get_profile()
@@ -198,7 +198,7 @@ def ask(request):
         answers =  get_answers(request.POST.items())
         state = get_state(request.session)
         state.next_state(answers)
-        priorQuestions = state.getPriorQuestions(state.get_answers())
+        priorQuestions = getPriorQuestions(state.get_answers())
         if request.user.is_authenticated():
             profile = request.user.get_profile()
             profile.save_answers(state.get_answers())
@@ -212,7 +212,7 @@ def ask(request):
             profile = request.user.get_profile()
             priorAnswers = profile.get_answers()
             state.add_vars(priorAnswers,1)
-            priorQuestions = state.getPriorQuestions(profile.get_answers())
+            priorQuestions = getPriorQuestions(profile.get_answers())
         state.next_state()
         return ask_or_done(request, state, priorQuestions)
     
