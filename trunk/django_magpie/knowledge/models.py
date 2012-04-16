@@ -461,12 +461,6 @@ class FactGroup(object):
                 return False
         return True
 
-    def check_fail(self):
-        for node in self.nodes:
-            if node.check_state(NODE_TESTED):
-                return True
-        return False
-
     def add_children(self, child_list):
         for child in child_list:
             self.children.append(child)
@@ -512,9 +506,6 @@ class FactNode(object):
 
     def set_premises(self, premises):
         self.parent_groups = premises
-
-    def gen_fact_key(self):
-        return '%d:%s' %( self.node_id, self.node_value)
 
     def get_key(self):
         return factnode_gen_key(self.node_type, self.node_id, self.value)
