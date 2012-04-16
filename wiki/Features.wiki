@@ -148,20 +148,20 @@ The following section seeks to give a brief overview of the administration inter
 When an admin account is used to log in to the Magpie administration interface the Magpie site admin Home screen is displayed presenting the system overview. 
 The overview is broken down into four sections: 
 
-AUTH (AUTHORISATION) 
-KNOWLEDGE
-REGISTER
-SITES
+=====AUTH (AUTHORISATION)=====
+=====KNOWLEDGE=====
+=====REGISTER=====
+=====SITES=====
 
 
-AUTH
+=====AUTH=====
 
 Auth(authorisation) is utilised to manage Magpie administration rights at group and account level.
 Contains two subsections: Groups and Users. 
 Various permissions can be specified relating to how a unique account or accounts belonging to a particular group can interact with the system.
 
 
-KNOWLEDGE
+=====KNOWLEDGE=====
 
 Knowledge is where you can create recommendations, upload multimedia content and specify rules of inferrence to tailor recommendations to users.
 Contains four subsections: Recommends, Resource files, Rule sets, and Variables.
@@ -233,7 +233,7 @@ There is a tick box labeled "Ask" which determines whether or not the variable i
 We may not want to ask a user about a variable if we intended on inferring the variables value with a conclusion. In this case it may help to set the "Prompt:" to something sensibly descriptive.
 
 
-REGISTER
+=====REGISTER=====
 
 Register administration consists of sections: Profiles and Accounts.
 
@@ -254,7 +254,7 @@ An account should be associated with a profile and thus may inherit Profile answ
 An account may have variables set to specific default values by adding Account answers similar to Profile answers above. 
 
 
-SITES
+=====SITES=====
 
 Sites is not currently used in the application but technically we should be settting the domain name in there as well as the FQDN of the website.
 
