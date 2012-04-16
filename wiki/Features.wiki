@@ -613,7 +613,16 @@ Not implemented.
 3.4 ALLOW 'OR' OF FACTS (AS WELL AS 'AND') TO FIRE RECOMMENDATIONS
 -------------------------------------------------------------------------------------
 
-Implemented.
+
+To see a logical 'OR' in action in the test database one merely needs to answer yes to either of the two questions:
+
+ *Have you just been in the rain?
+
+ *Were you just exercising vigorously?
+
+The recommendation "You should dry off with a towel" is presented along with a link to a magpie stealing a towel.
+
+
 
 See section 3.5 "IMPROVED" RULE SPECIFICATION below.
 
