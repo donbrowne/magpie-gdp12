@@ -467,12 +467,6 @@ class FactGroup(object):
                 return True
         return False
 
-    def del_root(self, tree):
-        for node in self.nodes:
-            tree.del_root(node)
-            if node.check_state(NODE_UNTESTED):
-                node.set_state(NODE_TESTED)
-
     def add_children(self, child_list):
         for child in child_list:
             self.children.append(child)
@@ -501,7 +495,6 @@ class FactNode(object):
         self.value = value
         self.parent_groups = []
         self.state = state
-        self.level = 0
 
     def get_type(self):
         return self.node_type
@@ -511,9 +504,6 @@ class FactNode(object):
 
     def set_state(self, state):
         self.state = state
-
-    def get_level(self):
-        return self.level
 
     def add_premise(self, group):
         self.parent_groups.append(group)
@@ -551,20 +541,6 @@ class FactTree(object):
     def get_rec(self, rec_id, value):
         return self.get_node(REC_NODE, rec_id, value)
 
-    def get_level(self, level):
-        item_list = []
-        if len(self.levels) >= level:
-            item_set = self.levels[level-1]
-            for item in item_set:
-                item_list.append(item)
-        return item_list
-
-    def get_maxlevel(self):
-        return len(self.levels)
-
-    def get_roots(self):
-        return self.get_level(1)
-
     def add_node(self, node):
         key = node.get_key()
         self.node_dict[key] = node
@@ -575,14 +551,6 @@ class FactTree(object):
     def add_rec(self, node):
         self.add_node(node)
         self.goals.append(node)
-
-    def add_root(self, node):
-        self.add_node(node)
-        self.level_node(node, 1)
-
-    def del_root(self, node):
-        if node.level == 1:
-            self.unlevel_node(node)
 
     def add_group(self, group):
         self.groups.append(group)
