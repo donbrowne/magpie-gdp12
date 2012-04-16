@@ -91,10 +91,8 @@ One posible solution is to run -
 The install stage of the script will symlink the wsgi script, as well
 as the media and static files folders to the DESTDIR folder. The page 
 can be accessed by navigating to the URL where that folder is served, 
-and launching the wsgi script. This assumes that the folder from which 
-Apache servers has a suitable htaccess file for serving wsgi files, and 
-that Apache has been suitably configured. The htaccess file will look 
-like -
+and launching the wsgi script. It also copies a htaccess file to that
+directory, containing -
 
   Options +ExecCGI 
   AddHandler wsgi-script .wsgi
