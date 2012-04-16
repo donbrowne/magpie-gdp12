@@ -419,7 +419,9 @@ As in the previous feature example, you can just next past any of the other ques
 5. In the graph itself additional information is provided to the user when they click on any of the nodes.  
    This information is in the form of a pop-up and can be dismissed by clicking on the "OK" button in the pop-up.
 
+2.11.2 Display of PML specification -
 
+Along side with the link for the graph viewer, a link to see the PML specification is available. This brings the user to a plain text display of the PML specification. This specification is useful for tools that can read PML.
 
 2.12  USER PROFILES
 -------------------------------------------------------------------------------------
