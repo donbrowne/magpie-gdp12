@@ -48,14 +48,12 @@ class ParserTests(TestCase):
         self.assertEqual(str(node), '1:Y')
 
     def testEmpty(self):
-        pos = -1
-        got_except = False
+        e = None
         try:
             self.parser.parse([])
         except PremiseException as e:
-            got_except = True
-            pos = e.pos
-        self.assertTrue(got_except and pos == 0)
+            pass
+        self.assertTrue(e and e.pos == 0)
 
     def testSimple(self):
         premise = RulePremise(
@@ -67,6 +65,19 @@ class ParserTests(TestCase):
         self.assertTrue(root.ptype==PTYPE_VAR and 
               root.left == 100 and
               root.right == 'Y')
+
+    def testTrail(self):
+        premise = RulePremise(
+                lchoice='', 
+                variable=Variable(id=100,name='x'),
+                value='Y',
+                rchoice='  )')
+        e = None
+        try:
+            root = self.parser.parse([premise])
+        except PremiseException as e:
+            pass
+        self.assertTrue(e and e.pos == 0 and e.field == PFIELD_RIGHT)
 
     def testSimple1Compound(self):
         premise = RulePremise(
