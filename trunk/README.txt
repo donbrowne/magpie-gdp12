@@ -59,11 +59,11 @@ The folder in which this readme is contained should not be located in
 the document root of Apache, but can otherwise be located where the user
 wishes.
 
-Make sure the directory containing the Makefile is your current working
-directory. Run the following (where DESTDIR should be the file system 
-path to the folder that serves as the Apache document root, or a 
-subdirectory of that folder. DESTDIR must exist, the makefile will check
-if the folder exists, and terminate if it does not) -
+Make sure the directory containing this README is your current working
+directory. Run the following (where the path following DESTDIR should be 
+the file system path to the folder that serves as the Apache document 
+root, or a subdirectory of that folder. DESTDIR must exist, the makefile 
+will check if the folder exists, and terminate if it does not) -
 
   make install DESTDIR=/home/magpie/public_html/
   
