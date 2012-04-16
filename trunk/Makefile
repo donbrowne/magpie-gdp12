@@ -40,7 +40,7 @@ clean:
 	find $(MAGDIR)/django_magpie/ -type f -name "*.pyc" -exec rm -f {} \;
 
 install: test
-	@if [ -d $(DESTDIR) ]; then echo "Creating symlinks"; cd $(DESTDIR); ln -s $(MAGDIR)/django_magpie/magpie.wsgi magpie.wsgi; ln -s $(MAGDIR)/resources/media media; ln -s $(MAGDIR)/resources/static static; echo "Install Done!"; else echo "ERROR: DESTDIR does not exist. Install not finished."; fi
+	@if [ -d $(DESTDIR) ]; then echo "Creating symlinks"; cd $(DESTDIR); rm -f magpie.wsgi; rm -f media; rm -f static; ln -s $(MAGDIR)/django_magpie/magpie.wsgi magpie.wsgi; ln -s $(MAGDIR)/resources/media media; ln -s $(MAGDIR)/resources/static static; echo "Install Done!"; else echo "ERROR: DESTDIR does not exist. Install not finished."; fi
 	
 test: build
 	python $(MAGDIR)/django_magpie/manage.py test
@@ -51,7 +51,7 @@ reset: build
 	rm -f $(MAGDIR)/sqlite3/magpie.db
 	python $(MAGDIR)/django_magpie/manage.py syncdb
 	chmod $(FILE_MODE) $(MAGDIR)/sqlite3/magpie.db 
-	@echo "Build Done!"
+	@echo "Reset Done!"
 	
 distclean: clean 
 	rm -rf $(MAGDIR)/sqlite3
