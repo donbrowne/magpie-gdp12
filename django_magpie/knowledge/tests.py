@@ -1389,3 +1389,38 @@ class FactStateTests(TestCase):
         facts = start.get_facts()
         self.assertEquals(ruleset_ids, [ruleset.id])
         self.assertEquals(facts, [(v1.id,'N'), (v2.id,'N')])
+
+class VariableAdminTests(TestCase):
+
+    def setUp(self):
+        username = 'test'
+        password = 'test'
+        User.objects.create_superuser(username, '', password)
+        success = self.client.login(username=username,password=password)
+        self.assertTrue(success)
+
+    def test_add_ask_prompt(self):
+        url = reverse('admin:knowledge_variable_add')
+        name=random_string(10)
+        prompt=random_string(10)
+        rsp = self.client.post(url, {
+                'name' : name,
+                'ask': True,
+                'prompt': prompt,
+                })
+        self.assertEqual(rsp.status_code, 302)
+        self.assertTrue(Variable.objects.count(),1)
+        var = Variable.objects.all()[0]
+        self.assertEquals(var.name, name)
+        self.assertEquals(var.prompt, prompt)
+
+    def test_add_ask_noprompt(self):
+        url = reverse('admin:knowledge_variable_add')
+        name=random_string(10)
+        rsp = self.client.post(url, {
+                'name' : name,
+                'ask': True,
+                'prompt': '',
+                })
+        self.assertEqual(rsp.status_code, 200)
+        self.assertEquals(Variable.objects.count(),0)
