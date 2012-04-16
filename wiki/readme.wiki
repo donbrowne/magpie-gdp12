@@ -95,7 +95,8 @@ can be accessed by navigating to the URL where that folder is served,
 and launching the wsgi script. It also copies a htaccess file to that
 directory, containing -
 
-  Options +ExecCGI 
+  Options +ExecCGI
+ 
   AddHandler wsgi-script .wsgi
   
 After the install, the resources/media/ folder contains a .htaccess
