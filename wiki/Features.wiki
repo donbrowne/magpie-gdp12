@@ -227,7 +227,7 @@ For more details please see sections:
 ====Variables====
 Variable values are also called "Facts" in the context of this application domain.
 The variable values or "Facts" that we are interested in are both Yes/No answers to questions posed to users as well as values from any conclusions (inferred) from the user answered questions.
-Variables can be added with the button "Add variable" (Home->Knowledge->Variables).
+Variables can be added with the button "Add variable" *Home > Knowledge > Variables*.
 Variables require a "Name:" to identify them to the Admin system and a "Prompt:" which is typically the text of a question that we wish to pose to a user.
 There is a tick box labeled "Ask" which determines whether or not the variable is asked of a user.
 We may not want to ask a user about a variable if we intended on inferring the variables value with a conclusion. In this case it may help to set the "Prompt:" to something sensibly descriptive.
@@ -272,9 +272,9 @@ Recommendations can take various forms: images, video, PML (specification/roadma
 
 Changing the ordering of rules in a given rule set (e.g. for IngestUser in the test database):
 
-1. From: [ Home › Knowledge › Rule sets ], click on the rule set of interest (for this example click IngestUser).
+1. From: *Home › Knowledge › Rule sets*, click on the rule set of interest (for this example click IngestUser).
 
-You should now be in [ Home › Knowledge › Rule sets › IngestUser ].  For any given rule you should see on the left of its "bar" a numeric ordering.
+You should now be in *Home › Knowledge › Rule sets › IngestUser *.  For any given rule you should see on the left of its "bar" a numeric ordering.
 This indicates the order in which the rules fire.  In order to change this ordering proceed as follows.
 
 2. Locate the "Move Item" control on the "bar" for the rule you wish to re-order (it is a diamond shaped icon to the right of the X icon on the right of the "bar").
@@ -301,7 +301,7 @@ See 3.5 "IMPROVED" RULE SPECIFICATION
 
 Specify a maintenance user:
 
-From the administration site [ Home › Auth › Users ] one can create new users with the "+ Add user" button on the upper right hand side of the interface.
+From the administration site *Home › Auth › Users* one can create new users with the "+ Add user" button on the upper right hand side of the interface.
 In order to specify a maintenance level user do as follows.
 
 1. Click the "+ Add user" button.
@@ -458,7 +458,7 @@ For more detail see section 2.14 SAVE/RESTORE SESSION STATE ON LOGOUT/LOGIN.
 
 User profiles are specified in the administration interface from:
 
-[ Home › Register › Profiles ]
+ *Home › Register › Profiles*
 
 Profiles lists all the profiles set up on the system. New profiles can be created in this section.
 Profiles are created with a profile name. 
@@ -470,7 +470,7 @@ Thus the profiles may have a list of variables set to specific default values fr
 
 1. Click on the button "Add profile"
 
-This will bring you to [ Home › Register › Profiles › Add profile ]
+This will bring you to *Home › Register › Profiles › Add profile*
 
 2. Next input a name for the profile.
 
@@ -508,7 +508,7 @@ In addition to the question state, the associated Recommendations and Reasons ar
 
 Resource files can be linked to recommendations as follows:
 
-1. From the administration interface section [ Home › Knowledge › Recommends ] select a Recommend by clicking on it.
+1. From the administration interface section *Home › Knowledge › Recommends* select a Recommend by clicking on it.
 
 2. Select the resource from one of the 3 link fields as appropriate for your need.
 
@@ -522,7 +522,7 @@ Resource files can be linked to recommendations as follows:
 -------------------------------------------------------------------------------------
 
 Artifacts (resources) should be stored on the server hosting the DSS, or optionally linked to on YouTube or other external web sites - see 2.15 (step 4) listed above.
-Resource files can be added (stored) to the server using administration interface at [ Home › Knowledge › Resource files ].
+Resource files can be added (stored) to the server using administration interface at *Home › Knowledge › Resource files*.
 
 In order to add a resource file:
 
@@ -539,7 +539,7 @@ In order to add a resource file:
 2.17 ACCESS (TO SUPPORTING ARTIFACTS) BASED ON LOGIN ID
 -------------------------------------------------------------------------------------
 
-Resources can be restricted by user login ID following the steps listed in 16 above when adding a resource.  An existing resource can be modified from [ Home › Knowledge › Resource files ].
+Resources can be restricted by user login ID following the steps listed in 16 above when adding a resource.  An existing resource can be modified from *Home › Knowledge › Resource files*.
 
 To modify an existing resource:
  
@@ -626,7 +626,7 @@ See section 3.5 "IMPROVED" RULE SPECIFICATION below.
 
 Rules are specified in the form of rule sets.  
 A profile type is associated with a rule set (in the Profiles section of the administration console).
-From [ Home › Knowledge › Rule sets ] click the "+ Add rule set" button to create a new rule set.
+From *Home › Knowledge › Rule sets* click the "+ Add rule set" button to create a new rule set.
 Rule sets are made up of one or more rules.
 Rules are added to a rule set by using the "Add Rule" button available when editing a rule set.
 When specifying a rule there are three main sections:  Premises, Conclusions and Recommendations.
@@ -680,7 +680,7 @@ Rank - A feature for assigning a priority ranking to recommendations.
 
 Rules may assert facts in the form of conclusions.
 
-From [ Home › Knowledge › Rule sets ] one can add or edit an existing rule set.
+From *Home › Knowledge › Rule sets* one can add or edit an existing rule set.
 
 When specifying a rule you may list premises which when evaluated collectively will result in conclusions (asserted facts) being set.
 This is in addition to any recommendations fired by the list of premises being evaluated.
