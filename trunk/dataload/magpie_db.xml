@@ -105,11 +105,6 @@
     <field type="CharField" name="app_label">knowledge</field>
     <field type="CharField" name="model">variable</field>
   </object>
-  <object pk="13" model="contenttypes.contenttype">
-    <field type="CharField" name="name">variable choice</field>
-    <field type="CharField" name="app_label">knowledge</field>
-    <field type="CharField" name="model">variablechoice</field>
-  </object>
   <object pk="b7343696ce0ddfeef3f5c09aae95a23a" model="sessions.session">
     <field type="TextField" name="session_data">MWVmODlkMTQ5YTk0ZmUyNGQ1MDI1Y2ZmZTZhMmZhOTFkN2JkODc4ODqAAn1xAVUGZW5naW5lcQJd
 cQMoVQdhbnN3ZXJzcQRdhnEFVQV0ZXN0c3EGXYZxB1UIcnVsZXNldHNxCF2GcQlVBHZhcnNxCl2G
@@ -354,9 +349,390 @@ VQ1fYXV0aF91c2VyX2lkcQRLAXUu
 </field>
     <field type="DateTimeField" name="expire_date">2012-03-19 02:40:13</field>
   </object>
+  <object pk="76749e63b107b88718d1d91ea5e35392" model="sessions.session">
+    <field type="TextField" name="session_data">ODJjNGZhMmY3ODdjNDliNGZlZWU5NDQyMzI1ZWJmOWM4MWY2OGUwNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+</field>
+    <field type="DateTimeField" name="expire_date">2012-04-28 14:56:05</field>
+  </object>
+  <object pk="e8a58d173976104dbc90f5b40932a9bd" model="sessions.session">
+    <field type="TextField" name="session_data">ODJjNGZhMmY3ODdjNDliNGZlZWU5NDQyMzI1ZWJmOWM4MWY2OGUwNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+</field>
+    <field type="DateTimeField" name="expire_date">2012-04-30 02:15:26</field>
+  </object>
+  <object pk="9733cfc649468aa87a797fbe40b3bcf9" model="sessions.session">
+    <field type="TextField" name="session_data">NTZjNmFmNzcwNzQxYjQxYzg3YjljMDkxYzAzNWIyY2JkZDg0YzRkZjqAAn1xAVUGZW5naW5lXXEC
+KFUFdGVzdHNxA11xBEsFYYZxBVUIcnVsZXNldHNxBl1xB0sCYYZxCFUEdmFyc3EJXXEKSwRVAEsB
+h3ELYYZxDGVzLg==
+</field>
+    <field type="DateTimeField" name="expire_date">2012-04-30 02:16:05</field>
+  </object>
   <object pk="1" model="sites.site">
     <field type="CharField" name="domain">example.com</field>
     <field type="CharField" name="name">example.com</field>
+  </object>
+  <object pk="220" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 15:00:11</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">1</field>
+    <field type="CharField" name="object_repr">IF testVariable=Y THEN testRecommend text text text</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="219" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 15:00:03</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">15</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; CanCookFood=Y THEN Make these foods in your own kitchen.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="218" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:59</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="217" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:55</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">11</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; IsHot=Y &amp; LikesIceCream=Y THEN Eat ice cream.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="216" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:52</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Y &amp; LikesTea=N &amp; LikesHotChocolate=N THEN Drink some cold water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="215" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:49</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">15</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; CanCookFood=Y THEN Make these foods in your own kitchen.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed rchoice for rule premise "IsHungry=Y &amp; ".</field>
+  </object>
+  <object pk="214" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:41</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">IF HasKitchen=Y &amp; LikesCooking=Y THEN CanCookFood=Y</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="213" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:35</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">IF HasKitchen=Y &amp; LikesCooking=Y THEN CanCookFood=Y</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="212" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:30</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">IF HasKitchen=Y &amp; LikesCooking=Y THEN CanCookFood=Y</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="211" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:25</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">14</field>
+    <field type="CharField" name="object_repr">IF HasKitchen=Y &amp; LikesCooking=Y THEN CanCookFood=Y</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed rchoice for rule premise "HasKitchen=Y &amp; ".</field>
+  </object>
+  <object pk="210" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:17</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Y &amp; LikesTea=N &amp; LikesHotChocolate=N THEN Drink some cold water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="209" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:13</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">11</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; IsHot=Y &amp; LikesIceCream=Y THEN Eat ice cream.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="208" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:09</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Y &amp; LikesTea=N &amp; LikesHotChocolate=N THEN Drink some cold water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="207" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:59:01</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">11</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; IsHot=Y &amp; LikesIceCream=Y THEN Eat ice cream.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="206" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:58:57</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">13</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Y &amp; LikesTea=N &amp; LikesHotChocolate=N THEN Drink some cold water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed rchoice for rule premise "IsThirsty=Y &amp; ". Changed rchoice for rule premise "LikesTea=N &amp; ".</field>
+  </object>
+  <object pk="205" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:58:45</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">11</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; IsHot=Y &amp; LikesIceCream=Y THEN Eat ice cream.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed rchoice for rule premise "IsHungry=Y &amp; ". Changed rchoice for rule premise "IsHot=Y &amp; ".</field>
+  </object>
+  <object pk="204" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:58:36</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">10</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Y &amp; IsCold=Y &amp; LikesHotChocolate=Y THEN Drink some hot chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="203" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:58:31</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">10</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Y &amp; IsCold=Y &amp; LikesHotChocolate=Y THEN Drink some hot chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed rchoice for rule premise "IsThirsty=Y &amp; ". Changed rchoice for rule premise "IsCold=Y &amp; ".</field>
+  </object>
+  <object pk="202" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:58:20</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">9</field>
+    <field type="CharField" name="object_repr">IF IsCold=Y &amp; IsThirsty=Y &amp; LikesTea=Y THEN Drink some tea.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="201" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:58:17</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">8</field>
+    <field type="CharField" name="object_repr">IF IsHot=Y &amp; IsThirsty=Y THEN Drink some cold water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="200" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:58:14</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">9</field>
+    <field type="CharField" name="object_repr">IF IsCold=Y &amp; IsThirsty=Y &amp; LikesTea=Y THEN Drink some tea.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="199" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:58:08</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">9</field>
+    <field type="CharField" name="object_repr">IF IsCold=Y &amp; IsThirsty=Y &amp; LikesTea=Y THEN Drink some tea.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed rchoice for rule premise "IsCold=Y &amp; ". Changed rchoice for rule premise "IsThirsty=Y &amp; ".</field>
+  </object>
+  <object pk="198" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:55</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">8</field>
+    <field type="CharField" name="object_repr">IF IsHot=Y &amp; IsThirsty=Y THEN Drink some cold water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="197" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:51</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; LikesChocolate=Y THEN Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="196" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:48</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; LikesChocolate=Y THEN Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="195" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:44</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; LikesBiscuits=Y THEN Eat biscuits.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="194" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:41</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; LikesCake=Y THEN Eat cake.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="193" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:38</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">7</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Y THEN Have a drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="192" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:35</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">6</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=N THEN Don't Drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="191" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:33</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">6</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=N THEN Don't Drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="190" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:28</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="189" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:25</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">IF IsHungry=N THEN Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="188" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:21</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">8</field>
+    <field type="CharField" name="object_repr">IF IsHot=Y &amp; IsThirsty=Y THEN Drink some cold water.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed rchoice for rule premise "IsHot=Y &amp; ".</field>
+  </object>
+  <object pk="187" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:57:14</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">12</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; LikesChocolate=Y THEN Eat chocolate.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed rchoice for rule premise "IsHungry=Y &amp; ".</field>
+  </object>
+  <object pk="186" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:56:59</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">4</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; LikesBiscuits=Y THEN Eat biscuits.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed rchoice for rule premise "IsHungry=Y &amp; ".</field>
+  </object>
+  <object pk="185" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:56:46</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y &amp; LikesCake=Y THEN Eat cake.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed rchoice for rule premise "IsHungry=Y &amp; ".</field>
+  </object>
+  <object pk="184" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:56:38</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">7</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=Y THEN Have a drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="183" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:56:35</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">6</field>
+    <field type="CharField" name="object_repr">IF IsThirsty=N THEN Don't Drink.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="182" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:56:32</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">IF IsHungry=Y THEN Eat some food.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
+  </object>
+  <object pk="181" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-14 14:56:29</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">5</field>
+    <field type="CharField" name="object_repr">IF IsHungry=N THEN Don't Eat.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">No fields changed.</field>
   </object>
   <object pk="180" model="admin.logentry">
     <field type="DateTimeField" name="action_time">2012-03-05 01:25:26</field>
@@ -2246,82 +2622,82 @@ VQ1fYXV0aF91c2VyX2lkcQRLAXUu
   <object pk="1" model="knowledge.variable">
     <field type="SlugField" name="name">testVariable</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">testVariable?</field>
+    <field type="TextField" name="prompt">testVariable?</field>
   </object>
   <object pk="2" model="knowledge.variable">
     <field type="SlugField" name="name">LikesCake</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like cake?</field>
+    <field type="TextField" name="prompt">Do you like cake?</field>
   </object>
   <object pk="3" model="knowledge.variable">
     <field type="SlugField" name="name">LikesBiscuits</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like biscuits?</field>
+    <field type="TextField" name="prompt">Do you like biscuits?</field>
   </object>
   <object pk="4" model="knowledge.variable">
     <field type="SlugField" name="name">IsHungry</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Are you hungry?</field>
+    <field type="TextField" name="prompt">Are you hungry?</field>
   </object>
   <object pk="5" model="knowledge.variable">
     <field type="SlugField" name="name">IsThirsty</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Are you thirsty?</field>
+    <field type="TextField" name="prompt">Are you thirsty?</field>
   </object>
   <object pk="6" model="knowledge.variable">
     <field type="SlugField" name="name">IsHot</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Are you hot?</field>
+    <field type="TextField" name="prompt">Are you hot?</field>
   </object>
   <object pk="7" model="knowledge.variable">
     <field type="SlugField" name="name">LikesIceCream</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like ice cream?</field>
+    <field type="TextField" name="prompt">Do you like ice cream?</field>
   </object>
   <object pk="8" model="knowledge.variable">
     <field type="SlugField" name="name">LikesSorbet</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like sorbet?</field>
+    <field type="TextField" name="prompt">Do you like sorbet?</field>
   </object>
   <object pk="9" model="knowledge.variable">
     <field type="SlugField" name="name">IsCold</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Are you cold?</field>
+    <field type="TextField" name="prompt">Are you cold?</field>
   </object>
   <object pk="10" model="knowledge.variable">
     <field type="SlugField" name="name">LikesTea</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like tea?</field>
+    <field type="TextField" name="prompt">Do you like tea?</field>
   </object>
   <object pk="11" model="knowledge.variable">
     <field type="SlugField" name="name">LikesHotChocolate</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like hot chocolate?</field>
+    <field type="TextField" name="prompt">Do you like hot chocolate?</field>
   </object>
   <object pk="12" model="knowledge.variable">
     <field type="SlugField" name="name">LikesChocolate</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like chocolate?</field>
+    <field type="TextField" name="prompt">Do you like chocolate?</field>
   </object>
   <object pk="14" model="knowledge.variable">
     <field type="SlugField" name="name">LikesBiscuitsChocolateCake</field>
     <field type="BooleanField" name="ask">False</field>
-    <field type="CharField" name="prompt">User likes biscuits, chocolate and cake.</field>
+    <field type="TextField" name="prompt">User likes biscuits, chocolate and cake.</field>
   </object>
   <object pk="15" model="knowledge.variable">
     <field type="SlugField" name="name">LikesCooking</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like cooking?</field>
+    <field type="TextField" name="prompt">Do you like cooking?</field>
   </object>
   <object pk="16" model="knowledge.variable">
     <field type="SlugField" name="name">HasKitchen</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you have a kitchen?</field>
+    <field type="TextField" name="prompt">Do you have a kitchen?</field>
   </object>
   <object pk="17" model="knowledge.variable">
     <field type="SlugField" name="name">CanCookFood</field>
     <field type="BooleanField" name="ask">False</field>
-    <field type="CharField" name="prompt">User has facility to cook own food.</field>
+    <field type="TextField" name="prompt">User has facility to cook own food.</field>
   </object>
   <object pk="1" model="knowledge.ruleset">
     <field type="SlugField" name="name">testRuleset</field>
@@ -2393,146 +2769,204 @@ VQ1fYXV0aF91c2VyX2lkcQRLAXUu
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">1</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">1</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="2" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">2</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="3" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">3</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="4" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">4</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="5" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">5</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">N</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="6" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">2</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">2</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="7" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">4</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">3</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="8" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">6</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">N</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="9" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">7</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="10" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">8</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">6</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="11" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">8</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="12" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">9</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="13" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="14" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">10</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="15" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="16" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">9</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="17" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">11</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="18" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="19" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">6</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="20" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">7</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="21" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">12</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="22" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">12</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">12</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="23" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="24" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">10</field>
     <field type="CharField" name="value">N</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="25" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">11</field>
     <field type="CharField" name="value">N</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="26" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">16</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="27" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">15</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="28" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="29" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">17</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="1" model="knowledge.ruleconclusion">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
@@ -2912,21 +3346,6 @@ VQ1fYXV0aF91c2VyX2lkcQRLAXUu
     <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
     <field type="CharField" name="codename">delete_variable</field>
   </object>
-  <object pk="38" model="auth.permission">
-    <field type="CharField" name="name">Can add variable choice</field>
-    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
-    <field type="CharField" name="codename">add_variablechoice</field>
-  </object>
-  <object pk="39" model="auth.permission">
-    <field type="CharField" name="name">Can change variable choice</field>
-    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
-    <field type="CharField" name="codename">change_variablechoice</field>
-  </object>
-  <object pk="40" model="auth.permission">
-    <field type="CharField" name="name">Can delete variable choice</field>
-    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
-    <field type="CharField" name="codename">delete_variablechoice</field>
-  </object>
   <object pk="62" model="auth.permission">
     <field type="CharField" name="name">Can add account</field>
     <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">21</field>
@@ -3030,7 +3449,7 @@ VQ1fYXV0aF91c2VyX2lkcQRLAXUu
     <field type="BooleanField" name="is_staff">True</field>
     <field type="BooleanField" name="is_active">True</field>
     <field type="BooleanField" name="is_superuser">True</field>
-    <field type="DateTimeField" name="last_login">2012-03-05 02:40:13</field>
+    <field type="DateTimeField" name="last_login">2012-04-16 02:15:26</field>
     <field type="DateTimeField" name="date_joined">2012-03-04 08:59:11</field>
     <field to="auth.group" name="groups" rel="ManyToManyRel"/>
     <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"/>
