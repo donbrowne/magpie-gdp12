@@ -154,20 +154,20 @@ The overview is broken down into four sections:
 * SITES
 
 
-====AUTH (AUTHORISATION)====
+===AUTH (AUTHORISATION)===
 
 Auth(authorisation) is utilised to manage Magpie administration rights at group and account level.
 Contains two subsections: Groups and Users. 
 Various permissions can be specified relating to how a unique account or accounts belonging to a particular group can interact with the system.
 
 
-====KNOWLEDGE====
+===KNOWLEDGE===
 
 Knowledge is where you can create recommendations, upload multimedia content and specify rules of inferrence to tailor recommendations to users.
 Contains four subsections: Recommends, Resource files, Rule sets, and Variables.
 
 
-=====Recommends=====
+====Recommends====
 This section contains the list of the set of recommendations that have been input. The process of having the user answer questions allows a subset of recommendations to be generated from this list and displayed to the user. Clicking on the button "Add recommend" opens a window to allow you to input details for a given recommend.
 
 Recommends must consist of an identifying name, some descriptive text.
@@ -181,7 +181,7 @@ For additional information see section:
 3.5.3 Recommendations
 
 
-=====Resource files=====
+====Resource files====
 This section allows you to upload resource files to the Magpie server for attaching to the recommendations.
 
 You must specify a description of the resource for ease of administration.
@@ -199,7 +199,7 @@ For additional information see sections:
 2.17 ACCESS (TO SUPPORTING ARTIFACTS) BASED ON LOGIN ID
 
 
-=====Rule sets=====
+====Rule sets====
 This is where you may create multiple rule sets to govern which information is asked of users and which recommendations are presented to them.
 A users profile is associated a rule set to determine which questions are posed to the user. Thus different user profiles may be posed different sets of questions to get different recommendations from the same knowledge base.
 The button "Add rule set" allows you to specify a list of rules which are run in order starting at Rule 1. Rule sets need a name to identify them for administration.
@@ -224,7 +224,7 @@ For more details please see sections:
 3.6 RULES ASSERT FACTS AS WELL AS RECOMMENDATIONS
 
 
-=====Variables=====
+====Variables====
 Variable values are also called "Facts" in the context of this application domain.
 The variable values or "Facts" that we are interested in are both Yes/No answers to questions posed to users as well as values from any conclusions (inferred) from the user answered questions.
 Variables can be added with the button "Add variable" (Home->Knowledge->Variables).
@@ -233,18 +233,18 @@ There is a tick box labeled "Ask" which determines whether or not the variable i
 We may not want to ask a user about a variable if we intended on inferring the variables value with a conclusion. In this case it may help to set the "Prompt:" to something sensibly descriptive.
 
 
-====REGISTER====
+===REGISTER===
 
 Register administration consists of sections: Profiles and Accounts.
 
-=====Profiles=====
+====Profiles====
 Profiles lists all the profiles set up on the system. 
 New profiles can be created in this section.
 Profiles are created with a profile name. 
 Profiles are associated with a rule set. 
 Profiles may have particular variables (or answers to questions you may pose) set to specific values by adding Profile answers.
 
-=====Accounts=====
+====Accounts====
 Accounts lists all of the user accounts registered on the system. 
 Accounts can be created by guest users registering to get a user account on the system.
 Clicking on an account in the list allows you to edit its associated parameters.
@@ -253,7 +253,7 @@ An account should be associated with a profile and thus may inherit Profile answ
 An account may have variables set to specific default values by adding Account answers similar to Profile answers above. 
 
 
-====SITES====
+===SITES===
 
 Sites is not currently used in the application but technically we should be settting the domain name in there as well as the FQDN of the website.
 
