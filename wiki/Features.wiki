@@ -616,9 +616,9 @@ Not implemented.
 
 To see a logical 'OR' in action in the test database one merely needs to answer yes to either of the two questions:
 
- *Have you just been in the rain?
+ * Have you just been in the rain?
 
- *Were you just exercising vigorously?
+ * Were you just exercising vigorously?
 
 The recommendation "You should dry off with a towel" is presented along with a link to a magpie stealing a towel.
 
