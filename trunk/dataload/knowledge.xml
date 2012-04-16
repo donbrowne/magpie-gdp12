@@ -268,82 +268,82 @@
   <object pk="1" model="knowledge.variable">
     <field type="SlugField" name="name">testVariable</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">testVariable?</field>
+    <field type="TextField" name="prompt">testVariable?</field>
   </object>
   <object pk="2" model="knowledge.variable">
     <field type="SlugField" name="name">LikesCake</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like cake?</field>
+    <field type="TextField" name="prompt">Do you like cake?</field>
   </object>
   <object pk="3" model="knowledge.variable">
     <field type="SlugField" name="name">LikesBiscuits</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like biscuits?</field>
+    <field type="TextField" name="prompt">Do you like biscuits?</field>
   </object>
   <object pk="4" model="knowledge.variable">
     <field type="SlugField" name="name">IsHungry</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Are you hungry?</field>
+    <field type="TextField" name="prompt">Are you hungry?</field>
   </object>
   <object pk="5" model="knowledge.variable">
     <field type="SlugField" name="name">IsThirsty</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Are you thirsty?</field>
+    <field type="TextField" name="prompt">Are you thirsty?</field>
   </object>
   <object pk="6" model="knowledge.variable">
     <field type="SlugField" name="name">IsHot</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Are you hot?</field>
+    <field type="TextField" name="prompt">Are you hot?</field>
   </object>
   <object pk="7" model="knowledge.variable">
     <field type="SlugField" name="name">LikesIceCream</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like ice cream?</field>
+    <field type="TextField" name="prompt">Do you like ice cream?</field>
   </object>
   <object pk="8" model="knowledge.variable">
     <field type="SlugField" name="name">LikesSorbet</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like sorbet?</field>
+    <field type="TextField" name="prompt">Do you like sorbet?</field>
   </object>
   <object pk="9" model="knowledge.variable">
     <field type="SlugField" name="name">IsCold</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Are you cold?</field>
+    <field type="TextField" name="prompt">Are you cold?</field>
   </object>
   <object pk="10" model="knowledge.variable">
     <field type="SlugField" name="name">LikesTea</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like tea?</field>
+    <field type="TextField" name="prompt">Do you like tea?</field>
   </object>
   <object pk="11" model="knowledge.variable">
     <field type="SlugField" name="name">LikesHotChocolate</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like hot chocolate?</field>
+    <field type="TextField" name="prompt">Do you like hot chocolate?</field>
   </object>
   <object pk="12" model="knowledge.variable">
     <field type="SlugField" name="name">LikesChocolate</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like chocolate?</field>
+    <field type="TextField" name="prompt">Do you like chocolate?</field>
   </object>
   <object pk="14" model="knowledge.variable">
     <field type="SlugField" name="name">LikesBiscuitsChocolateCake</field>
     <field type="BooleanField" name="ask">False</field>
-    <field type="CharField" name="prompt">User likes biscuits, chocolate and cake.</field>
+    <field type="TextField" name="prompt">User likes biscuits, chocolate and cake.</field>
   </object>
   <object pk="15" model="knowledge.variable">
     <field type="SlugField" name="name">LikesCooking</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you like cooking?</field>
+    <field type="TextField" name="prompt">Do you like cooking?</field>
   </object>
   <object pk="16" model="knowledge.variable">
     <field type="SlugField" name="name">HasKitchen</field>
     <field type="BooleanField" name="ask">True</field>
-    <field type="CharField" name="prompt">Do you have a kitchen?</field>
+    <field type="TextField" name="prompt">Do you have a kitchen?</field>
   </object>
   <object pk="17" model="knowledge.variable">
     <field type="SlugField" name="name">CanCookFood</field>
     <field type="BooleanField" name="ask">False</field>
-    <field type="CharField" name="prompt">User has facility to cook own food.</field>
+    <field type="TextField" name="prompt">User has facility to cook own food.</field>
   </object>
   <object pk="1" model="knowledge.ruleset">
     <field type="SlugField" name="name">testRuleset</field>
@@ -415,146 +415,204 @@
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">1</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">1</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="2" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">2</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="3" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">3</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="4" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">4</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="5" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">5</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">N</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="6" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">2</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">2</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="7" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">4</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">3</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="8" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">6</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">N</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="9" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">7</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="10" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">8</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">6</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="11" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">8</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="12" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">9</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="13" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="14" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">9</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">10</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="15" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="16" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">9</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="17" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">10</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">11</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="18" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="19" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">6</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="20" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">11</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">7</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="21" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">12</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="22" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">12</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">12</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="23" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="24" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">10</field>
     <field type="CharField" name="value">N</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="25" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">13</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">11</field>
     <field type="CharField" name="value">N</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="26" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">16</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="27" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">15</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="28" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">&amp;</field>
   </object>
   <object pk="29" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">17</field>
     <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
   </object>
   <object pk="1" model="knowledge.ruleconclusion">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
