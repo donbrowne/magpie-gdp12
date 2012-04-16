@@ -370,9 +370,93 @@ h3ELYYZxDGVzLg==
 </field>
     <field type="DateTimeField" name="expire_date">2012-04-30 02:16:05</field>
   </object>
+  <object pk="4eea9ae63add26273d4f44c6a29c125a" model="sessions.session">
+    <field type="TextField" name="session_data">NjJlYWY3ZDBhZTFlOTM1MzVjMjEzMTdmNWViMDllMTBlNjkzZGI5MzqAAn1xAShVBmVuZ2luZXEC
+XXEDKFUFdGVzdHNxBF2GcQVVCHJ1bGVzZXRzcQZdcQdLAmGGcQhVBHZhcnNxCV1xCihLElUBWUsB
+h3ELSwRVAVlLAYdxDEsFVQFZSwGHcQ1LAlUBWUsBh3EOSwNVAVlLAYdxD0sMVQFZSwGHcRBLBlUA
+SwGHcRFLBlUBWUsBh3ESSwpVAEsBh3ETSwlVAVlLAYdxFEsLVQFZSwGHcRVLB1UBWUsBh3EWSxBV
+AVlLAYdxF0sPVQFZSwGHcRhLEVgBAAAAWUsCh3EZZYZxGmVVEl9hdXRoX3VzZXJfYmFja2VuZHEb
+VSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEcVQ1fYXV0aF91c2Vy
+X2lkcR1LAXUu
+</field>
+    <field type="DateTimeField" name="expire_date">2012-04-30 03:28:57</field>
+  </object>
+  <object pk="3691d48108271fc5fe33c831dfc13e65" model="sessions.session">
+    <field type="TextField" name="session_data">NzI3N2Q3ODI2NzUxNWY4OTBiODdkNzc4MGE5ZTgxZTI3NjBmMDc2NzqAAn1xAS4=
+</field>
+    <field type="DateTimeField" name="expire_date">2012-04-30 03:05:28</field>
+  </object>
+  <object pk="cc0f62e59fffbd60e8f880198da5a6d2" model="sessions.session">
+    <field type="TextField" name="session_data">NzI3N2Q3ODI2NzUxNWY4OTBiODdkNzc4MGE5ZTgxZTI3NjBmMDc2NzqAAn1xAS4=
+</field>
+    <field type="DateTimeField" name="expire_date">2012-04-30 03:26:15</field>
+  </object>
   <object pk="1" model="sites.site">
     <field type="CharField" name="domain">example.com</field>
     <field type="CharField" name="name">example.com</field>
+  </object>
+  <object pk="227" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-16 03:28:14</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">6</field>
+    <field type="CharField" name="object_repr">Eat cake.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed otherLinks.</field>
+  </object>
+  <object pk="226" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-16 03:09:53</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">15</field>
+    <field type="CharField" name="object_repr">You should dry off with a towel.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Added external link "Link to a magpie stealing a towel".</field>
+  </object>
+  <object pk="225" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-16 03:03:22</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">IngestUser</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed order for rule "IF IsHungry=N THEN Don't Eat.". Changed order for rule "IF IsHungry=Y THEN Eat some food.". Changed order for rule "IF IsThirsty=N THEN Don't Drink.". Changed order for rule "IF IsThirsty=Y THEN Have a drink.". Changed order for rule "IF IsHungry=Y &amp; LikesCake=Y THEN Eat cake.". Changed order for rule "IF IsHungry=Y &amp; LikesBiscuits=Y THEN Eat biscuits.". Changed order for rule "IF IsHungry=Y &amp; LikesChocolate=Y THEN Eat chocolate.". Changed order for rule "IF IsHot=Y &amp; IsThirsty=Y THEN Drink some cold water.". Changed order for rule "IF IsCold=Y &amp; IsThirsty=Y &amp; LikesTea=Y THEN Drink some tea.". Changed order for rule "IF IsThirsty=Y &amp; IsCold=Y &amp; LikesHotChocolate=Y THEN Drink some hot chocolate.". Changed order for rule "IF IsHungry=Y &amp; IsHot=Y &amp; LikesIceCream=Y THEN Eat ice cream.". Changed order for rule "IF IsThirsty=Y &amp; LikesTea=N &amp; LikesHotChocolate=N THEN Drink some cold water.". Changed order for rule "IF HasKitchen=Y &amp; LikesCooking=Y THEN CanCookFood=Y". Changed order for rule "IF IsHungry=Y &amp; CanCookFood=Y THEN Make these foods in your own kitchen.". Changed order for rule "IF InTheRain=Y | WasExercising=Y THEN You should dry off with a towel.".</field>
+  </object>
+  <object pk="224" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-16 03:03:13</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+    <field type="TextField" name="object_id">16</field>
+    <field type="CharField" name="object_repr">IF InTheRain=Y | WasExercising=Y THEN You should dry off with a towel.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="223" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-16 03:02:17</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">19</field>
+    <field type="CharField" name="object_repr">WasExercising</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="222" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-16 03:01:48</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+    <field type="TextField" name="object_id">18</field>
+    <field type="CharField" name="object_repr">InTheRain</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
+  </object>
+  <object pk="221" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2012-04-16 03:01:18</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+    <field type="TextField" name="object_id">15</field>
+    <field type="CharField" name="object_repr">You should dry off with a towel.</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"/>
   </object>
   <object pk="220" model="admin.logentry">
     <field type="DateTimeField" name="action_time">2012-04-14 15:00:11</field>
@@ -2506,7 +2590,9 @@ h3ELYYZxDGVzLg==
     <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
       <None/>
     </field>
-    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="3"/>
+    </field>
   </object>
   <object pk="7" model="knowledge.recommend">
     <field type="SlugField" name="name">drinkColdWater</field>
@@ -2604,6 +2690,17 @@ h3ELYYZxDGVzLg==
     </field>
     <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
   </object>
+  <object pk="15" model="knowledge.recommend">
+    <field type="SlugField" name="name">NeedsTowel</field>
+    <field type="CharField" name="text">You should dry off with a towel.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+  </object>
   <object pk="1" model="knowledge.externallink">
     <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">2</field>
     <field type="CharField" name="description">Hungry Magpie on Youtube</field>
@@ -2618,6 +2715,11 @@ h3ELYYZxDGVzLg==
     <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">14</field>
     <field type="CharField" name="description">Cooking according to Wikipedia</field>
     <field type="CharField" name="link">http://en.wikipedia.org/wiki/Cooking</field>
+  </object>
+  <object pk="4" model="knowledge.externallink">
+    <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">15</field>
+    <field type="CharField" name="description">Link to a magpie stealing a towel</field>
+    <field type="CharField" name="link">http://www.youtube.com/watch?v=0EgMAaI255o</field>
   </object>
   <object pk="1" model="knowledge.variable">
     <field type="SlugField" name="name">testVariable</field>
@@ -2699,6 +2801,16 @@ h3ELYYZxDGVzLg==
     <field type="BooleanField" name="ask">False</field>
     <field type="TextField" name="prompt">User has facility to cook own food.</field>
   </object>
+  <object pk="18" model="knowledge.variable">
+    <field type="SlugField" name="name">InTheRain</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="TextField" name="prompt">Have you just been in the rain?</field>
+  </object>
+  <object pk="19" model="knowledge.variable">
+    <field type="SlugField" name="name">WasExercising</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="TextField" name="prompt">Were you just exercising vigorously?</field>
+  </object>
   <object pk="1" model="knowledge.ruleset">
     <field type="SlugField" name="name">testRuleset</field>
   </object>
@@ -2709,61 +2821,65 @@ h3ELYYZxDGVzLg==
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">1</field>
     <field type="PositiveIntegerField" name="order">1</field>
   </object>
-  <object pk="5" model="knowledge.rule">
+  <object pk="16" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">1</field>
   </object>
-  <object pk="3" model="knowledge.rule">
+  <object pk="5" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">2</field>
   </object>
-  <object pk="6" model="knowledge.rule">
+  <object pk="3" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">3</field>
   </object>
-  <object pk="7" model="knowledge.rule">
+  <object pk="6" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">4</field>
   </object>
-  <object pk="2" model="knowledge.rule">
+  <object pk="7" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">5</field>
   </object>
-  <object pk="4" model="knowledge.rule">
+  <object pk="2" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">6</field>
   </object>
-  <object pk="12" model="knowledge.rule">
+  <object pk="4" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">7</field>
   </object>
-  <object pk="8" model="knowledge.rule">
+  <object pk="12" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">8</field>
   </object>
-  <object pk="9" model="knowledge.rule">
+  <object pk="8" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">9</field>
   </object>
-  <object pk="10" model="knowledge.rule">
+  <object pk="9" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">10</field>
   </object>
-  <object pk="11" model="knowledge.rule">
+  <object pk="10" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">11</field>
   </object>
-  <object pk="13" model="knowledge.rule">
+  <object pk="11" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">12</field>
   </object>
-  <object pk="14" model="knowledge.rule">
+  <object pk="13" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">13</field>
   </object>
-  <object pk="15" model="knowledge.rule">
+  <object pk="14" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">14</field>
+  </object>
+  <object pk="15" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">15</field>
   </object>
   <object pk="1" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">1</field>
@@ -2968,6 +3084,20 @@ h3ELYYZxDGVzLg==
     <field type="CharField" name="lchoice"/>
     <field type="CharField" name="rchoice"/>
   </object>
+  <object pk="30" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">16</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">18</field>
+    <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">|</field>
+  </object>
+  <object pk="31" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">16</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">19</field>
+    <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
+  </object>
   <object pk="1" model="knowledge.ruleconclusion">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">17</field>
@@ -3043,6 +3173,11 @@ h3ELYYZxDGVzLg==
     <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">14</field>
     <field type="IntegerField" name="rank">0</field>
   </object>
+  <object pk="16" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">16</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">15</field>
+    <field type="IntegerField" name="rank">1</field>
+  </object>
   <object pk="1" model="register.profile">
     <field type="SlugField" name="name">testProfile</field>
     <field to="knowledge.ruleset" name="ruleset" rel="ManyToOneRel">1</field>
@@ -3115,6 +3250,66 @@ h3ELYYZxDGVzLg==
     <field to="register.account" name="parent" rel="ManyToOneRel">6</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
     <field type="CharField" name="value">N</field>
+  </object>
+  <object pk="20" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">18</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="21" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">4</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="22" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">5</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="23" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">2</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="24" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">3</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="25" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">12</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="26" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">6</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="27" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">9</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="28" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">11</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="29" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">7</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="30" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">16</field>
+    <field type="CharField" name="value">Y</field>
+  </object>
+  <object pk="31" model="register.accountanswer">
+    <field to="register.account" name="parent" rel="ManyToOneRel">1</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">15</field>
+    <field type="CharField" name="value">Y</field>
   </object>
   <object pk="22" model="auth.permission">
     <field type="CharField" name="name">Can add log entry</field>
@@ -3449,7 +3644,7 @@ h3ELYYZxDGVzLg==
     <field type="BooleanField" name="is_staff">True</field>
     <field type="BooleanField" name="is_active">True</field>
     <field type="BooleanField" name="is_superuser">True</field>
-    <field type="DateTimeField" name="last_login">2012-04-16 02:15:26</field>
+    <field type="DateTimeField" name="last_login">2012-04-16 03:00:38</field>
     <field type="DateTimeField" name="date_joined">2012-03-04 08:59:11</field>
     <field to="auth.group" name="groups" rel="ManyToManyRel"/>
     <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"/>
