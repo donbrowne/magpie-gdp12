@@ -332,7 +332,6 @@ class PremiseParser(object):
             if field == PFIELD_LEFT and (idx - 1) >=0 and (idx-1) < lprem:
                 field = PFIELD_RIGHT
                 idx = idx - 1
-                print field, idx
             raise PremiseException(idx, field, 'Missing Variable')
         if self.field != PFIELD_VAR:
             raise PremiseException(self.idx, self.field,
@@ -665,7 +664,10 @@ class Engine(object):
         tnode_list = []
         for tnode in reversed(search_premises[0].get_nodes()):
             if tnode not in node_set:
-                var = Variable.objects.get(pk=tnode.node_id)
+                try:
+                    var = Variable.objects.get(pk=tnode.node_id)
+                except Variable.DoesNotExist:
+                    continue
                 # FIXME this really should be the fact name
                 text = var.prompt if len(var.prompt) > 0 else var.name
                 qa = (text, tnode.value)
@@ -875,7 +877,10 @@ class Engine(object):
         for premise in test_premises: 
             for node in premise.get_nodes():
                 if node.state == NODE_UNTESTED:
-                    variable = Variable.objects.get(pk=node.node_id)
+                    try:
+                        variable = Variable.objects.get(pk=node.node_id)
+                    except Variable.DoesNotExist:
+                        continue
                     if variable.ask:
                         test_ids.append(node.node_id)
         if len(test_ids) > 0:
