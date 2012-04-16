@@ -10,8 +10,9 @@ from django.core.urlresolvers import reverse
 from knowledge.admin import RulePremiseInline, RulePremiseFormSet, ResourceFileAdmin
 from django.forms import formsets
 from django.core.files import File
-import shutil
+from admin import RuleAdmin
 
+import shutil
 import random
 import string
 
@@ -1424,3 +1425,26 @@ class VariableAdminTests(TestCase):
                 })
         self.assertEqual(rsp.status_code, 200)
         self.assertEquals(Variable.objects.count(),0)
+
+class RuleAdminTests(TestCase):
+
+    def setUp(self):
+        username = 'test'
+        password = 'test'
+        User.objects.create_superuser(username, '', password)
+        success = self.client.login(username=username,password=password)
+        self.assertTrue(success)
+
+    def test_model_perms(self):
+        ra = RuleAdmin(Rule, "")
+        self.assertEquals(ra.get_model_perms(None), {})
+
+    def test_response_change(self):
+        ra = RuleAdmin(Rule, "")
+        req = HttpRequest()
+        req.POST["_popup"] = 1
+        ruleset = RuleSet.objects.create(name='backchain')
+        rule = ruleset.rule_set.create()
+        rsp = ra.response_change(req, rule)
+        self.assertTrue(isinstance(rsp, HttpResponse))
+        

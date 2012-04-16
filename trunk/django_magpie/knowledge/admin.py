@@ -131,7 +131,7 @@ class RuleAdmin(admin.ModelAdmin):
             return HttpResponse('<script type="text/javascript">opener.dismissAddAnotherPopup(window, "%s", "%s");</script>' % \
                 # escape() calls force_unicode.
                 (escape(pk_value), escapejs(obj)))
-        return super(RuleAdmin, self).response_change(request, obj, *args, **kwargs)
+        return super(RuleAdmin, self).response_change(request, obj)
 
 
     def save_model(self, request, obj, form, change):
