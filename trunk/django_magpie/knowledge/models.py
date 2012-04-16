@@ -483,11 +483,10 @@ class FactGroup(object):
 VAR_NODE = 0
 REC_NODE = 1
 
-class FactNode(object):
+def factnode_gen_key(ntype, nid, nvalue):
+    return '%d:%d:%s' % (ntype, nid, nvalue)
 
-    @staticmethod
-    def gen_key(ntype, nid, nvalue):
-        return '%d:%d:%s' % (ntype, nid, nvalue)
+class FactNode(object):
 
     def __init__(self, ntype, nid, value, state=NODE_UNTESTED):
         self.node_type = ntype
@@ -514,12 +513,11 @@ class FactNode(object):
     def set_premises(self, premises):
         self.parent_groups = premises
 
-
     def gen_fact_key(self):
         return '%d:%s' %( self.node_id, self.node_value)
 
     def get_key(self):
-        return FactNode.gen_key(self.node_type, self.node_id, self.value)
+        return factnode_gen_key(self.node_type, self.node_id, self.value)
 
     def __str__(self):
         return self.get_key()
@@ -532,7 +530,7 @@ class FactTree(object):
         self.node_dict = {}
 
     def get_node(self, node_type, fact_id, value):
-        key = FactNode.gen_key(node_type, fact_id, value)
+        key = factnode_gen_key(node_type, fact_id, value)
         return self.node_dict.get(key, None)
 
     def get_fact(self, fact_id, value):
