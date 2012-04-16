@@ -152,7 +152,9 @@
     <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
       <None/>
     </field>
-    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel">
+      <object pk="3"/>
+    </field>
   </object>
   <object pk="7" model="knowledge.recommend">
     <field type="SlugField" name="name">drinkColdWater</field>
@@ -250,6 +252,17 @@
     </field>
     <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
   </object>
+  <object pk="15" model="knowledge.recommend">
+    <field type="SlugField" name="name">NeedsTowel</field>
+    <field type="CharField" name="text">You should dry off with a towel.</field>
+    <field to="knowledge.resourcefile" name="pmlLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="videoLink" rel="ManyToOneRel">
+      <None/>
+    </field>
+    <field to="knowledge.resourcefile" name="otherLinks" rel="ManyToManyRel"/>
+  </object>
   <object pk="1" model="knowledge.externallink">
     <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">2</field>
     <field type="CharField" name="description">Hungry Magpie on Youtube</field>
@@ -264,6 +277,11 @@
     <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">14</field>
     <field type="CharField" name="description">Cooking according to Wikipedia</field>
     <field type="CharField" name="link">http://en.wikipedia.org/wiki/Cooking</field>
+  </object>
+  <object pk="4" model="knowledge.externallink">
+    <field to="knowledge.recommend" name="rec" rel="ManyToOneRel">15</field>
+    <field type="CharField" name="description">Link to a magpie stealing a towel</field>
+    <field type="CharField" name="link">http://www.youtube.com/watch?v=0EgMAaI255o</field>
   </object>
   <object pk="1" model="knowledge.variable">
     <field type="SlugField" name="name">testVariable</field>
@@ -345,6 +363,16 @@
     <field type="BooleanField" name="ask">False</field>
     <field type="TextField" name="prompt">User has facility to cook own food.</field>
   </object>
+  <object pk="18" model="knowledge.variable">
+    <field type="SlugField" name="name">InTheRain</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="TextField" name="prompt">Have you just been in the rain?</field>
+  </object>
+  <object pk="19" model="knowledge.variable">
+    <field type="SlugField" name="name">WasExercising</field>
+    <field type="BooleanField" name="ask">True</field>
+    <field type="TextField" name="prompt">Were you just exercising vigorously?</field>
+  </object>
   <object pk="1" model="knowledge.ruleset">
     <field type="SlugField" name="name">testRuleset</field>
   </object>
@@ -355,61 +383,65 @@
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">1</field>
     <field type="PositiveIntegerField" name="order">1</field>
   </object>
-  <object pk="5" model="knowledge.rule">
+  <object pk="16" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">1</field>
   </object>
-  <object pk="3" model="knowledge.rule">
+  <object pk="5" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">2</field>
   </object>
-  <object pk="6" model="knowledge.rule">
+  <object pk="3" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">3</field>
   </object>
-  <object pk="7" model="knowledge.rule">
+  <object pk="6" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">4</field>
   </object>
-  <object pk="2" model="knowledge.rule">
+  <object pk="7" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">5</field>
   </object>
-  <object pk="4" model="knowledge.rule">
+  <object pk="2" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">6</field>
   </object>
-  <object pk="12" model="knowledge.rule">
+  <object pk="4" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">7</field>
   </object>
-  <object pk="8" model="knowledge.rule">
+  <object pk="12" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">8</field>
   </object>
-  <object pk="9" model="knowledge.rule">
+  <object pk="8" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">9</field>
   </object>
-  <object pk="10" model="knowledge.rule">
+  <object pk="9" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">10</field>
   </object>
-  <object pk="11" model="knowledge.rule">
+  <object pk="10" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">11</field>
   </object>
-  <object pk="13" model="knowledge.rule">
+  <object pk="11" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">12</field>
   </object>
-  <object pk="14" model="knowledge.rule">
+  <object pk="13" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">13</field>
   </object>
-  <object pk="15" model="knowledge.rule">
+  <object pk="14" model="knowledge.rule">
     <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
     <field type="PositiveIntegerField" name="order">14</field>
+  </object>
+  <object pk="15" model="knowledge.rule">
+    <field to="knowledge.ruleset" name="parent" rel="ManyToOneRel">2</field>
+    <field type="PositiveIntegerField" name="order">15</field>
   </object>
   <object pk="1" model="knowledge.rulepremise">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">1</field>
@@ -614,6 +646,20 @@
     <field type="CharField" name="lchoice"/>
     <field type="CharField" name="rchoice"/>
   </object>
+  <object pk="30" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">16</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">18</field>
+    <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice">|</field>
+  </object>
+  <object pk="31" model="knowledge.rulepremise">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">16</field>
+    <field to="knowledge.variable" name="variable" rel="ManyToOneRel">19</field>
+    <field type="CharField" name="value">Y</field>
+    <field type="CharField" name="lchoice"/>
+    <field type="CharField" name="rchoice"/>
+  </object>
   <object pk="1" model="knowledge.ruleconclusion">
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">14</field>
     <field to="knowledge.variable" name="variable" rel="ManyToOneRel">17</field>
@@ -688,5 +734,10 @@
     <field to="knowledge.rule" name="parent" rel="ManyToOneRel">15</field>
     <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">14</field>
     <field type="IntegerField" name="rank">0</field>
+  </object>
+  <object pk="16" model="knowledge.rulerecommend">
+    <field to="knowledge.rule" name="parent" rel="ManyToOneRel">16</field>
+    <field to="knowledge.recommend" name="recommend" rel="ManyToOneRel">15</field>
+    <field type="IntegerField" name="rank">1</field>
   </object>
 </django-objects>
