@@ -148,10 +148,10 @@ The following section seeks to give a brief overview of the administration inter
 When an admin account is used to log in to the Magpie administration interface the Magpie site admin Home screen is displayed presenting the system overview. 
 The overview is broken down into four sections: 
 
-* AUTH (AUTHORISATION)
-* KNOWLEDGE
-* REGISTER
-* SITES
+  * AUTH (AUTHORISATION)
+  * KNOWLEDGE
+  * REGISTER
+  * SITES
 
 
 ===AUTH (AUTHORISATION)===
