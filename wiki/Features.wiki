@@ -456,9 +456,7 @@ For more detail see section 2.14 SAVE/RESTORE SESSION STATE ON LOGOUT/LOGIN.
 2.13 SPECIFICATION OF USER PROFILES (BY MAINTAINER)
 -------------------------------------------------------------------------------------
 
-User profiles are specified in the administration interface from:
-
- *Home > Register > Profiles*
+User profiles are specified in the administration interface from: *Home › Register › Profiles › Profiles*
 
 Profiles lists all the profiles set up on the system. New profiles can be created in this section.
 Profiles are created with a profile name. 
