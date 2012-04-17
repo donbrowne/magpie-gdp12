@@ -22,6 +22,7 @@ class RegisterTests(TestCase):
         self.redirect = '/' + random_string(10)
         self.reg_url = makeurl('register',self.redirect)
         self.login_url = makeurl('login',self.redirect)
+        self.logout_url= makeurl('logout',self.redirect)
 
     def test_register_url(self):
         rsp = self.client.get(self.reg_url)
@@ -68,6 +69,10 @@ class RegisterTests(TestCase):
         self.assertEqual(rsp.status_code, 302)
         self.assertEqual(rsp['Location'], 'http://testserver' + self.redirect)
 
+    def test_logout_url(self):
+        rsp = self.client.get(self.logout_url)
+        self.assertEqual(rsp.status_code, 302)
+        self.assertEqual(rsp['Location'], 'http://testserver/')
 
 class AccountTests(TestCase):
 
@@ -209,7 +214,6 @@ class SignalCreateAccount(TestCase):
         signals.post_save.connect(create_account, sender=User)
 
     def test_create_account(self):
-        print 'test_create_account'
         username = random_string(10)
         email = '%s@test.com' % random_string(10)
         password =  User.objects.make_random_password(10)
