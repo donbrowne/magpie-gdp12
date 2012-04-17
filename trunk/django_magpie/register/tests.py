@@ -110,6 +110,25 @@ class AccountTests(TestCase):
         self.assertEqual(user.last_name, last_name)
         self.assertEqual(user.email, email)
 
+    def test_edit_account_werrors(self):
+        username = random_string(10)
+        email = '%s@test.com' % random_string(10)
+        password =  User.objects.make_random_password(10)
+        User.objects.create_user(username,email,password)
+        self.client.login(username=username,password=password)
+        rsp = self.client.get(self.account_url)
+        self.assertEqual(rsp.status_code, 200)
+        self.assertTrue(isinstance(rsp.context['form'],AccountForm))
+        first_name=random_string(10)
+        last_name=random_string(10)
+        email = 'invalid_email' 
+        rsp = self.client.post(self.account_url, {
+                'first_name': first_name,
+                'last_name': last_name,
+                'email' : email
+                })
+        self.assertEqual(rsp.status_code, 200)
+
     def test_save_answers_add(self):
         v1 = Variable.objects.create(name='v1', ask=False)
         v2 = Variable.objects.create(name='v2', ask=False)
