@@ -1182,6 +1182,11 @@ class RuleSetTests(TestCase):
         rsp = self.client.get(edit_url)
         self.assertEqual(rsp.status_code, 200)
 
+    def test_get_ruleset_url(self):
+        url = '%s%d/' %( self.ruleset_url, self.ruleset.id)
+        rsp = self.client.get(url)
+        self.assertEqual(rsp.status_code, 200)
+
 class ResourceFileAdminTests(TestCase):
     def setUp(self):
         self.RFadmin = ResourceFileAdmin(ResourceFile, "")
